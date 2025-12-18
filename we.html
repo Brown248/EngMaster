@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngMaster - Fun & Friendly Learning</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f0f4f8; /* Soft cloud color */
+        }
+
+        /* --- Bouncy Animations --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            70% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .pop-in {
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0; /* Start hidden */
+        }
+
+        /* Hover Effects */
+        .hover-bounce {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .hover-bounce:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Card Styles */
+        .soft-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .soft-card:hover {
+            border-color: #e2e8f0;
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.12);
+        }
+
+        /* Navigation Active State */
+        .nav-active {
+            background-color: #eff6ff;
+            color: #2563eb;
+            font-weight: 700;
+        }
+        .nav-active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 60%;
+            width: 4px;
+            background-color: #2563eb;
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
+</head>
+<body class="h-screen overflow-hidden text-slate-700">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- Utility Components ---
+        const PopIn = ({ children, delay = 0, className = "" }) => (
+            <div 
+                className={`pop-in ${className}`}
+                style={{ animationDelay: `${delay}ms` }}
+            >
+                {children}
+            </div>
+        );
+
+        // --- Main Sections ---
+
+        function HomeSection({ setActiveTab }) {
+            return (
+                <div className="max-w-6xl mx-auto py-4 space-y-10">
+                    {/* Welcome Header */}
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-6 pop-in">
+                        <div>
+                            <span className="inline-block px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-bold mb-2">👋 สวัสดีครับ, ยินดีต้อนรับ!</span>
+                            <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight">
+                                วันนี้อยากเก่งเรื่องอะไร?
+                            </h1>
+                            <p className="text-lg text-slate-500 mt-2 font-medium">
+                                EngMaster พร้อมช่วยอัพสกิลภาษาอังกฤษของคุณให้เป๊ะปัง
+                            </p>
+                        </div>
+                        {/* Interactive Mascot */}
+                        <div className="relative group cursor-pointer animate-float">
+                            <div className="text-8xl filter drop-shadow-xl transition-transform group-hover:rotate-12">🦉</div>
+                            <div className="absolute -top-6 -right-10 bg-white px-4 py-2 rounded-xl rounded-bl-none shadow-lg border-2 border-slate-100 transform scale-0 group-hover:scale-100 transition-transform origin-bottom-left">
+                                <p className="text-sm font-bold text-slate-700 whitespace-nowrap">Hoot! Let's go!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* 4 Main Categories - Updated Layout */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        
+                        {/* Vocab Card */}
+                        <div 
+                            onClick={() => setActiveTab('vocab')}
+                            className="soft-card p-6 cursor-pointer hover-bounce group relative overflow-hidden h-64 flex flex-col justify-between"
+                            style={{animationDelay: '100ms'}}
+                        >
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-orange-100 rounded-full -mr-10 -mt-10 opacity-50 transition-transform group-hover:scale-150"></div>
+                            <div className="relative z-10">
+                                <div className="w-14 h-14 bg-orange-100 text-orange-500 rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-sm">
+                                    📚
+                                </div>
+                                <h3 className="text-2xl font-bold text-slate-800 group-hover:text-orange-600 transition-colors">Vocabulary</h3>
+                                <p className="text-slate-500 font-medium">คลังศัพท์ A-Z</p>
+                            </div>
+                            <div className="relative z-10 flex items-center text-orange-500 font-bold text-sm bg-orange-50 w-fit px-4 py-2 rounded-full group-hover:bg-orange-500 group-hover:text-white transition-all">
+                                เริ่มท่องศัพท์ <i className="fas fa-chevron-right ml-2 text-xs"></i>
+                            </div>
+                        </div>
+
+                         {/* Slang Card (New) */}
+                        <div 
+                            onClick={() => setActiveTab('slang')}
+                            className="soft-card p-6 cursor-pointer hover-bounce group relative overflow-hidden h-64 flex flex-col justify-between"
+                            style={{animationDelay: '150ms'}}
+                        >
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-pink-100 rounded-full -mr-10 -mt-10 opacity-50 transition-transform group-hover:scale-150"></div>
+                            <div className="relative z-10">
+                                <div className="w-14 h-14 bg-pink-100 text-pink-500 rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-sm">
+                                    🔥
+                                </div>
+                                <h3 className="text-2xl font-bold text-slate-800 group-hover:text-pink-600 transition-colors">Slang</h3>
+                                <p className="text-slate-500 font-medium">ศัพท์วัยรุ่นอินเทรนด์</p>
+                            </div>
+                            <div className="relative z-10 flex items-center text-pink-500 font-bold text-sm bg-pink-50 w-fit px-4 py-2 rounded-full group-hover:bg-pink-500 group-hover:text-white transition-all">
+                                อัปเดตศัพท์ <i className="fas fa-chevron-right ml-2 text-xs"></i>
+                            </div>
+                        </div>
+
+                        {/* Grammar Card */}
+                        <div 
+                            onClick={() => setActiveTab('grammar')}
+                            className="soft-card p-6 cursor-pointer hover-bounce group relative overflow-hidden h-64 flex flex-col justify-between"
+                            style={{animationDelay: '200ms'}}
+                        >
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-purple-100 rounded-full -mr-10 -mt-10 opacity-50 transition-transform group-hover:scale-150"></div>
+                            <div className="relative z-10">
+                                <div className="w-14 h-14 bg-purple-100 text-purple-500 rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-sm">
+                                    🧠
+                                </div>
+                                <h3 className="text-2xl font-bold text-slate-800 group-hover:text-purple-600 transition-colors">12 Tenses</h3>
+                                <p className="text-slate-500 font-medium">ไวยากรณ์เข้าใจง่าย</p>
+                            </div>
+                            <div className="relative z-10 flex items-center text-purple-500 font-bold text-sm bg-purple-50 w-fit px-4 py-2 rounded-full group-hover:bg-purple-500 group-hover:text-white transition-all">
+                                ดูโครงสร้าง <i className="fas fa-chevron-right ml-2 text-xs"></i>
+                            </div>
+                        </div>
+
+                        {/* TOEIC Card */}
+                        <div 
+                            onClick={() => setActiveTab('toeic')}
+                            className="soft-card p-6 cursor-pointer hover-bounce group relative overflow-hidden h-64 flex flex-col justify-between"
+                            style={{animationDelay: '300ms'}}
+                        >
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-full -mr-10 -mt-10 opacity-50 transition-transform group-hover:scale-150"></div>
+                            <div className="relative z-10">
+                                <div className="w-14 h-14 bg-blue-100 text-blue-500 rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-sm">
+                                    🎓
+                                </div>
+                                <h3 className="text-2xl font-bold text-slate-800 group-hover:text-blue-600 transition-colors">TOEIC Exam</h3>
+                                <p className="text-slate-500 font-medium">ข้อสอบเสมือนจริง</p>
+                            </div>
+                            <div className="relative z-10 flex items-center text-blue-500 font-bold text-sm bg-blue-50 w-fit px-4 py-2 rounded-full group-hover:bg-blue-500 group-hover:text-white transition-all">
+                                ลุยข้อสอบ <i className="fas fa-chevron-right ml-2 text-xs"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    {/* Daily Quote / Fun Fact */}
+                    <div className="pop-in" style={{animationDelay: '400ms'}}>
+                        <div className="bg-gradient-to-r from-emerald-400 to-teal-500 rounded-3xl p-8 text-white flex flex-col md:flex-row items-center justify-between shadow-lg relative overflow-hidden">
+                            <div className="absolute opacity-10 text-9xl -bottom-10 -right-10 rotate-12">✨</div>
+                            <div className="relative z-10 mb-4 md:mb-0">
+                                <h3 className="text-2xl font-bold mb-1">Quote of the Day</h3>
+                                <p className="text-emerald-50 text-lg italic">"Practice makes progress, not perfection."</p>
+                            </div>
+                            <button className="relative z-10 bg-white text-emerald-600 px-6 py-3 rounded-xl font-bold shadow-md hover:scale-105 transition-transform">
+                                แชร์ให้เพื่อน
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function VocabSection() {
+            const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
+
+            return (
+                <div className="space-y-6 max-w-5xl mx-auto">
+                    <PopIn>
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-orange-100 text-orange-500 rounded-2xl flex items-center justify-center text-2xl">📚</div>
+                            <div>
+                                <h2 className="text-3xl font-bold text-slate-800">Vocabulary Bank</h2>
+                                <p className="text-slate-500">เลือกตัวอักษรเพื่อเริ่มเรียนรู้คำศัพท์</p>
+                            </div>
+                        </div>
+                    </PopIn>
+
+                    <PopIn delay={100}>
+                        <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+                            {/* Search Bar */}
+                            <div className="relative mb-8">
+                                <input 
+                                    type="text" 
+                                    placeholder="🔍 ค้นหาคำศัพท์ที่ต้องการ..." 
+                                    className="w-full pl-6 pr-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:outline-none focus:border-orange-300 focus:bg-white transition-all text-lg"
+                                />
+                            </div>
+
+                            {/* Keyboard Style Grid */}
+                            <div className="grid grid-cols-4 md:grid-cols-7 lg:grid-cols-9 gap-3">
+                                {letters.map((letter, idx) => (
+                                    <button 
+                                        key={letter}
+                                        className="aspect-square bg-slate-50 hover:bg-orange-400 hover:text-white rounded-xl border-b-4 border-slate-200 hover:border-orange-600 active:border-b-0 active:translate-y-1 transition-all flex flex-col items-center justify-center group"
+                                        style={{ transitionDuration: '0.1s' }}
+                                    >
+                                        <span className="text-2xl font-extrabold text-slate-600 group-hover:text-white">{letter}</span>
+                                    </button>
+                                ))}
+                                <button className="col-span-2 md:col-span-3 bg-blue-50 hover:bg-blue-500 hover:text-white rounded-xl border-b-4 border-blue-100 hover:border-blue-700 active:border-b-0 active:translate-y-1 transition-all flex items-center justify-center font-bold text-blue-600">
+                                    ดูทั้งหมด A-Z
+                                </button>
+                            </div>
+                        </div>
+                    </PopIn>
+                </div>
+            );
+        }
+
+        function SlangSection() {
+            const slangs = [
+                { word: "Tea", meaning: "เรื่องซุบซิบ (Gossip)", emoji: "☕", color: "text-amber-600", bg: "bg-amber-50" },
+                { word: "Slay", meaning: "ทำได้ปังมากแม่!", emoji: "💅", color: "text-pink-600", bg: "bg-pink-50" },
+                { word: "Ghost", meaning: "เท, หายเงียบ", emoji: "👻", color: "text-slate-600", bg: "bg-slate-100" },
+                { word: "Salty", meaning: "งอน, ขมขื่น", emoji: "🧂", color: "text-blue-600", bg: "bg-blue-50" },
+                { word: "Flex", meaning: "อวด (ความรวย, ของใหม่)", emoji: "💪", color: "text-emerald-600", bg: "bg-emerald-50" },
+                { word: "Simp", meaning: "คนที่ยอมทำทุกอย่างเพื่อคนที่ชอบ", emoji: "🥺", color: "text-purple-600", bg: "bg-purple-50" },
+            ];
+
+            return (
+                <div className="space-y-6 max-w-4xl mx-auto">
+                    <PopIn>
+                         <div className="flex items-center gap-4 mb-6">
+                            <div className="w-12 h-12 bg-pink-100 text-pink-500 rounded-2xl flex items-center justify-center text-2xl">🔥</div>
+                            <div>
+                                <h2 className="text-3xl font-bold text-slate-800">Slang of the Day</h2>
+                                <p className="text-slate-500">ศัพท์วัยรุ่นต้องรู้ ไม่งั้นคุยไม่รู้เรื่อง</p>
+                            </div>
+                        </div>
+                    </PopIn>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {slangs.map((item, index) => (
+                            <PopIn key={index} delay={index * 100}>
+                                <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-between hover-bounce cursor-default">
+                                    <div>
+                                        <h3 className={`text-2xl font-black ${item.color} mb-1`}>{item.word}</h3>
+                                        <p className="text-slate-500 font-medium">{item.meaning}</p>
+                                    </div>
+                                    <div className={`w-16 h-16 ${item.bg} rounded-full flex items-center justify-center text-3xl`}>
+                                        {item.emoji}
+                                    </div>
+                                </div>
+                            </PopIn>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        function GrammarSection() {
+            const [selectedTense, setSelectedTense] = useState(null);
+
+            // Detailed Data for all 12 Tenses (Restored Full Data)
+            const tenseData = {
+                "Present Simple": {
+                    structure: "S + V.1 (s/es)",
+                    concept: "ใช้กับข้อเท็จจริง (Fact), กิจวัตร (Routine), และความจริงทั่วไป",
+                    examples: ["I eat rice every day.", "The sun rises in the east.", "She works at a bank."]
+                },
+                "Present Continuous": {
+                    structure: "S + is/am/are + V.ing",
+                    concept: "ใช้กับเหตุการณ์ที่กำลังเกิดขึ้นขณะพูด หรือ แผนการในอนาคตอันใกล้",
+                    examples: ["I am studying English now.", "Look! It is raining.", "We are meeting him tomorrow."]
+                },
+                "Present Perfect": {
+                    structure: "S + has/have + V.3",
+                    concept: "ใช้กับเหตุการณ์ที่เกิดขึ้นในอดีตและส่งผลถึงปัจจุบัน หรือเพิ่งจบลง",
+                    examples: ["I have lost my keys.", "She has lived here for 10 years.", "Have you ever been to Japan?"]
+                },
+                "Present Perfect Continuous": {
+                    structure: "S + has/have + been + V.ing",
+                    concept: "เน้นความต่อเนื่องของเหตุการณ์ตั้งแต่อดีตจนถึงปัจจุบัน",
+                    examples: ["It has been raining for 3 hours.", "I have been waiting for you all morning."]
+                },
+                "Past Simple": {
+                    structure: "S + V.2",
+                    concept: "ใช้กับเหตุการณ์ที่จบลงแล้วในอดีต (มีระบุเวลาชัดเจน)",
+                    examples: ["I went to the cinema yesterday.", "We lived in London in 2010.", "He didn't buy the car."]
+                },
+                "Past Continuous": {
+                    structure: "S + was/were + V.ing",
+                    concept: "ใช้กับเหตุการณ์ที่กำลังดำเนินอยู่ในอดีต ณ เวลาใดเวลาหนึ่ง",
+                    examples: ["I was sleeping at 10 PM last night.", "While I was cooking, the phone rang."]
+                },
+                "Past Perfect": {
+                    structure: "S + had + V.3",
+                    concept: "ใช้คู่กับ Past Simple เพื่อบอกว่าเหตุการณ์หนึ่งเกิดก่อน (Past Perf) อีกเหตุการณ์หนึ่ง (Past Sim)",
+                    examples: ["When I arrived, the train had left.", "She had finished her work before she went out."]
+                },
+                "Past Perfect Continuous": {
+                    structure: "S + had + been + V.ing",
+                    concept: "คล้าย Past Perfect แต่เน้นความต่อเนื่องของการกระทำที่เกิดก่อน",
+                    examples: ["He had been drinking milk out of the carton when Mom walked into the kitchen."]
+                },
+                "Future Simple": {
+                    structure: "S + will + V.inf",
+                    concept: "ใช้คาดเดาอนาคต, สัญญา, หรือตัดสินใจทันทีขณะพูด",
+                    examples: ["I will call you later.", "It will rain tomorrow.", "I think he will win."]
+                },
+                "Future Continuous": {
+                    structure: "S + will + be + V.ing",
+                    concept: "ใช้บอกเหตุการณ์ที่จะกำลังเกิดขึ้น ณ เวลาหนึ่งในอนาคต",
+                    examples: ["At 8 PM tomorrow, I will be eating dinner.", "Don't call me at 9, I will be sleeping."]
+                },
+                "Future Perfect": {
+                    structure: "S + will + have + V.3",
+                    concept: "ใช้บอกว่าเหตุการณ์จะเสร็จสมบูรณ์ ณ เวลาหนึ่งในอนาคต",
+                    examples: ["By next year, I will have graduated.", "She will have finished the report by 5 PM."]
+                },
+                "Future Perfect Continuous": {
+                    structure: "S + will + have + been + V.ing",
+                    concept: "เน้นความต่อเนื่องของการกระทำที่จะดำเนินไปจนถึงจุดหนึ่งในอนาคต",
+                    examples: ["By next month, I will have been working here for 2 years."]
+                }
+            };
+
+            const tenseGroups = [
+                {
+                    title: "Present",
+                    icon: "☀️",
+                    color: "bg-emerald-100 text-emerald-700",
+                    items: ["Present Simple", "Present Continuous", "Present Perfect", "Present Perfect Continuous"]
+                },
+                {
+                    title: "Past",
+                    icon: "🕰️",
+                    color: "bg-amber-100 text-amber-700",
+                    items: ["Past Simple", "Past Continuous", "Past Perfect", "Past Perfect Continuous"]
+                },
+                {
+                    title: "Future",
+                    icon: "🚀",
+                    color: "bg-indigo-100 text-indigo-700",
+                    items: ["Future Simple", "Future Continuous", "Future Perfect", "Future Perfect Continuous"]
+                }
+            ];
+
+            if (selectedTense) {
+                const data = tenseData[selectedTense];
+                return (
+                    <div className="space-y-6 max-w-4xl mx-auto pop-in">
+                        <button 
+                            onClick={() => setSelectedTense(null)}
+                            className="bg-white px-5 py-2 rounded-full shadow-sm text-slate-600 font-bold hover:bg-slate-50 transition-colors flex items-center gap-2"
+                        >
+                            <i className="fas fa-arrow-left"></i> กลับไปหน้าเมนู
+                        </button>
+                        
+                        <div className="bg-white rounded-3xl overflow-hidden shadow-lg border-2 border-slate-100 relative">
+                            <div className="bg-gradient-to-r from-violet-500 to-fuchsia-500 p-8 text-white">
+                                <h2 className="text-4xl font-extrabold">{selectedTense}</h2>
+                                <p className="opacity-90 font-medium mt-2">Grammar Card</p>
+                            </div>
+                            
+                            <div className="p-8 space-y-8">
+                                <div className="bg-violet-50 rounded-2xl p-6 border-l-8 border-violet-500">
+                                    <h3 className="text-violet-900 font-bold uppercase tracking-wider text-sm mb-2">Structure</h3>
+                                    <p className="text-3xl font-mono font-bold text-violet-600">{data ? data.structure : ""}</p>
+                                </div>
+
+                                <div>
+                                    <h3 className="text-slate-800 font-bold text-xl mb-3 flex items-center gap-2">
+                                        💡 หลักการใช้
+                                    </h3>
+                                    <p className="text-slate-600 text-lg leading-relaxed">{data ? data.concept : ""}</p>
+                                </div>
+
+                                <div className="bg-slate-50 rounded-2xl p-6">
+                                     <h3 className="text-slate-800 font-bold text-xl mb-4 flex items-center gap-2">
+                                        🗣️ ตัวอย่างประโยค
+                                    </h3>
+                                    <ul className="space-y-3">
+                                        {data && data.examples.map((ex, i) => (
+                                            <li key={i} className="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+                                                <span className="bg-violet-100 text-violet-600 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">{i + 1}</span>
+                                                <span className="text-slate-700 font-medium">{ex}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="space-y-8 max-w-5xl mx-auto">
+                    <PopIn>
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-purple-100 text-purple-500 rounded-2xl flex items-center justify-center text-2xl">🧠</div>
+                            <div>
+                                <h2 className="text-3xl font-bold text-slate-800">12 Tenses Challenge</h2>
+                                <p className="text-slate-500">เลือก Tense ที่ต้องการเรียนรู้เลย</p>
+                            </div>
+                        </div>
+                    </PopIn>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {tenseGroups.map((group, groupIndex) => (
+                            <PopIn key={groupIndex} delay={groupIndex * 150} className="h-full">
+                                <div className="bg-white rounded-3xl p-2 border border-slate-100 shadow-sm h-full flex flex-col">
+                                    <div className={`p-4 rounded-2xl ${group.color} font-extrabold text-xl text-center mb-2 flex items-center justify-center gap-2`}>
+                                        <span>{group.icon}</span> {group.title}
+                                    </div>
+                                    <div className="space-y-1 p-2 flex-1">
+                                        {group.items.map((tense, idx) => (
+                                            <button 
+                                                key={idx} 
+                                                onClick={() => setSelectedTense(tense)}
+                                                className="w-full text-left p-3 rounded-xl hover:bg-slate-50 transition-colors font-medium text-slate-600 hover:text-slate-900 flex justify-between items-center group"
+                                            >
+                                                {tense}
+                                                <i className="fas fa-chevron-circle-right text-slate-200 group-hover:text-purple-400 text-xl transition-colors"></i>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </PopIn>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        function ToeicSection() {
+            return (
+                <div className="space-y-8 max-w-5xl mx-auto">
+                    <PopIn>
+                        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden text-center md:text-left">
+                            <div className="relative z-10">
+                                <span className="bg-white/20 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-sm">Simulation Mode</span>
+                                <h2 className="text-4xl font-extrabold mt-4 mb-4">TOEIC Practice Arena</h2>
+                                <p className="text-blue-100 text-lg max-w-lg mx-auto md:mx-0">
+                                    พร้อมลงสนามจริงรึยัง? เลือกพาร์ทที่ต้องการฝึกแล้วลุยเลย!
+                                </p>
+                                <button className="mt-8 bg-white text-blue-600 px-8 py-3 rounded-xl font-bold shadow-lg hover:scale-105 transition-transform flex items-center gap-2 mx-auto md:mx-0">
+                                    <i className="fas fa-play"></i> เริ่มจับเวลาสอบ
+                                </button>
+                            </div>
+                            {/* Decorative Background */}
+                            <div className="absolute top-1/2 -right-20 transform -translate-y-1/2 opacity-20 text-[12rem] rotate-12">📝</div>
+                        </div>
+                    </PopIn>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <PopIn delay={100} className="h-full">
+                            <div className="bg-white p-8 rounded-3xl shadow-sm border-2 border-slate-50 hover:border-blue-100 transition-colors h-full">
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 text-2xl">
+                                        🎧
+                                    </div>
+                                    <div>
+                                        <h3 className="text-2xl font-bold text-slate-800">Listening</h3>
+                                        <p className="text-slate-400 font-medium">100 ข้อ • 45 นาที</p>
+                                    </div>
+                                </div>
+                                <div className="space-y-3">
+                                    {['Photographs', 'Question-Response', 'Conversations', 'Short Talks'].map((item, i) => (
+                                        <div key={i} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-blue-50 cursor-pointer group transition-colors">
+                                            <span className="font-bold text-slate-600 group-hover:text-blue-600">Part {i + 1}: {item}</span>
+                                            <span className="bg-white px-2 py-1 rounded text-xs text-slate-400 font-bold border border-slate-100">Start</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </PopIn>
+
+                        <PopIn delay={200} className="h-full">
+                            <div className="bg-white p-8 rounded-3xl shadow-sm border-2 border-slate-50 hover:border-emerald-100 transition-colors h-full">
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-600 text-2xl">
+                                        📖
+                                    </div>
+                                    <div>
+                                        <h3 className="text-2xl font-bold text-slate-800">Reading</h3>
+                                        <p className="text-slate-400 font-medium">100 ข้อ • 75 นาที</p>
+                                    </div>
+                                </div>
+                                <div className="space-y-3">
+                                    {['Incomplete Sentences', 'Text Completion', 'Reading Comprehension'].map((item, i) => (
+                                        <div key={i} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-emerald-50 cursor-pointer group transition-colors">
+                                            <span className="font-bold text-slate-600 group-hover:text-emerald-600">Part {i + 5}: {item}</span>
+                                            <span className="bg-white px-2 py-1 rounded text-xs text-slate-400 font-bold border border-slate-100">Start</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </PopIn>
+                    </div>
+                </div>
+            );
+        }
+
+        // --- Main App Component ---
+        function EngMasterApp() {
+            const [activeTab, setActiveTab] = useState('home');
+            const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+            const menuItems = [
+                { id: 'home', label: 'หน้าแรก', icon: 'fa-home' },
+                { id: 'vocab', label: 'Vocabulary', icon: 'fa-book' },
+                { id: 'slang', label: 'Slang', icon: 'fa-fire' },
+                { id: 'grammar', label: 'Grammar', icon: 'fa-layer-group' },
+                { id: 'toeic', label: 'TOEIC', icon: 'fa-graduation-cap' },
+            ];
+
+            const renderContent = () => {
+                switch (activeTab) {
+                    case 'home': return <HomeSection setActiveTab={setActiveTab} />;
+                    case 'vocab': return <VocabSection />;
+                    case 'slang': return <SlangSection />;
+                    case 'grammar': return <GrammarSection />;
+                    case 'toeic': return <ToeicSection />;
+                    default: return <HomeSection setActiveTab={setActiveTab} />;
+                }
+            };
+
+            return (
+                <div className="flex h-screen bg-[#f8fafc] font-sans">
+                    {/* Floating Sidebar (Desktop) */}
+                    <aside className="hidden md:flex flex-col w-72 p-4 h-screen">
+                        <div className="bg-white rounded-[30px] shadow-lg h-full flex flex-col overflow-hidden border border-slate-100">
+                            {/* Logo Area */}
+                            <div className="p-8 flex items-center gap-3">
+                                <div className="bg-blue-600 text-white p-2 rounded-xl w-10 h-10 flex items-center justify-center shadow-lg shadow-blue-200">
+                                    <span className="font-extrabold text-xl">E</span>
+                                </div>
+                                <h1 className="text-xl font-extrabold text-slate-800 tracking-tight">EngMaster</h1>
+                            </div>
+
+                            {/* Nav Items */}
+                            <nav className="flex-1 px-4 space-y-2 overflow-y-auto">
+                                {menuItems.map((item) => (
+                                    <button
+                                        key={item.id}
+                                        onClick={() => setActiveTab(item.id)}
+                                        className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 relative overflow-hidden ${
+                                            activeTab === item.id
+                                                ? 'bg-blue-50 text-blue-600 font-bold'
+                                                : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+                                        }`}
+                                    >
+                                        <div className={`w-8 flex justify-center ${activeTab === item.id ? 'transform scale-110' : ''}`}>
+                                            <i className={`fas ${item.icon} text-lg`}></i>
+                                        </div>
+                                        <span>{item.label}</span>
+                                        {activeTab === item.id && (
+                                            <div className="absolute right-4 w-2 h-2 bg-blue-500 rounded-full"></div>
+                                        )}
+                                    </button>
+                                ))}
+                            </nav>
+                        </div>
+                    </aside>
+
+                    {/* Mobile Header */}
+                    <div className="md:hidden fixed top-0 w-full bg-white/80 backdrop-blur-md z-30 flex items-center justify-between p-4 px-6 border-b border-slate-100">
+                        <div className="flex items-center gap-2">
+                             <div className="bg-blue-600 text-white rounded-lg w-8 h-8 flex items-center justify-center font-bold">E</div>
+                            <span className="font-extrabold text-lg text-slate-800">EngMaster</span>
+                        </div>
+                        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-colors">
+                            <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+                        </button>
+                    </div>
+
+                    {/* Mobile Menu Overlay */}
+                    {isMobileMenuOpen && (
+                        <div className="md:hidden fixed inset-0 bg-white z-20 pt-24 px-6 animate-enter">
+                            <nav className="space-y-3">
+                                {menuItems.map((item) => (
+                                    <button
+                                        key={item.id}
+                                        onClick={() => {
+                                            setActiveTab(item.id);
+                                            setIsMobileMenuOpen(false);
+                                        }}
+                                        className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all ${
+                                            activeTab === item.id
+                                                ? 'bg-blue-50 text-blue-600 font-bold shadow-sm'
+                                                : 'bg-slate-50 text-slate-500'
+                                        }`}
+                                    >
+                                        <i className={`fas ${item.icon} w-6 text-center text-xl`}></i>
+                                        <span className="font-bold text-lg">{item.label}</span>
+                                    </button>
+                                ))}
+                            </nav>
+                        </div>
+                    )}
+
+                    {/* Main Content Area */}
+                    <main className="flex-1 overflow-y-auto pt-20 md:pt-0 relative">
+                        <div className="max-w-6xl mx-auto p-4 md:p-8 min-h-full pb-20">
+                            {renderContent()}
+                        </div>
+                    </main>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<EngMasterApp />);
+    </script>
+</body>
+</html>
