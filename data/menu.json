@@ -1,0 +1,42 @@
+[
+  {
+    "id": "home",
+    "label": "หน้าแรก (Home)",
+    "href": "/",
+    "icon": "Home"
+  },
+  {
+    "id": "vocab",
+    "label": "คลังศัพท์ (Vocabulary)",
+    "href": "/vocab",
+    "icon": "Book",
+    "items": [
+      { "id": "vocab-common", "label": "ศัพท์พื้นฐาน 3,000 คำ", "href": "/vocab/common" },
+      { "id": "vocab-business", "label": "ศัพท์ธุรกิจ (Business)", "href": "/vocab/business" },
+      { "id": "vocab-travel", "label": "ศัพท์ท่องเที่ยว", "href": "/vocab/travel" }
+    ]
+  },
+  {
+    "id": "grammar",
+    "label": "ไวยากรณ์ (Grammar)",
+    "href": "/grammar",
+    "icon": "Clock",
+    "items": [
+      { 
+        "id": "tenses", 
+        "label": "12 Tenses", 
+        "items": [
+            { "id": "present-simple", "label": "Present Simple", "href": "/grammar/present-simple" },
+            { "id": "past-simple", "label": "Past Simple", "href": "/grammar/past-simple" }
+        ]
+      },
+      { "id": "passive-voice", "label": "Passive Voice", "href": "/grammar/passive-voice" }
+    ]
+  },
+  {
+    "id": "toeic",
+    "label": "ข้อสอบ TOEIC",
+    "href": "/toeic",
+    "icon": "Target"
+  }
+]
