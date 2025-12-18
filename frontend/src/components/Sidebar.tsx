@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { Home, Book, Flame, Layers, GraduationCap } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const menuItems = [
   { path: '/', label: 'หน้าแรก', icon: Home },
@@ -11,40 +12,56 @@ const menuItems = [
 
 export default function Sidebar() {
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-white shadow-lg z-50 flex flex-col rounded-r-3xl">
-      {/* Logo Section */}
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-white shadow-xl shadow-gray-100 z-50 flex flex-col rounded-r-3xl overflow-hidden">
+      {/* Logo */}
       <div className="p-8 flex items-center gap-3">
-        <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-blue-200 shadow-lg">
+        <motion.div 
+          whileHover={{ rotate: 10, scale: 1.1 }}
+          className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-200"
+        >
           E
-        </div>
-        <span className="text-2xl font-bold text-gray-800 tracking-tight">EngMaster</span>
+        </motion.div>
+        <span className="text-xl font-bold text-gray-800 tracking-tight">EngMaster</span>
       </div>
 
-      {/* Navigation Links */}
-      <nav className="flex-1 px-4 py-4 flex flex-col gap-2">
+      {/* Menu */}
+      <nav className="flex-1 px-4 py-2 flex flex-col gap-2">
         {menuItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
             className={({ isActive }) =>
-              `flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-200 group ${
-                isActive
-                  ? 'bg-primary-light text-primary font-semibold shadow-sm'
-                  : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
+              `relative flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 group ${
+                isActive ? 'text-blue-600 font-semibold' : 'text-gray-500 hover:bg-gray-50'
               }`
             }
           >
             {({ isActive }) => (
               <>
-                <item.icon
-                  size={22}
-                  className={`transition-colors ${
-                    isActive ? 'text-primary' : 'text-gray-400 group-hover:text-gray-600'
-                  }`}
-                />
-                <span className="text-base">{item.label}</span>
+                {/* Active Background Animation */}
                 {isActive && (
-                  <div className="ml-auto w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 bg-blue-50 rounded-2xl"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  />
+                )}
+                
+                {/* Icon & Text */}
+                <span className="relative z-10">
+                  <item.icon size={22} className={`transition-colors ${isActive ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-600'}`} />
+                </span>
+                <span className="relative z-10 text-sm">{item.label}</span>
+
+                {/* Active Dot */}
+                {isActive && (
+                  <motion.div 
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="relative z-10 ml-auto w-2 h-2 rounded-full bg-blue-600 shadow-sm" 
+                  />
                 )}
               </>
             )}
@@ -52,10 +69,12 @@ export default function Sidebar() {
         ))}
       </nav>
 
-      {/* Footer / Version info (Optional) */}
-      <div className="p-6 text-center text-xs text-gray-400">
-        <p>EngMaster v1.0.0</p>
-        <p className="mt-1">Practice everyday</p>
+      {/* Footer / Version */}
+      <div className="p-6">
+        <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+           <p className="text-xs text-gray-400">EngMaster v1.0</p>
+           <p className="text-[10px] text-gray-300 mt-1">No Login Required</p>
+        </div>
       </div>
     </aside>
   );
