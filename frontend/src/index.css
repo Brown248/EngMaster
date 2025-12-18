@@ -4,11 +4,12 @@
 
 @layer base {
   body {
-    @apply font-sans text-gray-800 bg-[#F8F9FD];
+    /* เปลี่ยนจาก overflow-hidden เป็น overflow-y-auto หรือลบออก */
+    @apply font-sans text-slate-700 bg-[#f0f4f8] overflow-y-auto overflow-x-hidden;
   }
 }
 
-/* Custom Scrollbar for better UI look */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -16,9 +17,19 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 4px;
+  background: #cbd5e1;
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #94a3b8;
+}
+
+.soft-card {
+  @apply bg-white rounded-3xl border-2 border-transparent transition-all duration-300 ease-out;
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+}
+.soft-card:hover {
+  @apply border-slate-200;
+  box-shadow: 0 20px 50px -10px rgba(0,0,0,0.12);
+  transform: translateY(-5px) scale(1.02);
 }

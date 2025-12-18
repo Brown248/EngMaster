@@ -1,84 +1,93 @@
-import { useState } from 'react';
-import { Search, Volume2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-
-const vocabData = [
-  { id: 1, word: 'Accomplish', type: 'v.', meaning: 'ทำสำเร็จ, บรรลุผล', category: 'A' },
-  { id: 2, word: 'Benevolent', type: 'adj.', meaning: 'ใจบุญ, เมตตากรุณา', category: 'B' },
-  { id: 3, word: 'Collaborate', type: 'v.', meaning: 'ร่วมมือ, ประสานงาน', category: 'C' },
-  { id: 4, word: 'Diligent', type: 'adj.', meaning: 'ขยันหมั่นเพียร', category: 'D' },
-  { id: 5, word: 'Elaborate', type: 'v.', meaning: 'ขยายความ, ทำอย่างประณีต', category: 'E' },
-];
-
-const alphabets = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+import { motion } from 'framer-motion';
+import { Search } from 'lucide-react';
 
 export default function Vocabulary() {
-  const [selectedLetter, setSelectedLetter] = useState('#');
-  const [searchTerm, setSearchTerm] = useState('');
+  const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
+
+  // Stagger animation for letters
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.03
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20, scale: 0.5 },
+    show: { opacity: 1, y: 0, scale: 1 }
+  };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-6rem)] max-w-5xl mx-auto">
-      <div className="mb-6 space-y-4">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4 }}
+      className="space-y-8"
+    >
+      <div className="flex items-center gap-5">
+        <motion.div 
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: "spring", stiffness: 200, damping: 15 }}
+          className="w-16 h-16 bg-orange-100 text-orange-500 rounded-3xl flex items-center justify-center text-4xl shadow-md rotate-3"
+        >
+          📚
+        </motion.div>
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">Vocabulary Bank</h1>
-          <p className="text-gray-500 text-sm">คลังคำศัพท์แยกตามหมวดหมู่ A-Z</p>
+          <h2 className="text-4xl font-black text-slate-800 tracking-tight">Vocabulary Bank</h2>
+          <p className="text-slate-500 text-lg font-medium">เลือกตัวอักษรเพื่อเริ่มเรียนรู้คำศัพท์</p>
         </div>
+      </div>
 
-        {/* Search Bar Clean Style */}
-        <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-          <input
-            type="text"
-            placeholder="ค้นหาคำศัพท์..."
-            className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all text-gray-700 shadow-sm"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+      <div className="bg-white rounded-[2rem] p-8 shadow-lg shadow-orange-100/50 border border-white relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 -z-10" />
+
+        {/* Search Bar */}
+        <div className="relative mb-10 group">
+          <input 
+            type="text" 
+            placeholder="🔍 ค้นหาคำศัพท์ที่ต้องการ..." 
+            className="w-full pl-14 pr-6 py-5 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:outline-none focus:border-orange-400 focus:bg-white focus:shadow-lg focus:shadow-orange-100/50 transition-all text-lg font-medium text-slate-700 placeholder:text-slate-400 group-hover:border-orange-200"
           />
+          <div className="absolute left-5 top-1/2 -translate-y-1/2 p-1.5 bg-white rounded-lg shadow-sm border border-slate-100">
+            <Search size={20} className="text-orange-400" />
+          </div>
         </div>
 
-        {/* A-Z Filter */}
-        <div className="flex gap-1.5 overflow-x-auto pb-2 scrollbar-hide">
-          {alphabets.map((char) => (
-            <button
-              key={char}
-              onClick={() => setSelectedLetter(char)}
-              className={`min-w-[40px] h-10 rounded-lg text-sm font-semibold flex items-center justify-center transition-all ${
-                selectedLetter === char
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'bg-white text-gray-500 border border-gray-100 hover:border-blue-200 hover:text-blue-600'
-              }`}
+        {/* Keyboard Style Grid */}
+        <motion.div 
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-4 md:grid-cols-7 lg:grid-cols-9 gap-3 md:gap-4"
+        >
+          {letters.map((letter) => (
+            <motion.button 
+              key={letter}
+              variants={item}
+              whileHover={{ y: -5, backgroundColor: "#F97316", color: "#ffffff", borderColor: "#C2410C" }}
+              whileTap={{ scale: 0.9, y: 0 }}
+              className="aspect-square bg-white text-slate-600 rounded-2xl border-b-[6px] border-slate-200 active:border-b-0 active:translate-y-[6px] transition-all flex flex-col items-center justify-center group shadow-sm hover:shadow-orange-200"
             >
-              {char}
-            </button>
+              <span className="text-2xl font-black">{letter}</span>
+            </motion.button>
           ))}
-        </div>
+          
+          <motion.button 
+            variants={item}
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="col-span-2 md:col-span-3 bg-blue-50 text-blue-600 rounded-2xl border-b-[6px] border-blue-100 hover:bg-blue-500 hover:text-white hover:border-blue-700 active:border-b-0 active:translate-y-[6px] transition-all flex items-center justify-center font-bold shadow-sm h-full min-h-[60px]"
+          >
+            ดูทั้งหมด (A-Z)
+          </motion.button>
+        </motion.div>
       </div>
-
-      <div className="flex-1 overflow-y-auto pr-2 space-y-3 pb-4">
-        <AnimatePresence>
-          {vocabData.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
-              className="group bg-white p-5 rounded-2xl border border-gray-100 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer flex items-center justify-between"
-            >
-              <div>
-                <div className="flex items-baseline gap-2 mb-1">
-                  <h3 className="text-lg font-bold text-blue-700">{item.word}</h3>
-                  <span className="text-sm text-gray-400 italic">{item.type}</span>
-                </div>
-                <p className="text-gray-600 font-medium">{item.meaning}</p>
-              </div>
-              
-              <button className="w-9 h-9 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-blue-600 hover:text-white">
-                <Volume2 size={18} />
-              </button>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
-    </div>
+    </motion.div>
   );
 }

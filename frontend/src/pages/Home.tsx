@@ -1,169 +1,180 @@
-import { Link } from 'react-router-dom';
-import { Book, Flame, Layers, GraduationCap, ArrowRight, Trophy, Star, Clock, Target } from 'lucide-react';
-import { motion } from 'framer-motion';
-
-// ข้อมูลสำหรับ Grid Cards ด้านล่าง
-const features = [
-  {
-    title: 'Vocabulary Bank',
-    desc: 'คลังคำศัพท์ A-Z พร้อมคำแปล',
-    icon: Book,
-    bgIcon: 'bg-blue-500',
-    path: '/vocabulary',
-    stat: '3,000+ Words',
-    delay: 0.1
-  },
-  {
-    title: 'Slang of the Day',
-    desc: 'ศัพท์วัยรุ่นและสำนวนสุดฮิต',
-    icon: Flame,
-    bgIcon: 'bg-orange-500',
-    path: '/slang',
-    stat: 'Daily Update',
-    delay: 0.2
-  },
-  {
-    title: 'Grammar Station',
-    desc: 'สรุปหลักไวยากรณ์เข้าใจง่าย',
-    icon: Layers,
-    bgIcon: 'bg-purple-500',
-    path: '/grammar',
-    stat: '12 Topics',
-    delay: 0.3
-  },
-  {
-    title: 'TOEIC Arena',
-    desc: 'จำลองข้อสอบเสมือนจริง',
-    icon: GraduationCap,
-    bgIcon: 'bg-emerald-500',
-    path: '/toeic',
-    stat: 'Mock Tests',
-    delay: 0.4
-  }
-];
+import { useNavigate } from 'react-router-dom';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ChevronRight, Sparkles, Star, Heart } from 'lucide-react';
+import { useRef } from 'react';
 
 export default function Home() {
-  return (
-    <div className="max-w-6xl mx-auto space-y-8 pb-10">
-      
-      {/* 1. Header Section (Title + Streak) */}
-      <div className="flex justify-between items-end">
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }} 
-          animate={{ opacity: 1, x: 0 }}
-        >
-          <h1 className="text-3xl font-bold text-gray-800">Welcome Back! 👋</h1>
-          <p className="text-gray-500 mt-2">พร้อมฝึกภาษาอังกฤษวันนี้หรือยัง?</p>
-        </motion.div>
+  const navigate = useNavigate();
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: containerRef });
+  
+  // Parallax effects (พื้นหลังขยับช้าๆ เวลาเลื่อนจอ)
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 50]);
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 30, scale: 0.9 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { type: "spring", stiffness: 50 } 
+    }
+  };
+
+  return (
+    <motion.div 
+      ref={containerRef}
+      variants={container}
+      initial="hidden"
+      animate="show"
+      exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
+      className="space-y-10 relative"
+    >
+      {/* Background Decor (Parallax) */}
+      <motion.div style={{ y: y1 }} className="absolute top-0 right-0 w-64 h-64 bg-yellow-200/30 rounded-full blur-3xl -z-10" />
+      <motion.div style={{ y: y2 }} className="absolute bottom-20 left-10 w-40 h-40 bg-blue-200/30 rounded-full blur-2xl -z-10" />
+
+      {/* Welcome Header */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+        <motion.div variants={item} className="flex-1">
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-blue-100 text-blue-600 rounded-full text-sm font-bold mb-4 shadow-sm"
+          >
+            <Sparkles size={16} className="text-yellow-400 fill-yellow-400" />
+            <span>Welcome to EngMaster!</span>
+          </motion.div>
+          <h1 className="text-4xl md:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight">
+            Unlock your potential<br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">with EngMaster.</span>
+          </h1>
+          <p className="text-lg text-slate-500 mt-4 font-medium max-w-lg">
+            เรียนอังกฤษแบบไม่เครียด สนุกไปกับทุกบทเรียน เก่งขึ้นได้ทุกวัน!
+          </p>
+        </motion.div>
+        
+        {/* Interactive Mascot */}
         <motion.div 
-          initial={{ opacity: 0, x: 20 }} 
-          animate={{ opacity: 1, x: 0 }}
-          className="flex gap-4"
+          variants={item}
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          whileTap={{ scale: 0.9 }}
+          animate={{ 
+            y: [0, -15, 0],
+            rotate: [0, 2, -2, 0]
+          }}
+          transition={{ 
+            y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+          }}
+          className="relative group cursor-pointer"
         >
-          <div className="bg-white px-5 py-2.5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3">
-            <div className="p-1.5 bg-yellow-100 rounded-full">
-              <Trophy size={18} className="text-yellow-600 fill-yellow-600" />
-            </div>
-            <div>
-               <p className="text-xs text-gray-400 font-bold uppercase">Streak</p>
-               <p className="text-sm font-bold text-gray-800">0 Days</p>
-            </div>
-          </div>
+          {/* Aura Effect */}
+          <div className="absolute inset-0 bg-white/50 blur-2xl rounded-full scale-110 group-hover:bg-yellow-200/50 transition-colors duration-500" />
+          
+          <div className="relative text-[150px] leading-none filter drop-shadow-2xl z-10">🦉</div>
+          
+          {/* Chat Bubble */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: 1, type: "spring" }}
+            className="absolute -top-4 -right-12 bg-white px-5 py-3 rounded-2xl rounded-bl-none shadow-xl border-2 border-slate-100 transform origin-bottom-left z-20"
+          >
+            <p className="text-sm font-bold text-slate-700 whitespace-nowrap flex items-center gap-2">
+              Hoot! Let's go! 🚀
+            </p>
+          </motion.div>
         </motion.div>
       </div>
 
-      {/* 2. Hero Banner (Goal of the day) */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[2rem] p-8 md:p-10 text-white shadow-xl shadow-blue-200"
-      >
-        {/* Background Decorations (Animated) */}
-        <motion.div 
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -right-20 -top-20 w-80 h-80 bg-white opacity-5 rounded-full blur-3xl pointer-events-none" 
-        />
-        <motion.div 
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute right-20 bottom-0 w-40 h-40 bg-indigo-400 opacity-20 rounded-full blur-2xl pointer-events-none" 
-        />
-
-        <div className="relative z-10 max-w-2xl">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="p-2 bg-white/20 backdrop-blur-sm rounded-lg">
-              <Target size={20} className="text-white" />
+      {/* Grid Menu */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          { id: 'vocab', title: 'Vocabulary', sub: 'คลังศัพท์ A-Z', icon: '📚', color: 'orange', path: '/vocabulary' },
+          { id: 'slang', title: 'Slang', sub: 'ศัพท์วัยรุ่น', icon: '🔥', color: 'pink', path: '/slang' },
+          { id: 'grammar', title: '12 Tenses', sub: 'ไวยากรณ์', icon: '🧠', color: 'purple', path: '/grammar' },
+          { id: 'toeic', title: 'TOEIC Exam', sub: 'ข้อสอบจำลอง', icon: '🎓', color: 'blue', path: '/toeic' },
+        ].map((card) => (
+          <motion.div
+            key={card.id}
+            variants={item}
+            onClick={() => navigate(card.path)}
+            whileHover={{ y: -10, scale: 1.02 }}
+            whileTap={{ scale: 0.95 }}
+            className="soft-card p-6 cursor-pointer group relative overflow-hidden h-72 flex flex-col justify-between"
+          >
+            {/* Background Blob */}
+            <div className={`absolute -top-10 -right-10 w-40 h-40 bg-${card.color}-100 rounded-full opacity-50 transition-transform duration-500 group-hover:scale-[2.5]`} />
+            
+            <div className="relative z-10">
+              <div className={`w-16 h-16 bg-${card.color}-100 text-${card.color}-500 rounded-2xl flex items-center justify-center text-4xl mb-6 shadow-sm group-hover:rotate-12 transition-transform duration-300`}>
+                {card.icon}
+              </div>
+              <h3 className={`text-2xl font-black text-slate-800 group-hover:text-${card.color}-600 transition-colors`}>
+                {card.title}
+              </h3>
+              <p className="text-slate-500 font-medium mt-1 group-hover:text-slate-600">
+                {card.sub}
+              </p>
             </div>
-            <h2 className="text-xl font-bold">Goal of the day 🎯</h2>
+
+            <div className={`relative z-10 flex items-center justify-between mt-4`}>
+              <span className={`text-xs font-bold uppercase tracking-wider text-${card.color}-400 group-hover:text-${card.color}-600`}>
+                Start Learning
+              </span>
+              <div className={`w-10 h-10 rounded-full bg-${card.color}-50 flex items-center justify-center text-${card.color}-500 group-hover:bg-${card.color}-500 group-hover:text-white transition-all duration-300`}>
+                <ChevronRight size={20} />
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Encouragement Banner (New!) */}
+      <motion.div 
+        variants={item}
+        whileHover={{ scale: 1.01 }}
+        className="relative overflow-hidden bg-gradient-to-r from-emerald-500 to-teal-500 rounded-[2rem] p-10 text-white shadow-xl shadow-emerald-200"
+      >
+        {/* Decor Star */}
+        <div className="absolute -right-10 -bottom-20 opacity-20">
+          <Star size={200} fill="white" />
+        </div>
+        
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-3 opacity-90">
+              <Heart size={20} className="fill-white text-white animate-pulse" />
+              <span className="text-sm font-bold uppercase tracking-wider">กำลังใจสำหรับคุณ</span>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold leading-relaxed mb-3">
+              "Mistakes are proof that you are trying."
+            </h3>
+            <p className="text-emerald-50 text-lg font-medium leading-relaxed">
+              ความผิดพลาด คือหลักฐานว่าคุณกำลังพยายาม... <br/>
+              <span className="text-yellow-300 underline decoration-2 underline-offset-4 font-bold">
+                สู้ต่อไปนะ เก่งขึ้นวันละนิดก็พอแล้ว! ✌️
+              </span>
+            </p>
           </div>
           
-          <p className="text-2xl md:text-3xl font-bold mb-6 leading-relaxed">
-            "เรียนรู้คำศัพท์ใหม่ <span className="text-yellow-300">5 คำ</span> <br/>
-            และทำแบบทดสอบ Grammar <span className="text-yellow-300">1 บท</span>"
-          </p>
-          
-          <motion.button 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white text-blue-600 px-8 py-3 rounded-xl font-bold shadow-lg shadow-blue-900/20 hover:bg-blue-50 transition-colors"
+          <motion.div 
+            whileHover={{ scale: 1.1, rotate: 10 }}
+            className="hidden md:flex bg-white/20 backdrop-blur-md p-4 rounded-2xl border border-white/30 shadow-lg"
           >
-            เริ่มฝึกทันที
-          </motion.button>
+            <span className="text-6xl">💪</span>
+          </motion.div>
         </div>
       </motion.div>
-
-      {/* 3. Feature Grid (Practice Modes) */}
-      <div>
-        <motion.h3 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2"
-        >
-          <div className="p-1.5 bg-yellow-100 rounded-lg">
-            <Star size={16} className="text-yellow-600 fill-yellow-600" />
-          </div>
-          โหมดการฝึกฝน
-        </motion.h3>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((item, index) => (
-            <Link key={index} to={item.path}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: item.delay }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="group h-full bg-white rounded-[1.5rem] p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:shadow-gray-200 transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <motion.div 
-                    whileHover={{ rotate: 10 }}
-                    className={`${item.bgIcon} w-14 h-14 rounded-2xl flex items-center justify-center text-white mb-5 shadow-lg shadow-gray-200`}
-                  >
-                    <item.icon size={26} strokeWidth={2.5} />
-                  </motion.div>
-                  <h4 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">{item.title}</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-6">{item.desc}</p>
-                </div>
-                
-                <div className="flex items-center justify-between pt-4 border-t border-gray-50">
-                  <span className="flex items-center gap-1.5 text-xs font-semibold text-gray-400 bg-gray-50 px-2 py-1 rounded-md">
-                    <Clock size={12} />
-                    {item.stat}
-                  </span>
-                  <div className="flex items-center gap-1 text-sm font-bold text-blue-600 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                    Start <ArrowRight size={16} />
-                  </div>
-                </div>
-              </motion.div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
+    </motion.div>
   );
 }
