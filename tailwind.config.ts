@@ -8,12 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // ลบ backgroundImage ตรงนี้ออกให้หมด
-      // สามารถเพิ่มสีธีมของ EngMaster ตรงนี้ได้ในอนาคต เช่น
       colors: {
-        primary: "#3B82F6", // สีฟ้า EngMaster
-        secondary: "#F3F4F6", // สีพื้นหลังเทาอ่อน
-      }
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+      },
     },
   },
   plugins: [],
