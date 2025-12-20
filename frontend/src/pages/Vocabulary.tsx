@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Search } from 'lucide-react';
+import { Search, School } from 'lucide-react'; // เพิ่ม School icon
 
 export default function Vocabulary() {
   const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
@@ -78,13 +78,25 @@ export default function Vocabulary() {
             </motion.button>
           ))}
           
+          {/* ปุ่มดูทั้งหมด */}
           <motion.button 
             variants={item}
             whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="col-span-2 md:col-span-3 bg-blue-50 text-blue-600 rounded-2xl border-b-[6px] border-blue-100 hover:bg-blue-500 hover:text-white hover:border-blue-700 active:border-b-0 active:translate-y-[6px] transition-all flex items-center justify-center font-bold shadow-sm h-full min-h-[60px]"
+            className="col-span-2 md:col-span-2 bg-blue-50 text-blue-600 rounded-2xl border-b-[6px] border-blue-100 hover:bg-blue-500 hover:text-white hover:border-blue-700 active:border-b-0 active:translate-y-[6px] transition-all flex items-center justify-center font-bold shadow-sm h-full min-h-[60px]"
           >
             ดูทั้งหมด (A-Z)
+          </motion.button>
+
+          {/* ปุ่ม Academic Vocab (เพิ่มใหม่) */}
+          <motion.button 
+            variants={item}
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="col-span-2 md:col-span-2 bg-indigo-50 text-indigo-600 rounded-2xl border-b-[6px] border-indigo-100 hover:bg-indigo-500 hover:text-white hover:border-indigo-700 active:border-b-0 active:translate-y-[6px] transition-all flex items-center justify-center gap-2 font-bold shadow-sm h-full min-h-[60px]"
+          >
+            <School size={20} />
+            <span>Academic</span>
           </motion.button>
         </motion.div>
       </div>

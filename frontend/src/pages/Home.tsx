@@ -14,14 +14,14 @@ const CourseDetail = ({ id, onBack }) => {
       icon: <Book size={40} />, 
       color: 'orange', 
       tagline: 'คลังศัพท์ระดับเทพ', 
-      lessons: ['A-Z Common Words', 'Academic Vocab', 'Idioms & Phrases']
+      lessons: ['A-Z Common Words', 'Academic Vocab']
     },
     slang: { 
       title: 'Slang', 
       icon: <Flame size={40} />, 
       color: 'pink', 
       tagline: 'ศัพท์วัยรุ่นสุดฮิต', 
-      lessons: ['Modern Slang 2024', 'Internet Slang', 'Casual Conversations']
+      lessons: ['Modern Slang 2024', 'Internet Slang']
     },
     grammar: { 
       title: '12 Tenses', 
@@ -161,13 +161,13 @@ export default function App() {
               </span>
             </motion.div>
 
-            {/* Welcome Section */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-12 pt-4 relative z-10">
+            {/* Welcome Section - ลด padding-top เล็กน้อย */}
+            <div className="flex flex-col md:flex-row items-center justify-between gap-12 pt-2 relative z-10">
               <div className="flex-1 text-center md:text-left">
                 <motion.div 
                   onClick={goHome}
                   whileHover={{ scale: 1.05 }}
-                  className="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-blue-100 text-blue-600 rounded-full text-sm font-bold mb-8 shadow-sm cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-blue-100 text-blue-600 rounded-full text-sm font-bold mb-6 shadow-sm cursor-pointer"
                 >
                   <Sparkles size={16} className="text-yellow-400 fill-yellow-400" />
                   <span>Welcome to EngMaster!</span>
@@ -177,7 +177,7 @@ export default function App() {
                   Unlock your potential<br/>
                   <span onClick={goHome} className="cursor-pointer text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">with EngMaster.</span>
                 </h1>
-                <p className="text-xl text-slate-500 mt-6 font-medium max-w-lg mx-auto md:mx-0">
+                <p className="text-xl text-slate-500 mt-4 font-medium max-w-lg mx-auto md:mx-0">
                   เรียนอังกฤษแบบไม่เครียด สนุกไปกับทุกบทเรียน เก่งขึ้นได้ทุกวัน!
                 </p>
               </div>
@@ -200,7 +200,7 @@ export default function App() {
             </div>
 
             {/* --- ส่วนที่วงไว้ (Grid Menu) แก้ไขให้กดแล้วไปหน้า Detail จริง --- */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-2 relative z-10">
               {[
                 { id: 'vocab', title: 'Vocabulary', sub: 'คลังศัพท์ A-Z', icon: '📚', color: 'orange' },
                 { id: 'slang', title: 'Slang', sub: 'ศัพท์วัยรุ่น', icon: '🔥', color: 'pink' },
@@ -266,7 +266,7 @@ export default function App() {
             {/* Banner */}
             <motion.div 
               whileHover={{ scale: 1.01 }}
-              className="relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 rounded-[3rem] p-10 md:p-14 text-white shadow-2xl shadow-emerald-200/50 mt-10"
+              className="relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 rounded-[3rem] p-10 md:p-14 text-white shadow-2xl shadow-emerald-200/50 mt-6"
             >
               <div className="absolute -right-10 -bottom-10 opacity-20"><Star size={200} fill="white" /></div>
               <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
