@@ -139,7 +139,8 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, y: -20 }}
-            className="p-6 md:p-12 max-w-7xl mx-auto space-y-12 relative"
+            // ปรับระยะห่างด้านบน (pt) ให้น้อยลงเพื่อขยับเนื้อหาขึ้น
+            className="px-6 pb-6 pt-4 md:px-12 md:pb-12 md:pt-8 max-w-7xl mx-auto space-y-12 relative"
           >
             {/* Background Decor */}
             <motion.div style={{ y: y1 }} className="absolute top-0 right-0 w-80 h-80 bg-yellow-200/20 rounded-full blur-3xl -z-10" />
