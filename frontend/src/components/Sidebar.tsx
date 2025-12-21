@@ -1,14 +1,8 @@
 import { NavLink, Link } from 'react-router-dom';
-import { Home, Book, Flame, Layers, GraduationCap, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const menuItems = [
-  { path: '/', label: 'หน้าแรก', icon: Home },
-  { path: '/vocabulary', label: 'Vocabulary', icon: Book },
-  { path: '/slang', label: 'Slang', icon: Flame },
-  { path: '/grammar', label: 'Grammar', icon: Layers },
-  { path: '/toeic', label: 'TOEIC', icon: GraduationCap },
-];
+import { menuItems } from '../data/menuData'; // เรียกใช้ data
+import { cn } from '../utils/cn'; // เรียกใช้ utils
 
 interface SidebarProps {
   isOpen: boolean;
@@ -61,17 +55,19 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   key={item.path}
                   to={item.path}
                   onClick={onClose}
-                  className={({ isActive }) =>
-                    `w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-300 relative overflow-hidden group ${
-                      isActive
-                        ? 'bg-blue-50 text-blue-600 font-bold'
-                        : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
-                    }`
-                  }
+                  className={({ isActive }) => cn(
+                    "w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-300 relative overflow-hidden group",
+                    isActive 
+                      ? "bg-blue-50 text-blue-600 font-bold" 
+                      : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
+                  )}
                 >
                   {({ isActive }) => (
                     <>
-                      <div className={`w-5 flex justify-center transition-transform ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
+                      <div className={cn(
+                        "w-5 flex justify-center transition-transform",
+                        isActive ? "scale-110" : "group-hover:scale-110"
+                      )}>
                         <item.icon size={18} />
                       </div>
                       <span className="text-sm font-medium">{item.label}</span>

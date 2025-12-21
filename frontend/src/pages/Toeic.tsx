@@ -1,7 +1,12 @@
 import { motion } from 'framer-motion';
-import { PlayCircle, Clock, CheckCircle2 } from 'lucide-react';
+import { PlayCircle, Clock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { listeningParts, readingParts } from '../data/toeicData';
 
 export default function Toeic() {
+  const navigate = useNavigate();
+
+  // Animation Variants
   const container = {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -12,8 +17,16 @@ export default function Toeic() {
     show: { opacity: 1, y: 0, transition: { type: "spring", bounce: 0.4 } }
   };
 
+  // ฟังก์ชันเริ่ม Full Test (เริ่มที่ Part 1 พร้อมส่ง Flag isFullTest)
+  const startFullTest = () => {
+    navigate('/toeic/exam/listening-part1', { 
+      state: { isFullTest: true } 
+    });
+  };
+
   return (
     <div className="space-y-10">
+      {/* --- Banner Section --- */}
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -45,7 +58,10 @@ export default function Toeic() {
           >
             พร้อมลงสนามจริงรึยัง? ฝึกฝนด้วยข้อสอบเสมือนจริง จับเวลาจริง ครบทุกพาร์ท!
           </motion.p>
+          
+          {/* ปุ่ม Start Full Test */}
           <motion.button 
+            onClick={startFullTest}
             whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2)" }}
             whileTap={{ scale: 0.95 }}
             className="bg-white text-indigo-600 px-10 py-4 rounded-2xl font-black text-lg shadow-xl flex items-center gap-3 mx-auto md:mx-0 group-hover:text-indigo-700 transition-colors"
@@ -55,7 +71,7 @@ export default function Toeic() {
           </motion.button>
         </div>
         
-        {/* Decorative Background */}
+        {/* Decorative Background SVG */}
         <div className="absolute right-0 bottom-0 opacity-10 transform translate-x-1/4 translate-y-1/4">
            <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
               <path fill="#FFFFFF" d="M44.7,-76.4C58.9,-69.2,71.8,-59.1,81.6,-46.6C91.4,-34.1,98.1,-19.2,95.8,-5.1C93.5,9,82.2,22.3,71.1,34.2C60,46.1,49.1,56.6,36.5,64.2C23.9,71.8,9.6,76.5,-3.4,82.4C-16.4,88.3,-28.1,95.4,-39.2,90.3C-50.3,85.2,-60.8,67.9,-68.6,51.1C-76.4,34.3,-81.5,18,-79.8,2.7C-78.1,-12.6,-69.6,-26.9,-59.5,-38.7C-49.4,-50.5,-37.7,-59.8,-25.2,-68.2C-12.7,-76.6,-0.6,-84.1,13.2,-86.3L27,-88.5L44.7,-76.4Z" transform="translate(100 100)" />
@@ -63,13 +79,14 @@ export default function Toeic() {
         </div>
       </motion.div>
 
+      {/* --- Grid Menu Section --- */}
       <motion.div 
         variants={container}
         initial="hidden"
         animate="show"
         className="grid grid-cols-1 md:grid-cols-2 gap-8"
       >
-        {/* Listening Card */}
+        {/* 1. Listening Card (Part 1-4) */}
         <motion.div variants={item} className="bg-white p-8 rounded-[2.5rem] shadow-lg shadow-blue-100/50 border-2 border-slate-50 hover:border-blue-200 transition-colors h-full group">
           <div className="flex items-center gap-5 mb-8">
             <div className="w-16 h-16 bg-blue-100 rounded-3xl flex items-center justify-center text-blue-600 text-3xl shadow-inner group-hover:scale-110 transition-transform duration-300">
@@ -83,8 +100,13 @@ export default function Toeic() {
             </div>
           </div>
           <div className="space-y-4">
-            {['Photographs', 'Question-Response', 'Conversations', 'Short Talks'].map((item, i) => (
-              <div key={i} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl hover:bg-blue-50 cursor-pointer group/item transition-colors border border-slate-100 hover:border-blue-100">
+            {listeningParts.map((item, i) => (
+              <div 
+                key={i} 
+                // ลิงก์ไป Listening Part 1, 2, 3, 4 (Mock Data Key: listening-part1...4)
+                onClick={() => navigate(`/toeic/exam/listening-part${i + 1}`)}
+                className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl hover:bg-blue-50 cursor-pointer group/item transition-colors border border-slate-100 hover:border-blue-100"
+              >
                 <span className="font-bold text-slate-600 group-hover/item:text-blue-600 text-lg">Part {i + 1}: {item}</span>
                 <span className="bg-white px-4 py-1.5 rounded-xl text-xs text-slate-400 font-bold border border-slate-100 group-hover/item:bg-blue-600 group-hover/item:text-white transition-all shadow-sm">
                   Start
@@ -94,7 +116,7 @@ export default function Toeic() {
           </div>
         </motion.div>
 
-        {/* Reading Card */}
+        {/* 2. Reading Card (Part 5-7) */}
         <motion.div variants={item} className="bg-white p-8 rounded-[2.5rem] shadow-lg shadow-emerald-100/50 border-2 border-slate-50 hover:border-emerald-200 transition-colors h-full group">
           <div className="flex items-center gap-5 mb-8">
             <div className="w-16 h-16 bg-emerald-100 rounded-3xl flex items-center justify-center text-emerald-600 text-3xl shadow-inner group-hover:scale-110 transition-transform duration-300">
@@ -108,8 +130,14 @@ export default function Toeic() {
             </div>
           </div>
           <div className="space-y-4">
-            {['Incomplete Sentences', 'Text Completion', 'Reading Comprehension'].map((item, i) => (
-              <div key={i} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl hover:bg-emerald-50 cursor-pointer group/item transition-colors border border-slate-100 hover:border-emerald-100">
+            {readingParts.map((item, i) => (
+              <div 
+                key={i} 
+                // ลิงก์ไป Reading Part 5, 6, 7 (Mock Data Key: reading-part5...7)
+                // i เริ่มที่ 0 ดังนั้น +5 จะได้ part 5, 6, 7 พอดี
+                onClick={() => navigate(`/toeic/exam/reading-part${i + 5}`)}
+                className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl hover:bg-emerald-50 cursor-pointer group/item transition-colors border border-slate-100 hover:border-emerald-100"
+              >
                 <span className="font-bold text-slate-600 group-hover/item:text-emerald-600 text-lg">Part {i + 5}: {item}</span>
                 <span className="bg-white px-4 py-1.5 rounded-xl text-xs text-slate-400 font-bold border border-slate-100 group-hover/item:bg-emerald-600 group-hover/item:text-white transition-all shadow-sm">
                   Start

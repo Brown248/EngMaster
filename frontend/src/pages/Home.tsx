@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Sparkles, Star, Heart, Book, Flame, Brain, GraduationCap } from 'lucide-react';
+import { ChevronRight, Sparkles, Star, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { coursesData } from '../data/homeData'; // 1. Import Data
 
 export default function Home() {
   const navigate = useNavigate();
@@ -18,17 +19,8 @@ export default function Home() {
 
   const goToCourse = (id: string) => {
     navigate(`/${id}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // ScrollToTop component will handle scrolling
   };
-
-  // แก้ไข: เปลี่ยนการเก็บ icon จาก JSX Element (<Book />) เป็น Component (Book) 
-  // เพื่อป้องกัน Error: Objects are not valid as a React child และเพื่อให้ React จัดการ render ได้ถูกต้อง
-  const courses = [
-    { id: 'vocabulary', title: 'Vocabulary', sub: 'คลังศัพท์ A-Z', icon: Book, color: 'orange' },
-    { id: 'slang', title: 'Slang', sub: 'ศัพท์วัยรุ่น', icon: Flame, color: 'pink' },
-    { id: 'grammar', title: 'Grammar', sub: '12 Tenses', icon: Brain, color: 'purple' },
-    { id: 'toeic', title: 'TOEIC Exam', sub: 'ข้อสอบจำลอง', icon: GraduationCap, color: 'blue' },
-  ];
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-100 overflow-x-hidden">
@@ -101,8 +93,8 @@ export default function Home() {
 
             {/* --- Grid Menu --- */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-2 relative z-10">
-              {courses.map((card) => {
-                // ดึง Component ออกมาเพื่อใช้เป็น JSX tag (นี่คือวิธีที่ถูกต้องใน React)
+              {/* 2. ใช้ coursesData แทน courses */}
+              {coursesData.map((card) => {
                 const Icon = card.icon;
                 return (
                   <motion.div
@@ -126,7 +118,6 @@ export default function Home() {
                         ${card.color === 'purple' ? 'bg-purple-100 text-purple-500' : ''}
                         ${card.color === 'blue' ? 'bg-blue-100 text-blue-500' : ''}
                       `}>
-                        {/* เรียกใช้ Component ที่นี่ */}
                         <Icon size={32} />
                       </div>
                       <h3 className={`text-2xl font-black text-slate-800 transition-colors
