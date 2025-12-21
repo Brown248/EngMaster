@@ -1,22 +1,20 @@
 import { LucideIcon } from 'lucide-react';
 
-// สำหรับ Sidebar Menu
+// --- Shared Types ---
 export interface MenuItem {
   path: string;
   label: string;
   icon: LucideIcon;
 }
 
-// สำหรับ Home Cards
 export interface CourseCard {
   id: string;
   title: string;
   sub: string;
   icon: LucideIcon;
-  color: 'orange' | 'pink' | 'purple' | 'blue'; // ระบุสีที่อนุญาตให้ชัดเจน
+  color: 'orange' | 'pink' | 'purple' | 'blue';
 }
 
-// สำหรับ Slang items
 export interface SlangItem {
   word: string;
   meaning: string;
@@ -26,7 +24,12 @@ export interface SlangItem {
   border: string;
 }
 
-// สำหรับ Grammar items
+export interface GrammarDetail {
+  structure: string;
+  concept: string;
+  examples: string[];
+}
+
 export interface GrammarTopic {
   title: string;
   icon: string;
@@ -34,27 +37,21 @@ export interface GrammarTopic {
   items: string[];
 }
 
-export interface GrammarDetail {
-  structure: string;
-  concept: string;
-  examples: string[];
-}
-
 // --- Exam Types ---
 export interface Question {
   id: number;
-  text: string;
-  image?: string; // รองรับรูปภาพโจทย์ (ถ้ามี)
-  audio?: string; // รองรับไฟล์เสียง (ถ้ามี)
+  text: string;       // ตัวคำถาม
+  passage?: string;   // *ใหม่* เนื้อหาบทความ (สำหรับ Part 6-7)
+  image?: string;     // รูปภาพประกอบ (สำหรับ Part 1, 3, 4)
   choices: string[];
-  correctAnswer: number; // เก็บเป็น index (0, 1, 2, 3)
-  explanation: string; // คำอธิบายเฉลย
+  correctAnswer: number;
+  explanation: string;
 }
 
 export interface ExamPart {
   id: string;
   title: string;
   description: string;
-  timeLimit: number; // หน่วยเป็นวินาที
+  timeLimit: number; 
   questions: Question[];
 }

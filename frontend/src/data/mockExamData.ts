@@ -1,6 +1,8 @@
 import { ExamPart, Question } from '../types';
 
-// --- Helper Functions ---
+// ============================================================================
+// HELPER: QUESTION GENERATOR
+// ============================================================================
 const generateQuestions = (baseQuestions: any[], targetCount: number, startId: number) => {
   const result: Question[] = [];
   for (let i = 0; i < targetCount; i++) {
@@ -8,280 +10,286 @@ const generateQuestions = (baseQuestions: any[], targetCount: number, startId: n
     result.push({
       ...base,
       id: startId + i,
-      // ถ้าเป็นโจทย์ Reading ยาวๆ อาจจะคงเดิมไว้ แต่ถ้าเป็นข้อสั้นๆ อาจจะเติมเลข Variation
-      text: i < baseQuestions.length ? base.text : base.text
+      // ถ้ามี passage ให้คงเดิม ถ้าไม่มีและต้อง loop ให้คง text เดิม
+      text: base.text,
+      passage: base.passage 
     });
   }
   return result;
 };
 
-// --- Base Images ---
 const images = {
-  meeting: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=500&q=80",
-  warehouse: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&q=80",
-  construction: "https://images.unsplash.com/photo-1504384308090-c54be3855091?w=500&q=80"
+  meeting: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80",
+  warehouse: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80",
+  construction: "https://images.unsplash.com/photo-1504384308090-c54be3855091?w=600&q=80",
+  schedule: "https://images.unsplash.com/photo-1635350736475-c8cef4b21906?w=600&q=80"
 };
 
-// ==========================================
-// LISTENING BASE DATA (Real TOEIC Style)
-// ==========================================
+// ============================================================================
+// LISTENING SECTION (Part 1-4)
+// ============================================================================
 
 const part1Base = [
   {
     text: "(Audio) Look at the picture marked Number 1 in your test book.",
     image: images.meeting,
     choices: [
-      "Some documents are being distributed.",
-      "A presentation is being conducted.",
-      "Some people are rearranging the furniture.",
-      "The blinds have been pulled down."
+      "A. They are reviewing some documents.",
+      "B. They are rearranging the office furniture.",
+      "C. One of the men is putting on a jacket.",
+      "D. The computer monitors are facing the wall."
     ],
-    correctAnswer: 1,
-    explanation: "ในภาพมีการนำเสนองาน (Presentation) ข้อ A ผิดเพราะไม่มีใครแจกเอกสาร, C ผิดเพราะไม่ได้ย้ายโต๊ะ"
+    correctAnswer: 0,
+    explanation: "✅ (A) ถูกต้อง: คนในภาพกำลังดูเอกสารและหน้าจอ"
   },
   {
     text: "(Audio) Look at the picture marked Number 2.",
     image: images.warehouse,
     choices: [
-      "Boxes are stacked on the shelves.",
-      "A forklift is being repaired.",
-      "The warehouse is empty.",
-      "Workers are loading a truck."
+      "A. Some boxes are being loaded onto a truck.",
+      "B. The shelves are filled with merchandise.",
+      "C. A forklift is blocking the aisle.",
+      "D. The warehouse floor is being cleaned."
     ],
-    correctAnswer: 0,
-    explanation: "ภาพกล่องวางซ้อนกันบนชั้น (Stacked on the shelves) เป็นศัพท์ Part 1 ที่ออกบ่อย"
+    correctAnswer: 1,
+    explanation: "✅ (B) ถูกต้อง: ชั้นวางของเต็มไปด้วยสินค้า"
   }
 ];
 
 const part2Base = [
   {
-    text: "(Audio) Who's responsible for booking the flight tickets?",
-    choices: [
-      "It's in the conference room.",
-      "Ms. Tanaka usually handles that.",
-      "No, I haven't booked it yet."
-    ],
-    correctAnswer: 1,
-    explanation: "ถาม Who (ใคร) คำตอบทางอ้อมระบุชื่อคนรับผิดชอบ (Ms. Tanaka handles that)"
-  },
-  {
-    text: "(Audio) Why has the workshop been postponed?",
-    choices: [
-      "Because the speaker is ill.",
-      "Until next Friday.",
-      "At the training center."
-    ],
+    text: "(Audio) Who is responsible for booking the conference room?",
+    choices: ["A. I think Ms. Garcia handles that.", "B. It's down the hall on the left.", "C. Yes, I booked it yesterday."],
     correctAnswer: 0,
-    explanation: "ถาม Why (ทำไม) ต้องการเหตุผล (Because...)"
+    explanation: "ถาม Who ตอบชื่อคนรับผิดชอบ (Ms. Garcia)"
   },
   {
-    text: "(Audio) Would you prefer to meet in the morning or the afternoon?",
-    choices: [
-      "Yes, I would.",
-      "It was a productive meeting.",
-      "Either works for me."
-    ],
-    correctAnswer: 2,
-    explanation: "คำถามเลือกตอบ (Or) คำตอบที่ถูกต้องมักจะเป็น 'ได้ทั้งคู่' (Either works)"
+    text: "(Audio) Why hasn't the quarterly report been finalized yet?",
+    choices: ["A. Because we're still waiting for the sales data.", "B. It was a very productive quarter.", "C. You can leave it on my desk."],
+    correctAnswer: 0,
+    explanation: "ถาม Why ตอบเหตุผล (Waiting for data)"
   }
 ];
 
 const part3Base = [
-  // Conversation 1: Problem Solving
   {
-    text: "What problem are the speakers discussing?",
-    choices: ["A computer malfunction.", "A shipping delay.", "A billing error.", "A lost contract."],
-    correctAnswer: 2,
-    explanation: "มี Keyword เช่น 'invoice', 'incorrect amount', 'overcharged' -> Billing error"
-  },
-  {
-    text: "What does the man suggest?",
-    choices: ["Calling the supplier.", "Reviewing the policy.", "Sending a revised invoice.", "Pay the full amount."],
-    correctAnswer: 0,
-    explanation: "ผู้ชายพูดว่า 'Why don't we contact the vendor?' -> Calling supplier"
-  },
-  {
-    text: "What will the woman do next?",
-    choices: ["Update the database.", "Speak to the manager.", "Wait for a call.", "Write a check."],
+    text: "M: Hi, I'm calling to reschedule our meeting on Tuesday.\nW: That's fine. I'm free all morning on Wednesday.\nM: Wednesday morning works best for me. Shall we say 10 o'clock?\nW: Ah, I have a team briefing then. How about 11:00 instead?\n\nQ1: Why is the man calling?",
+    choices: ["A. To cancel an order", "B. To reschedule a meeting", "C. To ask for directions", "D. To confirm a reservation"],
     correctAnswer: 1,
-    explanation: "'I'll run this by Ms. Garcia first.' -> Speak to manager"
+    explanation: "Keyword: 'calling to reschedule our meeting'"
+  },
+  {
+    text: "Q2: What time do the speakers agree to meet?",
+    choices: ["A. 10:00", "B. 11:00", "C. Tuesday", "D. Thursday"],
+    correctAnswer: 1,
+    explanation: "ตกลงกันที่ 11:00"
+  },
+  {
+    text: "Q3: What will the woman do at 10:00?",
+    choices: ["A. Meet the man", "B. Have a team briefing", "C. Visit a client", "D. Go to lunch"],
+    correctAnswer: 1,
+    explanation: "มี Team briefing ตอน 10 โมง"
   }
 ];
 
 const part4Base = [
-  // Talk 1: Voicemail Message
   {
-    text: "What is the purpose of the message?",
-    choices: ["To schedule an interview.", "To confirm a reservation.", "To request a refund.", "To offer a job."],
-    correctAnswer: 0,
-    explanation: "ข้อความจาก HR นัดสัมภาษณ์ 'We'd like to schedule an interview...'"
-  },
-  {
-    text: "What is the listener asked to bring?",
-    choices: ["A photo ID.", "A portfolio.", "A reference letter.", "A resume."],
+    text: "(Audio) TechGiant Corp has announced plans to acquire a leading AI startup for 2 billion dollars. Shareholders reacted positively, with stock prices rising by 5%. The merger is expected to be finalized by the end of the year.\n\nQ1: What is the main topic of the report?",
+    choices: ["A. A new product", "B. A company acquisition", "C. A new CEO", "D. Bankruptcy"],
     correctAnswer: 1,
-    explanation: "Please bring a copy of your portfolio."
+    explanation: "Keyword: 'plans to acquire'"
   },
   {
-    text: "When should the listener return the call?",
-    choices: ["By 5 PM today.", "Tomorrow morning.", "Next week.", "Immediately."],
-    correctAnswer: 0,
-    explanation: "Please call me back before the office closes at 5."
+    text: "Q2: How did the stock market react?",
+    choices: ["A. Fell sharply", "B. Unchanged", "C. Rose by 5%", "D. Halted"],
+    correctAnswer: 2,
+    explanation: "Stock prices rising by 5%"
+  },
+  {
+    text: "Q3: When will the deal be completed?",
+    choices: ["A. Today", "B. Next month", "C. By year end", "D. Two years"],
+    correctAnswer: 2,
+    explanation: "Finalized by the end of the year"
   }
 ];
 
-// ==========================================
-// READING BASE DATA (Real TOEIC Style)
-// ==========================================
+// ============================================================================
+// READING SECTION (Part 5-7)
+// ============================================================================
 
 const part5Base = [
   {
-    text: "Ms. Johnson is a highly _______ architect who has designed several landmarks.",
-    choices: ["respect", "respects", "respected", "respecting"],
+    text: "Despite _______ extensive experience, Mr. Evans was not selected for the position.",
+    choices: ["he", "him", "his", "himself"],
     correctAnswer: 2,
-    explanation: "Adjective ขยาย architect ต้องใช้ Past Participle (respected) แปลว่า ที่ได้รับความเคารพ/มีชื่อเสียง"
+    explanation: "ต้องการ Possessive Adjective หน้า Noun (experience) -> 'his'"
   },
   {
-    text: "The annual report must be submitted _______ Friday, March 15.",
-    choices: ["on", "at", "by", "to"],
-    correctAnswer: 2,
-    explanation: "Deadline ใช้ Preposition 'by' (ภายใน/ก่อน) ถ้า 'on' จะหมายถึงทำในวันนั้นพอดี"
+    text: "The new strategy is _______ more effective than the previous one.",
+    choices: ["significantly", "significant", "significance", "signify"],
+    correctAnswer: 0,
+    explanation: "ใช้ Adverb ขยาย Comparative -> 'significantly more effective'"
   },
   {
-    text: "_______ severe weather conditions, the outdoor concert was canceled.",
-    choices: ["Because", "Due to", "Although", "Unless"],
-    correctAnswer: 1,
-    explanation: "ตามด้วย Noun Phrase (severe weather conditions) ต้องใช้ Due to. (Because ต้องตามด้วยประโยค)"
+    text: "All employees must _______ with the safety regulations.",
+    choices: ["comply", "observe", "fulfill", "obey"],
+    correctAnswer: 0,
+    explanation: "comply + with (ปฏิบัติตาม)"
   },
   {
-    text: "The new software allows users to process data much more _______.",
-    choices: ["efficient", "efficiency", "efficiently", "efficiencies"],
+    text: "Requests must be submitted _______ two weeks in advance.",
+    choices: ["at", "on", "at least", "almost"],
     correctAnswer: 2,
-    explanation: "ขยาย Verb 'process' ต้องใช้ Adverb (efficiently)"
-  },
-  {
-    text: "We are currently seeking a _______ replacement for the retiring director.",
-    choices: ["suit", "suitability", "suitable", "suitably"],
-    correctAnswer: 2,
-    explanation: "ต้องการ Adjective (suitable) มาขยาย Noun (replacement)"
+    explanation: "at least (อย่างน้อย)"
   }
 ];
+
+// --- Part 6 & 7: มี Passage ยาว ---
+
+// 1. Elevator Email (Part 6)
+const p6_elevator = `To: All Staff
+From: Facilities
+Subject: Elevator Maintenance
+
+Please be advised that the main elevators will be out of service (1)_______ the weekend for scheduled maintenance. We apologize for any (2)_______ this may cause to staff working overtime. Please use the freight elevator located at the rear of the building (3)_______. Normal service is expected to (4)_______ by Monday morning.`;
 
 const part6Base = [
   {
-    text: "To: All Employees\nSubject: Maintenance\n\nPlease be advised that the elevators will be out of _______ tomorrow morning.",
-    choices: ["work", "order", "repair", "service"],
-    correctAnswer: 3,
-    explanation: "Idiom: 'Out of service' (งดให้บริการ/ใช้งานไม่ได้)"
-  },
-  {
-    text: "Technicians will be performing routine _______ checks.",
-    choices: ["safe", "safety", "safely", "safer"],
+    passage: p6_elevator,
+    text: "Question 1: Choose the best word for blank (1)",
+    choices: ["while", "during", "as", "when"],
     correctAnswer: 1,
-    explanation: "Compound Noun: Safety checks (การตรวจสอบความปลอดภัย)"
+    explanation: "during the weekend (ตลอดช่วงวันหยุด)"
   },
   {
-    text: "We apologize for the _______.",
-    choices: ["inconvenience", "convenience", "inconvenient", "convenient"],
-    correctAnswer: 0,
-    explanation: "Noun: Inconvenience (ความไม่สะดวก)"
+    passage: p6_elevator,
+    text: "Question 2: Choose the best word for blank (2)",
+    choices: ["convenience", "inconvenience", "convenient", "inconvenient"],
+    correctAnswer: 1,
+    explanation: "apologize for any inconvenience (ความไม่สะดวก)"
   },
   {
-    text: "Please use the stairs _______.",
+    passage: p6_elevator,
+    text: "Question 3: Choose the best word for blank (3)",
     choices: ["instead", "however", "therefore", "although"],
     correctAnswer: 0,
-    explanation: "Adverb จบประโยค: Instead (แทน)"
+    explanation: "use... instead (ใช้...แทน)"
+  },
+  {
+    passage: p6_elevator,
+    text: "Question 4: Choose the best word for blank (4)",
+    choices: ["resume", "resuming", "resumed", "resumes"],
+    correctAnswer: 0,
+    explanation: "expected to resume (คาดว่าจะกลับมาใช้งานได้)"
   }
 ];
+
+// 2. Double Passage: Memo & Email (Part 7)
+const p7_relocation = `**Passage 1: Internal Memo**
+From: Sarah Jenkins, Operations Director
+To: All Staff
+Date: October 15
+Subject: Office Relocation Update
+
+As you know, we will be moving to our new headquarters at Riverfront Plaza on November 1st. The packing process will begin next Monday. Each department has been assigned a specific day to pick up crates. Please ensure all personal items are packed by Friday, Oct 27th. The IT department will be disconnecting equipment starting at 5:00 PM that Friday. Employees are expected to work remotely on Oct 30-31 while movers transport furniture.
+
+-----------------------------------
+
+**Passage 2: Email**
+From: Mark Alistair
+To: Sarah Jenkins
+Date: Oct 16
+Subject: Re: Relocation
+
+Dear Sarah,
+I received your memo regarding the move. I'm writing to request a slight adjustment for the Marketing team. We have a major client pitch scheduled for the morning of Monday, Oct 30th. It is critical that we have full access to our workstations and the server. Could the IT department delay disconnecting our equipment until Monday afternoon? We can pack our personal items by the deadline, but we need the computers active.`;
 
 const part7Base = [
-  // Set 1: Email & Schedule (Double Passage)
   {
-    text: "**Passage 1: Email**\nFrom: J. Miller\nTo: Staff\nSubject: Training Workshop\n\nI'm pleased to announce the schedule for next week's software training. All sessions will be held in Room B.\n\n**Passage 2: Schedule**\nMonday: Intro to Excel (9-11 AM)\nTuesday: Advanced PowerPoint (1-3 PM)\nWednesday: Database Management (10-12 AM)\n\n----------------\n\nWhat is the purpose of the email?",
-    choices: ["To cancel a meeting.", "To announce a training schedule.", "To hire a trainer.", "To request software."],
+    passage: p7_relocation,
+    text: "Q1: What is the main purpose of the memo?",
+    choices: ["A. To announce a new client", "B. To provide instructions for the move", "C. To change the moving date", "D. To request feedback"],
     correctAnswer: 1,
-    explanation: "Subject: Training Workshop และเนื้อหาแจ้งตารางอบรม"
+    explanation: "Memo แจ้งรายละเอียดขั้นตอนการย้ายออฟฟิศ"
   },
   {
-    text: "Where will the training take place?",
-    choices: ["Room A", "Room B", "The cafeteria", "Online"],
+    passage: p7_relocation,
+    text: "Q2: When will the IT department start disconnecting equipment?",
+    choices: ["A. October 15", "B. October 27", "C. October 30", "D. November 1"],
     correctAnswer: 1,
-    explanation: "ระบุชัดเจน 'held in Room B'"
+    explanation: "Passage 1 ระบุ: 'starting at 5:00 PM that Friday' (Friday, Oct 27th)"
   },
   {
-    text: "Which session is held in the afternoon?",
-    choices: ["Intro to Excel", "Advanced PowerPoint", "Database Management", "None"],
-    correctAnswer: 1,
-    explanation: "PowerPoint เวลา 1-3 PM (บ่าย)"
+    passage: p7_relocation,
+    text: "Q3: Why does Mark Alistair write the email?",
+    choices: ["A. To complain about the location", "B. To ask for packing supplies", "C. To request a schedule change", "D. To resign"],
+    correctAnswer: 2,
+    explanation: "Mark ขอเลื่อนเวลาตัดระบบ ('request a slight adjustment')"
   },
   {
-    text: "Who is the sender of the email?",
-    choices: ["Staff", "J. Miller", "HR", "IT Support"],
+    passage: p7_relocation,
+    text: "Q4: What implies about the Marketing team?",
+    choices: ["A. They are moving to a different floor", "B. They have an important meeting on Oct 30", "C. They have already packed", "D. They work remotely often"],
     correctAnswer: 1,
-    explanation: "From: J. Miller"
+    explanation: "Passage 2 ระบุ: 'major client pitch... Oct 30th'"
   },
   {
-    text: "How long is the Excel session?",
-    choices: ["1 hour", "2 hours", "3 hours", "4 hours"],
-    correctAnswer: 1,
-    explanation: "9-11 AM = 2 hours"
+    passage: p7_relocation,
+    text: "Q5: What solution does Mark propose?",
+    choices: ["A. Canceling the meeting", "B. Working from home", "C. Keeping equipment connected longer", "D. Moving on the weekend"],
+    correctAnswer: 2,
+    explanation: "Mark ขอให้ 'delay disconnecting... until Monday afternoon'"
   }
 ];
 
-// ==========================================
-// EXPORT FULL MOCK DATA (200 ITEMS GENERATED)
-// ==========================================
-export const mockExamData: Record<string, ExamPart> = {
-  // LISTENING (100 Questions)
-  'listening-part1': {
-    id: 'listening-part1',
-    title: 'Part 1: Photographs',
-    description: 'Select the best description of the picture.',
-    timeLimit: 300,
-    questions: generateQuestions(part1Base, 6, 1)
-  },
-  'listening-part2': {
-    id: 'listening-part2',
-    title: 'Part 2: Question-Response',
-    description: 'Listen to a question and choose the best response.',
-    timeLimit: 600,
-    questions: generateQuestions(part2Base, 25, 7)
-  },
-  'listening-part3': {
-    id: 'listening-part3',
-    title: 'Part 3: Conversations',
-    description: 'Listen to the dialogue and answer three questions.',
-    timeLimit: 900,
-    questions: generateQuestions(part3Base, 39, 32)
-  },
-  'listening-part4': {
-    id: 'listening-part4',
-    title: 'Part 4: Short Talks',
-    description: 'Listen to the talk and answer three questions.',
-    timeLimit: 900,
-    questions: generateQuestions(part4Base, 30, 71)
-  },
+// 3. Single Article: EV (Part 7)
+const p7_ev = `**Article: The Future of Electric Vehicles**
 
-  // READING (100 Questions)
-  'reading-part5': {
-    id: 'reading-part5',
-    title: 'Part 5: Incomplete Sentences',
-    description: 'Select the best word to complete the sentence.',
-    timeLimit: 900,
-    questions: generateQuestions(part5Base, 30, 101)
+(City Times) — Automotive giant Apex Motors unveiled its latest line of electric vehicles (EVs) yesterday, promising longer battery life and faster charging times. The new 'EcoDrive' series features a proprietary battery technology that allows drivers to travel up to 500 miles on a single charge.
+
+Industry analyst, Dr. Alan Grant, noted, "This is a game-changer. Range anxiety has been the number one barrier to EV adoption. Apex Motors has effectively removed that hurdle."
+
+However, challenges remain. The charging infrastructure in rural areas is still underdeveloped. To address this, Apex Motors announced a partnership with PowerGrid Inc. to install 5,000 new charging stations nationwide over the next two years.`;
+
+const part7Base2 = [
+  {
+    passage: p7_ev,
+    text: "Q6: What feature does the 'EcoDrive' series highlight?",
+    choices: ["A. Lower price", "B. Self-driving", "C. Extended driving range", "D. Luxury interiors"],
+    correctAnswer: 2,
+    explanation: "บทความระบุ 'travel up to 500 miles on a single charge'"
   },
-  'reading-part6': {
-    id: 'reading-part6',
-    title: 'Part 6: Text Completion',
-    description: 'Complete the missing words in the text.',
-    timeLimit: 900,
-    questions: generateQuestions(part6Base, 16, 131)
+  {
+    passage: p7_ev,
+    text: "Q7: According to Dr. Grant, what has been the main problem for EV buyers?",
+    choices: ["A. High cost", "B. Range anxiety", "C. Safety", "D. Design"],
+    correctAnswer: 1,
+    explanation: "Dr. Grant กล่าวว่า 'Range anxiety has been the number one barrier'"
   },
-  'reading-part7': {
-    id: 'reading-part7',
-    title: 'Part 7: Reading Comprehension',
-    description: 'Read the passages and answer the questions.',
-    timeLimit: 3000, 
-    questions: generateQuestions(part7Base, 54, 147)
+  {
+    passage: p7_ev,
+    text: "Q8: What is Apex Motors planning with PowerGrid Inc.?",
+    choices: ["A. New battery", "B. Merger", "C. Build charging stations", "D. New dealerships"],
+    correctAnswer: 2,
+    explanation: "ระบุว่า 'install 5,000 new charging stations'"
+  }
+];
+
+// ============================================================================
+// EXPORT FULL MOCK DATA
+// ============================================================================
+export const mockExamData: Record<string, ExamPart> = {
+  'listening-part1': { id: 'listening-part1', title: 'Part 1: Photographs', description: 'Select the best description.', timeLimit: 300, questions: generateQuestions(part1Base, 6, 1) },
+  'listening-part2': { id: 'listening-part2', title: 'Part 2: Q&A', description: 'Choose the best response.', timeLimit: 600, questions: generateQuestions(part2Base, 25, 7) },
+  'listening-part3': { id: 'listening-part3', title: 'Part 3: Conversations', description: 'Answer questions about the dialogue.', timeLimit: 900, questions: generateQuestions(part3Base, 39, 32) },
+  'listening-part4': { id: 'listening-part4', title: 'Part 4: Short Talks', description: 'Answer questions about the talk.', timeLimit: 900, questions: generateQuestions(part4Base, 30, 71) },
+  
+  'reading-part5': { id: 'reading-part5', title: 'Part 5: Incomplete Sentences', description: 'Complete the sentence.', timeLimit: 900, questions: generateQuestions(part5Base, 30, 101) },
+  'reading-part6': { id: 'reading-part6', title: 'Part 6: Text Completion', description: 'Complete the text.', timeLimit: 900, questions: generateQuestions(part6Base, 16, 131) }, // Loop set 1
+  'reading-part7': { id: 'reading-part7', title: 'Part 7: Reading Comprehension', description: 'Read passages and answer.', timeLimit: 3000, 
+    questions: [
+      ...generateQuestions(part7Base, 30, 147), // Double Passage Set
+      ...generateQuestions(part7Base2, 24, 177) // Single Passage Set
+    ] 
   }
 };
