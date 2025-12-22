@@ -1,11 +1,12 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+// Change back to relative paths to ensure stability in this environment
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
-import usePageTitle from './hooks/usePageTitle'; // 1. Import Hook มา
+import usePageTitle from './hooks/usePageTitle';
 
-// Lazy load pages
+// Lazy load pages using relative paths
 const Home = lazy(() => import('./pages/Home'));
 const Vocabulary = lazy(() => import('./pages/Vocabulary'));
 const Slang = lazy(() => import('./pages/Slang'));
@@ -24,7 +25,6 @@ const PageLoader = () => (
 function AnimatedRoutes() {
   const location = useLocation();
   
-  // 2. เรียกใช้ Hook ตรงนี้! (เพราะอยู่ภายใต้ Router แล้ว)
   usePageTitle(); 
 
   return (
@@ -36,7 +36,6 @@ function AnimatedRoutes() {
             <Route path="vocabulary" element={<Vocabulary />} />
             <Route path="slang" element={<Slang />} />
             <Route path="grammar" element={<Grammar />} />
-            <Route path="toeic" element={<Toeic />} />
             <Route path="toeic" element={<Toeic />} />
             <Route path="toeic/exam/:partId" element={<ToeicExam />} />
           </Route>

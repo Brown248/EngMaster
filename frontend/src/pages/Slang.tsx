@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { Volume2, Sparkles, Search } from 'lucide-react';
+import { Sparkles, Search } from 'lucide-react'; // ลบ Volume2 ออก
 import { useState } from 'react';
-import { slangs } from '../data/slangData'; // เรียกใช้ข้อมูลจากไฟล์ Data
+import { slangs } from '../data/slangData';
 
 export default function Slang() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -72,10 +72,7 @@ export default function Slang() {
                   <div className="flex-1">
                      <div className="flex items-center gap-2 mb-1">
                         <h3 className={`text-3xl font-black ${item.color} tracking-tight`}>{item.word}</h3>
-                        {/* ปุ่มฟังเสียง (จำลอง) */}
-                        <button className="p-2 rounded-full hover:bg-slate-100 text-slate-300 hover:text-slate-500 transition-colors active:scale-90">
-                           <Volume2 size={20} />
-                        </button>
+                        {/* ลบปุ่ม Volume2 ออกจากตรงนี้แล้ว */}
                      </div>
                      {/* Badge หมวดหมู่ (สมมติว่าเป็น Popular) */}
                      {index < 5 && (
