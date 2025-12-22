@@ -1,12 +1,11 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-// Change back to relative paths to ensure stability in this environment
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
 import usePageTitle from './hooks/usePageTitle';
 
-// Lazy load pages using relative paths
+// Lazy load pages
 const Home = lazy(() => import('./pages/Home'));
 const Vocabulary = lazy(() => import('./pages/Vocabulary'));
 const Slang = lazy(() => import('./pages/Slang'));
