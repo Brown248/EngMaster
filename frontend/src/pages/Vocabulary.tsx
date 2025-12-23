@@ -1,9 +1,10 @@
 import { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Search, Volume2, XCircle, Briefcase, School, Coffee, Globe } from 'lucide-react';
-import { vocabularyData, VocabWord } from '../data/vocabularyData';
+import { vocabularyData } from '../data/vocabularyData';
+// ✅ Import AdBanner
+import AdBanner from '../components/AdBanner';
 
-// Define category types
 type CategoryType = 'All' | 'General' | 'Academic' | 'Business';
 
 export default function Vocabulary() {
@@ -13,7 +14,6 @@ export default function Vocabulary() {
 
   const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
 
-  // Category Configuration for UI
   const categories: { id: CategoryType; label: string; icon: any; color: string }[] = [
     { id: 'All', label: 'ทั้งหมด', icon: Globe, color: 'bg-slate-100 text-slate-600 border-slate-200' },
     { id: 'General', label: 'ทั่วไป', icon: Coffee, color: 'bg-emerald-50 text-emerald-600 border-emerald-200' },
@@ -21,37 +21,24 @@ export default function Vocabulary() {
     { id: 'Academic', label: 'วิชาการ', icon: School, color: 'bg-purple-50 text-purple-600 border-purple-200' },
   ];
 
-  // Logic กรองคำศัพท์
   const filteredVocab = useMemo(() => {
     return vocabularyData.filter((item) => {
-      // 1. กรองตามหมวดหมู่
-      const matchesCategory = filterCategory === 'All' 
-        ? true 
-        : item.category === filterCategory;
-
-      // 2. กรองตามตัวอักษรแรก (ถ้ามีการเลือก)
-      const matchesLetter = selectedLetter 
-        ? item.word.charAt(0).toUpperCase() === selectedLetter 
-        : true;
-      
-      // 3. กรองตามคำค้นหา
+      const matchesCategory = filterCategory === 'All' ? true : item.category === filterCategory;
+      const matchesLetter = selectedLetter ? item.word.charAt(0).toUpperCase() === selectedLetter : true;
       const matchesSearch = searchTerm
         ? item.word.toLowerCase().includes(searchTerm.toLowerCase()) || 
           item.meaning.toLowerCase().includes(searchTerm.toLowerCase())
         : true;
-
       return matchesCategory && matchesLetter && matchesSearch;
     });
   }, [selectedLetter, searchTerm, filterCategory]);
 
-  // Reset Filters
   const clearFilters = () => {
     setSelectedLetter(null);
     setSearchTerm('');
     setFilterCategory('All');
   };
 
-  // Animation Variants
   const container = {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { staggerChildren: 0.03 } }
@@ -93,8 +80,6 @@ export default function Vocabulary() {
 
         {/* --- Controls Section --- */}
         <div className="space-y-6 mb-8">
-            
-            {/* 1. Category Tabs */}
             <div className="flex flex-wrap gap-2 md:gap-3 p-1.5 bg-slate-50 rounded-2xl border border-slate-100 w-fit">
                 {categories.map((cat) => {
                     const isActive = filterCategory === cat.id;
@@ -104,7 +89,7 @@ export default function Vocabulary() {
                             key={cat.id}
                             onClick={() => {
                                 setFilterCategory(cat.id);
-                                setSelectedLetter(null); // Reset letter filter when changing category
+                                setSelectedLetter(null);
                             }}
                             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold transition-all text-sm md:text-base
                                 ${isActive 
@@ -119,7 +104,6 @@ export default function Vocabulary() {
                 })}
             </div>
 
-            {/* 2. Search & Reset */}
             <div className="flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1 group">
                     <input 
@@ -153,7 +137,10 @@ export default function Vocabulary() {
             </div>
         </div>
 
-        {/* --- Keyboard Grid (Hidden when searching) --- */}
+        {/* ✅ แทรก AdBanner ก่อนตารางตัวอักษร */}
+        <AdBanner className="mb-8" />
+
+        {/* --- Keyboard Grid --- */}
         {!searchTerm && (
             <motion.div 
                 variants={container}
@@ -163,7 +150,6 @@ export default function Vocabulary() {
             >
             {letters.map((letter) => {
                 const isSelected = selectedLetter === letter;
-                // Check if this letter has words in the current category
                 const hasWords = vocabularyData.some(item => 
                     item.word.charAt(0).toUpperCase() === letter && 
                     (filterCategory === 'All' || item.category === filterCategory)
@@ -202,7 +188,6 @@ export default function Vocabulary() {
             {filteredVocab.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {filteredVocab.map((item, idx) => {
-                        // Find category styling
                         const catStyle = categories.find(c => c.id === item.category);
                         const CatIcon = catStyle?.icon || Globe;
 
@@ -233,7 +218,6 @@ export default function Vocabulary() {
                                         <p className="text-slate-500 text-sm italic">"{item.example}"</p>
                                     </div>
                                     
-                                    {/* Category Badge */}
                                     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider border ${catStyle?.color}`}>
                                         <CatIcon size={12} />
                                         {item.category}

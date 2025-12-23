@@ -2,7 +2,9 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Sparkles, Star, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { coursesData } from '../data/homeData'; // 1. Import Data
+import { coursesData } from '../data/homeData';
+// ✅ 1. เพิ่ม Import AdBanner
+import AdBanner from '../components/AdBanner';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -19,7 +21,6 @@ export default function Home() {
 
   const goToCourse = (id: string) => {
     navigate(`/${id}`);
-    // ScrollToTop component will handle scrolling
   };
 
   return (
@@ -91,9 +92,13 @@ export default function Home() {
               </motion.div>
             </div>
 
+            {/* ✅ 2. แทรก AdBanner ตรงนี้ (คั่นระหว่าง Hero กับ Menu) */}
+            <div className="relative z-10">
+              <AdBanner />
+            </div>
+
             {/* --- Grid Menu --- */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-2 relative z-10">
-              {/* 2. ใช้ coursesData แทน courses */}
               {coursesData.map((card) => {
                 const Icon = card.icon;
                 return (

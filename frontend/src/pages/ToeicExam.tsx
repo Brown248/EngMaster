@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Clock, ChevronLeft, ChevronRight, CheckCircle, XCircle, AlertCircle, RotateCcw, Home, ArrowRight, BarChart2, Eye, ArrowLeft, BookOpen } from 'lucide-react';
+import { Clock, ChevronLeft, ChevronRight, CheckCircle, AlertCircle, BarChart2, Eye, ArrowLeft, ArrowRight, BookOpen } from 'lucide-react';
 import { mockExamData } from '../data/mockExamData';
 import { cn } from '../utils/cn';
+// ✅ Import AdBanner
+import AdBanner from '../components/AdBanner';
 
 const FULL_TEST_ORDER = [
   'listening-part1', 'listening-part2', 'listening-part3', 'listening-part4',
@@ -23,35 +25,90 @@ export default function ToeicExam() {
   const { partId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  
-  const isFullTest = location.state?.isFullTest || false;
-  const previousResults: PartResult[] = location.state?.results || [];
 
-  const examData = mockExamData[partId || ''] || mockExamData['listening-part1'];
+  // --- CONFIG: Storage Keys (Unique per part) ---
+  const STORAGE_KEY_ANSWERS = `engmaster_answers_${partId}`;
+  const STORAGE_KEY_TIME = `engmaster_time_${partId}`;
+  const STORAGE_KEY_FULLTEST = `engmaster_fulltest_progress`;
+
+  // --- DATA LOAD & VALIDATION ---
+  const examData = mockExamData[partId || ''];
+
+  useEffect(() => {
+    if (!examData) navigate('/toeic');
+  }, [examData, navigate]);
+
+  if (!examData) return null;
+
+  // --- STATE MANAGEMENT WITH PERSISTENCE ---
+  const [isFullTest, setIsFullTest] = useState(false);
+  const [previousResults, setPreviousResults] = useState<PartResult[]>([]);
+
+  useEffect(() => {
+    if (location.state?.isFullTest) {
+      setIsFullTest(true);
+      setPreviousResults(location.state.results || []);
+      localStorage.setItem(STORAGE_KEY_FULLTEST, JSON.stringify({
+        isFullTest: true,
+        results: location.state.results || []
+      }));
+    } else {
+      const savedFullTest = localStorage.getItem(STORAGE_KEY_FULLTEST);
+      if (savedFullTest) {
+        const parsed = JSON.parse(savedFullTest);
+        if (parsed.isFullTest && FULL_TEST_ORDER.includes(partId || '')) {
+            setIsFullTest(true);
+            setPreviousResults(parsed.results);
+        }
+      }
+    }
+  }, [location.state, partId]);
+
+  const [answers, setAnswers] = useState<Record<number, number>>(() => {
+    const saved = localStorage.getItem(STORAGE_KEY_ANSWERS);
+    return saved ? JSON.parse(saved) : {};
+  });
+
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const saved = localStorage.getItem(STORAGE_KEY_TIME);
+    return saved ? parseInt(saved, 10) : examData.timeLimit;
+  });
 
   const [currentQ, setCurrentQ] = useState(0);
-  const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [timeLeft, setTimeLeft] = useState(examData.timeLimit);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [reviewPartId, setReviewPartId] = useState<string | null>(null);
 
+  // --- EFFECTS: Auto-Save ---
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY_ANSWERS, JSON.stringify(answers));
+  }, [answers, STORAGE_KEY_ANSWERS]);
+
   useEffect(() => {
     if (isSubmitted || timeLeft <= 0) return;
-    const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        const newTime = prev - 1;
+        localStorage.setItem(STORAGE_KEY_TIME, newTime.toString());
+        return newTime;
+      });
+    }, 1000);
     return () => clearInterval(timer);
-  }, [timeLeft, isSubmitted]);
+  }, [timeLeft, isSubmitted, STORAGE_KEY_TIME]);
 
   useEffect(() => {
     if (timeLeft === 0 && !isSubmitted) submitExam();
   }, [timeLeft]);
 
+  // --- HANDLERS ---
   const handleAnswer = (choiceIndex: number) => {
     if (isSubmitted) return;
-    setAnswers({ ...answers, [currentQ]: choiceIndex });
+    setAnswers(prev => ({ ...prev, [currentQ]: choiceIndex }));
   };
 
   const submitExam = () => {
     setIsSubmitted(true);
+    localStorage.removeItem(STORAGE_KEY_ANSWERS);
+    localStorage.removeItem(STORAGE_KEY_TIME);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -77,15 +134,31 @@ export default function ToeicExam() {
     };
 
     const updatedResults = [...previousResults, currentResult];
+    
+    localStorage.setItem(STORAGE_KEY_FULLTEST, JSON.stringify({
+        isFullTest: true,
+        results: updatedResults
+    }));
+
     const currentIndex = FULL_TEST_ORDER.indexOf(partId || '');
     
     if (currentIndex !== -1 && currentIndex < FULL_TEST_ORDER.length - 1) {
       const nextPartId = FULL_TEST_ORDER[currentIndex + 1];
+      localStorage.removeItem(STORAGE_KEY_ANSWERS);
+      localStorage.removeItem(STORAGE_KEY_TIME);
+
       navigate(`/toeic/exam/${nextPartId}`, {
         state: { isFullTest: true, results: updatedResults }
       });
       window.scrollTo(0, 0); 
     }
+  };
+
+  const handleExit = () => {
+    localStorage.removeItem(STORAGE_KEY_ANSWERS);
+    localStorage.removeItem(STORAGE_KEY_TIME);
+    localStorage.removeItem(STORAGE_KEY_FULLTEST);
+    navigate('/toeic');
   };
 
   const formatTime = (seconds: number) => {
@@ -94,7 +167,7 @@ export default function ToeicExam() {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  // --- REVIEW VIEW ---
+  // --- COMPONENT: Review View ---
   const ReviewView = ({ data, userAnswers, onBack }: { data: any, userAnswers: Record<number, number>, onBack?: () => void }) => {
     return (
       <div className="space-y-6">
@@ -140,7 +213,7 @@ export default function ToeicExam() {
     );
   };
 
-  // --- RESULT DASHBOARD ---
+  // --- RESULT VIEW ---
   if (isSubmitted) {
     const score = calculateScore();
     const timeUsed = examData.timeLimit - timeLeft;
@@ -170,6 +243,10 @@ export default function ToeicExam() {
                 <p className="text-blue-600 font-bold uppercase tracking-widest text-sm mb-2">Total Score</p>
                 <p className="text-6xl font-black text-blue-700">{totalScore} <span className="text-2xl text-blue-400">/ {totalQuestions}</span></p>
             </div>
+
+            {/* ✅ AdBanner ในหน้าจบ Full Test */}
+            <AdBanner className="mb-8" />
+
             <h3 className="text-2xl font-bold text-slate-700 mb-4 flex items-center gap-2"><BarChart2 /> Performance Breakdown</h3>
             <div className="space-y-3 mb-10">
               {allResults.map((r, idx) => (
@@ -185,7 +262,11 @@ export default function ToeicExam() {
                 </div>
               ))}
             </div>
-            <div className="flex justify-center"><button onClick={() => navigate('/toeic')} className="px-8 py-3 bg-slate-800 text-white rounded-xl font-bold shadow-lg hover:bg-slate-900 transition-all">Back to Menu</button></div>
+            <div className="flex justify-center">
+                <button onClick={handleExit} className="px-8 py-3 bg-slate-800 text-white rounded-xl font-bold shadow-lg hover:bg-slate-900 transition-all">
+                    Back to Menu (Clear Data)
+                </button>
+            </div>
           </motion.div>
         </div>
       );
@@ -207,22 +288,25 @@ export default function ToeicExam() {
             {isFullTest ? (
               <button onClick={handleNextPart} className="flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-black text-lg transition-colors shadow-lg shadow-blue-200 animate-bounce">Go to Next Part <ArrowRight size={24} /></button>
             ) : (
-              <button onClick={() => navigate('/toeic')} className="flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-bold transition-colors shadow-lg">Back to Menu</button>
+              <button onClick={handleExit} className="flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-bold transition-colors shadow-lg">Back to Menu</button>
             )}
           </div>
         </motion.div>
+        
+        {/* ✅ AdBanner ก่อนเฉลย */}
+        <AdBanner />
+
         {!isFullTest && <ReviewView data={examData} userAnswers={answers} />}
       </div>
     );
   }
 
-  // --- EXAM VIEW (SPLIT SCREEN FOR PASSAGE) ---
+  // --- EXAM VIEW ---
   const currentQuestion = examData.questions[currentQ];
   const hasPassage = !!currentQuestion.passage;
 
   return (
     <div className={cn("mx-auto pb-20", hasPassage ? "max-w-7xl px-4" : "max-w-3xl")}>
-      {/* Header */}
       <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center justify-between mb-6 sticky top-2 z-20">
         <div>
           <h2 className="font-black text-slate-700">{examData.title}</h2>
@@ -234,8 +318,6 @@ export default function ToeicExam() {
       </div>
 
       <div className={cn("gap-6", hasPassage ? "grid grid-cols-1 lg:grid-cols-2 items-start" : "")}>
-        
-        {/* LEFT COLUMN: PASSAGE (Sticky on Desktop) */}
         {hasPassage && (
           <motion.div 
             initial={{ opacity: 0, x: -20 }} 
@@ -251,7 +333,6 @@ export default function ToeicExam() {
           </motion.div>
         )}
 
-        {/* RIGHT COLUMN: QUESTION */}
         <motion.div 
           key={currentQ}
           initial={{ x: 20, opacity: 0 }}

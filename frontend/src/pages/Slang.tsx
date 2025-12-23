@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
-import { Sparkles, Search } from 'lucide-react'; // ลบ Volume2 ออก
-import { useState } from 'react';
+import { Sparkles, Search } from 'lucide-react';
+import { useState, Fragment } from 'react';
 import { slangs } from '../data/slangData';
+// ✅ Import AdBanner
+import AdBanner from '../components/AdBanner';
 
 export default function Slang() {
   const [searchTerm, setSearchTerm] = useState('');
 
-  // ฟังก์ชันกรองคำศัพท์
   const filteredSlangs = slangs.filter(item => 
     item.word.toLowerCase().includes(searchTerm.toLowerCase()) || 
     item.meaning.toLowerCase().includes(searchTerm.toLowerCase())
@@ -54,49 +55,54 @@ export default function Slang() {
       {filteredSlangs.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredSlangs.map((item, index) => (
-            <motion.div 
-              key={index}
-              layout // ช่วยให้ Animation ตอนกรองคำดูลื่นไหล
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.03 }}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className={`bg-white p-6 rounded-[2rem] border-2 ${item.border} shadow-lg shadow-slate-100 hover:shadow-xl transition-all cursor-default relative overflow-hidden group h-full flex flex-col justify-between`}
-            >
-              {/* Hover Glow Background */}
-              <div className={`absolute inset-0 ${item.bg} opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
-              <div className={`absolute -right-6 -top-6 w-32 h-32 ${item.bg} rounded-full blur-3xl opacity-50`} />
+            <Fragment key={index}>
+                <motion.div 
+                  layout
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.03 }}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  className={`bg-white p-6 rounded-[2rem] border-2 ${item.border} shadow-lg shadow-slate-100 hover:shadow-xl transition-all cursor-default relative overflow-hidden group h-full flex flex-col justify-between`}
+                >
+                  {/* Hover Glow Background */}
+                  <div className={`absolute inset-0 ${item.bg} opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
+                  <div className={`absolute -right-6 -top-6 w-32 h-32 ${item.bg} rounded-full blur-3xl opacity-50`} />
 
-              <div className="relative z-10">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                     <div className="flex items-center gap-2 mb-1">
-                        <h3 className={`text-3xl font-black ${item.color} tracking-tight`}>{item.word}</h3>
-                        {/* ลบปุ่ม Volume2 ออกจากตรงนี้แล้ว */}
-                     </div>
-                     {/* Badge หมวดหมู่ (สมมติว่าเป็น Popular) */}
-                     {index < 5 && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-yellow-100 text-yellow-700 text-[10px] font-bold uppercase tracking-wide">
-                           <Sparkles size={10} /> Trending
-                        </span>
-                     )}
-                  </div>
-                  <div className={`w-16 h-16 ${item.bg} rounded-2xl flex items-center justify-center text-4xl shadow-sm transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300`}>
-                    {item.emoji}
-                  </div>
-                </div>
+                  <div className="relative z-10">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                            <h3 className={`text-3xl font-black ${item.color} tracking-tight`}>{item.word}</h3>
+                        </div>
+                        {index < 5 && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-yellow-100 text-yellow-700 text-[10px] font-bold uppercase tracking-wide">
+                              <Sparkles size={10} /> Trending
+                            </span>
+                        )}
+                      </div>
+                      <div className={`w-16 h-16 ${item.bg} rounded-2xl flex items-center justify-center text-4xl shadow-sm transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300`}>
+                        {item.emoji}
+                      </div>
+                    </div>
 
-                <div className="bg-slate-50/80 backdrop-blur-sm p-4 rounded-xl border border-slate-100 group-hover:bg-white/90 transition-colors">
-                  <p className="text-slate-600 text-lg font-bold leading-relaxed">
-                    "{item.meaning}"
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+                    <div className="bg-slate-50/80 backdrop-blur-sm p-4 rounded-xl border border-slate-100 group-hover:bg-white/90 transition-colors">
+                      <p className="text-slate-600 text-lg font-bold leading-relaxed">
+                        "{item.meaning}"
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* ✅ แทรกโฆษณาทุกๆ 12 คำ */}
+                {(index + 1) % 12 === 0 && (
+                  <div className="col-span-1 md:col-span-2 xl:col-span-3">
+                    <AdBanner />
+                  </div>
+                )}
+            </Fragment>
           ))}
         </div>
       ) : (
-        // กรณีไม่เจอคำค้นหา
         <div className="text-center py-20 opacity-50">
           <div className="text-6xl mb-4">👻</div>
           <p className="text-xl font-bold text-slate-400">หาไม่เจออ่ะแม่... ลองคำอื่นดูนะ!</p>
