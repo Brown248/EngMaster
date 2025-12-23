@@ -1,9 +1,8 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react'; // ✅ แก้ไข: ลบ 'React,' ออก เหลือแค่ { useRef }
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Sparkles, Star, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { coursesData } from '../data/homeData';
-// ✅ 1. เพิ่ม Import AdBanner
 import AdBanner from '../components/AdBanner';
 
 export default function Home() {

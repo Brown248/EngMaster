@@ -33,16 +33,17 @@ export interface GrammarDetail {
 export interface GrammarTopic {
   title: string;
   icon: string;
-  color: 'emerald' | 'amber' | 'indigo';
+  // ✅ แก้ไข: เพิ่มสีที่ขาดหายไปตรงนี้
+  color: 'emerald' | 'amber' | 'indigo' | 'blue' | 'rose' | 'purple';
   items: string[];
 }
 
 // --- Exam Types ---
 export interface Question {
   id: number;
-  text: string;       // ตัวคำถาม
-  passage?: string;   // *ใหม่* เนื้อหาบทความ (สำหรับ Part 6-7)
-  image?: string;     // รูปภาพประกอบ (สำหรับ Part 1, 3, 4)
+  text: string;
+  passage?: string;
+  image?: string;
   choices: string[];
   correctAnswer: number;
   explanation: string;
