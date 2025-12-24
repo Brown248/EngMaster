@@ -9,6 +9,7 @@ import usePageTitle from './hooks/usePageTitle';
 const Home = lazy(() => import('./pages/Home'));
 const Vocabulary = lazy(() => import('./pages/Vocabulary'));
 const Grammar = lazy(() => import('./pages/Grammar'));
+const TensesQuiz = lazy(() => import('./pages/TensesQuiz')); // ✅ เพิ่มบรรทัดนี้
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Loading component
@@ -31,6 +32,7 @@ function AnimatedRoutes() {
             <Route index element={<Home />} />
             <Route path="vocabulary" element={<Vocabulary />} />
             <Route path="grammar" element={<Grammar />} />
+            <Route path="grammar/quiz" element={<TensesQuiz />} /> {/* ✅ เพิ่มบรรทัดนี้ */}
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -103,158 +103,174 @@ export const grammarTopics: GrammarTopic[] = [
   },
   {
     id: 'tenses',
-    title: '2. Tenses',
+    title: '2. 12 Tenses (ละเอียด)',
     icon: '⏳',
     color: 'orange',
     details: {
-      title: '12 Tenses (กาลเวลา)',
-      description: 'เจาะลึกโครงสร้างประโยคทั้ง 12 กาล เพื่อบอกเวลาของการกระทำอย่างแม่นยำ',
+      title: 'เจาะลึก 12 Tenses',
+      description: 'คู่มือ 12 Tenses ฉบับละเอียด พร้อมตัวอย่างสถานการณ์จริง และแบบทดสอบท้ายบท',
       subtopics: [
         // --- Present Tenses ---
         {
-          name: '2.1 Present Simple',
+          name: '2.1 Present Simple Tense',
           structure: 'Subject + V1 (s/es)',
-          usage: 'ใช้กับความจริงตามธรรมชาติ, กิจวัตรประจำวัน (Habit), หรือตารางเวลาที่แน่นอน',
+          usage: 'ใช้กับความจริงตามธรรมชาติ (Facts), กิจวัตรประจำวัน (Habits), ตารางเวลาที่แน่นอน (Timetables) และความรู้สึกนึกคิด (Feelings). กริยาเติม s/es เมื่อประธานเป็นเอกพจน์ (He, She, It).',
           examples: [
-            'The sun **rises** in the east. (ความจริง)',
-            'I **drink** coffee every morning. (กิจวัตร)',
-            'The train **leaves** at 9 AM. (ตารางเวลา)',
-            'She **works** at a bank. (สภาพความเป็นจริง)',
-            'He **does not like** spicy food. (ความชอบ)'
+            '**Fact:** The sun **rises** in the east and **sets** in the west.',
+            '**Habit:** I usually **drink** coffee before I **start** work.',
+            '**Timetable:** The train to Chiang Mai **leaves** at 9:00 PM tonight.',
+            '**State/Feeling:** She **loves** cats but she **hates** dogs.',
+            '**General Truth:** Water **boils** at 100 degrees Celsius.',
+            '**Negative:** He **does not (doesn\'t) play** football.',
+            '**Question:** **Do** you **speak** English?'
           ]
         },
         {
-          name: '2.2 Present Continuous',
+          name: '2.2 Present Continuous Tense',
           structure: 'Subject + is/am/are + V-ing',
-          usage: 'ใช้กับเหตุการณ์ที่กำลังเกิดขึ้นขณะพูด หรือเหตุการณ์ในอนาคตอันใกล้ที่มีการวางแผนไว้แล้ว',
+          usage: 'ใช้กับเหตุการณ์ที่กำลังเกิดขึ้นขณะพูด (Now), เหตุการณ์ที่เกิดขึ้นชั่วคราว (Temporary), หรือแผนการในอนาคตที่แน่นอน (Future Plan).',
           examples: [
-            'I **am studying** English right now. (กำลังทำ)',
-            'Look! It **is raining** outside. (กำลังเกิด)',
-            'We **are meeting** him tomorrow. (แผนในอนาคต)',
-            'She **is constantly talking** in class. (บ่นเรื่องนิสัย)',
-            'They **are building** a new house. (โครงการระยะยาว)'
+            '**Happening Now:** Please be quiet, the baby **is sleeping**.',
+            '**Temporary:** I usually drive to work, but this week I **am taking** the bus.',
+            '**Future Plan:** We **are flying** to Japan next Friday.',
+            '**Trend:** The climate **is changing** rapidly.',
+            '**Annoyance (with always):** You **are always coming** late!',
+            '**Action:** Look! It **is raining** heavily outside.',
+            '**Question:** **Are** you **listening** to me?'
           ]
         },
         {
-          name: '2.3 Present Perfect',
+          name: '2.3 Present Perfect Tense',
           structure: 'Subject + has/have + V3',
-          usage: 'ใช้เล่าประสบการณ์ (ไม่ระบุเวลา), เหตุการณ์ที่เพิ่งจบลง, หรือสิ่งที่เริ่มในอดีตและส่งผลถึงปัจจุบัน',
+          usage: 'ใช้เล่าประสบการณ์ในอดีต (ไม่ระบุเวลา), เหตุการณ์ที่เพิ่งจบลง (Just/Already), หรือสิ่งที่เริ่มในอดีตและส่งผลถึงปัจจุบัน (For/Since).',
           examples: [
-            'I **have finished** my homework. (เพิ่งจบ)',
-            'She **has visited** Japan twice. (ประสบการณ์)',
-            'We **have lived** here for 10 years. (ตั้งแต่อดีตถึงปัจจุบัน)',
-            'He **has lost** his keys. (ผลคือตอนนี้เข้าห้องไม่ได้)',
-            '**Have** you **seen** this movie before? (ถามประสบการณ์)'
+            '**Experience:** I **have been** to Singapore three times.',
+            '**Just finished:** She **has just finished** her homework.',
+            '**Result:** I **have lost** my keys. (So I cannot enter the house now).',
+            '**Since/For:** We **have known** each other since 2010.',
+            '**News:** The police **have arrested** two suspects.',
+            '**Question:** **Have** you **ever eaten** frogs?',
+            '**Negative:** I **have never seen** that movie.'
           ]
         },
         {
-          name: '2.4 Present Perfect Continuous',
+          name: '2.4 Present Perfect Continuous Tense',
           structure: 'Subject + has/have + been + V-ing',
-          usage: 'เน้นความต่อเนื่องของการกระทำที่เริ่มในอดีตและดำเนินมาจนถึงปัจจุบัน (และอาจทำต่อไป)',
+          usage: 'คล้าย Present Perfect แต่เน้นความ "ต่อเนื่อง" ของการกระทำที่เริ่มในอดีตและดำเนินมาจนถึงปัจจุบัน (และอาจทำต่อไป).',
           examples: [
-            'I **have been waiting** for you for 2 hours. (รอมาตลอดและยังรออยู่)',
-            'It **has been raining** all day.',
-            'She **has been working** here since 2010.',
-            'They **have been playing** games since morning.',
-            'My eyes are red because I **have been crying**.'
+            '**Duration:** I **have been waiting** for you for 2 hours! (I am still waiting).',
+            '**Recent Activity:** You look tired. **Have** you **been running**?',
+            '**Continuous Action:** It **has been raining** all day.',
+            '**Since:** She **has been teaching** at this school since she graduated.',
+            '**Explanation:** My hands are dirty because I **have been fixing** the car.',
+            '**Repeated:** He **has been calling** you all morning.'
           ]
         },
         // --- Past Tenses ---
         {
-          name: '2.5 Past Simple',
+          name: '2.5 Past Simple Tense',
           structure: 'Subject + V2',
-          usage: 'ใช้กับเหตุการณ์ที่เกิดขึ้นและจบลงแล้วในอดีต (มักมีคำบอกเวลา เช่น yesterday, last year)',
+          usage: 'ใช้กับเหตุการณ์ที่เกิดขึ้นและจบลงแล้วในอดีต โดยระบุเวลาชัดเจน (Yesterday, Last year, ...ago, In 1999).',
           examples: [
-            'I **visited** London last year.',
-            'She **bought** a new car yesterday.',
-            'We **did not go** to the party last night.',
-            'He **was** angry with me.',
-            'They **left** five minutes ago.'
+            '**Completed Action:** I **visited** my grandmother yesterday.',
+            '**Series of Actions:** He **woke** up, **washed** his face, and **left** the house.',
+            '**Past Fact:** Einstein **was** a great scientist.',
+            '**Time specific:** We **bought** this house in 2015.',
+            '**Negative:** I **did not (didn\'t) go** to the party last night.',
+            '**Question:** **Did** you **see** Tom yesterday?',
+            '**Duration in Past:** She **lived** in London for 5 years (but now she lives elsewhere).'
           ]
         },
         {
-          name: '2.6 Past Continuous',
+          name: '2.6 Past Continuous Tense',
           structure: 'Subject + was/were + V-ing',
-          usage: 'ใช้เล่าเหตุการณ์ที่กำลังดำเนินอยู่ในอดีต ณ เวลาที่ระบุ หรือมีเหตุการณ์อื่นเข้ามาแทรก',
+          usage: 'ใช้เล่าเหตุการณ์ที่ "กำลัง" ดำเนินอยู่ในอดีต ณ เวลาที่ระบุ หรือใช้คู่กับ Past Simple เมื่อมีเหตุการณ์แทรก.',
           examples: [
-            'I **was sleeping** at 10 PM last night.',
-            'While I **was walking**, I found a wallet.',
-            'They **were watching** TV when the phone rang.',
-            'She **was cooking** while he **was reading**.',
-            'What **were** you **doing** yesterday morning?'
+            '**Specific Time in Past:** At 8 PM last night, I **was watching** TV.',
+            '**Interrupted Action:** I **was sleeping** when the phone rang.',
+            '**Parallel Actions:** While I **was cooking**, my husband **was washing** the car.',
+            '**Background Story:** The birds **were singing** and the sun **was shining**.',
+            '**Question:** What **were** you **doing** at this time yesterday?',
+            '**Negative:** They **were not (weren\'t) listening** to the teacher.'
           ]
         },
         {
-          name: '2.7 Past Perfect',
+          name: '2.7 Past Perfect Tense',
           structure: 'Subject + had + V3',
-          usage: 'ใช้คู่กับ Past Simple เพื่อบอกว่าเหตุการณ์หนึ่งจบลง "ก่อน" อีกเหตุการณ์หนึ่งในอดีต',
+          usage: 'ใช้คู่กับ Past Simple เพื่อบอกว่าเหตุการณ์หนึ่งจบลง "ก่อน" อีกเหตุการณ์หนึ่งในอดีต (อดีตซ้อนอดีต).',
           examples: [
-            'When I arrived, the train **had left**. (รถไฟไปก่อนแล้ว)',
-            'She **had finished** work before she went out.',
-            'I realized that I **had lost** my phone.',
-            'He was tired because he **had worked** hard.',
-            'They **had not eaten** anything until noon.'
+            '**Before another action:** When I arrived at the station, the train **had left**.',
+            '**Reason:** He failed the exam because he **had not studied**.',
+            '**Experience in Past:** She told me she **had never been** to Paris before.',
+            '**By the time:** By the time the police arrived, the thief **had escaped**.',
+            '**Realization:** I realized that I **had forgotten** my wallet.',
+            '**Reported Speech:** He said that he **had bought** a new car.'
           ]
         },
         {
-          name: '2.8 Past Perfect Continuous',
+          name: '2.8 Past Perfect Continuous Tense',
           structure: 'Subject + had + been + V-ing',
-          usage: 'เน้นช่วงเวลาของการกระทำที่เกิดขึ้นต่อเนื่องในอดีต ก่อนที่จะมีอีกเหตุการณ์หนึ่งเกิด',
+          usage: 'เน้นช่วงเวลาของการกระทำที่เกิดขึ้น "ต่อเนื่อง" ในอดีต ก่อนที่จะมีอีกเหตุการณ์หนึ่งเกิด.',
           examples: [
-            'I **had been waiting** for 30 minutes when the bus finally came.',
-            'She was tired because she **had been running**.',
-            'They **had been living** there for 5 years before they moved.',
-            'It **had been raining** hard for several hours.',
-            'He **had been working** on that project since March.'
+            '**Duration before Past:** I **had been waiting** for 30 minutes when the bus finally came.',
+            '**Cause of feeling:** She was tired because she **had been working** hard all day.',
+            '**Ongoing before change:** They **had been living** there for 10 years before they moved.',
+            '**Continuous Action:** The road was wet because it **had been raining**.',
+            '**Emphasis:** He **had been trying** to call her for hours.',
+            '**Negative:** We **had not been eating** anything for 24 hours.'
           ]
         },
         // --- Future Tenses ---
         {
-          name: '2.9 Future Simple',
+          name: '2.9 Future Simple Tense',
           structure: 'Subject + will + V1',
-          usage: 'ใช้คาดเดาอนาคต, สัญญา, หรือตัดสินใจทำทันทีขณะพูด (ไม่ได้วางแผนล่วงหน้า)',
+          usage: 'ใช้คาดเดาอนาคต (Prediction), สัญญา (Promise), เสนอตัว (Offer), หรือตัดสินใจทำทันทีขณะพูด (Decision).',
           examples: [
-            'I think it **will rain** tomorrow.',
-            'I **will help** you with your bags.',
-            'I **will call** you later.',
-            'She **will not (won\'t) tell** anyone.',
-            '**Will** you **marry** me?'
+            '**Decision:** It\'s hot in here. I **will open** the window.',
+            '**Prediction:** I think it **will rain** tomorrow.',
+            '**Promise:** I **will love** you forever.',
+            '**Offer:** That bag looks heavy. I **will help** you.',
+            '**Future Fact:** He **will be** 25 next month.',
+            '**Negative:** I **won\'t tell** anyone your secret.',
+            '**Question:** **Will** you **marry** me?'
           ]
         },
         {
-          name: '2.10 Future Continuous',
+          name: '2.10 Future Continuous Tense',
           structure: 'Subject + will + be + V-ing',
-          usage: 'ใช้บอกว่าจะกำลังทำอะไรอยู่ในช่วงเวลาที่ระบุในอนาคต',
+          usage: 'ใช้บอกว่าจะ "กำลัง" ทำอะไรอยู่ในช่วงเวลาที่ระบุในอนาคต.',
           examples: [
-            'At 8 PM tonight, I **will be eating** dinner.',
-            'Don\'t call me at 9, I **will be sleeping**.',
-            'This time next week, we **will be flying** to Japan.',
-            'She **will be working** all day tomorrow.',
-            '**Will** you **be using** the car later?'
+            '**Specific Future Time:** At this time tomorrow, I **will be lying** on the beach.',
+            '**Polite Inquiry:** **Will** you **be using** the computer later?',
+            '**Future Plan/Routine:** I **will be seeing** John tomorrow at the office.',
+            '**Interrupted Future:** When you arrive, I **will be waiting** for you at the station.',
+            '**Duration in Future:** We **will be working** all day tomorrow.',
+            '**Negative:** She **won\'t be joining** us for dinner.'
           ]
         },
         {
-          name: '2.11 Future Perfect',
+          name: '2.11 Future Perfect Tense',
           structure: 'Subject + will + have + V3',
-          usage: 'ใช้บอกว่าเหตุการณ์จะ "เสร็จสมบูรณ์" ก่อนเวลาที่กำหนดในอนาคต',
+          usage: 'ใช้บอกว่าเหตุการณ์จะ "เสร็จสมบูรณ์" ก่อนเวลาที่กำหนดในอนาคต (มักมีคำว่า By...).',
           examples: [
-            'By next year, I **will have finished** my degree.',
-            'They **will have arrived** by the time you get there.',
-            'She **will have left** before 5 PM.',
-            'I **will have saved** enough money by December.',
-            'We **will have completed** the project by Monday.'
+            '**Completion:** By next year, I **will have finished** my degree.',
+            '**Before time:** The train **will have left** by the time we get there.',
+            '**Duration up to Future:** Next month, we **will have been** married for 10 years.',
+            '**Assumption:** He **will have heard** the news by now.',
+            '**Goal:** I **will have saved** 100,000 baht by December.',
+            '**Question:** **Will** you **have completed** the report by Friday?'
           ]
         },
         {
-          name: '2.12 Future Perfect Continuous',
+          name: '2.12 Future Perfect Continuous Tense',
           structure: 'Subject + will + have + been + V-ing',
-          usage: 'เน้นความต่อเนื่องของการกระทำที่จะดำเนินไปจนถึงจุดหนึ่งในอนาคต',
+          usage: 'เน้นความ "ต่อเนื่อง" ของการกระทำที่จะดำเนินไปจนถึงจุดหนึ่งในอนาคต.',
           examples: [
-            'By next month, I **will have been working** here for 10 years.',
-            'She **will have been sleeping** for 8 hours by 6 AM.',
-            'They **will have been waiting** for over an hour when the show starts.',
-            'Next year, we **will have been living** in this house for 20 years.',
-            'By 5 PM, he **will have been driving** for 6 hours.'
+            '**Duration until Future:** By 5 PM, I **will have been driving** for 6 hours.',
+            '**Ongoing Action:** Next year, she **will have been working** here for 20 years.',
+            '**Cause in Future:** He will be tired because he **will have been playing** football all afternoon.',
+            '**Long-term:** By the time you arrive, we **will have been waiting** for ages.',
+            '**Negative:** I **won\'t have been sleeping** much before the exam.'
           ]
         }
       ]

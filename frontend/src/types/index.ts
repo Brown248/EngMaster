@@ -15,29 +15,36 @@ export interface CourseCard {
   color: 'orange' | 'pink' | 'purple' | 'blue';
 }
 
+export interface SlangItem {
+  word: string;
+  meaning: string;
+  emoji: string;
+  color: string;
+  bg: string;
+  border: string;
+}
+
+// ✅ New Grammar Types
 export interface GrammarSubtopic {
   name: string;
-  structure?: string; // โครงสร้างประโยค (เขียนเต็ม)
-  usage: string;      // วิธีใช้แบบละเอียด
-  examples: string[]; // ตัวอย่างประโยค
+  explanation: string;
+  examples: string[];
 }
 
 export interface GrammarDetail {
   title: string;
-  description?: string;
   subtopics: GrammarSubtopic[];
 }
 
 export interface GrammarTopic {
   id: string;
   title: string;
-  icon: string;
-  // เพิ่มเฉดสีให้ครบถ้วนสำหรับการตกแต่ง
+  icon: string; // Emoji
   color: 'emerald' | 'amber' | 'indigo' | 'blue' | 'rose' | 'purple' | 'orange' | 'teal' | 'cyan' | 'slate' | 'fuchsia' | 'lime';
   details: GrammarDetail;
 }
 
-// --- Exam Types (คงเดิมไว้เผื่ออนาคต) ---
+// --- Exam Types ---
 export interface Question {
   id: number;
   text: string;
