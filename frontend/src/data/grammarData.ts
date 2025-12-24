@@ -1,164 +1,969 @@
-import { GrammarDetail, GrammarTopic } from '../types';
+import { GrammarTopic } from '../types';
 
-export const tenseData: Record<string, GrammarDetail> = {
-    // --- Present Tenses ---
-    "Present Simple": {
-        structure: "S + V.1 (s/es)",
-        concept: "ใช้กับความจริงทั่วไป (Fact), กิจวัตรประจำวัน (Routine), และตารางเวลาที่แน่นอน",
-        examples: ["The sun rises in the east.", "I drink coffee every morning.", "The train leaves at 9 AM."]
-    },
-    "Present Continuous": {
-        structure: "S + is/am/are + V.ing",
-        concept: "ใช้กับเหตุการณ์ที่กำลังเกิดขึ้นขณะพูด หรือแผนการในอนาคตอันใกล้ที่แน่นอน",
-        examples: ["She is sleeping right now.", "We are meeting him tonight.", "Look! It is raining."]
-    },
-    "Present Perfect": {
-        structure: "S + has/have + V.3",
-        concept: "ใช้กับเหตุการณ์ที่เกิดขึ้นในอดีตและส่งผลถึงปัจจุบัน หรือประสบการณ์ชีวิต (ไม่ระบุเวลา)",
-        examples: ["I have lost my wallet.", "She has visited Japan twice.", "They have lived here for 10 years."]
-    },
-    "Present Perfect Continuous": {
-        structure: "S + has/have + been + V.ing",
-        concept: "เน้นความต่อเนื่องของการกระทำตั้งแต่อดีตจนถึงปัจจุบัน (ยังทำอยู่)",
-        examples: ["It has been raining for 3 hours.", "I have been waiting for you all day."]
-    },
-
-    // --- Past Tenses ---
-    "Past Simple": {
-        structure: "S + V.2",
-        concept: "ใช้กับเหตุการณ์ที่จบลงแล้วในอดีต (มักมีคำบอกเวลา เช่น yesterday, last year)",
-        examples: ["I walked to school yesterday.", "He bought a new car last month.", "They didn't come to the party."]
-    },
-    "Past Continuous": {
-        structure: "S + was/were + V.ing",
-        concept: "ใช้กับเหตุการณ์ที่กำลังดำเนินอยู่ในอดีต ณ ช่วงเวลาหนึ่ง หรือมีเหตุการณ์อื่นเข้ามาแทรก",
-        examples: ["I was eating dinner at 7 PM.", "While I was sleeping, the phone rang."]
-    },
-    "Past Perfect": {
-        structure: "S + had + V.3",
-        concept: "ใช้บอกเหตุการณ์ที่ 'เกิดก่อน' และ 'จบลง' ก่อนที่จะมีอีกเหตุการณ์ในอดีตเกิดขึ้นตามมา",
-        examples: ["When I arrived, the train had left.", "She had finished work before she went out."]
-    },
-    "Past Perfect Continuous": {
-        structure: "S + had + been + V.ing",
-        concept: "เน้นความต่อเนื่องของการกระทำที่เกิดก่อนอีกเหตุการณ์หนึ่งในอดีต",
-        examples: ["He had been waiting for 2 hours when she finally arrived."]
-    },
-
-    // --- Future Tenses ---
-    "Future Simple": {
-        structure: "S + will + V.inf",
-        concept: "ใช้คาดเดาอนาคต, สัญญา, หรือตัดสินใจทันทีขณะพูด",
-        examples: ["I think it will rain.", "I will help you.", "Someone is knocking. I will open the door."]
-    },
-    "Future Continuous": {
-        structure: "S + will + be + V.ing",
-        concept: "ใช้บอกเหตุการณ์ที่จะกำลังเกิดขึ้น ณ เวลาที่ระบุไว้ในอนาคต",
-        examples: ["At 8 PM tomorrow, I will be watching TV.", "Don't call me at 7, I will be driving."]
-    },
-    "Future Perfect": {
-        structure: "S + will + have + V.3",
-        concept: "ใช้บอกว่าเหตุการณ์จะเสร็จสมบูรณ์ ณ เวลาหนึ่งในอนาคต",
-        examples: ["By next year, I will have graduated.", "She will have finished the report by 5 PM."]
-    },
-    "Future Perfect Continuous": {
-        structure: "S + will + have + been + V.ing",
-        concept: "เน้นความต่อเนื่องของการกระทำที่จะดำเนินไปจนถึงจุดหนึ่งในอนาคต",
-        examples: ["By next month, I will have been working here for 5 years."]
-    },
-
-    // --- Passive Voice ---
-    "Passive Voice (Present)": {
-        structure: "S + is/am/are + V.3",
-        concept: "ประธานเป็นผู้ถูกกระทำ (ในปัจจุบัน)",
-        examples: ["English is spoken all over the world.", "The room is cleaned every day."]
-    },
-    "Passive Voice (Past)": {
-        structure: "S + was/were + V.3",
-        concept: "ประธานเป็นผู้ถูกกระทำ (ในอดีต)",
-        examples: ["This house was built in 1990.", "My phone was stolen yesterday."]
-    },
-
-    // --- Conditionals ---
-    "Zero Conditional": {
-        structure: "If + Pres Sim, Pres Sim",
-        concept: "ใช้กับความจริงทั่วไป หรือวิทยาศาสตร์ (เป็นจริงเสมอ)",
-        examples: ["If you mix red and yellow, you get orange.", "If water reaches 100 degrees, it boils."]
-    },
-    "First Conditional": {
-        structure: "If + Pres Sim, will + V.inf",
-        concept: "ใช้กับเหตุการณ์ที่มีโอกาสเกิดขึ้นสูงในอนาคต (เป็นไปได้)",
-        examples: ["If it rains, I will stay home.", "If you study hard, you will pass the exam."]
-    },
-    "Second Conditional": {
-        structure: "If + Past Sim, would + V.inf",
-        concept: "ใช้สมมติเหตุการณ์ที่เป็นไปไม่ได้ในปัจจุบัน หรือจินตนาการ",
-        examples: ["If I were you, I would buy that car.", "If I won the lottery, I would travel the world."]
-    },
-    "Third Conditional": {
-        structure: "If + Past Perf, would have + V.3",
-        concept: "ใช้สมมติเหตุการณ์ในอดีตที่ตรงข้ามกับความจริง (เสียดาย/อยากแก้ไข)",
-        examples: ["If I had known, I would have helped you.", "If she had driven carefully, she wouldn't have crashed."]
-    },
-
-    // --- Parts of Speech ---
-    "Noun (คำนาม)": {
-        structure: "คน, สัตว์, สิ่งของ, สถานที่, นามธรรม",
-        concept: "ทำหน้าที่เป็นประธาน (Subject) หรือกรรม (Object) ของประโยค",
-        examples: ["The *cat* is cute.", "I love *Bangkok*.", "*Happiness* is important."]
-    },
-    "Verb (คำกริยา)": {
-        structure: "Action / State",
-        concept: "คำแสดงการกระทำ หรือสถานะความเป็นอยู่",
-        examples: ["She *runs* fast.", "He *is* a doctor.", "They *play* football."]
-    },
-    "Adjective (คำคุณศัพท์)": {
-        structure: "ขยาย Noun",
-        concept: "วางหน้าคำนาม หรือหลัง V.to be เพื่อบอกลักษณะ",
-        examples: ["A *big* house.", "The car is *red*.", "She looks *beautiful*."]
-    },
-    "Adverb (คำกริยาวิเศษณ์)": {
-        structure: "ขยาย Verb, Adj, หรือ Adverb อื่น",
-        concept: "มักลงท้ายด้วย -ly บอกว่าทำอย่างไร, ที่ไหน, เมื่อไหร่, บ่อยแค่ไหน",
-        examples: ["He walks *slowly*.", "She is *very* smart.", "I *always* wake up early."]
+export const grammarTopics: GrammarTopic[] = [
+  {
+    id: 'parts-of-speech',
+    title: '1. Parts of Speech',
+    icon: '🧩',
+    color: 'indigo',
+    details: {
+      title: 'ชนิดของคำ (Parts of Speech)',
+      description: 'พื้นฐานที่สุดของไวยากรณ์ คือการรู้หน้าที่ของคำแต่ละชนิดในประโยค',
+      subtopics: [
+        {
+          name: '1.1 Noun (คำนาม)',
+          usage: 'ใช้เรียกชื่อคน สัตว์ สิ่งของ สถานที่ หรือความคิด (Abstract Noun) สามารถทำหน้าที่เป็น ประธาน (Subject) หรือ กรรม (Object) ของประโยค',
+          examples: [
+            '**Common Noun (นามทั่วไป):** The **dog** barked loudly.',
+            '**Proper Noun (นามเฉพาะ):** I live in **Bangkok**.',
+            '**Abstract Noun (นามธรรม):** **Love** is all around us.',
+            '**Countable Noun (นามนับได้):** She has three **books**.',
+            '**Uncountable Noun (นามนับไม่ได้):** Please give me some **water**.'
+          ]
+        },
+        {
+          name: '1.2 Pronoun (คำสรรพนาม)',
+          usage: 'ใช้แทนคำนามที่กล่าวไปแล้ว เพื่อหลีกเลี่ยงการพูดซ้ำซาก',
+          examples: [
+            '**Subject Pronoun (ประธาน):** **She** is my teacher.',
+            '**Object Pronoun (กรรม):** Please tell **him** the truth.',
+            '**Possessive Pronoun (แสดงความเป็นเจ้าของ):** This car is **mine**.',
+            '**Reflexive Pronoun (สะท้อนตัวเอง):** He hurt **himself**.',
+            '**Relative Pronoun (เชื่อมประโยค):** The man **who** called is here.'
+          ]
+        },
+        {
+          name: '1.3 Verb (คำกริยา)',
+          usage: 'แสดงการกระทำ (Action) หรือสถานะความเป็นอยู่ (State) ของประธาน',
+          examples: [
+            '**Action Verb:** They **run** in the park every morning.',
+            '**Stative Verb:** I **know** the answer.',
+            '**Linking Verb:** She **seems** happy today.',
+            '**Transitive Verb (ต้องการกรรม):** He **bought** a car.',
+            '**Auxiliary Verb (กริยาช่วย):** We **are** going home.'
+          ]
+        },
+        {
+          name: '1.4 Adjective (คำคุณศัพท์)',
+          usage: 'ขยายคำนาม (Noun) หรือคำสรรพนาม (Pronoun) เพื่อบอกลักษณะ สี ขนาด หรือจำนวน',
+          examples: [
+            'She lives in a **big** house.',
+            'I saw a **beautiful** flower.',
+            '**This** book is mine (Demonstrative).',
+            'I have **many** friends (Quantitative).',
+            'He is **taller** than me (Comparative).'
+          ]
+        },
+        {
+          name: '1.5 Adverb (คำกริยาวิเศษณ์)',
+          usage: 'ขยายคำกริยา (Verb), คำคุณศัพท์ (Adjective), หรือคำกริยาวิเศษณ์ด้วยกันเอง (Adverb) เพื่อบอกว่าทำอย่างไร ที่ไหน หรือเมื่อไหร่',
+          examples: [
+            'He speaks **slowly** (Manner).',
+            'She arrived **yesterday** (Time).',
+            'They live **nearby** (Place).',
+            'It is **very** hot (Degree).',
+            'I **always** wake up early (Frequency).'
+          ]
+        },
+        {
+          name: '1.6 Preposition (คำบุพบท)',
+          usage: 'เชื่อมคำนามกับส่วนอื่นของประโยค เพื่อระบุตำแหน่ง เวลา หรือทิศทาง',
+          examples: [
+            'The cat is **on** the sofa.',
+            'We will meet **at** 5 PM.',
+            'She walked **into** the room.',
+            'I am waiting **for** you.',
+            'The book is **under** the table.'
+          ]
+        },
+        {
+          name: '1.7 Conjunction (คำสันธาน)',
+          usage: 'เชื่อมคำ วลี หรือประโยคเข้าด้วยกัน',
+          examples: [
+            'I like tea **and** coffee.',
+            'He is poor **but** happy.',
+            'I stayed home **because** it rained.',
+            'You can go **or** stay.',
+            '**Although** it was late, we continued working.'
+          ]
+        },
+        {
+          name: '1.8 Interjection (คำอุทาน)',
+          usage: 'คำที่เปล่งออกมาเพื่อแสดงอารมณ์ความรู้สึกอย่างฉับพลัน',
+          examples: [
+            '**Wow!** That is amazing.',
+            '**Ouch!** You stepped on my foot.',
+            '**Hey!** Where are you going?',
+            '**Oh no!** I forgot my wallet.',
+            '**Well**, let\'s get started.'
+          ]
+        }
+      ]
     }
-};
-
-export const grammarCategories: GrammarTopic[] = [
-    {
-        title: "Present Tenses",
-        icon: "☀️",
-        color: "emerald",
-        items: ["Present Simple", "Present Continuous", "Present Perfect", "Present Perfect Continuous"]
-    },
-    {
-        title: "Past Tenses",
-        icon: "🕰️",
-        color: "amber",
-        items: ["Past Simple", "Past Continuous", "Past Perfect", "Past Perfect Continuous"]
-    },
-    {
-        title: "Future Tenses",
-        icon: "🚀",
-        color: "indigo",
-        items: ["Future Simple", "Future Continuous", "Future Perfect", "Future Perfect Continuous"]
-    },
-    {
-        title: "Passive Voice",
-        icon: "🛡️",
-        color: "blue",
-        items: ["Passive Voice (Present)", "Passive Voice (Past)"]
-    },
-    {
-        title: "If-Clauses",
-        icon: "🔀",
-        color: "rose",
-        items: ["Zero Conditional", "First Conditional", "Second Conditional", "Third Conditional"]
-    },
-    {
-        title: "Parts of Speech",
-        icon: "🧩",
-        color: "purple",
-        items: ["Noun (คำนาม)", "Verb (คำกริยา)", "Adjective (คำคุณศัพท์)", "Adverb (คำกริยาวิเศษณ์)"]
+  },
+  {
+    id: 'tenses',
+    title: '2. Tenses',
+    icon: '⏳',
+    color: 'orange',
+    details: {
+      title: '12 Tenses (กาลเวลา)',
+      description: 'เจาะลึกโครงสร้างประโยคทั้ง 12 กาล เพื่อบอกเวลาของการกระทำอย่างแม่นยำ',
+      subtopics: [
+        // --- Present Tenses ---
+        {
+          name: '2.1 Present Simple',
+          structure: 'Subject + V1 (s/es)',
+          usage: 'ใช้กับความจริงตามธรรมชาติ, กิจวัตรประจำวัน (Habit), หรือตารางเวลาที่แน่นอน',
+          examples: [
+            'The sun **rises** in the east. (ความจริง)',
+            'I **drink** coffee every morning. (กิจวัตร)',
+            'The train **leaves** at 9 AM. (ตารางเวลา)',
+            'She **works** at a bank. (สภาพความเป็นจริง)',
+            'He **does not like** spicy food. (ความชอบ)'
+          ]
+        },
+        {
+          name: '2.2 Present Continuous',
+          structure: 'Subject + is/am/are + V-ing',
+          usage: 'ใช้กับเหตุการณ์ที่กำลังเกิดขึ้นขณะพูด หรือเหตุการณ์ในอนาคตอันใกล้ที่มีการวางแผนไว้แล้ว',
+          examples: [
+            'I **am studying** English right now. (กำลังทำ)',
+            'Look! It **is raining** outside. (กำลังเกิด)',
+            'We **are meeting** him tomorrow. (แผนในอนาคต)',
+            'She **is constantly talking** in class. (บ่นเรื่องนิสัย)',
+            'They **are building** a new house. (โครงการระยะยาว)'
+          ]
+        },
+        {
+          name: '2.3 Present Perfect',
+          structure: 'Subject + has/have + V3',
+          usage: 'ใช้เล่าประสบการณ์ (ไม่ระบุเวลา), เหตุการณ์ที่เพิ่งจบลง, หรือสิ่งที่เริ่มในอดีตและส่งผลถึงปัจจุบัน',
+          examples: [
+            'I **have finished** my homework. (เพิ่งจบ)',
+            'She **has visited** Japan twice. (ประสบการณ์)',
+            'We **have lived** here for 10 years. (ตั้งแต่อดีตถึงปัจจุบัน)',
+            'He **has lost** his keys. (ผลคือตอนนี้เข้าห้องไม่ได้)',
+            '**Have** you **seen** this movie before? (ถามประสบการณ์)'
+          ]
+        },
+        {
+          name: '2.4 Present Perfect Continuous',
+          structure: 'Subject + has/have + been + V-ing',
+          usage: 'เน้นความต่อเนื่องของการกระทำที่เริ่มในอดีตและดำเนินมาจนถึงปัจจุบัน (และอาจทำต่อไป)',
+          examples: [
+            'I **have been waiting** for you for 2 hours. (รอมาตลอดและยังรออยู่)',
+            'It **has been raining** all day.',
+            'She **has been working** here since 2010.',
+            'They **have been playing** games since morning.',
+            'My eyes are red because I **have been crying**.'
+          ]
+        },
+        // --- Past Tenses ---
+        {
+          name: '2.5 Past Simple',
+          structure: 'Subject + V2',
+          usage: 'ใช้กับเหตุการณ์ที่เกิดขึ้นและจบลงแล้วในอดีต (มักมีคำบอกเวลา เช่น yesterday, last year)',
+          examples: [
+            'I **visited** London last year.',
+            'She **bought** a new car yesterday.',
+            'We **did not go** to the party last night.',
+            'He **was** angry with me.',
+            'They **left** five minutes ago.'
+          ]
+        },
+        {
+          name: '2.6 Past Continuous',
+          structure: 'Subject + was/were + V-ing',
+          usage: 'ใช้เล่าเหตุการณ์ที่กำลังดำเนินอยู่ในอดีต ณ เวลาที่ระบุ หรือมีเหตุการณ์อื่นเข้ามาแทรก',
+          examples: [
+            'I **was sleeping** at 10 PM last night.',
+            'While I **was walking**, I found a wallet.',
+            'They **were watching** TV when the phone rang.',
+            'She **was cooking** while he **was reading**.',
+            'What **were** you **doing** yesterday morning?'
+          ]
+        },
+        {
+          name: '2.7 Past Perfect',
+          structure: 'Subject + had + V3',
+          usage: 'ใช้คู่กับ Past Simple เพื่อบอกว่าเหตุการณ์หนึ่งจบลง "ก่อน" อีกเหตุการณ์หนึ่งในอดีต',
+          examples: [
+            'When I arrived, the train **had left**. (รถไฟไปก่อนแล้ว)',
+            'She **had finished** work before she went out.',
+            'I realized that I **had lost** my phone.',
+            'He was tired because he **had worked** hard.',
+            'They **had not eaten** anything until noon.'
+          ]
+        },
+        {
+          name: '2.8 Past Perfect Continuous',
+          structure: 'Subject + had + been + V-ing',
+          usage: 'เน้นช่วงเวลาของการกระทำที่เกิดขึ้นต่อเนื่องในอดีต ก่อนที่จะมีอีกเหตุการณ์หนึ่งเกิด',
+          examples: [
+            'I **had been waiting** for 30 minutes when the bus finally came.',
+            'She was tired because she **had been running**.',
+            'They **had been living** there for 5 years before they moved.',
+            'It **had been raining** hard for several hours.',
+            'He **had been working** on that project since March.'
+          ]
+        },
+        // --- Future Tenses ---
+        {
+          name: '2.9 Future Simple',
+          structure: 'Subject + will + V1',
+          usage: 'ใช้คาดเดาอนาคต, สัญญา, หรือตัดสินใจทำทันทีขณะพูด (ไม่ได้วางแผนล่วงหน้า)',
+          examples: [
+            'I think it **will rain** tomorrow.',
+            'I **will help** you with your bags.',
+            'I **will call** you later.',
+            'She **will not (won\'t) tell** anyone.',
+            '**Will** you **marry** me?'
+          ]
+        },
+        {
+          name: '2.10 Future Continuous',
+          structure: 'Subject + will + be + V-ing',
+          usage: 'ใช้บอกว่าจะกำลังทำอะไรอยู่ในช่วงเวลาที่ระบุในอนาคต',
+          examples: [
+            'At 8 PM tonight, I **will be eating** dinner.',
+            'Don\'t call me at 9, I **will be sleeping**.',
+            'This time next week, we **will be flying** to Japan.',
+            'She **will be working** all day tomorrow.',
+            '**Will** you **be using** the car later?'
+          ]
+        },
+        {
+          name: '2.11 Future Perfect',
+          structure: 'Subject + will + have + V3',
+          usage: 'ใช้บอกว่าเหตุการณ์จะ "เสร็จสมบูรณ์" ก่อนเวลาที่กำหนดในอนาคต',
+          examples: [
+            'By next year, I **will have finished** my degree.',
+            'They **will have arrived** by the time you get there.',
+            'She **will have left** before 5 PM.',
+            'I **will have saved** enough money by December.',
+            'We **will have completed** the project by Monday.'
+          ]
+        },
+        {
+          name: '2.12 Future Perfect Continuous',
+          structure: 'Subject + will + have + been + V-ing',
+          usage: 'เน้นความต่อเนื่องของการกระทำที่จะดำเนินไปจนถึงจุดหนึ่งในอนาคต',
+          examples: [
+            'By next month, I **will have been working** here for 10 years.',
+            'She **will have been sleeping** for 8 hours by 6 AM.',
+            'They **will have been waiting** for over an hour when the show starts.',
+            'Next year, we **will have been living** in this house for 20 years.',
+            'By 5 PM, he **will have been driving** for 6 hours.'
+          ]
+        }
+      ]
     }
+  },
+  {
+    id: 'voice',
+    title: '3. Voice',
+    icon: '🗣️',
+    color: 'blue',
+    details: {
+      title: 'Active & Passive Voice',
+      description: 'รูปแบบประโยคที่เน้นผู้กระทำ (Active) หรือผู้ถูกกระทำ (Passive)',
+      subtopics: [
+        {
+          name: 'Active Voice',
+          structure: 'Subject (ผู้ทำ) + Verb + Object (ผู้ถูกทำ)',
+          usage: 'ประโยคทั่วไปที่ประธานเป็นผู้กระทำกริยา เน้นที่ตัวผู้ทำ',
+          examples: [
+            'The teacher **teaches** the students.',
+            'John **ate** the cake.',
+            'Somebody **stole** my car.',
+            'She **is writing** a letter.',
+            'They **will build** a house.'
+          ]
+        },
+        {
+          name: 'Passive Voice',
+          structure: 'Subject (ผู้ถูกทำ) + Verb to be + Verb ช่อง 3 (+ by ผู้ทำ)',
+          usage: 'ประธานเป็นผู้ถูกกระทำ ใช้เมื่อต้องการเน้นที่การกระทำ หรือไม่รู้ว่าใครเป็นคนทำ',
+          examples: [
+            'The students **are taught** by the teacher.',
+            'The cake **was eaten** by John.',
+            'My car **was stolen** (ไม่รู้ว่าใครขโมย).',
+            'A letter **is being written**.',
+            'A house **will be built**.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'mood',
+    title: '4. Mood',
+    icon: '🎭',
+    color: 'purple',
+    details: {
+      title: 'Mood (เจตนาของประโยค)',
+      subtopics: [
+        {
+          name: 'Indicative Mood (บอกเล่าข้อเท็จจริง)',
+          usage: 'ใช้พูดถึงความจริง หรือถามคำถามทั่วไป เป็นรูปประโยคที่ใช้บ่อยที่สุด',
+          examples: [
+            'The earth **revolves** around the sun.',
+            'She **likes** reading.',
+            '**Are** you happy?',
+            'It **rained** yesterday.',
+            'We **will go** soon.'
+          ]
+        },
+        {
+          name: 'Imperative Mood (คำสั่ง/ขอร้อง)',
+          usage: 'ใช้สั่ง ขอร้อง หรือแนะนำ มักละประธาน (You) ไว้',
+          examples: [
+            '**Open** the door.',
+            '**Please be** quiet.',
+            '**Do not touch** the glass.',
+            '**Turn** left at the corner.',
+            '**Have** a nice day.'
+          ]
+        },
+        {
+          name: 'Subjunctive Mood (สมมติ/ปรารถนา)',
+          usage: 'ใช้กับเหตุการณ์สมมติที่ไม่เป็นจริง หรือคำแนะนำที่สำคัญ (มักใช้รูป verb ที่แปลกไปจากปกติ)',
+          examples: [
+            'I wish I **were** a bird.',
+            'If I **were** you, I would accept.',
+            'It is essential that he **be** here on time.',
+            'I suggest that she **wait**.',
+            'God **save** the King.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'sentence-structure',
+    title: '5. Sentence Structure',
+    icon: '🏗️',
+    color: 'teal',
+    details: {
+      title: 'โครงสร้างประโยค',
+      subtopics: [
+        {
+          name: 'Simple Sentence (ประโยคความเดียว)',
+          structure: '1 Independent Clause',
+          usage: 'มีประธานและกริยาหลักชุดเดียว ใจความสมบูรณ์',
+          examples: [
+            'The dog **barked**.',
+            'She **drinks** coffee every morning.',
+            'John and Mary **went** to the movies.',
+            'I **am** happy.',
+            'The sun **shines** brightly.'
+          ]
+        },
+        {
+          name: 'Compound Sentence (ประโยคความรวม)',
+          structure: 'Independent Clause + Conjunction (FANBOYS) + Independent Clause',
+          usage: 'ประโยคความเดียว 2 ประโยคเชื่อมกันด้วย and, but, or, so, etc.',
+          examples: [
+            'I like tea, **but** she likes coffee.',
+            'It was raining, **so** we stayed home.',
+            'He studied hard, **yet** he failed.',
+            'Will you go, **or** will you stay?',
+            'I wanted to buy it, **but** I had no money.'
+          ]
+        },
+        {
+          name: 'Complex Sentence (ประโยคความซ้อน)',
+          structure: 'Independent Clause + Dependent Clause',
+          usage: 'มีประโยคหลักและประโยคย่อยเชื่อมกันด้วย because, although, if, when, etc.',
+          examples: [
+            'I missed the bus **because** I woke up late.',
+            '**Although** he is rich, he is unhappy.',
+            'If it rains, **we will cancel the trip**.',
+            'The man **who called** is my uncle.',
+            'I will wait **until you arrive**.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'clauses',
+    title: '6. Clauses',
+    icon: '🔗',
+    color: 'rose',
+    details: {
+      title: 'อนุประโยค (Clauses)',
+      description: 'กลุ่มคำที่มีประธานและกริยา แต่อาจจะไม่ใช่ประโยคที่สมบูรณ์',
+      subtopics: [
+        {
+          name: 'Independent Clause (อิสระ)',
+          usage: 'ประโยคที่สมบูรณ์ในตัวเอง มีความหมายครบถ้วน',
+          examples: [
+            '**She runs fast.**',
+            '**I love pizza.**',
+            '**He is a doctor.**',
+            '**They played football.**',
+            '**The sky is blue.**'
+          ]
+        },
+        {
+          name: 'Dependent Clause (ไม่อิสระ)',
+          usage: 'ประโยคที่ไม่สมบูรณ์ ต้องเกาะกับประโยคหลัก ทำหน้าที่ขยายความ',
+          examples: [
+            'I know **that he is lying** (Noun Clause).',
+            'The book **which I bought** is good (Adjective Clause).',
+            '**Because it rained**, we didn\'t go (Adverb Clause).',
+            'She asked **where I lived**.',
+            'I will leave **when you arrive**.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'conditionals',
+    title: '7. Conditionals',
+    icon: '🤔',
+    color: 'amber',
+    details: {
+      title: 'If-Clauses (ประโยคเงื่อนไข)',
+      subtopics: [
+        {
+          name: 'Zero Conditional (ความจริงเสมอ)',
+          structure: 'If + Present Simple, Present Simple',
+          usage: 'ใช้กับกฎธรรมชาติ หรือความจริงทั่วไป',
+          examples: [
+            'If you heat ice, it **melts**.',
+            'If I drink coffee, I **get** headache.',
+            'Plants **die** if they don\'t get water.',
+            'If you mix red and blue, you **get** purple.',
+            'The machine **starts** if you press this button.'
+          ]
+        },
+        {
+          name: 'First Conditional (เป็นไปได้ในอนาคต)',
+          structure: 'If + Present Simple, Future Simple (will)',
+          usage: 'ใช้กับเหตุการณ์ที่น่าจะเกิดขึ้นจริงในอนาคต',
+          examples: [
+            'If it rains, I **will stay** home.',
+            'If you study hard, you **will pass**.',
+            'She **will be** angry if you are late.',
+            'If I see him, I **will tell** him.',
+            'We **will go** to the park if it is sunny.'
+          ]
+        },
+        {
+          name: 'Second Conditional (สมมติในปัจจุบัน)',
+          structure: 'If + Past Simple, Would + Verb ช่อง 1',
+          usage: 'ใช้กับเรื่องสมมติที่ไม่จริงในปัจจุบัน หรือเป็นไปได้ยาก',
+          examples: [
+            'If I won the lottery, I **would buy** a house.',
+            'If I **were** you, I would apologize.',
+            'She **would travel** if she had money.',
+            'If he knew the answer, he **would tell** us.',
+            'They **would come** if they were free.'
+          ]
+        },
+        {
+          name: 'Third Conditional (เสียดายในอดีต)',
+          structure: 'If + Past Perfect, Would have + Verb ช่อง 3',
+          usage: 'ใช้พูดถึงอดีตที่แก้ไขไม่ได้แล้ว (รู้งี้...)',
+          examples: [
+            'If I had studied, I **would have passed**.',
+            'If she had driven carefully, she **would not have crashed**.',
+            'I **would have called** you if I had known.',
+            'If we had left earlier, we **would not have missed** the bus.',
+            'He **would have been** happy if he had seen you.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'modals',
+    title: '8. Modal Verbs',
+    icon: '🛠️',
+    color: 'cyan',
+    details: {
+      title: 'กริยาช่วยพิเศษ',
+      description: 'กริยาที่ช่วยบอกความหมายเพิ่มเติม เช่น ความสามารถ, หน้าที่, ความเป็นไปได้',
+      subtopics: [
+        {
+          name: 'Ability (ความสามารถ)',
+          usage: 'Can (ปัจจุบัน), Could (อดีต)',
+          examples: [
+            'I **can** swim.',
+            'She **could** play piano when she was five.',
+            'He **cannot** speak Japanese.',
+            '**Can** you drive?',
+            'They **could** run very fast.'
+          ]
+        },
+        {
+          name: 'Obligation (หน้าที่/ข้อบังคับ)',
+          usage: 'Must (ต้อง - กฎ/ความรู้สึก), Have to (ต้อง - สถานการณ์บังคับ)',
+          examples: [
+            'You **must** wear a seatbelt.',
+            'I **have to** go to work now.',
+            'Students **must not** cheat.',
+            'She **has to** finish this by Friday.',
+            'We **had to** wait for an hour.'
+          ]
+        },
+        {
+          name: 'Advice (คำแนะนำ)',
+          usage: 'Should / Ought to (ควรจะ)',
+          examples: [
+            'You **should** see a doctor.',
+            'He **should not** eat so much.',
+            'We **ought to** apologize.',
+            '**Should** I buy this?',
+            'They **should** study more.'
+          ]
+        },
+        {
+          name: 'Possibility (ความเป็นไปได้)',
+          usage: 'May, Might, Could (อาจจะ)',
+          examples: [
+            'It **might** rain today.',
+            'She **may** come to the party.',
+            'This **could** be the right answer.',
+            'He **might not** know.',
+            'They **may** have left already.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'gerund-infinitive',
+    title: '9. Gerund & Infinitive',
+    icon: '🔄',
+    color: 'emerald',
+    details: {
+      title: 'V-ing และ to V1',
+      subtopics: [
+        {
+          name: 'Gerund (Verb เติม ing)',
+          usage: 'ทำหน้าที่เป็นคำนาม แปลว่า "การ..." ใช้หลังคำกริยาบางคำ (Enjoy, Mind, Avoid)',
+          examples: [
+            'I enjoy **reading**.',
+            '**Swimming** is good for health.',
+            'She avoided **answering** my question.',
+            'Would you mind **opening** the window?',
+            'He is good at **drawing**.'
+          ]
+        },
+        {
+          name: 'Infinitive (to + Verb ช่อง 1)',
+          usage: 'ใช้บอกวัตถุประสงค์ หรือตามหลังคำกริยาบางคำ (Want, Hope, Decide)',
+          examples: [
+            'I want **to learn** English.',
+            'She decided **to go** home.',
+            'We hope **to see** you again.',
+            'He went to the shop **to buy** milk.',
+            'It is important **to sleep** well.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'reported-speech',
+    title: '10. Reported Speech',
+    icon: '📢',
+    color: 'indigo',
+    details: {
+      title: 'การนำคำพูดมาเล่าต่อ',
+      subtopics: [
+        {
+          name: 'Direct Speech (พูดตรง)',
+          usage: 'ยกคำพูดเขามาทั้งประโยค อยู่ในเครื่องหมายคำพูด',
+          examples: [
+            'He said, "I **am** happy."',
+            'She said, "I **will** call you."',
+            'Tom asked, "Where **are** you?"',
+            '"Stop!" he shouted.',
+            'Mary said, "I **love** this song."'
+          ]
+        },
+        {
+          name: 'Indirect Speech (เล่าต่อ)',
+          usage: 'เล่าว่าเขาพูดอะไร ต้องเปลี่ยน Tense ให้เป็นอดีตมากขึ้น และเปลี่ยนสรรพนาม',
+          examples: [
+            'He said that he **was** happy.',
+            'She said that she **would** call me.',
+            'Tom asked where I **was**.',
+            'He shouted at me to stop.',
+            'Mary said that she **loved** that song.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'question-forms',
+    title: '11. Question Forms',
+    icon: '❓',
+    color: 'purple',
+    details: {
+      title: 'รูปแบบประโยคคำถาม',
+      subtopics: [
+        {
+          name: 'Yes/No Questions',
+          usage: 'คำถามที่ต้องการคำตอบว่า ใช่ หรือ ไม่ใช่',
+          examples: [
+            '**Do** you like pizza?',
+            '**Is** she your sister?',
+            '**Can** you help me?',
+            '**Have** you finished?',
+            '**Will** they come?'
+          ]
+        },
+        {
+          name: 'Wh-Questions',
+          usage: 'ถามเพื่อต้องการรายละเอียด (Who, What, Where, When, Why, How)',
+          examples: [
+            '**Where** are you going?',
+            '**What** is your name?',
+            '**Why** did you do that?',
+            '**How** much is this?',
+            '**Who** is that man?'
+          ]
+        },
+        {
+          name: 'Tag Questions',
+          usage: 'ประโยคบอกเล่า + ส่วนคำถามสั้นๆ ท้ายประโยค (ถามย้ำความมั่นใจ)',
+          examples: [
+            'You are a student, **aren’t you**?',
+            'She isn’t here, **is she**?',
+            'He can swim, **can’t he**?',
+            'They lived in London, **didn’t they**?',
+            'It’s hot today, **isn’t it**?'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'comparison',
+    title: '12. Comparison',
+    icon: '⚖️',
+    color: 'orange',
+    details: {
+      title: 'การเปรียบเทียบ',
+      subtopics: [
+        {
+          name: 'Positive Degree (ขั้นเท่า)',
+          usage: 'ใช้ as ... as เพื่อบอกว่าสองสิ่งเท่ากัน',
+          examples: [
+            'She is **as tall as** her mother.',
+            'This box is **as heavy as** that one.',
+            'He runs **as fast as** a tiger.',
+            'English is not **as hard as** math.',
+            'You are **as smart as** your brother.'
+          ]
+        },
+        {
+          name: 'Comparative Degree (ขั้นกว่า)',
+          usage: 'เติม -er than (คำพยางค์เดียว) หรือ more ... than (คำหลายพยางค์)',
+          examples: [
+            'This car is **faster than** that one.',
+            'She is **more beautiful than** a flower.',
+            'Today is **hotter than** yesterday.',
+            'This book is **more interesting than** the movie.',
+            'He is **older than** me.'
+          ]
+        },
+        {
+          name: 'Superlative Degree (ขั้นสุด)',
+          usage: 'เติม the ... -est (คำพยางค์เดียว) หรือ the most ... (คำหลายพยางค์)',
+          examples: [
+            'She is **the best** student in class.',
+            'This is **the most expensive** watch.',
+            'Everest is **the highest** mountain.',
+            'He is **the smartest** person I know.',
+            'It was **the happiest** day of my life.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'articles',
+    title: '13. Articles',
+    icon: '🅰️',
+    color: 'teal',
+    details: {
+      title: 'คำนำหน้านาม (a, an, the)',
+      subtopics: [
+        {
+          name: 'Indefinite Articles (a, an)',
+          usage: 'ใช้นำหน้านามนับได้เอกพจน์ ที่ไม่เจาะจง (an ใช้หน้าเสียงสระ a, e, i, o, u)',
+          examples: [
+            'I saw **a** dog in the park.',
+            'She wants to eat **an** apple.',
+            'He is **a** doctor.',
+            'Wait for **an** hour.',
+            'Do you have **a** pen?'
+          ]
+        },
+        {
+          name: 'Definite Article (the)',
+          usage: 'ใช้นำหน้านามที่เจาะจง ผู้พูดและผู้ฟังเข้าใจตรงกันว่าอันไหน',
+          examples: [
+            '**The** sun is hot.',
+            'Close **the** door, please.',
+            'I bought a book. **The** book is good.',
+            'She plays **the** piano well.',
+            '**The** sky is blue.'
+          ]
+        },
+        {
+          name: 'Zero Article (ไม่ใส่)',
+          usage: 'ไม่ใส่หน้าคำนามพหูพจน์กล่าวลอยๆ, นามนับไม่ได้, ชื่อประเทศ, หรือมื้ออาหาร',
+          examples: [
+            '**Cats** are cute.',
+            'I drink **water**.',
+            'She lives in **Thailand**.',
+            'He plays **football**.',
+            'I had **breakfast** at 8 AM.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'subject-verb',
+    title: '14. S-V Agreement',
+    icon: '🤝',
+    color: 'blue',
+    details: {
+      title: 'ความสอดคล้องของประธานและกริยา',
+      description: 'ประธานและกริยาต้องเข้ากันได้ (เอกพจน์คู่เอกพจน์ พหูพจน์คู่พหูพจน์)',
+      subtopics: [
+        {
+          name: 'Basic Rule',
+          usage: 'ประธานเอกพจน์ (He, She, It, A cat) กริยาต้องเติม s/es',
+          examples: [
+            'He **walks** to school.',
+            'The dog **barks** loudly.',
+            'She **likes** pizza.',
+            'It **rains** a lot here.',
+            'My brother **plays** games.'
+          ]
+        },
+        {
+          name: 'Plural Subject',
+          usage: 'ประธานพหูพจน์ (They, We, Cats) กริยาไม่ต้องเติม s',
+          examples: [
+            'They **walk** to school.',
+            'Dogs **bark** loudly.',
+            'We **like** pizza.',
+            'My brothers **play** games.',
+            'The students **study** hard.'
+          ]
+        },
+        {
+          name: 'Special Cases',
+          usage: 'คำว่า Everyone, Someone, Nobody นับเป็นเอกพจน์เสมอ',
+          examples: [
+            '**Everyone is** ready.',
+            '**Somebody has** stolen my bag.',
+            '**No one knows** the answer.',
+            '**Each** of the students **has** a book.',
+            '**Neither** of them **is** correct.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'word-formation',
+    title: '15. Word Formation',
+    icon: '🔤',
+    color: 'rose',
+    details: {
+      title: 'การสร้างคำใหม่',
+      subtopics: [
+        {
+          name: 'Prefix (คำนำหน้า)',
+          usage: 'เติมหน้าคำรากศัพท์เพื่อเปลี่ยนความหมาย (เช่น ปฏิเสธ)',
+          examples: [
+            'Happy → **Un**happy (ไม่มีความสุข)',
+            'Agree → **Dis**agree (ไม่เห็นด้วย)',
+            'Possible → **Im**possible (เป็นไปไม่ได้)',
+            'Write → **Re**write (เขียนใหม่)',
+            'Legal → **Il**legal (ผิดกฎหมาย)'
+          ]
+        },
+        {
+          name: 'Suffix (คำลงท้าย)',
+          usage: 'เติมท้ายคำรากศัพท์เพื่อเปลี่ยนหน้าที่ของคำ (Part of speech)',
+          examples: [
+            'Happy (Adj) → Happi**ness** (Noun)',
+            'Teach (Verb) → Teach**er** (Noun)',
+            'Beauty (Noun) → Beauti**ful** (Adj)',
+            'Quick (Adj) → Quick**ly** (Adv)',
+            'Act (Verb) → Act**ion** (Noun)'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'common-errors',
+    title: '16. Common Errors',
+    icon: '❌',
+    color: 'amber',
+    details: {
+      title: 'ข้อผิดพลาดที่พบบ่อย',
+      subtopics: [
+        {
+          name: 'Verb Patterns',
+          usage: 'การใช้ Verb ผิดรูปแบบ',
+          examples: [
+            '❌ I am agree → ✅ I **agree**',
+            '❌ She is go → ✅ She **goes**',
+            '❌ He don’t know → ✅ He **doesn’t** know',
+            '❌ I look forward to see you → ✅ I look forward to **seeing** you',
+            '❌ I am boring (ฉันน่าเบื่อ) → ✅ I am **bored** (ฉันรู้สึกเบื่อ)'
+          ]
+        },
+        {
+          name: 'Prepositions',
+          usage: 'การใช้บุพบทผิด',
+          examples: [
+            '❌ I am good in English → ✅ I am good **at** English',
+            '❌ Married with John → ✅ Married **to** John',
+            '❌ Listen me → ✅ Listen **to** me',
+            '❌ Waiting you → ✅ Waiting **for** you',
+            '❌ Discuss about politics → ✅ **Discuss** politics'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'punctuation',
+    title: '17. Punctuation',
+    icon: '🖊️',
+    color: 'indigo',
+    details: {
+      title: 'เครื่องหมายวรรคตอน',
+      subtopics: [
+        {
+          name: 'Common Marks',
+          usage: 'เครื่องหมายที่ใช้บ่อยในประโยค',
+          examples: [
+            '**Full stop (.):** ใช้จบประโยคบอกเล่า เช่น I am happy**.**',
+            '**Comma (,):** ใช้คั่นคำหรือประโยค เช่น I like apples**,** bananas**,** and oranges.',
+            '**Question mark (?):** ใช้จบประโยคคำถาม เช่น Are you ok**?**',
+            '**Exclamation mark (!):** ใช้แสดงอารมณ์ตกใจ เช่น Watch out**!**',
+            '**Quotation marks (" "):** ใช้ยกคำพูด เช่น He said**,** **"**Hello**"**.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'style',
+    title: '18. Style & Register',
+    icon: '👔',
+    color: 'purple',
+    details: {
+      title: 'ระดับภาษา (ทางการ vs ไม่ทางการ)',
+      subtopics: [
+        {
+          name: 'Formal Language',
+          usage: 'ภาษาทางการ ใช้ในการเขียนธุรกิจ การสมัครงาน หรือคุยกับผู้ใหญ่',
+          examples: [
+            'I **would like to inquire** about...',
+            'We **apologize** for the inconvenience.',
+            '**Consequently**, we must leave.',
+            'Please **inform** us immediately.',
+            '**However**, it is expensive.'
+          ]
+        },
+        {
+          name: 'Informal Language',
+          usage: 'ภาษากันเอง ใช้คุยกับเพื่อน ครอบครัว หรือแชท',
+          examples: [
+            'I **want to ask** about...',
+            '**Sorry** for the trouble.',
+            '**So**, we gotta go.',
+            'Please **let us know** ASAP.',
+            '**But**, it\'s pricey.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'idioms',
+    title: '19. Idiomatic Grammar',
+    icon: '💬',
+    color: 'cyan',
+    details: {
+      title: 'สำนวนทางไวยากรณ์',
+      subtopics: [
+        {
+          name: 'Make vs Do',
+          usage: 'Make (สร้างขึ้นมาใหม่), Do (ทำกิจกรรม/หน้าที่)',
+          examples: [
+            '**Make** a cake.',
+            '**Do** homework.',
+            '**Make** a decision.',
+            '**Do** the dishes.',
+            '**Make** a mistake.'
+          ]
+        },
+        {
+          name: 'Say vs Tell',
+          usage: 'Tell ต้องมีกรรม (คนฟัง) ตามหลังเสมอ, Say พูดลอยๆ ได้',
+          examples: [
+            'He **said** hello.',
+            'He **told me** a story.',
+            'She **said** that she was tired.',
+            'Please **tell him** to come.',
+            'Don\'t **tell a lie**.'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'advanced',
+    title: '20. Advanced Structures',
+    icon: '🚀',
+    color: 'slate',
+    details: {
+      title: 'โครงสร้างประโยคขั้นสูง',
+      subtopics: [
+        {
+          name: 'Inversion (การกลับประโยค)',
+          usage: 'นำคำปฏิเสธขึ้นต้นประโยค แล้วสลับกริยาช่วยมาไว้หน้าประธาน เพื่อเน้นความ',
+          examples: [
+            '**Never have I** seen such a thing. (ปกติ: I have never seen...)',
+            '**Rarely do we** go there.',
+            '**Not only did he** win, but he also broke the record.',
+            '**Little did she** know about the surprise.',
+            '**Had I** known, I would have helped.'
+          ]
+        },
+        {
+          name: 'Cleft Sentences (ประโยคแยก)',
+          usage: 'โครงสร้าง It was... that... เพื่อเน้นย้ำส่วนใดส่วนหนึ่งของประโยค',
+          examples: [
+            '**It was John who** broke the window. (เน้นว่า จอห์น นะที่เป็นคนทำ)',
+            '**What I need is** a holiday.',
+            '**It was yesterday that** I saw him.',
+            '**All I want is** you.',
+            '**The person who** called was Mary.'
+          ]
+        }
+      ]
+    }
+  }
 ];

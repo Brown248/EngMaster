@@ -5,9 +5,7 @@ import { useLocation } from 'react-router-dom';
 const titles: Record<string, string> = {
   '/': 'Home',
   '/vocabulary': 'Vocabulary Bank',
-  '/slang': 'Teen Slang',
   '/grammar': 'Grammar Challenge',
-  '/toeic': 'TOEIC Simulation',
 };
 
 export default function usePageTitle(baseTitle: string = 'EngMaster') {

@@ -8,11 +8,8 @@ import usePageTitle from './hooks/usePageTitle';
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'));
 const Vocabulary = lazy(() => import('./pages/Vocabulary'));
-const Slang = lazy(() => import('./pages/Slang'));
 const Grammar = lazy(() => import('./pages/Grammar'));
-const Toeic = lazy(() => import('./pages/Toeic'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-const ToeicExam = lazy(() => import('./pages/ToeicExam'));
 
 // Loading component
 const PageLoader = () => (
@@ -33,10 +30,7 @@ function AnimatedRoutes() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="vocabulary" element={<Vocabulary />} />
-            <Route path="slang" element={<Slang />} />
             <Route path="grammar" element={<Grammar />} />
-            <Route path="toeic" element={<Toeic />} />
-            <Route path="toeic/exam/:partId" element={<ToeicExam />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
