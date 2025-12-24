@@ -10,8 +10,9 @@ const Home = lazy(() => import('./pages/Home'));
 const Vocabulary = lazy(() => import('./pages/Vocabulary'));
 const Grammar = lazy(() => import('./pages/Grammar'));
 const TensesQuiz = lazy(() => import('./pages/TensesQuiz'));
+// ✅ แก้ไข: อัปเดต Path ให้ตรงกับชื่อไฟล์ใหม่ (PartsOfSpeechQuiz.tsx)
 const PartsOfSpeechQuiz = lazy(() => import('./pages/PartsOfSpeechQui')); 
-const VoiceQuiz = lazy(() => import('./pages/VoiceQuiz')); // ✅ Import ใหม่
+const VoiceQuiz = lazy(() => import('./pages/VoiceQuiz'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Loading component
@@ -33,10 +34,15 @@ function AnimatedRoutes() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="vocabulary" element={<Vocabulary />} />
+            
+            {/* --- Grammar Routes --- */}
             <Route path="grammar" element={<Grammar />} />
+            {/* ✅ เพิ่ม Route นี้เพื่อให้รองรับการเลือกหัวข้อผ่าน URL (แก้ปัญหาปุ่ม Back) */}
+            <Route path="grammar/:topicId" element={<Grammar />} />
+            
             <Route path="grammar/quiz" element={<TensesQuiz />} />
             <Route path="grammar/parts-of-speech-quiz" element={<PartsOfSpeechQuiz />} />
-            <Route path="grammar/voice-quiz" element={<VoiceQuiz />} /> {/* ✅ Route ใหม่ */}
+            <Route path="grammar/voice-quiz" element={<VoiceQuiz />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

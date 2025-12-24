@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, CheckCircle2, XCircle, RefreshCw, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { partsOfSpeechQuizData } from '../data/partsOfSpeechQuizData';
+// ✅ แก้ไข: Import ข้อมูลให้ถูกไฟล์
+import { tensesQuizData } from '../data/tensesQuizData';
 import AdBanner from '../components/AdBanner';
 
-export default function PartsOfSpeechQuiz() {
+// ✅ แก้ไข: เปลี่ยนชื่อ Component เป็น TensesQuiz
+export default function TensesQuiz() {
   const navigate = useNavigate();
   
   // State
@@ -13,12 +15,15 @@ export default function PartsOfSpeechQuiz() {
   const [userAnswers, setUserAnswers] = useState<(number | null)[]>([]);
   const [isFinished, setIsFinished] = useState(false);
 
-  // Initialize array of nulls based on question count
+  // Initialize array based on data length
   useEffect(() => {
-    setUserAnswers(new Array(partsOfSpeechQuizData.length).fill(null));
+    // ✅ แก้ไข: ใช้ tensesQuizData
+    if (tensesQuizData) {
+        setUserAnswers(new Array(tensesQuizData.length).fill(null));
+    }
   }, []);
 
-  // Helper to parse bold text from markdown-style **text** to HTML
+  // Helper to parse bold text
   const parseQuestionText = (text: string) => {
     return text.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-indigo-700">$1</span>');
   };
@@ -32,7 +37,8 @@ export default function PartsOfSpeechQuiz() {
 
   // Handle Navigation
   const handleNext = () => {
-    if (currentQuestionIndex < partsOfSpeechQuizData.length - 1) {
+    // ✅ แก้ไข: ใช้ tensesQuizData
+    if (currentQuestionIndex < tensesQuizData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       finishQuiz();
@@ -52,18 +58,26 @@ export default function PartsOfSpeechQuiz() {
 
   const restartQuiz = () => {
     setCurrentQuestionIndex(0);
-    setUserAnswers(new Array(partsOfSpeechQuizData.length).fill(null));
+    // ✅ แก้ไข: ใช้ tensesQuizData
+    setUserAnswers(new Array(tensesQuizData.length).fill(null));
     setIsFinished(false);
     window.scrollTo(0, 0);
   };
 
+  // ป้องกัน error กรณีโหลดข้อมูลไม่ทัน
+  if (!tensesQuizData) {
+      return <div className="p-10 text-center text-slate-500">Loading quiz data...</div>;
+  }
+
   // --- Result Screen ---
   if (isFinished) {
     const score = userAnswers.reduce((acc, ans, index) => {
-      return (ans === partsOfSpeechQuizData[index].correctAnswer) ? (acc || 0) + 1 : (acc || 0);
+      // ✅ แก้ไข: ใช้ tensesQuizData
+      return (ans === tensesQuizData[index].correctAnswer) ? (acc || 0) + 1 : (acc || 0);
     }, 0) || 0;
 
-    const percentage = Math.round((score / partsOfSpeechQuizData.length) * 100);
+    // ✅ แก้ไข: ใช้ tensesQuizData
+    const percentage = Math.round((score / tensesQuizData.length) * 100);
 
     return (
       <div className="min-h-screen bg-slate-50 py-10 px-4">
@@ -79,11 +93,12 @@ export default function PartsOfSpeechQuiz() {
             </div>
             
             <h2 className="text-3xl font-black text-slate-800 mb-2">Quiz Completed!</h2>
-            <p className="text-slate-500 mb-8 font-medium">ทดสอบ Parts of Speech เรียบร้อย มาดูผลคะแนนกัน!</p>
+            <p className="text-slate-500 mb-8 font-medium">ทดสอบ Tenses 12 ข้อ เรียบร้อย!</p>
             
             <div className="flex justify-center items-end gap-2 mb-8">
               <span className="text-6xl font-black text-indigo-600">{score}</span>
-              <span className="text-2xl font-bold text-slate-400 mb-2">/ {partsOfSpeechQuizData.length}</span>
+              {/* ✅ แก้ไข: ใช้ tensesQuizData */}
+              <span className="text-2xl font-bold text-slate-400 mb-2">/ {tensesQuizData.length}</span>
             </div>
 
             <div className="w-full bg-slate-100 rounded-full h-4 mb-8 overflow-hidden max-w-md mx-auto">
@@ -118,7 +133,8 @@ export default function PartsOfSpeechQuiz() {
           {/* Solution List */}
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-slate-800 ml-2">เฉลยละเอียด:</h3>
-            {partsOfSpeechQuizData.map((question, index) => {
+            {/* ✅ แก้ไข: ใช้ tensesQuizData */}
+            {tensesQuizData.map((question, index) => {
               const userAnswer = userAnswers[index];
               const isCorrect = userAnswer === question.correctAnswer;
               
@@ -179,9 +195,10 @@ export default function PartsOfSpeechQuiz() {
   }
 
   // --- Quiz Screen ---
-  const questionData = partsOfSpeechQuizData[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / partsOfSpeechQuizData.length) * 100;
-  const isLastQuestion = currentQuestionIndex === partsOfSpeechQuizData.length - 1;
+  // ✅ แก้ไข: ใช้ tensesQuizData
+  const questionData = tensesQuizData[currentQuestionIndex];
+  const progress = ((currentQuestionIndex + 1) / tensesQuizData.length) * 100;
+  const isLastQuestion = currentQuestionIndex === tensesQuizData.length - 1;
   const hasAnsweredCurrent = userAnswers[currentQuestionIndex] !== null && userAnswers[currentQuestionIndex] !== undefined;
 
   return (
@@ -194,7 +211,8 @@ export default function PartsOfSpeechQuiz() {
           <ArrowLeft size={20} /> ออกจากแบบทดสอบ
         </button>
         <div className="px-4 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-sm font-bold">
-          ข้อที่ {currentQuestionIndex + 1} / {partsOfSpeechQuizData.length}
+          {/* ✅ แก้ไข: ใช้ tensesQuizData */}
+          ข้อที่ {currentQuestionIndex + 1} / {tensesQuizData.length}
         </div>
       </div>
 
