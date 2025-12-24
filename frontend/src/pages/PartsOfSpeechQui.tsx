@@ -15,10 +15,12 @@ export default function PartsOfSpeechQuiz() {
 
   // Initialize array of nulls based on question count
   useEffect(() => {
-    setUserAnswers(new Array(partsOfSpeechQuizData.length).fill(null));
+    if (partsOfSpeechQuizData) {
+        setUserAnswers(new Array(partsOfSpeechQuizData.length).fill(null));
+    }
   }, []);
 
-  // Helper to parse bold text from markdown-style **text** to HTML
+  // Helper to parse bold text
   const parseQuestionText = (text: string) => {
     return text.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-indigo-700">$1</span>');
   };
@@ -56,6 +58,10 @@ export default function PartsOfSpeechQuiz() {
     setIsFinished(false);
     window.scrollTo(0, 0);
   };
+
+  if (!partsOfSpeechQuizData) {
+      return <div className="p-10 text-center text-slate-500">Loading quiz data...</div>;
+  }
 
   // --- Result Screen ---
   if (isFinished) {

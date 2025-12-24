@@ -1,182 +1,179 @@
-import { useRef } from 'react'; // ✅ แก้ไข: ลบ 'React,' ออก เหลือแค่ { useRef }
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Sparkles, Star, Heart } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronRight, ArrowLeft, PlayCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { coursesData } from '../data/homeData';
+import { grammarTopics } from '../data/grammarData';
 import AdBanner from '../components/AdBanner';
 
-export default function Home() {
+export default function Grammar() {
   const navigate = useNavigate();
-  
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: containerRef });
-  
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
 
-  const goHome = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const activeTopic = grammarTopics.find(t => t.id === selectedTopic);
+
+  // ฟังก์ชันช่วยตรวจสอบว่าหัวข้อไหนมี Quiz บ้าง
+  const hasQuiz = (topicId: string) => {
+    return ['tenses', 'parts-of-speech'].includes(topicId);
   };
 
-  const goToCourse = (id: string) => {
-    navigate(`/${id}`);
+  const startQuiz = (topicId: string) => {
+    if (topicId === 'tenses') {
+      navigate('/grammar/quiz');
+    } else if (topicId === 'parts-of-speech') {
+      navigate('/grammar/parts-of-speech-quiz');
+    }
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-100 overflow-x-hidden">
-      
+    <div className="space-y-8 pb-12">
       <AnimatePresence mode="wait">
-        <motion.div 
-            key="home"
-            ref={containerRef}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="px-6 pb-6 pt-4 md:px-12 md:pb-12 md:pt-8 max-w-7xl mx-auto space-y-12 relative"
+        {!selectedTopic ? (
+          <motion.div 
+            key="list"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            className="space-y-8"
           >
-            {/* Background Decor */}
-            <motion.div style={{ y: y1 }} className="absolute top-0 right-0 w-80 h-80 bg-yellow-200/20 rounded-full blur-3xl -z-10" />
-            <motion.div style={{ y: y2 }} className="absolute bottom-20 left-10 w-56 h-56 bg-blue-200/20 rounded-full blur-2xl -z-10" />
-
-            {/* --- โลโก้แบรนด์ --- */}
-            <motion.div 
-              onClick={goHome}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-3 cursor-pointer group w-fit relative z-20"
-            >
-              <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-6 group-hover:bg-blue-500 transition-all">
-                <span className="text-white text-2xl font-black italic">E</span>
+            <div className="flex items-center gap-5">
+              <div className="w-16 h-16 bg-purple-100 text-purple-500 rounded-3xl flex items-center justify-center text-4xl shadow-md">
+                🧠
               </div>
-              <span className="text-2xl font-black text-slate-800 group-hover:text-blue-600 transition-colors">
-                EngMaster
-              </span>
-            </motion.div>
+              <div>
+                <h2 className="text-4xl font-black text-slate-800 tracking-tight">Grammar Challenge</h2>
+                <p className="text-slate-500 text-lg font-medium">รวมไวยากรณ์สำคัญ จากพื้นฐานสู่ระดับสูง</p>
+              </div>
+            </div>
 
-            {/* Welcome Section */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-12 pt-2 relative z-10">
-              <div className="flex-1 text-center md:text-left">
-                <motion.div 
-                  onClick={goHome}
-                  whileHover={{ scale: 1.05 }}
-                  className="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-blue-100 text-blue-600 rounded-full text-sm font-bold mb-6 shadow-sm cursor-pointer"
+            <AdBanner className="mb-8" />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {grammarTopics.map((topic) => (
+                <motion.div
+                  key={topic.id}
+                  onClick={() => setSelectedTopic(topic.id)}
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`bg-white p-6 rounded-2xl shadow-sm border-2 border-slate-100 cursor-pointer hover:shadow-lg transition-all group relative overflow-hidden`}
                 >
-                  <Sparkles size={16} className="text-yellow-400 fill-yellow-400" />
-                  <span>Welcome to EngMaster!</span>
-                </motion.div>
-                
-                <h1 className="text-5xl md:text-7xl font-black text-slate-800 tracking-tight leading-[1.1]">
-                  Unlock your potential<br/>
-                  <span onClick={goHome} className="cursor-pointer text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">with EngMaster.</span>
-                </h1>
-                <p className="text-xl text-slate-500 mt-4 font-medium max-w-lg mx-auto md:mx-0">
-                  เรียนอังกฤษแบบไม่เครียด สนุกไปกับทุกบทเรียน เก่งขึ้นได้ทุกวัน!
-                </p>
-              </div>
-              
-              {/* Mascot */}
-              <motion.div 
-                onClick={goHome}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.9 }}
-                animate={{ y: [0, -15, 0] }}
-                transition={{ y: { duration: 4, repeat: Infinity, ease: "easeInOut" } }}
-                className="relative cursor-pointer group"
-              >
-                <div className="absolute inset-0 bg-white/60 blur-[100px] rounded-full scale-125" />
-                <div className="relative text-[150px] md:text-[200px] leading-none filter drop-shadow-2xl z-10 select-none">🦉</div>
-                <div className="absolute -top-2 -right-10 bg-white px-5 py-3 rounded-2xl rounded-bl-none shadow-xl border border-slate-100 z-20">
-                  <p className="text-sm font-black text-slate-700">Let's go! 🚀</p>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* ✅ 2. แทรก AdBanner ตรงนี้ (คั่นระหว่าง Hero กับ Menu) */}
-            <div className="relative z-10">
-              <AdBanner />
-            </div>
-
-            {/* --- Grid Menu --- */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-2 relative z-10">
-              {coursesData.map((card) => {
-                const Icon = card.icon;
-                return (
-                  <motion.div
-                    key={card.id}
-                    onClick={() => goToCourse(card.id)}
-                    whileHover={{ y: -12, scale: 1.02 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm cursor-pointer group relative overflow-hidden h-80 flex flex-col justify-between transition-all hover:shadow-2xl"
-                  >
-                    <div className={`absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-10 transition-transform duration-700 group-hover:scale-[2.5] 
-                      ${card.color === 'orange' ? 'bg-orange-400' : ''}
-                      ${card.color === 'pink' ? 'bg-pink-400' : ''}
-                      ${card.color === 'purple' ? 'bg-purple-400' : ''}
-                      ${card.color === 'blue' ? 'bg-blue-400' : ''}
-                    `} />
-                    
-                    <div className="relative z-10">
-                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-4xl mb-6 shadow-inner group-hover:rotate-12 transition-transform
-                        ${card.color === 'orange' ? 'bg-orange-100 text-orange-500' : ''}
-                        ${card.color === 'pink' ? 'bg-pink-100 text-pink-500' : ''}
-                        ${card.color === 'purple' ? 'bg-purple-100 text-purple-500' : ''}
-                        ${card.color === 'blue' ? 'bg-blue-100 text-blue-500' : ''}
-                      `}>
-                        <Icon size={32} />
-                      </div>
-                      <h3 className={`text-2xl font-black text-slate-800 transition-colors
-                        ${card.color === 'orange' ? 'group-hover:text-orange-600' : ''}
-                        ${card.color === 'pink' ? 'group-hover:text-pink-600' : ''}
-                        ${card.color === 'purple' ? 'group-hover:text-purple-600' : ''}
-                        ${card.color === 'blue' ? 'group-hover:text-blue-600' : ''}
-                      `}>
-                        {card.title}
+                  <div className={`absolute top-0 right-0 w-24 h-24 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150
+                    ${topic.color === 'indigo' ? 'bg-indigo-50' : ''}
+                    ${topic.color === 'orange' ? 'bg-orange-50' : ''}
+                    ${topic.color === 'blue' ? 'bg-blue-50' : ''}
+                    ${topic.color === 'purple' ? 'bg-purple-50' : ''}
+                    ${topic.color === 'teal' ? 'bg-teal-50' : ''}
+                    ${topic.color === 'rose' ? 'bg-rose-50' : ''}
+                    ${topic.color === 'amber' ? 'bg-amber-50' : ''}
+                    ${topic.color === 'cyan' ? 'bg-cyan-50' : ''}
+                    ${topic.color === 'emerald' ? 'bg-emerald-50' : ''}
+                    ${topic.color === 'slate' ? 'bg-slate-50' : ''}
+                  `} />
+                  
+                  <div className="relative z-10 flex items-start justify-between">
+                    <div className="flex items-center gap-4">
+                      <span className="text-3xl">{topic.icon}</span>
+                      <h3 className="text-xl font-bold text-slate-700 group-hover:text-purple-600 transition-colors">
+                        {topic.title.split('. ')[1] || topic.title}
                       </h3>
-                      <p className="text-slate-500 font-bold mt-2">{card.sub}</p>
                     </div>
-
-                    <div className="relative z-10 flex items-center justify-between mt-4">
-                      <span className={`text-xs font-black uppercase tracking-widest
-                        ${card.color === 'orange' ? 'text-orange-400' : ''}
-                        ${card.color === 'pink' ? 'text-pink-400' : ''}
-                        ${card.color === 'purple' ? 'text-purple-400' : ''}
-                        ${card.color === 'blue' ? 'text-blue-400' : ''}
-                      `}>
-                        Start Now
-                      </span>
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all
-                        ${card.color === 'orange' ? 'bg-orange-50 text-orange-500 group-hover:bg-orange-500 group-hover:text-white' : ''}
-                        ${card.color === 'pink' ? 'bg-pink-50 text-pink-500 group-hover:bg-pink-500 group-hover:text-white' : ''}
-                        ${card.color === 'purple' ? 'bg-purple-50 text-purple-500 group-hover:bg-purple-500 group-hover:text-white' : ''}
-                        ${card.color === 'blue' ? 'bg-blue-50 text-blue-500 group-hover:bg-blue-500 group-hover:text-white' : ''}
-                      `}>
-                        <ChevronRight size={24} />
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+                    <ChevronRight className="text-slate-300 group-hover:text-purple-500 transition-colors" />
+                  </div>
+                  <div className="mt-4">
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                        {topic.title.split('. ')[0]}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div 
+            key="detail"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="bg-white rounded-[2.5rem] p-8 shadow-xl border border-slate-100"
+          >
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <button 
+                  onClick={() => setSelectedTopic(null)}
+                  className="flex items-center gap-2 text-slate-400 hover:text-purple-600 font-bold transition-colors w-fit"
+                >
+                  <ArrowLeft size={20} /> Back to Topics
+                </button>
+                
+                {/* แสดงปุ่ม Quiz ถ้ามี */}
+                {selectedTopic && hasQuiz(selectedTopic) && (
+                  <button 
+                    onClick={() => startQuiz(selectedTopic)}
+                    className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all"
+                  >
+                    <PlayCircle size={20} />
+                    เริ่มทำแบบทดสอบ
+                  </button>
+                )}
             </div>
 
-            {/* Banner */}
-            <motion.div 
-              whileHover={{ scale: 1.01 }}
-              className="relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 rounded-[3rem] p-10 md:p-14 text-white shadow-2xl shadow-emerald-200/50 mt-6"
-            >
-              <div className="absolute -right-10 -bottom-10 opacity-20"><Star size={200} fill="white" /></div>
-              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
-                <div className="flex-1 text-center md:text-left">
-                  <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-                    <Heart size={24} className="fill-white animate-pulse" />
-                    <span className="text-sm font-black uppercase tracking-widest">Motivation</span>
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-black mb-4 leading-tight">"Mistakes are proof that you are trying."</h3>
-                  <p className="text-emerald-50 text-xl font-medium">เก่งขึ้นวันละนิดก็พอแล้ว! ✌️</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-md p-10 rounded-[2.5rem] border border-white/20 hidden md:block text-8xl select-none">💪</div>
+            <div className="flex items-center gap-4 mb-8 pb-6 border-b border-slate-100">
+              <span className="text-5xl">{activeTopic?.icon}</span>
+              <div>
+                {/* ✅ ใส่ ? ป้องกัน Error เวลาหาข้อมูลไม่เจอ */}
+                <h2 className="text-3xl font-black text-slate-800">{activeTopic?.details?.title}</h2>
+                <p className="text-slate-500 font-medium">{activeTopic?.title}</p>
               </div>
-            </motion.div>
-        </motion.div>
+            </div>
+
+            <AdBanner className="mb-8" />
+
+            <div className="space-y-8">
+              {/* ✅ ใส่ ? เพื่อป้องกัน Crash ถ้า subtopics เป็น undefined */}
+              {activeTopic?.details?.subtopics?.map((sub, idx) => (
+                <div key={idx} className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                  <h3 className="text-xl font-bold text-purple-600 mb-3">{sub.name}</h3>
+                  
+                  {sub.structure && (
+                    <div className="mb-3 px-4 py-2 bg-blue-50 border border-blue-100 rounded-lg inline-block">
+                        <span className="text-xs font-bold text-blue-500 uppercase tracking-wide mr-2">Structure:</span>
+                        <span className="font-mono text-blue-700 font-medium">{sub.structure}</span>
+                    </div>
+                  )}
+
+                  <p className="text-slate-700 font-medium mb-4 leading-relaxed">
+                    {sub.usage || sub.explanation}
+                  </p>
+                  
+                  {sub.examples && sub.examples.length > 0 && (
+                    <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+                      <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Examples:</p>
+                      <ul className="space-y-2.5">
+                        {sub.examples.map((ex, i) => (
+                          <li key={i} className="flex gap-3 text-slate-600 items-start text-sm md:text-base">
+                            <span className="text-purple-400 mt-1.5 text-[8px] flex-shrink-0">●</span>
+                            <span dangerouslySetInnerHTML={{ __html: ex.replace(/\*\*(.*?)\*\*/g, '<b class="text-purple-700 font-bold">$1</b>') }} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {selectedTopic && hasQuiz(selectedTopic) && (
+              <div className="mt-12 pt-8 border-t border-slate-100 text-center">
+                 <h3 className="text-2xl font-bold text-slate-800 mb-4">พร้อมทดสอบความเข้าใจรึยัง?</h3>
+                 <button 
+                    onClick={() => startQuiz(selectedTopic)}
+                    className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold text-xl hover:bg-slate-800 hover:shadow-2xl hover:-translate-y-1 transition-all"
+                  >
+                    <PlayCircle size={24} />
+                    เริ่มทำแบบทดสอบ {activeTopic?.details?.title}
+                  </button>
+              </div>
+            )}
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );

@@ -8,121 +8,114 @@ export const grammarTopics: GrammarTopic[] = [
     color: 'indigo',
     details: {
       title: 'ชนิดของคำ (Parts of Speech)',
-      description: 'พื้นฐานสำคัญของไวยากรณ์ แบ่งออกเป็น 9 ประเภทหลัก',
+      description: 'พื้นฐานสำคัญของไวยากรณ์ภาษาอังกฤษ แบ่งออกเป็น 9 ประเภทหลัก การเข้าใจหน้าที่ของคำแต่ละชนิดจะช่วยให้สร้างประโยคได้ถูกต้องและสละสลวย',
       subtopics: [
         {
           name: '1.1 Noun (คำนาม)',
-          usage: 'ใช้เรียกชื่อคน สัตว์ สิ่งของ สถานที่ หรือความคิด แบ่งเป็น 8 ประเภทหลัก',
+          explanation: 'คำที่ใช้เรียกชื่อคน สัตว์ สิ่งของ สถานที่ หรือสิ่งที่เป็นนามธรรม (ความคิด ความรู้สึก)',
+          usage: 'แบ่งเป็น 8 ประเภทหลัก: Common (ทั่วไป), Proper (เฉพาะเจาะจง), Concrete (รูปธรรม), Abstract (นามธรรม), Countable (นับได้), Uncountable (นับไม่ได้), Collective (สมุหนาม), Compound (นามประสม)',
           examples: [
-            '**Common Noun (นามทั่วไป):** dog, city, car',
-            '**Proper Noun (นามเฉพาะ):** Bangkok, John, Toyota',
-            '**Concrete Noun (นามรูปธรรม):** table, water, noise (สัมผัสได้)',
-            '**Abstract Noun (นามธรรม):** love, happiness, idea (จับต้องไม่ได้)',
-            '**Countable Noun (นับได้):** books, pens, apples',
-            '**Uncountable Noun (นับไม่ได้):** water, rice, information',
-            '**Collective Noun (สมุหนาม):** team, family, group',
-            '**Compound Noun (นามประสม):** toothpaste, bedroom, swimming pool',
-            'Example: **The team** won the match.'
+            'The **cat** is sleeping on the **sofa**. (Common & Concrete Noun)',
+            '**Thailand** is famous for its spicy **food**. (Proper Noun)',
+            '**Honesty** is the best **policy**. (Abstract Noun)',
+            'Our **team** won the **championship**. (Collective Noun)',
+            'Can I have some **sugar** for my **coffee**? (Uncountable Noun)'
           ]
         },
         {
           name: '1.2 Pronoun (คำสรรพนาม)',
-          usage: 'ใช้แทนคำนามเพื่อไม่ให้พูดซ้ำ แบ่งเป็น 9 ประเภท',
+          explanation: 'คำที่ใช้แทนคำนามที่กล่าวถึงมาแล้ว หรือเป็นที่เข้าใจกัน เพื่อหลีกเลี่ยงการใช้คำเดิมซ้ำๆ',
+          usage: 'หน้าที่หลัก: Subject (ประธาน - I, he), Object (กรรม - me, him), Possessive (แสดงเจ้าของ - mine, yours), Reflexive (สะท้อนตนเอง - myself), Relative (เชื่อมความ - who, which)',
           examples: [
-            '**Subject:** I, he, she, we, they (เป็นประธาน)',
-            '**Object:** me, him, her, us, them (เป็นกรรม)',
-            '**Possessive:** my/mine, your/yours (แสดงเจ้าของ)',
-            '**Reflexive:** myself, yourself (สะท้อนเข้าตัว)',
-            '**Demonstrative:** this, that, these, those (ชี้เฉพาะ)',
-            '**Relative:** who, which, that (เชื่อมประโยค)',
-            '**Interrogative:** who, what, where (คำถาม)',
-            '**Indefinite:** someone, anyone, nothing (ไม่เจาะจง)',
-            '**Reciprocal:** each other, one another (ซึ่งกันและกัน)',
-            'Example: She taught **herself** English.'
+            '**She** loves reading books in her free time. (Subject Pronoun)',
+            'Please give **it** to **me**. (Object Pronoun)',
+            'This beautiful house is **mine**, not **yours**. (Possessive Pronoun)',
+            'He taught **himself** to play the guitar. (Reflexive Pronoun)',
+            'The man **who** called you is waiting outside. (Relative Pronoun)'
           ]
         },
         {
           name: '1.3 Verb (คำกริยา)',
-          usage: 'แสดงการกระทำหรือสถานะ แบ่งตามหน้าที่และประเภท',
+          explanation: 'คำที่แสดงการกระทำ (Action) หรือสถานะความเป็นอยู่ (State) ของประธานในประโยค',
+          usage: 'ประเภทสำคัญ: Action Verbs (กระทำ), Stative Verbs (ความรู้สึก/สภาวะ), Linking Verbs (เชื่อมประธานกับคุณสมบัติ), Auxiliary Verbs (กริยาช่วย)',
           examples: [
-            '**Action Verb:** run, eat, play (แสดงการกระทำ)',
-            '**Stative Verb:** know, love, believe (แสดงความรู้สึก/สถานะ)',
-            '**Linking Verb:** be, seem, look (เชื่อมประธานกับคุณสมบัติ)',
-            '**Transitive:** eat (needs object) - I eat **an apple**.',
-            '**Intransitive:** sleep, smile (no object needed)',
-            '**Auxiliary (กริยาช่วย):** do, have, be (ช่วยสร้าง Tense/ประโยค)',
-            '**Modal Verb:** can, must, should (บอกความสามารถ/หน้าที่)',
-            'Example: She **has been studying** all night.'
+            'They **play** football every evening. (Action Verb)',
+            'She **looks** happy today. (Linking Verb)',
+            'I **understand** the lesson clearly. (Stative Verb)',
+            'We **are** watching a movie right now. (Auxiliary Verb)',
+            'You **must** finish your homework by tomorrow. (Modal Verb)'
           ]
         },
         {
           name: '1.4 Adjective (คำคุณศัพท์)',
-          usage: 'ขยายคำนามหรือสรรพนาม บอกลักษณะ ปริมาณ หรือลำดับ',
+          explanation: 'คำที่ทำหน้าที่ขยายคำนามหรือคำสรรพนาม เพื่อบอกลักษณะ คุณสมบัติ หรือรายละเอียดเพิ่มเติม',
+          usage: 'ตำแหน่ง: วางหน้า Noun หรือหลัง Linking Verb (be, feel, look). ลำดับการวาง: Opinion -> Size -> Age -> Shape -> Color -> Origin -> Material',
           examples: [
-            '**Descriptive:** big, red, beautiful',
-            '**Quantitative:** many, few, three',
-            '**Demonstrative:** this, that',
-            '**Possessive:** my, your, his',
-            '**Interrogative:** which, whose',
-            '**Comparative:** bigger, more expensive',
-            '**Superlative:** biggest, most expensive',
-            '**Order of adjectives:** Opinion -> Size -> Age -> Shape -> Color -> Origin -> Material',
-            'Example: a **beautiful small old wooden** house'
+            'She lives in a **big** house near the river.',
+            'The sky is **blue** and **clear** today.',
+            'He bought a **new red sports** car.',
+            'This soup tastes **delicious**.',
+            'I met a **friendly old** man at the park.'
           ]
         },
         {
           name: '1.5 Adverb (คำกริยาวิเศษณ์)',
-          usage: 'ขยาย Verb, Adjective หรือ Adverb ด้วยกันเอง เพื่อบอกรายละเอียดเพิ่มเติม',
+          explanation: 'คำที่ขยาย Verb, Adjective หรือ Adverb ด้วยกันเอง เพื่อบอกรายละเอียดว่าทำอย่างไร ที่ไหน เมื่อไหร่ หรือมากน้อยแค่ไหน',
+          usage: 'ประเภท: Manner (อย่างไร), Time (เมื่อไหร่), Place (ที่ไหน), Frequency (บ่อยแค่ไหน), Degree (ระดับ)',
           examples: [
-            '**Manner (อย่างไร):** quickly, happily, well',
-            '**Time (เมื่อไหร่):** now, yesterday, soon',
-            '**Frequency (บ่อยแค่ไหน):** often, always, never',
-            '**Place (ที่ไหน):** here, there, everywhere',
-            '**Degree (ระดับ):** very, too, quite, extremely',
-            'Example: He speaks **very clearly**.'
+            'The turtle walks **slowly**. (Adverb of Manner)',
+            'I will call you **later**. (Adverb of Time)',
+            'He **always** drinks coffee in the morning. (Adverb of Frequency)',
+            'It is **extremely** hot outside today. (Adverb of Degree)',
+            'Please wait **here** for a moment. (Adverb of Place)'
           ]
         },
         {
           name: '1.6 Preposition (คำบุพบท)',
-          usage: 'เชื่อมคำนามกับส่วนอื่นของประโยค เพื่อบอกความสัมพันธ์',
+          explanation: 'คำที่ใช้เชื่อมคำนามหรือสรรพนามกับคำอื่นๆ ในประโยค เพื่อบอกความสัมพันธ์ เช่น เวลา สถานที่ หรือทิศทาง',
+          usage: 'กลุ่มหลัก: Preposition of Time (at, on, in), Place (at, on, in, under), Direction (to, into, towards)',
           examples: [
-            '**Place:** in, on, at, under, behind',
-            '**Time:** before, after, during, since',
-            '**Movement:** to, into, towards, through',
-            '**Cause/Other:** because of, by, with',
-            'Example: The keys are **under** the table.'
+            'The meeting is **on** Monday **at** 9:00 AM.',
+            'There is a cat hiding **under** the bed.',
+            'She travels to work **by** train.',
+            'I am interested **in** learning history.',
+            'He walked **through** the park to get home.'
           ]
         },
         {
           name: '1.7 Conjunction (คำสันธาน)',
-          usage: 'เชื่อมคำ วลี หรือประโยคเข้าด้วยกัน',
+          explanation: 'คำที่ใช้เชื่อมคำ วลี หรือประโยคเข้าด้วยกัน เพื่อให้ความหมายต่อเนื่องและสละสลวย',
+          usage: 'ประเภท: Coordinating (FANBOYS - for, and, nor, but, or, yet, so), Subordinating (เชื่อมประโยคย่อย - because, although), Correlative (คู่ - both...and)',
           examples: [
-            '**Coordinating (FANBOYS):** for, and, nor, but, or, yet, so',
-            '**Subordinating:** because, although, if, when (เชื่อมประโยคย่อย)',
-            '**Correlative:** both...and, either...or, neither...nor',
-            'Example: I stayed home **because** it rained.'
+            'I like pizza **and** pasta.',
+            'She is tired **but** happy.',
+            'We stayed home **because** it was raining heavily.',
+            '**Although** he is rich, he lives modestly.',
+            'You can have **either** tea **or** coffee.'
           ]
         },
         {
           name: '1.8 Determiner (คำนำหน้านาม)',
-          usage: 'วางหน้าคำนามเพื่อกำหนดขอบเขตหรือระบุความชัดเจน',
+          explanation: 'คำที่วางอยู่หน้าคำนามเสมอ เพื่อระบุความชี้เฉพาะเจาะจง หรือบอกปริมาณ',
+          usage: 'ประเภท: Articles (a, an, the), Demonstratives (this, that), Quantifiers (some, many), Possessives (my, your)',
           examples: [
-            '**Articles:** a, an, the',
-            '**Demonstratives:** this, that, these, those',
-            '**Quantifiers:** some, any, many, much, a lot of',
-            '**Possessives:** my, your, his, her',
-            'Example: I need **some** help.'
+            '**The** sun rises in the east.',
+            '**This** book is mine, but **that** one is yours.',
+            'I have **some** questions about the lesson.',
+            '**Every** student must wear a uniform.',
+            '**My** parents are waiting in the car.'
           ]
         },
         {
           name: '1.9 Interjection (คำอุทาน)',
-          usage: 'คำที่แสดงอารมณ์ความรู้สึก มักมีเครื่องหมาย !',
+          explanation: 'คำสั้นๆ ที่ใช้แสดงอารมณ์ความรู้สึกอย่างฉับพลัน มักตามด้วยเครื่องหมายตกใจ (!)',
+          usage: 'ใช้แสดงความตกใจ (Surprise), เจ็บปวด (Pain), ดีใจ (Joy), หรือทักทาย (Greeting)',
           examples: [
-            '**Shock/Surprise:** Wow!, Oh!',
-            '**Pain:** Ouch!',
-            '**Greeting:** Hey!, Hi!',
-            '**Hesitation:** Umm, Well...',
-            'Example: **Wow!** Amazing!'
+            '**Wow!** You look amazing in that dress.',
+            '**Ouch!** I bit my tongue.',
+            '**Oh!** I didn\'t see you there.',
+            '**Hey!** What\'s up?',
+            '**Alas!** We lost the game.'
           ]
         }
       ]

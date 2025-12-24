@@ -1,233 +1,231 @@
 import { QuizQuestion } from '../types';
 
 export const partsOfSpeechQuizData: QuizQuestion[] = [
-  // --- Noun ---
+  // --- Noun (1-4) ---
   {
     id: 1,
-    question: "Identify the type of the bold word: 'The **team** is celebrating their victory.'",
-    options: ["Proper Noun", "Collective Noun", "Abstract Noun", "Compound Noun"],
-    correctAnswer: 1,
-    explanation: "'Team' คือกลุ่มคนหรือคณะ จึงเป็น Collective Noun (สมุหนาม)."
+    question: "Identify the **Collective Noun** in this sentence: 'The team celebrated their victory.'",
+    options: ["Team", "Victory", "Celebrated", "Their"],
+    correctAnswer: 0,
+    explanation: "'Team' คือกลุ่มคนหรือคณะบุคคล จึงเป็น Collective Noun (สมุหนาม)."
   },
   {
     id: 2,
-    question: "Which word is an Abstract Noun?",
-    options: ["Table", "Bangkok", "Freedom", "Teacher"],
-    correctAnswer: 2,
-    explanation: "'Freedom' (เสรีภาพ) เป็นสิ่งที่จับต้องไม่ได้ เป็นความคิดหรือความรู้สึก จึงเป็น Abstract Noun."
+    question: "Which of the following is an **Abstract Noun**?",
+    options: ["Table", "Happiness", "School", "Doctor"],
+    correctAnswer: 1,
+    explanation: "'Happiness' (ความสุข) เป็นสิ่งที่จับต้องไม่ได้ เป็นความรู้สึก จึงเป็น Abstract Noun."
   },
   {
     id: 3,
-    question: "Identify the Compound Noun: 'I need some toothpaste for my trip.'",
-    options: ["Need", "Toothpaste", "Trip", "Some"],
-    correctAnswer: 1,
-    explanation: "'Toothpaste' เกิดจาก Tooth + Paste มารวมกันเป็นคำใหม่ จึงเป็น Compound Noun."
+    question: "Identify the **Compound Noun**.",
+    options: ["Toothpaste", "Tooth", "Paste", "Big"],
+    correctAnswer: 0,
+    explanation: "'Toothpaste' เกิดจากคำว่า Tooth + Paste มารวมกันเป็นคำใหม่."
   },
-  
-  // --- Pronoun ---
   {
     id: 4,
-    question: "Choose the correct Reflexive Pronoun: 'He hurt ______ while playing football.'",
-    options: ["him", "his", "himself", "he"],
-    correctAnswer: 2,
-    explanation: "ประธานเป็น He (เขาผู้ชาย) ทำกริยากับตัวเอง ต้องใช้ Reflexive Pronoun คือ 'himself'."
+    question: "'Bangkok' is an example of a/an ...",
+    options: ["Common Noun", "Proper Noun", "Abstract Noun", "Collective Noun"],
+    correctAnswer: 1,
+    explanation: "'Bangkok' เป็นชื่อเฉพาะของสถานที่ ขึ้นต้นด้วยตัวพิมพ์ใหญ่ จึงเป็น Proper Noun."
   },
+
+  // --- Pronoun (5-9) ---
   {
     id: 5,
-    question: "Which of these is a Demonstrative Pronoun?",
-    options: ["Who", "This", "My", "Myself"],
+    question: "She taught **herself** to play the guitar. The bold word is a...",
+    options: ["Possessive Pronoun", "Reflexive Pronoun", "Object Pronoun", "Relative Pronoun"],
     correctAnswer: 1,
-    explanation: "'This' (นี้) ใช้ชี้เฉพาะเจาะจงสิ่งที่อยู่ใกล้ เป็น Demonstrative Pronoun."
+    explanation: "'Herself' สะท้อนการกระทำกลับเข้าหาประธาน (She) จึงเป็น Reflexive Pronoun."
   },
   {
     id: 6,
-    question: "'**Who** called you last night?' - What type of pronoun is 'Who'?",
-    options: ["Relative Pronoun", "Interrogative Pronoun", "Indefinite Pronoun", "Subject Pronoun"],
+    question: "They looked at **each other** in surprise.",
+    options: ["Reflexive Pronoun", "Reciprocal Pronoun", "Indefinite Pronoun", "Demonstrative Pronoun"],
     correctAnswer: 1,
-    explanation: "'Who' ในบริบทนี้ใช้ขึ้นต้นประโยคคำถาม จึงเป็น Interrogative Pronoun."
+    explanation: "'Each other' แปลว่า 'ซึ่งกันและกัน' แสดงความสัมพันธ์ระหว่างกัน จึงเป็น Reciprocal Pronoun."
   },
-
-  // --- Verb ---
   {
     id: 7,
-    question: "Identify the Stative Verb: 'I **know** the answer.'",
-    options: ["Know", "Answer", "The", "I"],
+    question: "**Who** is calling? The bold word is a/an...",
+    options: ["Interrogative Pronoun", "Relative Pronoun", "Demonstrative Pronoun", "Indefinite Pronoun"],
     correctAnswer: 0,
-    explanation: "'Know' (รู้) เป็นกริยาแสดงสภาวะทางความคิด ไม่ใช่การกระทำทางร่างกาย จึงเป็น Stative Verb."
+    explanation: "'Who' ในบริบทนี้ใช้ขึ้นต้นประโยคคำถาม จึงเป็น Interrogative Pronoun."
   },
   {
     id: 8,
-    question: "She **can** swim very fast. 'Can' is a/an ...",
-    options: ["Action Verb", "Modal Verb", "Linking Verb", "Transitive Verb"],
+    question: "This is the book **which** I bought yesterday.",
+    options: ["Interrogative Pronoun", "Relative Pronoun", "Subject Pronoun", "Object Pronoun"],
+    correctAnswer: 1,
+    explanation: "'Which' ในที่นี้ทำหน้าที่เชื่อมประโยคและขยายคำนามข้างหน้า (book) จึงเป็น Relative Pronoun."
+  },
+  {
+    id: 9,
+    question: "**Someone** is knocking at the door.",
+    options: ["Definite Pronoun", "Indefinite Pronoun", "Personal Pronoun", "Possessive Pronoun"],
+    correctAnswer: 1,
+    explanation: "'Someone' (บางคน) ไม่ได้ระบุเจาะจงว่าเป็นใคร จึงเป็น Indefinite Pronoun."
+  },
+
+  // --- Verb (10-13) ---
+  {
+    id: 10,
+    question: "I **know** the answer. The verb 'know' is a...",
+    options: ["Action Verb", "Stative Verb", "Linking Verb", "Auxiliary Verb"],
+    correctAnswer: 1,
+    explanation: "'Know' แสดงสภาวะทางความคิด ไม่ใช่การกระทำทางร่างกาย จึงเป็น Stative Verb."
+  },
+  {
+    id: 11,
+    question: "She **can** speak three languages.",
+    options: ["Action Verb", "Modal Verb", "Linking Verb", "Intransitive Verb"],
     correctAnswer: 1,
     explanation: "'Can' เป็น Modal Verb ที่บอกความสามารถ (Ability)."
   },
   {
-    id: 9,
-    question: "Which sentence contains a Transitive Verb?",
-    options: ["She sleeps.", "He eats an apple.", "They run.", "Birds fly."],
-    correctAnswer: 1,
-    explanation: "'Eats' ในประโยค 'He eats an apple' ต้องการกรรม (an apple) มารองรับ จึงเป็น Transitive Verb."
-  },
-
-  // --- Adjective ---
-  {
-    id: 10,
-    question: "Choose the correct order of adjectives: 'A ______ car.'",
-    options: ["red big Italian", "big red Italian", "Italian big red", "red Italian big"],
-    correctAnswer: 1,
-    explanation: "ลำดับ Adjective: Size (big) -> Color (red) -> Origin (Italian)."
-  },
-  {
-    id: 11,
-    question: "Which word is a Comparative Adjective?",
-    options: ["Good", "Better", "Best", "Bad"],
-    correctAnswer: 1,
-    explanation: "'Better' (ดีกว่า) เป็นขั้นกว่าของ Good."
-  },
-  {
     id: 12,
-    question: "'This is **my** book.' - What type of adjective is 'my'?",
-    options: ["Descriptive", "Demonstrative", "Possessive", "Quantitative"],
-    correctAnswer: 2,
-    explanation: "'My' แสดงความเป็นเจ้าของ จึงเป็น Possessive Adjective."
+    question: "He **sleeps** early. The verb 'sleeps' is...",
+    options: ["Transitive", "Intransitive", "Linking", "Auxiliary"],
+    correctAnswer: 1,
+    explanation: "'Sleeps' ไม่ต้องการกรรมมารองรับ (เราไม่พูดว่า sleeps something) จึงเป็น Intransitive Verb."
   },
-
-  // --- Adverb ---
   {
     id: 13,
-    question: "Identify the Adverb of Frequency: 'She **always** arrives on time.'",
-    options: ["She", "Arrives", "Always", "Time"],
-    correctAnswer: 2,
-    explanation: "'Always' (เสมอ) บอกความถี่ของการกระทำ."
+    question: "She **eats** an apple. The verb 'eats' is...",
+    options: ["Transitive", "Intransitive", "Linking", "Modal"],
+    correctAnswer: 0,
+    explanation: "'Eats' ต้องการกรรม (an apple) มารองรับเพื่อให้ได้ใจความสมบูรณ์ จึงเป็น Transitive Verb."
   },
+
+  // --- Adjective (14-16) ---
   {
     id: 14,
-    question: "He speaks English **fluently**. 'Fluently' is an adverb of...",
-    options: ["Time", "Place", "Manner", "Degree"],
-    correctAnswer: 2,
-    explanation: "'Fluently' (อย่างคล่องแคล่ว) ขยายว่าพูดอย่างไร จึงเป็น Adverb of Manner."
+    question: "Choose the correct order of adjectives: 'A ______ house.'",
+    options: ["beautiful small old", "small beautiful old", "old beautiful small", "small old beautiful"],
+    correctAnswer: 0,
+    explanation: "ลำดับ: Opinion (beautiful) -> Size (small) -> Age (old)."
   },
   {
     id: 15,
-    question: "It is **very** hot today. 'Very' is an adverb of...",
-    options: ["Degree", "Manner", "Place", "Time"],
-    correctAnswer: 0,
-    explanation: "'Very' (มาก) ขยายคำคุณศัพท์ hot เพื่อบอกระดับความเข้มข้น จึงเป็น Adverb of Degree."
+    question: "**This** car is mine. 'This' functions as a...",
+    options: ["Descriptive Adjective", "Demonstrative Adjective", "Quantitative Adjective", "Possessive Adjective"],
+    correctAnswer: 1,
+    explanation: "'This' ใช้ชี้เฉพาะเจาะจงคำนาม (car) จึงเป็น Demonstrative Adjective."
   },
-
-  // --- Preposition ---
   {
     id: 16,
-    question: "The cat is hiding ______ the table.",
-    options: ["in", "at", "under", "of"],
-    correctAnswer: 2,
-    explanation: "'Under' (ใต้) บอกตำแหน่งที่ตั้ง จึงเหมาะสมที่สุดในบริบทนี้."
+    question: "She is the **smartest** student in class.",
+    options: ["Comparative Adjective", "Superlative Adjective", "Descriptive Adjective", "Proper Adjective"],
+    correctAnswer: 1,
+    explanation: "'Smartest' (ฉลาดที่สุด) เป็นการเปรียบเทียบขั้นสูงสุด (Superlative)."
   },
+
+  // --- Adverb (17-19) ---
   {
     id: 17,
-    question: "We have a meeting ______ Monday.",
-    options: ["in", "at", "on", "to"],
+    question: "He speaks **slowly**. 'Slowly' is an Adverb of...",
+    options: ["Time", "Place", "Manner", "Frequency"],
     correctAnswer: 2,
-    explanation: "ใช้นำหน้าวัน (Days of the week) ต้องใช้ Preposition 'on'."
+    explanation: "'Slowly' (อย่างช้าๆ) ขยายกริยาเพื่อบอกอาการว่าทำอย่างไร (Manner)."
   },
   {
     id: 18,
-    question: "She walked ______ the room.",
-    options: ["into", "at", "on", "during"],
-    correctAnswer: 0,
-    explanation: "'Into' (เข้าไปข้างใน) บอกการเคลื่อนที่ (Movement) เข้าสู่สถานที่."
+    question: "She **always** drinks coffee in the morning.",
+    options: ["Adverb of Degree", "Adverb of Time", "Adverb of Frequency", "Adverb of Place"],
+    correctAnswer: 2,
+    explanation: "'Always' (เสมอ/เป็นประจำ) บอกความถี่ (Frequency)."
   },
-
-  // --- Conjunction ---
   {
     id: 19,
-    question: "I wanted to buy it, ______ I didn't have enough money.",
-    options: ["and", "but", "so", "or"],
-    correctAnswer: 1,
-    explanation: "ประโยคหน้าและหลังขัดแย้งกัน (อยากซื้อ แต่ไม่มีเงิน) ต้องใช้ 'but'."
+    question: "It is **very** hot today. 'Very' is an Adverb of...",
+    options: ["Degree", "Manner", "Place", "Time"],
+    correctAnswer: 0,
+    explanation: "'Very' (มาก) ขยายคำคุณศัพท์ hot เพื่อบอกระดับความเข้มข้น (Degree)."
   },
+
+  // --- Preposition (20-22) ---
   {
     id: 20,
-    question: "______ it rained, we played football.",
-    options: ["Because", "Although", "If", "So"],
+    question: "The cat is **under** the table.",
+    options: ["Preposition of Time", "Preposition of Place", "Preposition of Movement", "Preposition of Cause"],
     correctAnswer: 1,
-    explanation: "ประโยคแสดงความขัดแย้ง (ฝนตก แต่ก็ยังเล่น) ใช้ 'Although' (แม้ว่า)."
+    explanation: "'Under' (ข้างใต้) บอกตำแหน่งสถานที่ (Place)."
   },
   {
     id: 21,
-    question: "Which word is a Coordinating Conjunction (FANBOYS)?",
-    options: ["Because", "Although", "Yet", "Unless"],
-    correctAnswer: 2,
-    explanation: "'Yet' (แต่กระนั้น) เป็นหนึ่งใน FANBOYS (For, And, Nor, But, Or, Yet, So)."
+    question: "We will meet **at** 5 PM.",
+    options: ["Preposition of Place", "Preposition of Time", "Preposition of Movement", "Preposition of Agent"],
+    correctAnswer: 1,
+    explanation: "'At' เมื่อนำหน้าเวลาตามนาฬิกา ถือเป็น Preposition of Time."
   },
-
-  // --- Determiner ---
   {
     id: 22,
-    question: "I need ______ help with this problem.",
-    options: ["a", "an", "some", "many"],
-    correctAnswer: 2,
-    explanation: "'Help' เป็นนามนับไม่ได้ ในประโยคบอกเล่ามักใช้ 'some'."
+    question: "He walked **into** the room.",
+    options: ["Preposition of Place", "Preposition of Movement", "Preposition of Time", "Preposition of Manner"],
+    correctAnswer: 1,
+    explanation: "'Into' (เข้าไปใน) แสดงการเคลื่อนที่ (Movement)."
   },
+
+  // --- Conjunction (23-25) ---
   {
     id: 23,
-    question: "______ car over there is mine.",
-    options: ["This", "That", "These", "Those"],
+    question: "I like coffee, **but** my sister likes tea.",
+    options: ["Subordinating Conjunction", "Coordinating Conjunction", "Correlative Conjunction", "Adverbial Conjunction"],
     correctAnswer: 1,
-    explanation: "ชี้สิ่งที่อยู่ไกล (over there) และเป็นเอกพจน์ (car) ใช้ 'That'."
+    explanation: "'But' เป็นหนึ่งใน FANBOYS ซึ่งเป็น Coordinating Conjunction เชื่อมประโยคที่มีความสำคัญเท่ากัน."
   },
   {
     id: 24,
-    question: "Do you have ______ brothers or sisters?",
-    options: ["some", "any", "the", "a"],
+    question: "I stayed home **because** it was raining.",
+    options: ["Coordinating Conjunction", "Subordinating Conjunction", "Correlative Conjunction", "Relative Pronoun"],
     correctAnswer: 1,
-    explanation: "ในประโยคคำถามและปฏิเสธ มักใช้ 'any' นำหน้านามนับได้พหูพจน์."
+    explanation: "'Because' เชื่อมประโยคเหตุผล (ประโยคย่อย) เข้ากับประโยคหลัก จึงเป็น Subordinating Conjunction."
   },
-
-  // --- Interjection ---
   {
     id: 25,
-    question: "______, that hurt! (Expression of pain)",
-    options: ["Wow", "Ouch", "Hey", "Yum"],
-    correctAnswer: 1,
-    explanation: "'Ouch' เป็นคำอุทานที่ใช้เมื่อรู้สึกเจ็บปวด."
-  },
-  {
-    id: 26,
-    question: "Which word is an Interjection?",
-    options: ["Run", "Beautiful", "Alas", "Under"],
+    question: "**Both** Tom **and** Jerry are here.",
+    options: ["Coordinating Conjunction", "Subordinating Conjunction", "Correlative Conjunction", "Preposition"],
     correctAnswer: 2,
-    explanation: "'Alas' เป็นคำอุทานโบราณ (แสดงความเศร้า/เสียดาย)."
+    explanation: "'Both...and' มาเป็นคู่กันเสมอ จึงเป็น Correlative Conjunction."
   },
 
-  // --- Mixed Identification ---
+  // --- Determiner (26-28) ---
+  {
+    id: 26,
+    question: "I have **an** apple.",
+    options: ["Demonstrative", "Quantifier", "Article", "Possessive"],
+    correctAnswer: 2,
+    explanation: "'An' เป็น Article (คำนำหน้านาม) ใช้นำหน้านามนับได้เอกพจน์ที่ขึ้นต้นด้วยเสียงสระ."
+  },
   {
     id: 27,
-    question: "Identify the part of speech of 'quickly' in 'He runs quickly.'",
-    options: ["Adjective", "Adverb", "Verb", "Noun"],
-    correctAnswer: 1,
-    explanation: "ลงท้ายด้วย -ly และขยายกริยา runs คือ Adverb."
+    question: "Do you have **any** money?",
+    options: ["Article", "Demonstrative", "Quantifier", "Interjection"],
+    correctAnswer: 2,
+    explanation: "'Any' เป็น Quantifier บอกปริมาณ (ใช้ในประโยคคำถาม/ปฏิเสธ)."
   },
   {
     id: 28,
-    question: "Identify the part of speech of 'smart' in 'She is a smart student.'",
-    options: ["Noun", "Verb", "Adjective", "Pronoun"],
-    correctAnswer: 2,
-    explanation: "ขยายคำนาม student บอกลักษณะ คือ Adjective."
+    question: "**My** car is red.",
+    options: ["Possessive Determiner", "Demonstrative Determiner", "Article", "Quantifier"],
+    correctAnswer: 0,
+    explanation: "'My' แสดงความเป็นเจ้าของและนำหน้าคำนาม จึงเป็น Possessive Determiner."
   },
+
+  // --- Interjection (29-30) ---
   {
     id: 29,
-    question: "Identify the part of speech of 'between' in 'Sit between us.'",
-    options: ["Conjunction", "Preposition", "Adverb", "Adjective"],
-    correctAnswer: 1,
-    explanation: "บอกตำแหน่งความสัมพันธ์ระหว่างคำนาม (us) คือ Preposition."
+    question: "**Wow!** That looks amazing.",
+    options: ["Conjunction", "Preposition", "Interjection", "Adverb"],
+    correctAnswer: 2,
+    explanation: "'Wow!' เป็นคำอุทานแสดงความรู้สึกประหลาดใจ."
   },
   {
     id: 30,
-    question: "Identify the part of speech of 'swim' in 'I like to swim.'",
-    options: ["Noun", "Adjective", "Verb", "Preposition"],
+    question: "Which word is an Interjection? 'Hey! Come here.'",
+    options: ["Come", "Here", "Hey", "None"],
     correctAnswer: 2,
-    explanation: "แสดงการกระทำ คือ Verb."
+    explanation: "'Hey!' เป็นคำอุทานที่ใช้เรียกความสนใจ."
   }
 ];

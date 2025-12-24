@@ -10,7 +10,7 @@ const Home = lazy(() => import('./pages/Home'));
 const Vocabulary = lazy(() => import('./pages/Vocabulary'));
 const Grammar = lazy(() => import('./pages/Grammar'));
 const TensesQuiz = lazy(() => import('./pages/TensesQuiz'));
-const PartsOfSpeechQuiz = lazy(() => import('./pages/PartsOfSpeechQuiz')); // ✅ Import ใหม่
+const PartsOfSpeechQuiz = lazy(() => import('./pages/PartsOfSpeechQui')); 
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Loading component
