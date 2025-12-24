@@ -85,7 +85,7 @@ export default function PartsOfSpeechQuiz() {
             </div>
             
             <h2 className="text-3xl font-black text-slate-800 mb-2">Quiz Completed!</h2>
-            <p className="text-slate-500 mb-8 font-medium">ทดสอบ Parts of Speech เรียบร้อย มาดูผลคะแนนกัน!</p>
+            <p className="text-slate-500 mb-8 font-medium">ทดสอบ Parts of Speech 30 ข้อ เรียบร้อย!</p>
             
             <div className="flex justify-center items-end gap-2 mb-8">
               <span className="text-6xl font-black text-indigo-600">{score}</span>
