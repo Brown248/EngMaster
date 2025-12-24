@@ -117,6 +117,7 @@ export default function Grammar() {
             <div className="flex items-center gap-4 mb-8 pb-6 border-b border-slate-100">
               <span className="text-5xl">{activeTopic?.icon}</span>
               <div>
+                {/* ✅ ใส่ ? ป้องกัน Error ตัวแดง */}
                 <h2 className="text-3xl font-black text-slate-800">{activeTopic?.details?.title}</h2>
                 <p className="text-slate-500 font-medium">{activeTopic?.title}</p>
               </div>
@@ -125,7 +126,7 @@ export default function Grammar() {
             <AdBanner className="mb-8" />
 
             <div className="space-y-8">
-              {/* จุดนี้ต้องใส่ ? เพื่อป้องกัน Error เวลาหาข้อมูลไม่เจอ */}
+              {/* ✅ ใส่ ? เพื่อป้องกัน Crash ถ้าข้อมูลยังไม่มา */}
               {activeTopic?.details?.subtopics?.map((sub, idx) => (
                 <div key={idx} className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
                   <h3 className="text-xl font-bold text-purple-600 mb-3">{sub.name}</h3>
