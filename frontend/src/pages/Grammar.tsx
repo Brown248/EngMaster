@@ -11,6 +11,19 @@ export default function Grammar() {
 
   const activeTopic = grammarTopics.find(t => t.id === selectedTopic);
 
+  // ฟังก์ชันช่วยตรวจสอบว่าหัวข้อไหนมี Quiz บ้าง
+  const hasQuiz = (topicId: string) => {
+    return ['tenses', 'parts-of-speech'].includes(topicId);
+  };
+
+  const startQuiz = (topicId: string) => {
+    if (topicId === 'tenses') {
+      navigate('/grammar/quiz');
+    } else if (topicId === 'parts-of-speech') {
+      navigate('/grammar/parts-of-speech-quiz');
+    }
+  };
+
   return (
     <div className="space-y-8 pb-12">
       <AnimatePresence mode="wait">
@@ -48,6 +61,12 @@ export default function Grammar() {
                     ${topic.color === 'orange' ? 'bg-orange-50' : ''}
                     ${topic.color === 'blue' ? 'bg-blue-50' : ''}
                     ${topic.color === 'purple' ? 'bg-purple-50' : ''}
+                    ${topic.color === 'teal' ? 'bg-teal-50' : ''}
+                    ${topic.color === 'rose' ? 'bg-rose-50' : ''}
+                    ${topic.color === 'amber' ? 'bg-amber-50' : ''}
+                    ${topic.color === 'cyan' ? 'bg-cyan-50' : ''}
+                    ${topic.color === 'emerald' ? 'bg-emerald-50' : ''}
+                    ${topic.color === 'slate' ? 'bg-slate-50' : ''}
                   `} />
                   
                   <div className="relative z-10 flex items-start justify-between">
@@ -84,14 +103,14 @@ export default function Grammar() {
                   <ArrowLeft size={20} /> Back to Topics
                 </button>
                 
-                {/* ปุ่ม Link ไป Quiz ถ้าเป็นหัวข้อ Tenses */}
-                {selectedTopic === 'tenses' && (
+                {/* แสดงปุ่ม Quiz ถ้ามี */}
+                {selectedTopic && hasQuiz(selectedTopic) && (
                   <button 
-                    onClick={() => navigate('/grammar/quiz')}
-                    className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all"
+                    onClick={() => startQuiz(selectedTopic)}
+                    className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all"
                   >
                     <PlayCircle size={20} />
-                    เริ่มทำแบบทดสอบ 30 ข้อ
+                    เริ่มทำแบบทดสอบ
                   </button>
                 )}
             </div>
@@ -123,7 +142,7 @@ export default function Grammar() {
                   </p>
                   
                   <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
-                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">5 Examples:</p>
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Examples:</p>
                     <ul className="space-y-2.5">
                       {sub.examples.map((ex, i) => (
                         <li key={i} className="flex gap-3 text-slate-600 items-start text-sm md:text-base">
@@ -137,15 +156,15 @@ export default function Grammar() {
               ))}
             </div>
 
-            {selectedTopic === 'tenses' && (
+            {selectedTopic && hasQuiz(selectedTopic) && (
               <div className="mt-12 pt-8 border-t border-slate-100 text-center">
                  <h3 className="text-2xl font-bold text-slate-800 mb-4">พร้อมทดสอบความเข้าใจรึยัง?</h3>
                  <button 
-                    onClick={() => navigate('/grammar/quiz')}
+                    onClick={() => startQuiz(selectedTopic)}
                     className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold text-xl hover:bg-slate-800 hover:shadow-2xl hover:-translate-y-1 transition-all"
                   >
                     <PlayCircle size={24} />
-                    เริ่มทำแบบทดสอบ 12 Tenses
+                    เริ่มทำแบบทดสอบ {activeTopic?.details.title}
                   </button>
               </div>
             )}

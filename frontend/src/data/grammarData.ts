@@ -3,25 +3,128 @@ import { GrammarTopic } from '../types';
 export const grammarTopics: GrammarTopic[] = [
   {
     id: 'parts-of-speech',
-    title: '1. Parts of Speech',
+    title: '1. Parts of Speech (ชนิดของคำ)',
     icon: '🧩',
     color: 'indigo',
     details: {
       title: 'ชนิดของคำ (Parts of Speech)',
-      description: 'พื้นฐานที่สุดของไวยากรณ์ คือการรู้หน้าที่ของคำแต่ละชนิดในประโยค',
+      description: 'พื้นฐานสำคัญของไวยากรณ์ แบ่งออกเป็น 9 ประเภทหลัก',
       subtopics: [
         {
           name: '1.1 Noun (คำนาม)',
-          usage: 'ใช้เรียกชื่อคน สัตว์ สิ่งของ สถานที่ หรือความคิด (Abstract Noun)',
+          usage: 'ใช้เรียกชื่อคน สัตว์ สิ่งของ สถานที่ หรือความคิด แบ่งเป็น 8 ประเภทหลัก',
           examples: [
-            'The **dog** runs fast.',
-            '**Bangkok** is a big city.',
-            '**Happiness** is important.',
-            'She has three **cats**.',
-            'Please drink some **water**.'
+            '**Common Noun (นามทั่วไป):** dog, city, car',
+            '**Proper Noun (นามเฉพาะ):** Bangkok, John, Toyota',
+            '**Concrete Noun (นามรูปธรรม):** table, water, noise (สัมผัสได้)',
+            '**Abstract Noun (นามธรรม):** love, happiness, idea (จับต้องไม่ได้)',
+            '**Countable Noun (นับได้):** books, pens, apples',
+            '**Uncountable Noun (นับไม่ได้):** water, rice, information',
+            '**Collective Noun (สมุหนาม):** team, family, group',
+            '**Compound Noun (นามประสม):** toothpaste, bedroom, swimming pool',
+            'Example: **The team** won the match.'
           ]
         },
-        // ... (ข้อมูลเดิมส่วนอื่น ๆ)
+        {
+          name: '1.2 Pronoun (คำสรรพนาม)',
+          usage: 'ใช้แทนคำนามเพื่อไม่ให้พูดซ้ำ แบ่งเป็น 9 ประเภท',
+          examples: [
+            '**Subject:** I, he, she, we, they (เป็นประธาน)',
+            '**Object:** me, him, her, us, them (เป็นกรรม)',
+            '**Possessive:** my/mine, your/yours (แสดงเจ้าของ)',
+            '**Reflexive:** myself, yourself (สะท้อนเข้าตัว)',
+            '**Demonstrative:** this, that, these, those (ชี้เฉพาะ)',
+            '**Relative:** who, which, that (เชื่อมประโยค)',
+            '**Interrogative:** who, what, where (คำถาม)',
+            '**Indefinite:** someone, anyone, nothing (ไม่เจาะจง)',
+            '**Reciprocal:** each other, one another (ซึ่งกันและกัน)',
+            'Example: She taught **herself** English.'
+          ]
+        },
+        {
+          name: '1.3 Verb (คำกริยา)',
+          usage: 'แสดงการกระทำหรือสถานะ แบ่งตามหน้าที่และประเภท',
+          examples: [
+            '**Action Verb:** run, eat, play (แสดงการกระทำ)',
+            '**Stative Verb:** know, love, believe (แสดงความรู้สึก/สถานะ)',
+            '**Linking Verb:** be, seem, look (เชื่อมประธานกับคุณสมบัติ)',
+            '**Transitive:** eat (needs object) - I eat **an apple**.',
+            '**Intransitive:** sleep, smile (no object needed)',
+            '**Auxiliary (กริยาช่วย):** do, have, be (ช่วยสร้าง Tense/ประโยค)',
+            '**Modal Verb:** can, must, should (บอกความสามารถ/หน้าที่)',
+            'Example: She **has been studying** all night.'
+          ]
+        },
+        {
+          name: '1.4 Adjective (คำคุณศัพท์)',
+          usage: 'ขยายคำนามหรือสรรพนาม บอกลักษณะ ปริมาณ หรือลำดับ',
+          examples: [
+            '**Descriptive:** big, red, beautiful',
+            '**Quantitative:** many, few, three',
+            '**Demonstrative:** this, that',
+            '**Possessive:** my, your, his',
+            '**Interrogative:** which, whose',
+            '**Comparative:** bigger, more expensive',
+            '**Superlative:** biggest, most expensive',
+            '**Order of adjectives:** Opinion -> Size -> Age -> Shape -> Color -> Origin -> Material',
+            'Example: a **beautiful small old wooden** house'
+          ]
+        },
+        {
+          name: '1.5 Adverb (คำกริยาวิเศษณ์)',
+          usage: 'ขยาย Verb, Adjective หรือ Adverb ด้วยกันเอง เพื่อบอกรายละเอียดเพิ่มเติม',
+          examples: [
+            '**Manner (อย่างไร):** quickly, happily, well',
+            '**Time (เมื่อไหร่):** now, yesterday, soon',
+            '**Frequency (บ่อยแค่ไหน):** often, always, never',
+            '**Place (ที่ไหน):** here, there, everywhere',
+            '**Degree (ระดับ):** very, too, quite, extremely',
+            'Example: He speaks **very clearly**.'
+          ]
+        },
+        {
+          name: '1.6 Preposition (คำบุพบท)',
+          usage: 'เชื่อมคำนามกับส่วนอื่นของประโยค เพื่อบอกความสัมพันธ์',
+          examples: [
+            '**Place:** in, on, at, under, behind',
+            '**Time:** before, after, during, since',
+            '**Movement:** to, into, towards, through',
+            '**Cause/Other:** because of, by, with',
+            'Example: The keys are **under** the table.'
+          ]
+        },
+        {
+          name: '1.7 Conjunction (คำสันธาน)',
+          usage: 'เชื่อมคำ วลี หรือประโยคเข้าด้วยกัน',
+          examples: [
+            '**Coordinating (FANBOYS):** for, and, nor, but, or, yet, so',
+            '**Subordinating:** because, although, if, when (เชื่อมประโยคย่อย)',
+            '**Correlative:** both...and, either...or, neither...nor',
+            'Example: I stayed home **because** it rained.'
+          ]
+        },
+        {
+          name: '1.8 Determiner (คำนำหน้านาม)',
+          usage: 'วางหน้าคำนามเพื่อกำหนดขอบเขตหรือระบุความชัดเจน',
+          examples: [
+            '**Articles:** a, an, the',
+            '**Demonstratives:** this, that, these, those',
+            '**Quantifiers:** some, any, many, much, a lot of',
+            '**Possessives:** my, your, his, her',
+            'Example: I need **some** help.'
+          ]
+        },
+        {
+          name: '1.9 Interjection (คำอุทาน)',
+          usage: 'คำที่แสดงอารมณ์ความรู้สึก มักมีเครื่องหมาย !',
+          examples: [
+            '**Shock/Surprise:** Wow!, Oh!',
+            '**Pain:** Ouch!',
+            '**Greeting:** Hey!, Hi!',
+            '**Hesitation:** Umm, Well...',
+            'Example: **Wow!** Amazing!'
+          ]
+        }
       ]
     }
   },
