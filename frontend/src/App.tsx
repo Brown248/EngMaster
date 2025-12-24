@@ -11,6 +11,7 @@ const Vocabulary = lazy(() => import('./pages/Vocabulary'));
 const Grammar = lazy(() => import('./pages/Grammar'));
 const TensesQuiz = lazy(() => import('./pages/TensesQuiz'));
 const PartsOfSpeechQuiz = lazy(() => import('./pages/PartsOfSpeechQui')); 
+const VoiceQuiz = lazy(() => import('./pages/VoiceQuiz')); // ✅ Import ใหม่
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Loading component
@@ -34,7 +35,8 @@ function AnimatedRoutes() {
             <Route path="vocabulary" element={<Vocabulary />} />
             <Route path="grammar" element={<Grammar />} />
             <Route path="grammar/quiz" element={<TensesQuiz />} />
-            <Route path="grammar/parts-of-speech-quiz" element={<PartsOfSpeechQuiz />} /> {/* ✅ Route ใหม่ */}
+            <Route path="grammar/parts-of-speech-quiz" element={<PartsOfSpeechQuiz />} />
+            <Route path="grammar/voice-quiz" element={<VoiceQuiz />} /> {/* ✅ Route ใหม่ */}
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
