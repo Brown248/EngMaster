@@ -1,244 +1,265 @@
-import { Question } from '../types';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowLeft, CheckCircle2, XCircle, RefreshCw, Trophy, AlertCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { tensesQuizData } from '../data/tensesQuizData';
+import AdBanner from '../components/AdBanner';
 
-export const tensesQuizData: Question[] = [
-  {
-    id: 1,
-    text: "She ______ usually ______ coffee, but today she ______ tea.",
-    choices: [
-      "doesn't drink / is drinking",
-      "isn't drinking / drinks",
-      "don't drink / is drinking",
-      "didn't drink / drank"
-    ],
-    correctAnswer: 0,
-    explanation: "ใช้ Present Simple (doesn't drink) กับนิสัยปกติ (usually) และ Present Continuous (is drinking) กับเหตุการณ์ที่เกิดขึ้นเฉพาะวันนี้ (today)"
-  },
-  {
-    id: 2,
-    text: "Look! The bus ______.",
-    choices: [
-      "come",
-      "comes",
-      "is coming",
-      "came"
-    ],
-    correctAnswer: 2,
-    explanation: "มีคำว่า 'Look!' เป็นสัญญาณบอกว่าเหตุการณ์กำลังเกิดขึ้นขณะพูด จึงใช้ Present Continuous (is coming)"
-  },
-  {
-    id: 3,
-    text: "I ______ my homework yet.",
-    choices: [
-      "didn't finish",
-      "haven't finished",
-      "don't finish",
-      "won't finish"
-    ],
-    correctAnswer: 1,
-    explanation: "มีคำว่า 'yet' (ยัง) ในประโยคปฏิเสธ มักใช้กับ Present Perfect (haven't finished)"
-  },
-  {
-    id: 4,
-    text: "By this time next year, I ______ form university.",
-    choices: [
-      "will graduate",
-      "am graduating",
-      "will have graduated",
-      "have graduated"
-    ],
-    correctAnswer: 2,
-    explanation: "โครงสร้าง 'By + เวลาในอนาคต' บ่งบอกถึงความสมบูรณ์ของการกระทำในอนาคต ใช้ Future Perfect (will have graduated)"
-  },
-  {
-    id: 5,
-    text: "While I ______ TV, the lights went out.",
-    choices: [
-      "watch",
-      "watched",
-      "am watching",
-      "was watching"
-    ],
-    correctAnswer: 3,
-    explanation: "เหตุการณ์ที่กำลังดำเนินอยู่ในอดีต (Past Continuous) แล้วมีอีกเหตุการณ์แทรก (Past Simple)"
-  },
-  {
-    id: 6,
-    text: "He ______ in London for 10 years before he moved to Paris.",
-    choices: [
-      "lived",
-      "has lived",
-      "had lived",
-      "was living"
-    ],
-    correctAnswer: 2,
-    explanation: "เหตุการณ์ที่เกิดขึ้นก่อนอีกเหตุการณ์หนึ่งในอดีต (moved) ต้องใช้ Past Perfect (had lived)"
-  },
-  {
-    id: 7,
-    text: "If it rains, we ______ at home.",
-    choices: [
-      "stay",
-      "would stay",
-      "will stay",
-      "stayed"
-    ],
-    correctAnswer: 2,
-    explanation: "First Conditional (If + Present Simple, Future Simple) ใช้กับเหตุการณ์ที่เป็นไปได้ในอนาคต"
-  },
-  {
-    id: 8,
-    text: "Water ______ at 100 degrees Celsius.",
-    choices: [
-      "boil",
-      "boils",
-      "is boiling",
-      "boiled"
-    ],
-    correctAnswer: 1,
-    explanation: "ข้อเท็จจริงทางวิทยาศาสตร์ (Scientific Fact) ใช้ Present Simple เสมอ"
-  },
-  {
-    id: 9,
-    text: "They ______ dinner when I arrived.",
-    choices: [
-      "had",
-      "have had",
-      "were having",
-      "are having"
-    ],
-    correctAnswer: 2,
-    explanation: "เหตุการณ์กำลังดำเนินอยู่ในอดีต (were having) เมื่อมีการกระทำอื่นเข้ามาแทรก (arrived)"
-  },
-  {
-    id: 10,
-    text: "I ______ him since we were in high school.",
-    choices: [
-      "know",
-      "knew",
-      "have known",
-      "am knowing"
-    ],
-    correctAnswer: 2,
-    explanation: "ใช้ Present Perfect กับเหตุการณ์ที่เริ่มในอดีตและดำเนินถึงปัจจุบัน (since...)"
-  },
-  {
-    id: 11,
-    text: "At 9 AM tomorrow, I ______ an exam.",
-    choices: [
-      "will take",
-      "will be taking",
-      "take",
-      "took"
-    ],
-    correctAnswer: 1,
-    explanation: "ระบุเวลาที่แน่นอนในอนาคต (At 9 AM tomorrow) ว่าจะกำลังทำอะไรอยู่ ใช้ Future Continuous"
-  },
-  {
-    id: 12,
-    text: "She said she ______ help me.",
-    choices: [
-      "will",
-      "would",
-      "can",
-      "may"
-    ],
-    correctAnswer: 1,
-    explanation: "Reported Speech: เมื่อกริยานำเป็นอดีต (said) กริยาตามต้องเปลี่ยนเป็นอดีต (will -> would)"
-  },
-  {
-    id: 13,
-    text: "How long ______ you ______ waiting for the bus?",
-    choices: [
-      "have / been",
-      "are / X",
-      "do / X",
-      "did / X"
-    ],
-    correctAnswer: 0,
-    explanation: "ถามถึงระยะเวลาของการกระทำที่ต่อเนื่องจากอดีตถึงปัจจุบัน ใช้ Present Perfect Continuous"
-  },
-  {
-    id: 14,
-    text: "When I got to the station, the train ______.",
-    choices: [
-      "left",
-      "has left",
-      "had left",
-      "leaves"
-    ],
-    correctAnswer: 2,
-    explanation: "รถไฟออกไป 'ก่อน' ที่จะมาถึงสถานี (อดีตซ้อนอดีต) ใช้ Past Perfect"
-  },
-  {
-    id: 15,
-    text: "I promise I ______ late again.",
-    choices: [
-      "am not",
-      "won't be",
-      "don't be",
-      "haven't been"
-    ],
-    correctAnswer: 1,
-    explanation: "การให้คำสัญญา (Promise) ใช้ Future Simple (will/won't)"
-  },
-  {
-    id: 16,
-    text: "He ______ working on this project for 5 hours by the time the boss arrives.",
-    choices: [
-      "will work",
-      "will be working",
-      "will have been",
-      "is working"
-    ],
-    correctAnswer: 2,
-    explanation: "เน้นความต่อเนื่องของการกระทำที่จะดำเนินไปถึงจุดหนึ่งในอนาคต ใช้ Future Perfect Continuous"
-  },
-  {
-    id: 17,
-    text: "Last night, I ______ very tired, so I ______ to bed early.",
-    choices: [
-      "feel / go",
-      "felt / went",
-      "felt / go",
-      "feel / went"
-    ],
-    correctAnswer: 1,
-    explanation: "เล่าเหตุการณ์ในอดีต (Last night) ใช้ Past Simple ทั้งคู่"
-  },
-  {
-    id: 18,
-    text: "______ you ever ______ to Japan?",
-    choices: [
-      "Did / go",
-      "Have / been",
-      "Were / going",
-      "Do / go"
-    ],
-    correctAnswer: 1,
-    explanation: "ถามประสบการณ์ที่ผ่านมา (ever) ใช้ Present Perfect (Have you ever been...)"
-  },
-  {
-    id: 19,
-    text: "Next week, we ______ a party.",
-    choices: [
-      "have",
-      "had",
-      "are having",
-      "have had"
-    ],
-    correctAnswer: 2,
-    explanation: "แผนการในอนาคตที่เตรียมการไว้แล้ว สามารถใช้ Present Continuous ได้ (are having)"
-  },
-  {
-    id: 20,
-    text: "The phone rang while I ______ a shower.",
-    choices: [
-      "took",
-      "was taking",
-      "am taking",
-      "had taken"
-    ],
-    correctAnswer: 1,
-    explanation: "เหตุการณ์ที่กำลังดำเนินอยู่ (was taking) ถูกขัดจังหวะ (rang)"
+export default function TensesQuiz() {
+  const navigate = useNavigate();
+  
+  // State
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [userAnswers, setUserAnswers] = useState<(number | null)[]>([]); // เก็บคำตอบของผู้ใช้ (index ของตัวเลือก)
+  const [isFinished, setIsFinished] = useState(false);
+
+  // Initialize array of nulls based on question count
+  useEffect(() => {
+    setUserAnswers(new Array(tensesQuizData.length).fill(null));
+  }, []);
+
+  // Handle Answer Selection
+  const handleOptionSelect = (optionIndex: number) => {
+    const newAnswers = [...userAnswers];
+    newAnswers[currentQuestionIndex] = optionIndex;
+    setUserAnswers(newAnswers);
+  };
+
+  // Handle Navigation
+  const handleNext = () => {
+    if (currentQuestionIndex < tensesQuizData.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      finishQuiz();
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+    }
+  };
+
+  const finishQuiz = () => {
+    // เช็คว่าทำครบไหม (เผื่อไว้) แต่ในที่นี้จะอนุญาตให้ส่งเลย
+    setIsFinished(true);
+    window.scrollTo(0, 0);
+  };
+
+  const restartQuiz = () => {
+    setCurrentQuestionIndex(0);
+    setUserAnswers(new Array(tensesQuizData.length).fill(null));
+    setIsFinished(false);
+    window.scrollTo(0, 0);
+  };
+
+  // --- ส่วนแสดงผลคะแนนและเฉลย (Result Screen) ---
+  if (isFinished) {
+    // คำนวณคะแนน
+    const score = userAnswers.reduce((acc, ans, index) => {
+      return (ans === tensesQuizData[index].correctAnswer) ? (acc || 0) + 1 : (acc || 0);
+    }, 0) || 0;
+
+    const percentage = Math.round((score / tensesQuizData.length) * 100);
+
+    return (
+      <div className="min-h-screen bg-slate-50 py-10 px-4">
+        <div className="max-w-3xl mx-auto space-y-8">
+          {/* Score Card */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white rounded-[2rem] p-8 md:p-12 shadow-xl text-center border border-slate-100 relative overflow-hidden"
+          >
+            <div className="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6 text-5xl shadow-sm">
+              🏆
+            </div>
+            
+            <h2 className="text-3xl font-black text-slate-800 mb-2">Quiz Completed!</h2>
+            <p className="text-slate-500 mb-8 font-medium">ทำครบทุกข้อแล้ว มาดูผลลัพธ์กันครับ</p>
+            
+            <div className="flex justify-center items-end gap-2 mb-8">
+              <span className="text-6xl font-black text-blue-600">{score}</span>
+              <span className="text-2xl font-bold text-slate-400 mb-2">/ {tensesQuizData.length}</span>
+            </div>
+
+            <div className="w-full bg-slate-100 rounded-full h-4 mb-8 overflow-hidden max-w-md mx-auto">
+              <motion.div 
+                initial={{ width: 0 }}
+                animate={{ width: `${percentage}%` }}
+                className={`h-full rounded-full ${
+                  percentage >= 80 ? 'bg-green-500' : 
+                  percentage >= 50 ? 'bg-yellow-500' : 'bg-red-500'
+                }`}
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-4 justify-center">
+              <button 
+                onClick={restartQuiz}
+                className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg"
+              >
+                <RefreshCw size={20} /> ทำอีกครั้ง
+              </button>
+              <button 
+                onClick={() => navigate('/grammar')}
+                className="flex items-center gap-2 px-6 py-3 bg-slate-100 text-slate-600 rounded-xl font-bold hover:bg-slate-200 transition-colors"
+              >
+                <ArrowLeft size={20} /> กลับบทเรียน
+              </button>
+            </div>
+          </motion.div>
+
+          <AdBanner />
+
+          {/* รายการเฉลยละเอียด */}
+          <div className="space-y-6">
+            <h3 className="text-2xl font-bold text-slate-800 ml-2">เฉลยคำตอบ:</h3>
+            {tensesQuizData.map((question, index) => {
+              const userAnswer = userAnswers[index];
+              const isCorrect = userAnswer === question.correctAnswer;
+              
+              return (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className={`bg-white rounded-2xl p-6 border-2 ${isCorrect ? 'border-green-100' : 'border-red-100'} shadow-sm`}
+                >
+                  <div className="flex items-start justify-between gap-4 mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0
+                        ${isCorrect ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}
+                      `}>
+                        {index + 1}
+                      </div>
+                      <h4 className="font-bold text-slate-800 text-lg">{question.question}</h4>
+                    </div>
+                    {isCorrect ? <CheckCircle2 className="text-green-500 shrink-0" /> : <XCircle className="text-red-500 shrink-0" />}
+                  </div>
+
+                  <div className="space-y-2 pl-11">
+                    {/* ตัวเลือกที่ user ตอบ */}
+                    <div className={`p-3 rounded-lg flex justify-between items-center text-sm font-medium
+                      ${isCorrect 
+                        ? 'bg-green-50 text-green-700 border border-green-200' 
+                        : 'bg-red-50 text-red-700 border border-red-200'}
+                    `}>
+                      <span>
+                        <span className="font-bold mr-2">คำตอบของคุณ:</span> 
+                        {userAnswer !== null ? question.options[userAnswer] : '(ไม่ได้ตอบ)'}
+                      </span>
+                    </div>
+
+                    {/* เฉลย (ถ้าผิด) */}
+                    {!isCorrect && (
+                      <div className="p-3 rounded-lg bg-green-50 text-green-700 border border-green-200 text-sm font-medium">
+                        <span className="font-bold mr-2">คำตอบที่ถูก:</span> 
+                        {question.options[question.correctAnswer]}
+                      </div>
+                    )}
+
+                    {/* คำอธิบาย (แสดงเฉพาะข้อที่ผิด หรือแสดงตลอดก็ได้ ในที่นี้แสดงตลอดเพื่อให้ความรู้) */}
+                    <div className="mt-3 pt-3 border-t border-slate-100 flex gap-3 text-slate-600 text-sm">
+                      <AlertCircle size={16} className="text-blue-500 shrink-0 mt-0.5" />
+                      <p>{question.explanation}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
   }
-];
+
+  // --- หน้าทำข้อสอบ (Quiz Screen) ---
+  const questionData = tensesQuizData[currentQuestionIndex];
+  const progress = ((currentQuestionIndex + 1) / tensesQuizData.length) * 100;
+  const isLastQuestion = currentQuestionIndex === tensesQuizData.length - 1;
+  const hasAnsweredCurrent = userAnswers[currentQuestionIndex] !== null && userAnswers[currentQuestionIndex] !== undefined;
+
+  return (
+    <div className="min-h-screen bg-slate-50 py-8 px-4 flex flex-col items-center">
+      <div className="w-full max-w-3xl flex items-center justify-between mb-6">
+        <button 
+          onClick={() => navigate('/grammar')} 
+          className="flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold transition-colors"
+        >
+          <ArrowLeft size={20} /> ออกจากแบบทดสอบ
+        </button>
+        <div className="px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-sm font-bold">
+          ข้อที่ {currentQuestionIndex + 1} / {tensesQuizData.length}
+        </div>
+      </div>
+
+      <div className="w-full max-w-3xl">
+        <div className="bg-white rounded-[2rem] shadow-lg border border-slate-100 overflow-hidden relative min-h-[400px] flex flex-col">
+          {/* Progress Bar */}
+          <div className="w-full h-1.5 bg-slate-100">
+            <motion.div 
+              className="h-full bg-blue-500"
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+            />
+          </div>
+
+          <div className="p-8 md:p-10 flex-1 flex flex-col">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-8 leading-snug">
+              {questionData.question}
+            </h2>
+
+            <div className="space-y-3 flex-1">
+              {questionData.options.map((option, index) => {
+                const isSelected = userAnswers[currentQuestionIndex] === index;
+                
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handleOptionSelect(index)}
+                    className={`w-full p-4 rounded-xl text-left font-semibold text-lg transition-all flex items-center justify-between border-2
+                      ${isSelected 
+                        ? 'bg-blue-50 border-blue-500 text-blue-700 shadow-sm' 
+                        : 'border-slate-100 hover:border-blue-200 hover:bg-slate-50 text-slate-600'
+                      }`}
+                  >
+                    <span>{option}</span>
+                    {isSelected && <div className="w-4 h-4 rounded-full bg-blue-500" />}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-50">
+              <button
+                onClick={handlePrevious}
+                disabled={currentQuestionIndex === 0}
+                className={`text-slate-500 font-bold hover:text-slate-800 transition-colors ${currentQuestionIndex === 0 ? 'invisible' : ''}`}
+              >
+                ข้อก่อนหน้า
+              </button>
+
+              <button
+                onClick={handleNext}
+                disabled={!hasAnsweredCurrent} // บังคับให้ตอบก่อนไปข้อถัดไป (ถ้าต้องการให้ข้ามได้ ให้ลบบรรทัดนี้)
+                className={`px-8 py-3 rounded-xl font-bold text-white transition-all shadow-lg flex items-center gap-2
+                  ${!hasAnsweredCurrent 
+                    ? 'bg-slate-300 cursor-not-allowed shadow-none' 
+                    : 'bg-slate-800 hover:bg-slate-900 hover:scale-105'
+                  }`}
+              >
+                {isLastQuestion ? 'ส่งคำตอบ' : 'ถัดไป'}
+                {!isLastQuestion && <ArrowLeft size={20} className="rotate-180" />}
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <AdBanner className="mt-8" />
+      </div>
+    </div>
+  );
+}

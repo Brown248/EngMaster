@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ArrowLeft } from 'lucide-react';
+import { ChevronRight, ArrowLeft, PlayCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { grammarTopics } from '../data/grammarData';
 import AdBanner from '../components/AdBanner';
 
 export default function Grammar() {
+  const navigate = useNavigate();
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
 
   const activeTopic = grammarTopics.find(t => t.id === selectedTopic);
@@ -26,7 +28,7 @@ export default function Grammar() {
               </div>
               <div>
                 <h2 className="text-4xl font-black text-slate-800 tracking-tight">Grammar Challenge</h2>
-                <p className="text-slate-500 text-lg font-medium">รวมไวยากรณ์ 20 เรื่องสำคัญ จากพื้นฐานสู่ระดับสูง</p>
+                <p className="text-slate-500 text-lg font-medium">รวมไวยากรณ์สำคัญ จากพื้นฐานสู่ระดับสูง</p>
               </div>
             </div>
 
@@ -41,18 +43,11 @@ export default function Grammar() {
                   whileTap={{ scale: 0.98 }}
                   className={`bg-white p-6 rounded-2xl shadow-sm border-2 border-slate-100 cursor-pointer hover:shadow-lg transition-all group relative overflow-hidden`}
                 >
-                  {/* Color Decor */}
                   <div className={`absolute top-0 right-0 w-24 h-24 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150
                     ${topic.color === 'indigo' ? 'bg-indigo-50' : ''}
                     ${topic.color === 'orange' ? 'bg-orange-50' : ''}
                     ${topic.color === 'blue' ? 'bg-blue-50' : ''}
                     ${topic.color === 'purple' ? 'bg-purple-50' : ''}
-                    ${topic.color === 'teal' ? 'bg-teal-50' : ''}
-                    ${topic.color === 'rose' ? 'bg-rose-50' : ''}
-                    ${topic.color === 'amber' ? 'bg-amber-50' : ''}
-                    ${topic.color === 'cyan' ? 'bg-cyan-50' : ''}
-                    ${topic.color === 'emerald' ? 'bg-emerald-50' : ''}
-                    ${topic.color === 'slate' ? 'bg-slate-50' : ''}
                   `} />
                   
                   <div className="relative z-10 flex items-start justify-between">
@@ -81,12 +76,25 @@ export default function Grammar() {
             exit={{ opacity: 0, x: 20 }}
             className="bg-white rounded-[2.5rem] p-8 shadow-xl border border-slate-100"
           >
-            <button 
-              onClick={() => setSelectedTopic(null)}
-              className="flex items-center gap-2 text-slate-400 hover:text-purple-600 font-bold mb-6 transition-colors"
-            >
-              <ArrowLeft size={20} /> Back to Topics
-            </button>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <button 
+                  onClick={() => setSelectedTopic(null)}
+                  className="flex items-center gap-2 text-slate-400 hover:text-purple-600 font-bold transition-colors w-fit"
+                >
+                  <ArrowLeft size={20} /> Back to Topics
+                </button>
+                
+                {/* ปุ่ม Link ไป Quiz ถ้าเป็นหัวข้อ Tenses */}
+                {selectedTopic === 'tenses' && (
+                  <button 
+                    onClick={() => navigate('/grammar/quiz')}
+                    className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all"
+                  >
+                    <PlayCircle size={20} />
+                    เริ่มทำแบบทดสอบ 30 ข้อ
+                  </button>
+                )}
+            </div>
 
             <div className="flex items-center gap-4 mb-8 pb-6 border-b border-slate-100">
               <span className="text-5xl">{activeTopic?.icon}</span>
@@ -110,15 +118,17 @@ export default function Grammar() {
                     </div>
                   )}
 
-                  <p className="text-slate-700 font-medium mb-4 leading-relaxed">{sub.usage}</p>
+                  <p className="text-slate-700 font-medium mb-4 leading-relaxed">
+                    {sub.usage || sub.explanation}
+                  </p>
                   
                   <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
                     <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">5 Examples:</p>
                     <ul className="space-y-2.5">
                       {sub.examples.map((ex, i) => (
-                        <li key={i} className="flex gap-3 text-slate-600 items-start">
-                          <span className="text-purple-400 mt-1.5 text-[8px]">●</span>
-                          <span dangerouslySetInnerHTML={{ __html: ex.replace(/\*\*(.*?)\*\*/g, '<b class="text-purple-700">$1</b>') }} />
+                        <li key={i} className="flex gap-3 text-slate-600 items-start text-sm md:text-base">
+                          <span className="text-purple-400 mt-1.5 text-[8px] flex-shrink-0">●</span>
+                          <span dangerouslySetInnerHTML={{ __html: ex.replace(/\*\*(.*?)\*\*/g, '<b class="text-purple-700 font-bold">$1</b>') }} />
                         </li>
                       ))}
                     </ul>
@@ -126,6 +136,19 @@ export default function Grammar() {
                 </div>
               ))}
             </div>
+
+            {selectedTopic === 'tenses' && (
+              <div className="mt-12 pt-8 border-t border-slate-100 text-center">
+                 <h3 className="text-2xl font-bold text-slate-800 mb-4">พร้อมทดสอบความเข้าใจรึยัง?</h3>
+                 <button 
+                    onClick={() => navigate('/grammar/quiz')}
+                    className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold text-xl hover:bg-slate-800 hover:shadow-2xl hover:-translate-y-1 transition-all"
+                  >
+                    <PlayCircle size={24} />
+                    เริ่มทำแบบทดสอบ 12 Tenses
+                  </button>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

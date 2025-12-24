@@ -24,15 +24,18 @@ export interface SlangItem {
   border: string;
 }
 
-// ✅ New Grammar Types
+// ✅ Grammar Types (อัปเดตให้รองรับ Structure และ Usage)
 export interface GrammarSubtopic {
   name: string;
-  explanation: string;
+  explanation?: string; // รองรับของเดิม
+  usage?: string;       // เพิ่มใหม่: วิธีใช้
+  structure?: string;   // เพิ่มใหม่: โครงสร้างประโยค
   examples: string[];
 }
 
 export interface GrammarDetail {
   title: string;
+  description?: string; // เพิ่ม description หัวข้อหลัก
   subtopics: GrammarSubtopic[];
 }
 
@@ -51,6 +54,15 @@ export interface Question {
   passage?: string;
   image?: string;
   choices: string[];
+  correctAnswer: number;
+  explanation: string;
+}
+
+// เพิ่ม Quiz Question Interface สำหรับ Tenses
+export interface QuizQuestion {
+  id: number;
+  question: string;
+  options: string[];
   correctAnswer: number;
   explanation: string;
 }

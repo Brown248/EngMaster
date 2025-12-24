@@ -1,157 +1,221 @@
-export interface QuizQuestion {
-  id: number;
-  question: string;
-  options: string[];
-  correctAnswer: number; // Index 0-3
-  explanation: string;
-}
+import { QuizQuestion } from '../types';
 
 export const tensesQuizData: QuizQuestion[] = [
-  // --- Present Tenses ---
+  // --- Present ---
   {
     id: 1,
-    question: "Look! It ______ outside. You should take an umbrella.",
+    question: "Look! It ______ outside.",
     options: ["rains", "is raining", "rained", "has rained"],
     correctAnswer: 1,
-    explanation: "มีคำว่า 'Look!' (ดูนั่นสิ!) แสดงว่าเหตุการณ์กำลังเกิดขึ้น ณ ขณะพูด ต้องใช้ Present Continuous (is/am/are + V-ing)."
+    explanation: "มีคำว่า Look! เป็นสัญญาณว่าเหตุการณ์กำลังเกิด (Present Continuous)."
   },
   {
     id: 2,
-    question: "She usually ______ to school by bus, but today she is walking.",
-    options: ["go", "goes", "is going", "went"],
+    question: "Water ______ at 100 degrees Celsius.",
+    options: ["boil", "boils", "is boiling", "boiled"],
     correctAnswer: 1,
-    explanation: "คำว่า 'usually' บอกนิสัยหรือกิจวัตร ต้องใช้ Present Simple ประธาน She (เอกพจน์) กริยาต้องเติม -es เป็น 'goes'."
+    explanation: "ข้อเท็จจริงทางวิทยาศาสตร์ ใช้ Present Simple (เติม s)."
   },
   {
     id: 3,
-    question: "I ______ my keys. I can't open the door now.",
-    options: ["lose", "lost", "have lost", "had lost"],
-    correctAnswer: 2,
-    explanation: "เหตุการณ์เกิดขึ้นในอดีต (ทำกุญแจหาย) แต่ส่งผลถึงปัจจุบัน (เข้าห้องไม่ได้) ต้องใช้ Present Perfect (have + V3)."
+    question: "I ______ my homework yet.",
+    options: ["didn't finish", "haven't finished", "don't finish", "won't finish"],
+    correctAnswer: 1,
+    explanation: "มีคำว่า yet ในประโยคปฏิเสธ ใช้ Present Perfect."
   },
   {
     id: 4,
-    question: "They ______ football for two hours. They look tired.",
-    options: ["are playing", "have played", "have been playing", "played"],
-    correctAnswer: 2,
-    explanation: "มี 'for two hours' และเน้นความต่อเนื่องของการกระทำที่ส่งผลให้เหนื่อย ต้องใช้ Present Perfect Continuous (have been + V-ing)."
+    question: "She usually ______ coffee, but today she is drinking tea.",
+    options: ["doesn't drink", "drinks", "is drinking", "drank"],
+    correctAnswer: 1,
+    explanation: "ปกติ (usually) ใช้ Present Simple, วันนี้ (today) ใช้ Present Continuous."
   },
-  
-  // --- Past Tenses ---
   {
     id: 5,
-    question: "We ______ to Chiang Mai last December.",
-    options: ["go", "went", "have gone", "were going"],
-    correctAnswer: 1,
-    explanation: "มีระบุเวลาในอดีตชัดเจน 'last December' ต้องใช้ Past Simple (V2) คือ 'went'."
+    question: "We ______ football for two hours. We are tired.",
+    options: ["play", "are playing", "have been playing", "played"],
+    correctAnswer: 2,
+    explanation: "เน้นความต่อเนื่องของการกระทำที่ส่งผลถึงปัจจุบัน (เหนื่อย) ใช้ Present Perfect Continuous."
   },
   {
     id: 6,
-    question: "While I ______ TV, the electricity went out.",
-    options: ["watched", "was watching", "am watching", "have watched"],
+    question: "My father ______ in a bank.",
+    options: ["work", "works", "is working", "has worked"],
     correctAnswer: 1,
-    explanation: "เหตุการณ์กำลังดำเนินอยู่ (ดูทีวี) แล้วมีอีกเหตุการณ์แทรก (ไฟดับ) ใช้ Past Continuous (was/were + V-ing) คู่กับ Past Simple."
+    explanation: "อาชีพหรือความจริงทั่วไป ใช้ Present Simple ประธานเอกพจน์กริยาเติม s."
   },
   {
     id: 7,
-    question: "When I arrived at the station, the train ______.",
-    options: ["left", "has left", "had left", "was leaving"],
+    question: "Please be quiet. The baby ______.",
+    options: ["sleeps", "slept", "is sleeping", "has slept"],
     correctAnswer: 2,
-    explanation: "รถไฟออกไป 'ก่อน' ที่จะมาถึง (อดีตซ้อนอดีต) เหตุการณ์ที่เกิดก่อนใช้ Past Perfect (had + V3)."
+    explanation: "เหตุการณ์กำลังเกิดขณะพูด (Please be quiet) ใช้ Present Continuous."
   },
   {
     id: 8,
-    question: "He was tired because he ______ all day.",
-    options: ["worked", "has worked", "had been working", "is working"],
-    correctAnswer: 2,
-    explanation: "บอกสาเหตุในอดีต (was tired) ที่เกิดจากการทำต่อเนื่องมานานก่อนหน้านั้น ใช้ Past Perfect Continuous (had been + V-ing)."
+    question: "They ______ to the cinema every Sunday.",
+    options: ["go", "goes", "are going", "went"],
+    correctAnswer: 0,
+    explanation: "กิจวัตร (every Sunday) ใช้ Present Simple."
   },
 
-  // --- Future Tenses ---
+  // --- Past ---
   {
     id: 9,
-    question: "I think it ______ tomorrow.",
-    options: ["rains", "is raining", "will rain", "has rained"],
-    correctAnswer: 2,
-    explanation: "การคาดเดาอนาคตทั่วไป (Prediction) มักใช้ Future Simple (will + V1)."
+    question: "I ______ to London last year.",
+    options: ["go", "went", "have gone", "had gone"],
+    correctAnswer: 1,
+    explanation: "ระบุเวลาจบชัดเจน (last year) ใช้ Past Simple."
   },
   {
     id: 10,
-    question: "Don't call me at 8 PM. I ______ dinner.",
-    options: ["will have", "will be having", "have", "am having"],
+    question: "While I ______ TV, the phone rang.",
+    options: ["watched", "was watching", "am watching", "have watched"],
     correctAnswer: 1,
-    explanation: "ระบุเวลาเจาะจงในอนาคต (At 8 PM) ว่าจะกำลังทำอะไรอยู่ ใช้ Future Continuous (will be + V-ing)."
+    explanation: "เหตุการณ์กำลังดำเนินในอดีต (was watching) แล้วมีอีกอันแทรก."
   },
   {
     id: 11,
-    question: "By next year, she ______ her degree.",
-    options: ["finishes", "will finish", "will have finished", "has finished"],
+    question: "When I got to the station, the train ______.",
+    options: ["left", "has left", "had left", "leaves"],
     correctAnswer: 2,
-    explanation: "มีคำว่า 'By...' (ภายใน...) บอกว่าเหตุการณ์จะเสร็จสิ้นก่อนเวลานั้นในอนาคต ใช้ Future Perfect (will have + V3)."
+    explanation: "รถไฟออกไปก่อนที่ฉันจะถึง (อดีตซ้อนอดีต) ใช้ Past Perfect."
   },
   {
     id: 12,
-    question: "By the time you arrive, we ______ for three hours.",
-    options: ["will wait", "will be waiting", "will have been waiting", "wait"],
+    question: "He ______ there for 10 years before he moved.",
+    options: ["lived", "has lived", "had lived", "was living"],
     correctAnswer: 2,
-    explanation: "เน้นระยะเวลา (for three hours) ที่จะดำเนินไปจนถึงจุดหนึ่งในอนาคต ใช้ Future Perfect Continuous."
+    explanation: "อยู่มาก่อนที่จะย้าย (Past Perfect)."
   },
-
-  // --- Mixed / Tricky Questions ---
   {
     id: 13,
-    question: "The sun ______ in the east.",
-    options: ["rise", "rises", "is rising", "rose"],
+    question: "I ______ very tired last night.",
+    options: ["feel", "felt", "have felt", "had felt"],
     correctAnswer: 1,
-    explanation: "เป็นความจริงตามธรรมชาติ (General Truth) ใช้ Present Simple เสมอ."
+    explanation: "เล่าเรื่องอดีต (last night) ใช้ Past Simple."
   },
   {
     id: 14,
-    question: "I ______ him since we were in high school.",
-    options: ["know", "knew", "have known", "am knowing"],
-    correctAnswer: 2,
-    explanation: "มี 'since' (ตั้งแต่) บอกจุดเริ่มต้นในอดีตถึงปัจจุบัน ใช้ Present Perfect. (Know ไม่นิยมใช้รูป Continuous)."
+    question: "Did you ______ him yesterday?",
+    options: ["see", "saw", "seen", "seeing"],
+    correctAnswer: 0,
+    explanation: "หลัง Did กริยาต้องเป็นรูป Infinitive (V1 ไม่ผัน)."
   },
   {
     id: 15,
-    question: "Listen to the thunder! It ______ rain.",
-    options: ["will", "is going to", "is", "must"],
+    question: "It ______ heavily when I woke up.",
+    options: ["rained", "was raining", "rains", "has rained"],
     correctAnswer: 1,
-    explanation: "คาดการณ์อนาคตที่มีหลักฐานชัดเจน (เสียงฟ้าร้อง) ใช้ 'be going to'."
+    explanation: "ฝนกำลังตกอยู่ (Past Cont) ตอนที่ตื่น (Past Simple)."
   },
+
+  // --- Future ---
   {
     id: 16,
-    question: "Before she moved to London, she ______ in Paris for 5 years.",
-    options: ["lives", "has lived", "had lived", "lived"],
+    question: "I think it ______ tomorrow.",
+    options: ["rains", "is raining", "will rain", "has rained"],
     correctAnswer: 2,
-    explanation: "เหตุการณ์ในอดีต (อยู่ปารีส) เกิดก่อนอีกเหตุการณ์ในอดีต (ย้ายไปลอนดอน) ใช้ Past Perfect."
+    explanation: "คาดเดาอนาคตทั่วไป (Prediction) ใช้ Future Simple."
   },
   {
     id: 17,
-    question: "If it rains, I ______ at home.",
-    options: ["stay", "stayed", "will stay", "would stay"],
-    correctAnswer: 2,
-    explanation: "First Conditional (If + Present, Future) เป็นเหตุการณ์สมมติที่อาจเกิดขึ้นจริง."
+    question: "At 10 AM tomorrow, I ______ in a meeting.",
+    options: ["will sit", "will be sitting", "sit", "have sat"],
+    correctAnswer: 1,
+    explanation: "ระบุเวลาเจาะจงในอนาคตว่าจะกำลังทำอะไรอยู่ ใช้ Future Continuous."
   },
   {
     id: 18,
-    question: "While he was cooking, he ______ his finger.",
-    options: ["cut", "was cutting", "cuts", "has cut"],
-    correctAnswer: 0,
-    explanation: "เหตุการณ์สั้นๆ (บาดนิ้ว) เข้ามาแทรกเหตุการณ์ที่กำลังดำเนินอยู่ ใช้ Past Simple (V2 cut-cut-cut)."
+    question: "By next year, she ______ her degree.",
+    options: ["finishes", "will finish", "will have finished", "is finishing"],
+    correctAnswer: 2,
+    explanation: "มีคำว่า By (ภายใน...) ใช้ Future Perfect."
   },
   {
     id: 19,
-    question: "This time next week, I ______ on the beach.",
-    options: ["lie", "am lying", "will be lying", "will lie"],
+    question: "Don't touch that! You ______ yourself.",
+    options: ["burn", "are burning", "will burn", "have burnt"],
     correctAnswer: 2,
-    explanation: "จินตนาการภาพเหตุการณ์ที่จะกำลังเกิดขึ้นในเวลาที่ระบุในอนาคต ใช้ Future Continuous."
+    explanation: "เตือนภัยหรือคาดเดาผลลัพธ์ ใช้ Future Simple."
   },
   {
     id: 20,
-    question: "She said that she ______ hungry.",
-    options: ["is", "was", "has been", "will be"],
+    question: "By the time you arrive, we ______ for hours.",
+    options: ["wait", "will wait", "will have been waiting", "waited"],
+    correctAnswer: 2,
+    explanation: "เน้นความต่อเนื่องถึงจุดหนึ่งในอนาคต ใช้ Future Perfect Continuous."
+  },
+
+  // --- Mixed & Advanced ---
+  {
+    id: 21,
+    question: "______ you ever ______ to Paris?",
+    options: ["Did / go", "Have / been", "Do / go", "Were / going"],
     correctAnswer: 1,
-    explanation: "Reported Speech (Indirect) ประโยคหลักเป็นอดีต (said) ประโยคย่อยต้องถอย Tense เป็นอดีตตาม (is -> was)."
+    explanation: "ถามประสบการณ์ (ever) ใช้ Present Perfect."
+  },
+  {
+    id: 22,
+    question: "If it rains, we ______ at home.",
+    options: ["stay", "stayed", "will stay", "would stay"],
+    correctAnswer: 2,
+    explanation: "First Conditional (If + Present, Future)."
+  },
+  {
+    id: 23,
+    question: "She said she ______ busy.",
+    options: ["is", "was", "will be", "has been"],
+    correctAnswer: 1,
+    explanation: "Reported Speech: said (อดีต) -> was (อดีต)."
+  },
+  {
+    id: 24,
+    question: "While he was cooking, he ______ his finger.",
+    options: ["cut", "was cutting", "cuts", "has cut"],
+    correctAnswer: 0,
+    explanation: "เหตุการณ์แทรกเข้ามาสั้นๆ (บาดนิ้ว) ใช้ Past Simple."
+  },
+  {
+    id: 25,
+    question: "The bus ______ at 9:00 AM every day.",
+    options: ["leave", "leaves", "is leaving", "left"],
+    correctAnswer: 1,
+    explanation: "ตารางเวลา (Timetable) ใช้ Present Simple เสมอ."
+  },
+  {
+    id: 26,
+    question: "I ______ him since 2015.",
+    options: ["knew", "know", "have known", "am knowing"],
+    correctAnswer: 2,
+    explanation: "Since + เวลาในอดีต ใช้ Present Perfect."
+  },
+  {
+    id: 27,
+    question: "What ______ you ______ when I called?",
+    options: ["did / do", "were / doing", "are / doing", "have / done"],
+    correctAnswer: 1,
+    explanation: "ถามเหตุการณ์ที่กำลังทำในอดีต."
+  },
+  {
+    id: 28,
+    question: "By the time we got there, the concert ______.",
+    options: ["started", "has started", "had started", "starts"],
+    correctAnswer: 2,
+    explanation: "คอนเสิร์ตเริ่มไปก่อนที่เราจะถึง (อดีตซ้อนอดีต) ใช้ Past Perfect."
+  },
+  {
+    id: 29,
+    question: "He ______ as a doctor for 20 years by next month.",
+    options: ["works", "will work", "will have been working", "has worked"],
+    correctAnswer: 2,
+    explanation: "Future Perfect Continuous เน้นความต่อเนื่องถึงอนาคต (by next month)."
+  },
+  {
+    id: 30,
+    question: "Listen! Someone ______ the piano.",
+    options: ["plays", "played", "is playing", "has played"],
+    correctAnswer: 2,
+    explanation: "Listen! บอกเหตุการณ์ขณะนี้ ใช้ Present Continuous."
   }
 ];
