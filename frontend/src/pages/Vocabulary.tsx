@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Volume2, XCircle, Briefcase, School, Coffee, Globe } from 'lucide-react';
+import { Search, XCircle, Briefcase, School, Coffee, Globe } from 'lucide-react'; // ลบ Volume2 ออก
 import { vocabularyData } from '../data/vocabularyData';
 // ✅ Import AdBanner
 import AdBanner from '../components/AdBanner';
@@ -207,9 +207,7 @@ export default function Vocabulary() {
                                         <h4 className="text-2xl font-black text-slate-800">{item.word}</h4>
                                         <span className="text-sm font-bold text-orange-500 italic">{item.partOfSpeech}</span>
                                     </div>
-                                    <button className="p-2 bg-white rounded-full text-slate-400 hover:text-orange-500 shadow-sm border border-slate-100 active:scale-90 transition-all">
-                                        <Volume2 size={18} />
-                                    </button>
+                                    {/* ลบปุ่มเสียงออกแล้วตรงนี้ */}
                                 </div>
                                 
                                 <div className="relative z-10">
