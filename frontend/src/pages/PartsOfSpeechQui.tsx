@@ -2,38 +2,50 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, CheckCircle2, XCircle, RefreshCw, AlertCircle, Play } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { partsOfSpeechQuizData } from '../data/partsOfSpeechQuizData';
-import { adjectiveQuizData } from '../data/adjectiveQuizData';
+import { separatePartsOfSpeechData } from '../data/separatePartsOfSpeechData';
+import { partsOfSpeechQuizData as mixedData } from '../data/partsOfSpeechQuizData'; // เผื่อกรณีเลือกแบบรวม
 import { shuffleArray } from '../utils/quizUtils';
 import { QuizQuestion } from '../types';
-import AdBanner from '../components/AdBanner'; // ✅ นำกลับมาใช้
+import AdBanner from '../components/AdBanner';
 
 export default function PartsOfSpeechQuiz() {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // รับ state ว่ามาจากหัวข้อไหน
-  const subTopicName = location.state?.subTopic as string | undefined;
+  // รับ state ว่ามาจากหัวข้อไหน (ชื่อต้องตรงกับ id ใน grammarData/separatePartsOfSpeechData)
+  // ตัวอย่าง subTopicName: "Noun (คำนาม)" -> เราจะตัดเอาแค่ "noun"
+  const rawSubTopic = location.state?.subTopic as string | undefined;
   
-  // State
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<(number | string | string[] | null)[]>([]);
   const [isFinished, setIsFinished] = useState(false);
+  const [currentTopicId, setCurrentTopicId] = useState<string>('');
 
-  // Initialize Quiz Data
   useEffect(() => {
-    let rawData: QuizQuestion[] = [];
+    let selectedQuestions: QuizQuestion[] = [];
+    let topicId = 'mixed';
 
-    // 1. เลือกชุดข้อสอบ
-    if (subTopicName && subTopicName.includes('Adjective')) {
-        rawData = [...adjectiveQuizData];
+    if (rawSubTopic) {
+        // แปลงชื่อเช่น "Noun (คำนาม)" -> "noun"
+        const keyword = rawSubTopic.split(' ')[0].toLowerCase();
+        const foundTopic = separatePartsOfSpeechData.find(t => t.id === keyword);
+        
+        if (foundTopic) {
+            selectedQuestions = [...foundTopic.questions];
+            topicId = keyword;
+        } else {
+            // กรณีหาไม่เจอ ให้ใช้แบบรวม หรือ Adjective เดิม
+            selectedQuestions = [...mixedData];
+        }
     } else {
-        rawData = [...partsOfSpeechQuizData];
+        selectedQuestions = [...mixedData];
     }
 
-    // 2. สุ่มข้อสอบ
-    const shuffledQ = shuffleArray(rawData).map(q => {
+    setCurrentTopicId(topicId);
+
+    // สุ่มโจทย์ และสุ่มช้อยส์ (เฉพาะ Reorder)
+    const shuffledQ = shuffleArray(selectedQuestions).map(q => {
         if (q.type === 'reorder' && q.options) {
             return { ...q, options: shuffleArray([...q.options]) };
         }
@@ -44,14 +56,13 @@ export default function PartsOfSpeechQuiz() {
     setUserAnswers(new Array(shuffledQ.length).fill(null));
     setCurrentQuestionIndex(0);
     setIsFinished(false);
-  }, [subTopicName]);
+  }, [rawSubTopic]);
 
   // Helper: Parse Bold Text
   const parseQuestionText = (text: string) => {
     return text.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-indigo-700">$1</span>');
   };
 
-  // --- Handlers ---
   const handleOptionSelect = (ans: any) => {
     const newAnswers = [...userAnswers];
     newAnswers[currentQuestionIndex] = ans;
@@ -92,9 +103,8 @@ export default function PartsOfSpeechQuiz() {
       return ans === q.correctAnswer;
   };
 
-  if (questions.length === 0) return <div className="p-10 text-center">Loading...</div>;
+  if (questions.length === 0) return <div className="p-10 text-center font-bold text-slate-500">Loading Quiz Data...</div>;
 
-  // --- Result Screen ---
   if (isFinished) {
     const score = questions.reduce((acc, q, index) => checkAnswer(q, userAnswers[index]) ? acc + 1 : acc, 0);
     const percentage = Math.round((score / questions.length) * 100);
@@ -105,36 +115,35 @@ export default function PartsOfSpeechQuiz() {
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-[2rem] p-8 md:p-12 shadow-xl text-center border border-slate-100 relative">
             <div className="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6 text-5xl">🏆</div>
             <h2 className="text-3xl font-black text-slate-800 mb-2">Quiz Completed!</h2>
-            <p className="text-slate-500 mb-8 font-medium">Topic: {subTopicName || 'Parts of Speech Mixed'}</p>
+            <p className="text-slate-500 mb-8 font-medium">Topic: <span className="capitalize font-bold text-indigo-600">{currentTopicId}</span></p>
             <div className="text-6xl font-black text-indigo-600 mb-6">{score} <span className="text-2xl text-slate-400">/ {questions.length}</span></div>
             <div className="w-full bg-slate-100 rounded-full h-4 mb-8 overflow-hidden max-w-md mx-auto">
               <div className={`h-full rounded-full ${percentage >= 80 ? 'bg-green-500' : percentage >= 50 ? 'bg-yellow-500' : 'bg-red-500'}`} style={{ width: `${percentage}%` }} />
             </div>
             <div className="flex justify-center gap-4">
-               <button onClick={() => window.location.reload()} className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold flex gap-2 hover:bg-indigo-700 transition-colors"><RefreshCw size={20}/> ทำอีกครั้ง</button>
+               <button onClick={() => window.location.reload()} className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold flex gap-2 hover:bg-indigo-700 transition-colors shadow-lg"><RefreshCw size={20}/> ทำอีกครั้ง</button>
                <button onClick={() => navigate('/grammar')} className="px-6 py-3 bg-slate-100 text-slate-600 rounded-xl font-bold flex gap-2 hover:bg-slate-200 transition-colors"><ArrowLeft size={20}/> กลับบทเรียน</button>
             </div>
           </motion.div>
 
-          <AdBanner /> {/* ✅ แสดง AdBanner */}
+          <AdBanner />
 
-          {/* เฉลย */}
           <div className="space-y-4">
              {questions.map((q, i) => {
                  const isCorrect = checkAnswer(q, userAnswers[i]);
                  return (
                      <div key={i} className={`bg-white p-5 rounded-2xl border-l-4 ${isCorrect ? 'border-green-500' : 'border-red-500'} shadow-sm`}>
                          <div className="flex justify-between items-start mb-2">
-                             <h4 className="font-bold text-slate-800 text-lg" dangerouslySetInnerHTML={{ __html: parseQuestionText(q.question) }} />
+                             <h4 className="font-bold text-slate-800 text-lg pr-4" dangerouslySetInnerHTML={{ __html: parseQuestionText(q.question) }} />
                              {isCorrect ? <CheckCircle2 className="text-green-500 shrink-0" /> : <XCircle className="text-red-500 shrink-0" />}
                          </div>
                          {!isCorrect && (
                              <div className="text-sm text-red-500 font-bold mb-2 bg-red-50 p-2 rounded-lg inline-block">
-                                 เฉลย: {Array.isArray(q.correctAnswer) ? q.correctAnswer.join(' ') : q.correctAnswer}
+                                 เฉลย: {Array.isArray(q.correctAnswer) ? q.correctAnswer.join(' ') : q.type === 'choice' && q.options ? q.options[q.correctAnswer as number] : q.correctAnswer}
                              </div>
                          )}
                          <div className="flex gap-2 items-start mt-2 pt-2 border-t border-slate-100">
-                             <AlertCircle size={16} className="text-indigo-400 mt-0.5 shrink-0" /> {/* ✅ ใช้ AlertCircle ตรงนี้ */}
+                             <AlertCircle size={16} className="text-indigo-400 mt-0.5 shrink-0" />
                              <p className="text-sm text-slate-500">{q.explanation}</p>
                          </div>
                      </div>
@@ -163,11 +172,12 @@ export default function PartsOfSpeechQuiz() {
           <div className="h-1.5 bg-slate-100 w-full"><motion.div className="h-full bg-indigo-500" animate={{ width: `${progress}%` }} /></div>
           
           <div className="p-8 md:p-10 flex-1 flex flex-col">
-              <span className="text-xs font-bold text-slate-400 uppercase mb-2 tracking-wider">{q.type === 'reorder' ? 'Rearrange' : q.type === 'fill-blank' ? 'Fill in the blank' : q.type === 'true-false' ? 'True / False' : 'Multiple Choice'}</span>
+              <span className="text-xs font-bold text-slate-400 uppercase mb-2 tracking-wider flex items-center gap-2">
+                {q.type === 'reorder' ? 'เรียงประโยค' : q.type === 'fill-blank' ? 'เติมคำในช่องว่าง' : q.type === 'true-false' ? 'ถูก หรือ ผิด' : 'เลือกคำตอบที่ถูก'}
+              </span>
               <h2 className="text-2xl font-bold text-slate-800 mb-6 leading-relaxed" dangerouslySetInnerHTML={{ __html: parseQuestionText(q.question) }} />
 
               <div className="flex-1 space-y-3">
-                  {/* Choice / TF */}
                   {(q.type === 'choice' || q.type === 'true-false') && q.options?.map((opt, idx) => (
                       <button 
                         key={idx} 
@@ -179,22 +189,21 @@ export default function PartsOfSpeechQuiz() {
                       </button>
                   ))}
 
-                  {/* Fill Blank */}
                   {q.type === 'fill-blank' && (
                       <input 
                         type="text" 
                         value={userAnswer as string || ''}
                         onChange={(e) => handleTextChange(e.target.value)}
-                        placeholder="Type your answer here..."
-                        className="w-full p-4 text-xl border-2 border-slate-200 rounded-xl focus:border-indigo-500 outline-none text-slate-700 font-medium"
+                        placeholder="พิมพ์คำตอบที่นี่..."
+                        className="w-full p-4 text-xl border-2 border-slate-200 rounded-xl focus:border-indigo-500 outline-none text-slate-700 font-medium bg-slate-50"
                         autoFocus
                       />
                   )}
 
-                  {/* Reorder */}
                   {q.type === 'reorder' && (
                       <div className="space-y-6">
-                          <div className="min-h-[60px] p-4 bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl flex flex-wrap gap-2">
+                          <div className="min-h-[60px] p-4 bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl flex flex-wrap gap-2 items-center">
+                              {(userAnswer as string[] || []).length === 0 && <span className="text-slate-400 text-sm italic">แตะคำด้านล่างเพื่อเรียงประโยค</span>}
                               {(userAnswer as string[] || []).map((word, idx) => (
                                   <button key={idx} onClick={() => handleReorderRemove(idx)} className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-lg font-bold hover:bg-red-100 transition-colors">{word}</button>
                               ))}
@@ -221,13 +230,13 @@ export default function PartsOfSpeechQuiz() {
 
               <div className="mt-8 pt-6 border-t border-slate-50 flex justify-end">
                   <button onClick={handleNext} disabled={!hasAnswered} className="px-8 py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 hover:scale-105 disabled:opacity-50 disabled:scale-100 disabled:cursor-not-allowed transition-all flex gap-2 items-center">
-                      {currentQuestionIndex === questions.length - 1 ? 'Finish' : 'Next'} <Play size={20} className="fill-current"/>
+                      {currentQuestionIndex === questions.length - 1 ? 'ส่งคำตอบ' : 'ถัดไป'} <Play size={20} className="fill-current"/>
                   </button>
               </div>
           </div>
       </div>
       
-      <AdBanner className="mt-8" /> {/* ✅ แสดง AdBanner ด้านล่าง */}
+      <AdBanner className="mt-8" />
     </div>
   );
 }
