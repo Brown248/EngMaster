@@ -45,13 +45,12 @@ export interface QuizQuestion {
   id: number;
   type: QuestionType; 
   question: string;
-  options?: string[]; // สำหรับ choice, matching, reorder
-  correctAnswer: string | number | string[]; // รองรับคำตอบหลายรูปแบบ
+  options?: string[];
+  correctAnswer: string | number | string[];
   explanation: string;
-  tenseTopic?: string; // ระบุชื่อ Tense (เผื่อใช้ในโหมดรวม)
+  tenseTopic?: string;
 }
 
-// Interface สำหรับเก็บข้อมูลแยกราย Tense
 export interface TenseTopicData {
   id: string;
   name: string;
