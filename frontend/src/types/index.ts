@@ -1,4 +1,3 @@
-// frontend/src/types/index.ts
 import { LucideIcon } from 'lucide-react';
 
 // --- Shared Types ---
@@ -39,16 +38,23 @@ export interface GrammarTopic {
   details: GrammarDetail;
 }
 
-// --- Quiz Types (Updated) ---
-// รองรับประเภทคำถาม 5 แบบ
+// --- Quiz Types ---
 export type QuestionType = 'choice' | 'true-false' | 'matching' | 'reorder' | 'fill-blank';
 
 export interface QuizQuestion {
   id: number;
-  type: QuestionType; // ระบุประเภท
+  type: QuestionType; 
   question: string;
-  options?: string[]; // ตัวเลือก (สำหรับ choice, matching, reorder)
-  correctAnswer: string | number | string[]; // คำตอบ (รองรับ index, string, หรือ array ของ string)
+  options?: string[]; // สำหรับ choice, matching, reorder
+  correctAnswer: string | number | string[]; // รองรับคำตอบหลายรูปแบบ
   explanation: string;
-  tenseTopic?: string; // ระบุหัวข้อ Tense
+  tenseTopic?: string; // ระบุชื่อ Tense (เผื่อใช้ในโหมดรวม)
+}
+
+// Interface สำหรับเก็บข้อมูลแยกราย Tense
+export interface TenseTopicData {
+  id: string;
+  name: string;
+  description: string;
+  questions: QuizQuestion[];
 }
