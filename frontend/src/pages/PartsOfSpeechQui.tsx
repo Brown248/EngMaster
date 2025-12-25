@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, CheckCircle2, XCircle, RefreshCw, AlertCircle, Play } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { separatePartsOfSpeechData } from '../data/separatePartsOfSpeechData';
-import { partsOfSpeechQuizData as mixedData } from '../data/partsOfSpeechQuizData'; // เผื่อกรณีเลือกแบบรวม
+import { partsOfSpeechQuizData as mixedData } from '../data/partsOfSpeechQuizData'; // บรรทัดนี้ถูกต้องแล้ว แต่ต้องมีไฟล์ข้อ 1 อยู่จริง
 import { shuffleArray } from '../utils/quizUtils';
 import { QuizQuestion } from '../types';
 import AdBanner from '../components/AdBanner';
@@ -12,8 +12,7 @@ export default function PartsOfSpeechQuiz() {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // รับ state ว่ามาจากหัวข้อไหน (ชื่อต้องตรงกับ id ใน grammarData/separatePartsOfSpeechData)
-  // ตัวอย่าง subTopicName: "Noun (คำนาม)" -> เราจะตัดเอาแค่ "noun"
+  // รับ state ว่ามาจากหัวข้อไหน
   const rawSubTopic = location.state?.subTopic as string | undefined;
   
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
@@ -27,7 +26,6 @@ export default function PartsOfSpeechQuiz() {
     let topicId = 'mixed';
 
     if (rawSubTopic) {
-        // แปลงชื่อเช่น "Noun (คำนาม)" -> "noun"
         const keyword = rawSubTopic.split(' ')[0].toLowerCase();
         const foundTopic = separatePartsOfSpeechData.find(t => t.id === keyword);
         
@@ -35,7 +33,6 @@ export default function PartsOfSpeechQuiz() {
             selectedQuestions = [...foundTopic.questions];
             topicId = keyword;
         } else {
-            // กรณีหาไม่เจอ ให้ใช้แบบรวม หรือ Adjective เดิม
             selectedQuestions = [...mixedData];
         }
     } else {
@@ -44,7 +41,6 @@ export default function PartsOfSpeechQuiz() {
 
     setCurrentTopicId(topicId);
 
-    // สุ่มโจทย์ และสุ่มช้อยส์ (เฉพาะ Reorder)
     const shuffledQ = shuffleArray(selectedQuestions).map(q => {
         if (q.type === 'reorder' && q.options) {
             return { ...q, options: shuffleArray([...q.options]) };
@@ -58,7 +54,6 @@ export default function PartsOfSpeechQuiz() {
     setIsFinished(false);
   }, [rawSubTopic]);
 
-  // Helper: Parse Bold Text
   const parseQuestionText = (text: string) => {
     return text.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-indigo-700">$1</span>');
   };
