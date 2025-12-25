@@ -3,6 +3,7 @@ import { QuizQuestion } from '../types';
 export const voiceQuizData: QuizQuestion[] = [
   {
     id: 1,
+    type: 'choice',
     question: "Change into Passive Voice: **'He opens the door.'**",
     options: [
       "The door is opened by him.",
@@ -15,6 +16,7 @@ export const voiceQuizData: QuizQuestion[] = [
   },
   {
     id: 2,
+    type: 'choice',
     question: "Change into Passive Voice: **'They are building a new house.'**",
     options: [
       "A new house is built by them.",
@@ -27,6 +29,7 @@ export const voiceQuizData: QuizQuestion[] = [
   },
   {
     id: 3,
+    type: 'choice',
     question: "Change into Passive Voice: **'Someone stole my bag yesterday.'**",
     options: [
       "My bag is stolen yesterday.",
@@ -39,6 +42,7 @@ export const voiceQuizData: QuizQuestion[] = [
   },
   {
     id: 4,
+    type: 'choice',
     question: "Which sentence is in **Passive Voice**?",
     options: [
       "The chef cooked a delicious meal.",
@@ -51,6 +55,7 @@ export const voiceQuizData: QuizQuestion[] = [
   },
   {
     id: 5,
+    type: 'choice',
     question: "Change into Active Voice: **'The letter was written by Sarah.'**",
     options: [
       "Sarah writes the letter.",
@@ -63,6 +68,7 @@ export const voiceQuizData: QuizQuestion[] = [
   },
   {
     id: 6,
+    type: 'choice',
     question: "Change into Passive Voice: **'We have finished the work.'**",
     options: [
       "The work was finished.",
@@ -75,6 +81,7 @@ export const voiceQuizData: QuizQuestion[] = [
   },
   {
     id: 7,
+    type: 'choice',
     question: "Complete the sentence: **'This song ______ by a famous singer in 1990.'**",
     options: [
       "sing",
@@ -87,6 +94,7 @@ export const voiceQuizData: QuizQuestion[] = [
   },
   {
     id: 8,
+    type: 'choice',
     question: "Change into Passive Voice: **'You must follow the rules.'**",
     options: [
       "The rules must followed.",
@@ -99,6 +107,7 @@ export const voiceQuizData: QuizQuestion[] = [
   },
   {
     id: 9,
+    type: 'choice',
     question: "Change into Passive Voice: **'Did he write this book?'**",
     options: [
       "Was this book written by him?",
@@ -111,6 +120,7 @@ export const voiceQuizData: QuizQuestion[] = [
   },
   {
     id: 10,
+    type: 'choice',
     question: "Why do we usually use Passive Voice?",
     options: [
       "To make the sentence longer.",

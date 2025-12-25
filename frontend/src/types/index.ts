@@ -1,3 +1,4 @@
+// frontend/src/types/index.ts
 import { LucideIcon } from 'lucide-react';
 
 // --- Shared Types ---
@@ -15,62 +16,39 @@ export interface CourseCard {
   color: 'orange' | 'pink' | 'purple' | 'blue';
 }
 
-export interface SlangItem {
-  word: string;
-  meaning: string;
-  emoji: string;
-  color: string;
-  bg: string;
-  border: string;
-}
-
-// ✅ Grammar Types (อัปเดตให้รองรับ Structure และ Usage)
+// --- Grammar Types ---
 export interface GrammarSubtopic {
   name: string;
-  explanation?: string; // รองรับของเดิม
-  usage?: string;       // เพิ่มใหม่: วิธีใช้
-  structure?: string;   // เพิ่มใหม่: โครงสร้างประโยค
+  explanation?: string;
+  usage?: string;
+  structure?: string;
   examples: string[];
 }
 
 export interface GrammarDetail {
   title: string;
-  description?: string; // เพิ่ม description หัวข้อหลัก
+  description?: string;
   subtopics: GrammarSubtopic[];
 }
 
 export interface GrammarTopic {
   id: string;
   title: string;
-  icon: string; // Emoji
+  icon: string;
   color: 'emerald' | 'amber' | 'indigo' | 'blue' | 'rose' | 'purple' | 'orange' | 'teal' | 'cyan' | 'slate' | 'fuchsia' | 'lime';
   details: GrammarDetail;
 }
 
-// --- Exam Types ---
-export interface Question {
-  id: number;
-  text: string;
-  passage?: string;
-  image?: string;
-  choices: string[];
-  correctAnswer: number;
-  explanation: string;
-}
+// --- Quiz Types (Updated) ---
+// รองรับประเภทคำถาม 5 แบบ
+export type QuestionType = 'choice' | 'true-false' | 'matching' | 'reorder' | 'fill-blank';
 
-// เพิ่ม Quiz Question Interface สำหรับ Tenses
 export interface QuizQuestion {
   id: number;
+  type: QuestionType; // ระบุประเภท
   question: string;
-  options: string[];
-  correctAnswer: number;
+  options?: string[]; // ตัวเลือก (สำหรับ choice, matching, reorder)
+  correctAnswer: string | number | string[]; // คำตอบ (รองรับ index, string, หรือ array ของ string)
   explanation: string;
-}
-
-export interface ExamPart {
-  id: string;
-  title: string;
-  description: string;
-  timeLimit: number; 
-  questions: Question[];
+  tenseTopic?: string; // ระบุหัวข้อ Tense
 }

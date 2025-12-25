@@ -153,14 +153,18 @@ export default function VoiceQuiz() {
                     `}>
                       <span>
                         <span className="font-bold mr-2">คำตอบของคุณ:</span> 
-                        {userAnswer !== null ? question.options[userAnswer] : '(ไม่ได้ตอบ)'}
+                         {/* Safe access to options */}
+                         {userAnswer !== null && question.options 
+                            ? question.options[userAnswer] 
+                            : '(ไม่ได้ตอบ)'}
                       </span>
                     </div>
 
-                    {!isCorrect && (
+                    {!isCorrect && question.options && (
                       <div className="p-3 rounded-lg bg-green-50 text-green-700 border border-green-200 text-sm font-medium">
                         <span className="font-bold mr-2">คำตอบที่ถูก:</span> 
-                        {question.options[question.correctAnswer]}
+                         {/* Cast correctAnswer to number */}
+                         {question.options[question.correctAnswer as number]}
                       </div>
                     )}
 
@@ -216,7 +220,8 @@ export default function VoiceQuiz() {
             />
 
             <div className="space-y-3 flex-1">
-              {questionData.options.map((option, index) => {
+              {/* Safe map over options */}
+              {questionData.options?.map((option, index) => {
                 const isSelected = userAnswers[currentQuestionIndex] === index;
                 
                 return (

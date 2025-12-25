@@ -85,7 +85,7 @@ export default function PartsOfSpeechQuiz() {
             </div>
             
             <h2 className="text-3xl font-black text-slate-800 mb-2">Quiz Completed!</h2>
-            <p className="text-slate-500 mb-8 font-medium">ทดสอบ Parts of Speech 30 ข้อ เรียบร้อย!</p>
+            <p className="text-slate-500 mb-8 font-medium">ทดสอบ Parts of Speech {partsOfSpeechQuizData.length} ข้อ เรียบร้อย!</p>
             
             <div className="flex justify-center items-end gap-2 mb-8">
               <span className="text-6xl font-black text-indigo-600">{score}</span>
@@ -159,14 +159,18 @@ export default function PartsOfSpeechQuiz() {
                     `}>
                       <span>
                         <span className="font-bold mr-2">คำตอบของคุณ:</span> 
-                        {userAnswer !== null ? question.options[userAnswer] : '(ไม่ได้ตอบ)'}
+                        {/* Safe access to options */}
+                        {userAnswer !== null && question.options 
+                            ? question.options[userAnswer] 
+                            : '(ไม่ได้ตอบ)'}
                       </span>
                     </div>
 
-                    {!isCorrect && (
+                    {!isCorrect && question.options && (
                       <div className="p-3 rounded-lg bg-green-50 text-green-700 border border-green-200 text-sm font-medium">
                         <span className="font-bold mr-2">คำตอบที่ถูก:</span> 
-                        {question.options[question.correctAnswer]}
+                        {/* Cast correctAnswer to number for indexing */}
+                        {question.options[question.correctAnswer as number]}
                       </div>
                     )}
 
@@ -222,7 +226,8 @@ export default function PartsOfSpeechQuiz() {
             />
 
             <div className="space-y-3 flex-1">
-              {questionData.options.map((option, index) => {
+              {/* Safe map over options */}
+              {questionData.options?.map((option, index) => {
                 const isSelected = userAnswers[currentQuestionIndex] === index;
                 
                 return (

@@ -4,6 +4,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   // --- Noun (1-4) ---
   {
     id: 1,
+    type: 'choice',
     question: "Identify the **Collective Noun** in this sentence: 'The team celebrated their victory.'",
     options: ["Team", "Victory", "Celebrated", "Their"],
     correctAnswer: 0,
@@ -11,6 +12,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 2,
+    type: 'choice',
     question: "Which of the following is an **Abstract Noun**?",
     options: ["Table", "Happiness", "School", "Doctor"],
     correctAnswer: 1,
@@ -18,6 +20,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 3,
+    type: 'choice',
     question: "Identify the **Compound Noun**.",
     options: ["Toothpaste", "Tooth", "Paste", "Big"],
     correctAnswer: 0,
@@ -25,6 +28,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 4,
+    type: 'choice',
     question: "'Bangkok' is an example of a/an ...",
     options: ["Common Noun", "Proper Noun", "Abstract Noun", "Collective Noun"],
     correctAnswer: 1,
@@ -34,6 +38,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   // --- Pronoun (5-9) ---
   {
     id: 5,
+    type: 'choice',
     question: "She taught **herself** to play the guitar. The bold word is a...",
     options: ["Possessive Pronoun", "Reflexive Pronoun", "Object Pronoun", "Relative Pronoun"],
     correctAnswer: 1,
@@ -41,6 +46,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 6,
+    type: 'choice',
     question: "They looked at **each other** in surprise.",
     options: ["Reflexive Pronoun", "Reciprocal Pronoun", "Indefinite Pronoun", "Demonstrative Pronoun"],
     correctAnswer: 1,
@@ -48,6 +54,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 7,
+    type: 'choice',
     question: "**Who** is calling? The bold word is a/an...",
     options: ["Interrogative Pronoun", "Relative Pronoun", "Demonstrative Pronoun", "Indefinite Pronoun"],
     correctAnswer: 0,
@@ -55,6 +62,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 8,
+    type: 'choice',
     question: "This is the book **which** I bought yesterday.",
     options: ["Interrogative Pronoun", "Relative Pronoun", "Subject Pronoun", "Object Pronoun"],
     correctAnswer: 1,
@@ -62,6 +70,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 9,
+    type: 'choice',
     question: "**Someone** is knocking at the door.",
     options: ["Definite Pronoun", "Indefinite Pronoun", "Personal Pronoun", "Possessive Pronoun"],
     correctAnswer: 1,
@@ -71,6 +80,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   // --- Verb (10-13) ---
   {
     id: 10,
+    type: 'choice',
     question: "I **know** the answer. The verb 'know' is a...",
     options: ["Action Verb", "Stative Verb", "Linking Verb", "Auxiliary Verb"],
     correctAnswer: 1,
@@ -78,6 +88,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 11,
+    type: 'choice',
     question: "She **can** speak three languages.",
     options: ["Action Verb", "Modal Verb", "Linking Verb", "Intransitive Verb"],
     correctAnswer: 1,
@@ -85,6 +96,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 12,
+    type: 'choice',
     question: "He **sleeps** early. The verb 'sleeps' is...",
     options: ["Transitive", "Intransitive", "Linking", "Auxiliary"],
     correctAnswer: 1,
@@ -92,6 +104,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 13,
+    type: 'choice',
     question: "She **eats** an apple. The verb 'eats' is...",
     options: ["Transitive", "Intransitive", "Linking", "Modal"],
     correctAnswer: 0,
@@ -101,6 +114,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   // --- Adjective (14-16) ---
   {
     id: 14,
+    type: 'choice',
     question: "Choose the correct order of adjectives: 'A ______ house.'",
     options: ["beautiful small old", "small beautiful old", "old beautiful small", "small old beautiful"],
     correctAnswer: 0,
@@ -108,6 +122,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 15,
+    type: 'choice',
     question: "**This** car is mine. 'This' functions as a...",
     options: ["Descriptive Adjective", "Demonstrative Adjective", "Quantitative Adjective", "Possessive Adjective"],
     correctAnswer: 1,
@@ -115,6 +130,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 16,
+    type: 'choice',
     question: "She is the **smartest** student in class.",
     options: ["Comparative Adjective", "Superlative Adjective", "Descriptive Adjective", "Proper Adjective"],
     correctAnswer: 1,
@@ -124,6 +140,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   // --- Adverb (17-19) ---
   {
     id: 17,
+    type: 'choice',
     question: "He speaks **slowly**. 'Slowly' is an Adverb of...",
     options: ["Time", "Place", "Manner", "Frequency"],
     correctAnswer: 2,
@@ -131,6 +148,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 18,
+    type: 'choice',
     question: "She **always** drinks coffee in the morning.",
     options: ["Adverb of Degree", "Adverb of Time", "Adverb of Frequency", "Adverb of Place"],
     correctAnswer: 2,
@@ -138,6 +156,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 19,
+    type: 'choice',
     question: "It is **very** hot today. 'Very' is an Adverb of...",
     options: ["Degree", "Manner", "Place", "Time"],
     correctAnswer: 0,
@@ -147,6 +166,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   // --- Preposition (20-22) ---
   {
     id: 20,
+    type: 'choice',
     question: "The cat is **under** the table.",
     options: ["Preposition of Time", "Preposition of Place", "Preposition of Movement", "Preposition of Cause"],
     correctAnswer: 1,
@@ -154,6 +174,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 21,
+    type: 'choice',
     question: "We will meet **at** 5 PM.",
     options: ["Preposition of Place", "Preposition of Time", "Preposition of Movement", "Preposition of Agent"],
     correctAnswer: 1,
@@ -161,6 +182,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 22,
+    type: 'choice',
     question: "He walked **into** the room.",
     options: ["Preposition of Place", "Preposition of Movement", "Preposition of Time", "Preposition of Manner"],
     correctAnswer: 1,
@@ -170,6 +192,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   // --- Conjunction (23-25) ---
   {
     id: 23,
+    type: 'choice',
     question: "I like coffee, **but** my sister likes tea.",
     options: ["Subordinating Conjunction", "Coordinating Conjunction", "Correlative Conjunction", "Adverbial Conjunction"],
     correctAnswer: 1,
@@ -177,6 +200,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 24,
+    type: 'choice',
     question: "I stayed home **because** it was raining.",
     options: ["Coordinating Conjunction", "Subordinating Conjunction", "Correlative Conjunction", "Relative Pronoun"],
     correctAnswer: 1,
@@ -184,6 +208,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 25,
+    type: 'choice',
     question: "**Both** Tom **and** Jerry are here.",
     options: ["Coordinating Conjunction", "Subordinating Conjunction", "Correlative Conjunction", "Preposition"],
     correctAnswer: 2,
@@ -193,6 +218,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   // --- Determiner (26-28) ---
   {
     id: 26,
+    type: 'choice',
     question: "I have **an** apple.",
     options: ["Demonstrative", "Quantifier", "Article", "Possessive"],
     correctAnswer: 2,
@@ -200,6 +226,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 27,
+    type: 'choice',
     question: "Do you have **any** money?",
     options: ["Article", "Demonstrative", "Quantifier", "Interjection"],
     correctAnswer: 2,
@@ -207,6 +234,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 28,
+    type: 'choice',
     question: "**My** car is red.",
     options: ["Possessive Determiner", "Demonstrative Determiner", "Article", "Quantifier"],
     correctAnswer: 0,
@@ -216,6 +244,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   // --- Interjection (29-30) ---
   {
     id: 29,
+    type: 'choice',
     question: "**Wow!** That looks amazing.",
     options: ["Conjunction", "Preposition", "Interjection", "Adverb"],
     correctAnswer: 2,
@@ -223,6 +252,7 @@ export const partsOfSpeechQuizData: QuizQuestion[] = [
   },
   {
     id: 30,
+    type: 'choice',
     question: "Which word is an Interjection? 'Hey! Come here.'",
     options: ["Come", "Here", "Hey", "None"],
     correctAnswer: 2,
