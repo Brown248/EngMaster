@@ -165,22 +165,11 @@ export default function Grammar() {
                                 </div>
                             )}
 
-                            {/* ปุ่ม Start Quiz เฉพาะหัวข้อนั้นๆ */}
-                            {hasQuiz(activeTopic.id, sub.name) && (
-                                <div className="mt-8 pt-6 border-t border-slate-200 flex justify-end">
-                                    <button 
-                                        onClick={() => startQuiz(activeTopic.id, sub.name)}
-                                        className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition-all hover:scale-105 shadow-lg"
-                                    >
-                                        <PlayCircle size={20} />
-                                        ทำแบบทดสอบ {sub.name.split(' ')[0]}
-                                    </button>
-                                </div>
-                            )}
+                            {/* ส่วนปุ่ม "ทำแบบทดสอบ" สีดำ ถูกลบออกแล้ว */}
                         </div>
                     ))}
                     
-                    {/* ปุ่ม Start Quiz รวม สำหรับ Tenses หรือ Voice */}
+                    {/* ปุ่ม Start Quiz รวม สำหรับ Tenses หรือ Voice (สียังคงเป็น Gradient) */}
                     {!selectedSubtopic && hasQuiz(activeTopic?.id || '') && activeTopic?.id !== 'parts-of-speech' && (
                         <div className="mt-8 text-center">
                             <button 
