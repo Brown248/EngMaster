@@ -1,4 +1,3 @@
-// src/data/grammarData.ts
 import { GrammarTopic } from '../types';
 
 export const grammarTopics: GrammarTopic[] = [
@@ -9,108 +8,599 @@ export const grammarTopics: GrammarTopic[] = [
     color: 'indigo',
     details: {
       title: 'ชนิดของคำ (Parts of Speech)',
-      description: 'พื้นฐานสำคัญของภาษาอังกฤษ เจาะลึกครบทั้ง 9 ชนิด',
+      description: 'พื้นฐานสำคัญของภาษาอังกฤษ เจาะลึกครบทั้ง 9 ชนิด แยกย่อยทุกประเด็น',
       subtopics: [
         {
-          name: 'Noun (คำนาม)',
-          usage: 'ใช้เรียกชื่อคน สัตว์ สิ่งของ สถานที่ (มี 8 ประเภทหลัก)',
-          structure: 'Common, Proper, Concrete, Abstract, Countable, Uncountable, Collective, Compound',
-          examples: [
-            '**Common:** I saw a **dog**.',
-            '**Proper:** She lives in **Bangkok**.',
-            '**Abstract:** **Love** is all around.',
-            '**Collective:** The **team** won the match.',
-            '**Compound:** I need some **toothpaste**.'
+          name: '1.1 Noun (คำนาม)',
+          usage: 'คำที่ใช้เรียกคน สัตว์ สิ่งของ สถานที่ (มี 8 ประเภท)',
+          types: [
+            {
+              name: 'Common Noun (นามทั่วไป)',
+              usage: 'ใช้เรียกสิ่งทั่วไป ไม่เจาะจงชื่อ',
+              examples: [
+                'I saw a **dog** in the park. (ฉันเห็นสุนัขตัวหนึ่งในสวน)',
+                'She wants to buy a new **car**. (เธออยากซื้อรถคันใหม่)',
+                'The **city** is very busy today. (เมืองดูวุ่นวายมากวันนี้)',
+                'He is a dedicated **teacher**. (เขาเป็นครูที่ทุ่มเท)',
+                'Please pass me the **book**. (ช่วยส่งหนังสือเล่มนั้นให้ฉันหน่อย)'
+              ]
+            },
+            {
+              name: 'Proper Noun (นามเฉพาะ)',
+              usage: 'ชื่อเฉพาะของคน สถานที่ (ขึ้นต้นด้วยตัวใหญ่เสมอ)',
+              examples: [
+                'I live in **Bangkok**. (ฉันอาศัยอยู่ในกรุงเทพฯ)',
+                '**Lisa** is singing a song. (ลิซ่ากำลังร้องเพลง)',
+                'We visited **Japan** last year. (พวกเราไปเที่ยวญี่ปุ่นเมื่อปีที่แล้ว)',
+                'Today is **Monday**. (วันนี้คือวันจันทร์)',
+                'He works for **Toyota**. (เขาทำงานที่บริษัทโตโยต้า)'
+              ]
+            },
+            {
+              name: 'Concrete Noun (รูปธรรม)',
+              usage: 'สิ่งที่จับต้องได้ มองเห็นได้ สัมผัสได้',
+              examples: [
+                'The **table** is made of wood. (โต๊ะตัวนี้ทำจากไม้)',
+                'Please close the **door**. (กรุณาปิดประตูด้วย)',
+                'I hear a loud **noise**. (ฉันได้ยินเสียงดัง)',
+                'The **water** is very cold. (น้ำเย็นมาก)',
+                'She holds a red **flower**. (เธอถือดอกไม้สีแดง)'
+              ]
+            },
+            {
+              name: 'Abstract Noun (นามธรรม)',
+              usage: 'ความรู้สึก สภาวะ ความคิด ที่จับต้องไม่ได้',
+              examples: [
+                '**Love** makes the world go round. (ความรักทำให้โลกหมุนไป)',
+                'She showed great **kindness**. (เธอแสดงความเมตตาอย่างมาก)',
+                '**Honesty** is the best policy. (ความซื่อสัตย์คือนโยบายที่ดีที่สุด)',
+                'He is full of **happiness**. (เขาเต็มไปด้วยความสุข)',
+                '**Freedom** is important for everyone. (อิสรภาพเป็นสิ่งสำคัญสำหรับทุกคน)'
+              ]
+            },
+            {
+              name: 'Countable Noun (นามนับได้)',
+              usage: 'นับเป็นชิ้น/อันได้ มีรูปเอกพจน์และพหูพจน์',
+              examples: [
+                'I have two **books**. (ฉันมีหนังสือสองเล่ม)',
+                'There is an **apple** on the desk. (มีแอปเปิ้ลหนึ่งผลบนโต๊ะ)',
+                'Three **cats** are playing. (แมวสามตัวกำลังเล่นกัน)',
+                'She bought a new **shirt**. (เธอซื้อเสื้อเชิ้ตตัวใหม่)',
+                'Many **students** are absent today. (วันนี้นักเรียนหลายคนขาดเรียน)'
+              ]
+            },
+            {
+              name: 'Uncountable Noun (นามนับไม่ได้)',
+              usage: 'นับไม่ได้ ต้องใช้ภาชนะตวง หรือมองเป็นมวลรวม',
+              examples: [
+                'Please give me some **water**. (ขอน้ำให้ฉันหน่อย)',
+                'I like to eat **rice**. (ฉันชอบกินข้าว)',
+                '**Sugar** is sweet. (น้ำตาลมีรสหวาน)',
+                'Her **hair** is very long. (ผมของเธอยาวมาก)',
+                'Do you have any **money**? (คุณมีเงินบ้างไหม?)'
+              ]
+            },
+            {
+              name: 'Collective Noun (สมุหนาม)',
+              usage: 'คำนามที่อยู่เป็นกลุ่ม เป็นคณะ',
+              examples: [
+                'The **team** won the match. (ทีมชนะการแข่งขัน)',
+                'A **flock** of birds flew away. (ฝูงนกบินหนีไป)',
+                'My **family** is eating dinner. (ครอบครัวของฉันกำลังทานมื้อเย็น)',
+                'The **jury** made a decision. (คณะลูกขุนได้ตัดสินใจแล้ว)',
+                'He gave her a **bunch** of flowers. (เขาให้ช่อดอกไม้แก่เธอ)'
+              ]
+            },
+            {
+              name: 'Compound Noun (นามประสม)',
+              usage: 'คำนาม 2 คำมารวมกันเกิดความหมายใหม่',
+              examples: [
+                'I need to buy **toothpaste**. (ฉันต้องซื้อยาสีฟัน)',
+                'Let\'s go to the **bedroom**. (ไปที่ห้องนอนกันเถอะ)',
+                'The **bus stop** is over there. (ป้ายรถเมล์อยู่ตรงนั้น)',
+                'She is my **mother-in-law**. (เธอคือแม่ยายของฉัน)',
+                'Look at that beautiful **sunflower**. (ดูดอกทานตะวันสวยๆ นั่นสิ)'
+              ]
+            }
           ]
         },
         {
-          name: 'Pronoun (สรรพนาม)',
-          usage: 'ใช้แทนคำนาม (มี 9 ประเภท)',
-          structure: 'Subject, Object, Possessive, Reflexive, Demonstrative, Relative, Interrogative, Indefinite, Reciprocal',
-          examples: [
-            '**Subject:** **She** loves cats.',
-            '**Reflexive:** She taught **herself** English.',
-            '**Relative:** The man **who** called is here.',
-            '**Indefinite:** **Someone** is knocking.',
-            '**Reciprocal:** They help **each other**.'
+          name: '1.2 Pronoun (สรรพนาม)',
+          usage: 'คำที่ใช้แทนคำนาม เพื่อไม่ให้พูดซ้ำ (มี 9 ประเภท)',
+          types: [
+            { 
+              name: 'Subject Pronoun', 
+              usage: 'ทำหน้าที่เป็นประธานของประโยค', 
+              examples: [
+                '**I** go to school every day. (ฉันไปโรงเรียนทุกวัน)',
+                '**She** likes to eat ice cream. (เธอชอบกินไอศกรีม)',
+                '**They** play football in the field. (พวกเขาเล่นฟุตบอลในสนาม)',
+                '**We** are happy to see you. (พวกเราดีใจที่ได้เจอคุณ)',
+                '**It** is raining heavily outside. (ฝนกำลังตกหนักข้างนอก)'
+              ] 
+            },
+            { 
+              name: 'Object Pronoun', 
+              usage: 'ทำหน้าที่เป็นกรรมของประโยค', 
+              examples: [
+                'She loves **me**. (เธอรักฉัน)',
+                'I saw **him** at the market. (ฉันเห็นเขาที่ตลาด)',
+                'Please give it to **them**. (กรุณาส่งมันให้พวกเขา)',
+                'Teacher called **us**. (คุณครูเรียกพวกเรา)',
+                'Can you help **her**? (คุณช่วยเธอได้ไหม?)'
+              ] 
+            },
+            { 
+              name: 'Possessive Pronoun', 
+              usage: 'แสดงความเป็นเจ้าของ (ไม่ต้องมีนามตามหลัง)', 
+              examples: [
+                'This book is **mine**. (หนังสือเล่มนี้เป็นของฉัน)',
+                'Is this pen **yours**? (ปากกาด้ามนี้เป็นของคุณหรือเปล่า?)',
+                'The house is **theirs**. (บ้านหลังนั้นเป็นของพวกเขา)',
+                'The victory is **ours**. (ชัยชนะเป็นของพวกเรา)',
+                'That bag is **hers**. (กระเป๋าใบนั้นเป็นของเธอ)'
+              ] 
+            },
+            { 
+              name: 'Reflexive Pronoun', 
+              usage: 'สรรพนามสะท้อน (กระทำต่อตัวเอง)', 
+              examples: [
+                'She taught **herself** English. (เธอสอนภาษาอังกฤษด้วยตัวเอง)',
+                'I cut **myself** while cooking. (ฉันทำมีดบาดตัวเองตอนทำอาหาร)',
+                'They enjoyed **themselves** at the party. (พวกเขาสนุกสนานกันเองในงานปาร์ตี้)',
+                'He blamed **himself** for the mistake. (เขาโทษตัวเองสำหรับความผิดพลาด)',
+                'The cat cleans **itself**. (แมวทำความสะอาดตัวเอง)'
+              ] 
+            },
+            { 
+              name: 'Demonstrative Pronoun', 
+              usage: 'สรรพนามชี้เฉพาะ (นี่, นั่น)', 
+              examples: [
+                '**This** is my favorite book. (นี่คือหนังสือเล่มโปรดของฉัน)',
+                '**That** looks delicious. (นั่นดูน่าอร่อยจัง)',
+                '**These** are my shoes. (เหล่านี้คือรองเท้าของฉัน)',
+                '**Those** are beautiful birds. (เหล่านั้นคือนกที่สวยงาม)',
+                'I don\'t like **this**. (ฉันไม่ชอบสิ่งนี้เลย)'
+              ] 
+            },
+            { 
+              name: 'Relative Pronoun', 
+              usage: 'เชื่อมประโยคขยายคำนาม (ผู้ซึ่ง, ที่ซึ่ง)', 
+              examples: [
+                'The man **who** called is here. (ผู้ชายคนที่โทรมาอยู่ที่นี่แล้ว)',
+                'This is the car **which** I bought. (นี่คือรถคันที่ฉันซื้อมา)',
+                'The book **that** you gave me is good. (หนังสือที่คุณให้ฉันมามันดีมาก)',
+                'She is the girl **whose** brother is a doctor. (เธอคือเด็กผู้หญิงที่พี่ชายเป็นหมอ)',
+                'I know the place **where** he lives. (ฉันรู้สถานที่ที่เขาอาศัยอยู่)'
+              ] 
+            },
+            { 
+              name: 'Interrogative Pronoun', 
+              usage: 'ใช้สำหรับถามคำถาม', 
+              examples: [
+                '**Who** are you? (คุณคือใคร?)',
+                '**What** is this? (นี่คืออะไร?)',
+                '**Where** are you going? (คุณกำลังจะไปไหน?)',
+                '**Whose** pen is this? (ปากกานี้เป็นของใคร?)',
+                '**Which** do you prefer? (คุณชอบอันไหนมากกว่า?)'
+              ] 
+            },
+            { 
+              name: 'Indefinite Pronoun', 
+              usage: 'สรรพนามไม่เจาะจง (ใครบางคน, ทุกคน)', 
+              examples: [
+                '**Someone** is knocking at the door. (มีใครบางคนกำลังเคาะประตู)',
+                '**Anyone** can do this task. (ใครๆ ก็ทำงานนี้ได้)',
+                '**Everybody** loves music. (ทุกคนรักดนตรี)',
+                'I have **nothing** to say. (ฉันไม่มีอะไรจะพูด)',
+                '**Something** smells good. (มีบางอย่างกลิ่นหอมจัง)'
+              ] 
+            },
+            { 
+              name: 'Reciprocal Pronoun', 
+              usage: 'สรรพนามแสดงความสัมพันธ์ซึ่งกันและกัน', 
+              examples: [
+                'They help **each other**. (พวกเขาช่วยเหลือซึ่งกันและกัน)',
+                'We love **one another**. (พวกเรารักซึ่งกันและกัน)',
+                'The two friends hugged **each other**. (เพื่อนสองคนกอดกัน)',
+                'They looked at **one another**. (พวกเขามองหน้ากัน)',
+                'We should respect **each other**. (เราควรเคารพซึ่งกันและกัน)'
+              ] 
+            }
           ]
         },
         {
-          name: 'Verb (กริยา)',
+          name: '1.3 Verb (กริยา)',
           usage: 'แสดงการกระทำหรือสภาวะ',
-          structure: 'Action, Stative, Linking, Transitive, Intransitive, Auxiliary, Modal',
-          examples: [
-            '**Action:** She **runs** fast.',
-            '**Stative:** I **know** him.',
-            '**Linking:** He **seems** tired.',
-            '**Transitive:** I **eat** an apple. (ต้องการกรรม)',
-            '**Modal:** You **must** go.'
+          types: [
+            { 
+              name: 'Action Verb', 
+              usage: 'แสดงการกระทำทางกายภาพหรือจิตใจ', 
+              examples: [
+                'She **runs** very fast. (เธอวิ่งเร็วมาก)',
+                'We **eat** pizza for dinner. (พวกเรากินพิซซ่าเป็นมื้อเย็น)',
+                'He **writes** a letter to his friend. (เขาเขียนจดหมายหาเพื่อน)',
+                'They **play** football every evening. (พวกเขาเล่นฟุตบอลทุกเย็น)',
+                'I **think** about my future. (ฉันคิดเกี่ยวกับอนาคตของฉัน)'
+              ] 
+            },
+            { 
+              name: 'Stative Verb', 
+              usage: 'แสดงสภาวะ ความรู้สึก (มักไม่เติม ing)', 
+              examples: [
+                'I **know** the answer. (ฉันรู้คำตอบ)',
+                'She **loves** cats very much. (เธอรักแมวมาก)',
+                'He **believes** in ghosts. (เขาเชื่อเรื่องผี)',
+                'This food **tastes** good. (อาหารนี้รสชาติดี)',
+                'I **understand** what you mean. (ฉันเข้าใจสิ่งที่คุณหมายถึง)'
+              ] 
+            },
+            { 
+              name: 'Linking Verb', 
+              usage: 'เชื่อมประธานกับคุณสมบัติ (ไม่ใช่การกระทำ)', 
+              examples: [
+                'He **is** a smart student. (เขาเป็นนักเรียนที่ฉลาด)',
+                'You **look** tired today. (วันนี้คุณดูเหนื่อยนะ)',
+                'The weather **seems** nice. (อากาศดูเหมือนจะดี)',
+                'She **became** a doctor. (เธอกลายเป็นหมอ)',
+                'It **feels** soft. (มันให้ความรู้สึกนุ่ม)'
+              ] 
+            },
+            { 
+              name: 'Transitive Verb', 
+              usage: 'กริยาที่ต้องการกรรมมารองรับ', 
+              examples: [
+                'I **eat** an apple. (ฉันกินแอปเปิ้ล - ต้องมีแอปเปิ้ลเป็นกรรม)',
+                'She **kicked** the ball. (เธอเตะลูกบอล)',
+                'He **bought** a new car. (เขาซื้อรถคันใหม่)',
+                'They **built** a house. (พวกเขาสร้างบ้าน)',
+                'We **watch** television. (พวกเราดูโทรทัศน์)'
+              ] 
+            },
+            { 
+              name: 'Intransitive Verb', 
+              usage: 'กริยาที่ไม่ต้องการกรรม สมบูรณ์ในตัวเอง', 
+              examples: [
+                'The baby **sleeps**. (ทารกนอนหลับ)',
+                'Birds **fly** in the sky. (นกบินบนท้องฟ้า)',
+                'She **smiled** happily. (เธอยิ้มอย่างมีความสุข)',
+                'He **runs** in the park. (เขาวิ่งในสวน)',
+                'The sun **rises**. (พระอาทิตย์ขึ้น)'
+              ] 
+            },
+            { 
+              name: 'Auxiliary Verb', 
+              usage: 'กริยาช่วย (Do, Have, Be) ช่วยสร้างประโยค', 
+              examples: [
+                'I **do** not know him. (ฉันไม่รู้จักเขา)',
+                'She **has** finished her work. (เธอทำงานของเธอเสร็จแล้ว)',
+                'They **are** playing football. (พวกเขากำลังเล่นฟุตบอล)',
+                '**Do** you like coffee? (คุณชอบกาแฟไหม?)',
+                'He **did** not come yesterday. (เขาไม่ได้มาเมื่อวาน)'
+              ] 
+            },
+            { 
+              name: 'Modal Verb', 
+              usage: 'กริยาช่วยบอกความสามารถ ความเป็นไปได้', 
+              examples: [
+                'I **can** swim. (ฉันว่ายน้ำได้)',
+                'You **must** go now. (คุณต้องไปเดี๋ยวนี้)',
+                'We **should** sleep early. (พวกเราควรนอนเร็ว)',
+                'It **may** rain today. (ฝนอาจจะตกวันนี้)',
+                '**Could** you help me? (คุณช่วยฉันหน่อยได้ไหม?)'
+              ] 
+            }
           ]
         },
         {
-          name: 'Adjective (คุณศัพท์)',
+          name: '1.4 Adjective (คุณศัพท์)',
           usage: 'ขยายคำนาม บอกลักษณะ หรือเปรียบเทียบ',
-          structure: 'Descriptive, Quantitative, Demonstrative, Possessive, Comparative, Superlative',
-          examples: [
-            '**Descriptive:** A **beautiful** house.',
-            '**Order:** A **beautiful small old wooden** house.',
-            '**Comparative:** This car is **bigger** than that one.',
-            '**Superlative:** She is the **smartest** student.',
-            '**Possessive:** **My** car is red.'
+          types: [
+             { 
+               name: 'Descriptive', 
+               usage: 'บอกลักษณะ คุณภาพ', 
+               examples: [
+                 'A **big** house stands on the hill. (บ้านหลังใหญ่อยู่บนเนินเขา)',
+                 'She drives a **red** car. (เธอขับรถสีแดง)',
+                 'The **angry** dog barked. (สุนัขที่โกรธเห่า)',
+                 'He is a **rich** man. (เขาเป็นคนรวย)',
+                 'The soup is **hot**. (ซุปร้อน)'
+               ] 
+             },
+             { 
+               name: 'Quantitative', 
+               usage: 'บอกปริมาณ จำนวน', 
+               examples: [
+                 'I have **many** friends here. (ฉันมีเพื่อนหลายคนที่นี่)',
+                 'There is **some** water left. (มีน้ำเหลืออยู่บ้าง)',
+                 'She has **three** cats. (เธอมีแมวสามตัว)',
+                 'He ate the **whole** cake. (เขากินเค้กทั้งก้อน)',
+                 'I have **no** money. (ฉันไม่มีเงินเลย)'
+               ] 
+             },
+             { 
+               name: 'Demonstrative', 
+               usage: 'ชี้เฉพาะเจาะจง (วางหน้าคำนาม)', 
+               examples: [
+                 '**This** book is interesting. (หนังสือเล่มนี้น่าสนใจ)',
+                 '**That** car is fast. (รถคันนั้นเร็ว)',
+                 '**These** apples are fresh. (แอปเปิ้ลเหล่านี้สดใหม่)',
+                 '**Those** birds are flying away. (นกเหล่านั้นกำลังบินหนีไป)',
+                 'I like **this** song. (ฉันชอบเพลงนี้)'
+               ] 
+             },
+             { 
+               name: 'Possessive', 
+               usage: 'แสดงความเป็นเจ้าของ (วางหน้าคำนาม)', 
+               examples: [
+                 '**My** pen is blue. (ปากกาของฉันสีน้ำเงิน)',
+                 '**Your** name is beautiful. (ชื่อของคุณไพเราะ)',
+                 '**His** house is big. (บ้านของเขาหลังใหญ่)',
+                 '**Her** hair is long. (ผมของเธอยาว)',
+                 '**Our** team won. (ทีมของพวกเราชนะ)'
+               ] 
+             },
+             { 
+               name: 'Interrogative', 
+               usage: 'ใช้ขยายคำนามในประโยคคำถาม', 
+               examples: [
+                 '**Which** color do you like? (คุณชอบสีไหน?)',
+                 '**What** time is it? (มันคือกี่โมง?)',
+                 '**Whose** shoes are these? (รองเท้านี้เป็นของใคร?)',
+                 '**Which** way should we go? (เราควรไปทางไหน?)',
+                 '**What** book are you reading? (คุณกำลังอ่านหนังสืออะไร?)'
+               ] 
+             },
+             { 
+               name: 'Comparative', 
+               usage: 'ขั้นกว่า (เปรียบเทียบ 2 สิ่ง)', 
+               examples: [
+                 'This car is **bigger** than that one. (รถคันนี้ใหญ่กว่าคันนั้น)',
+                 'She is **taller** than me. (เธอสูงกว่าฉัน)',
+                 'The exam was **more difficult** than I thought. (ข้อสอบยากกว่าที่ฉันคิด)',
+                 'Today is **hotter** than yesterday. (วันนี้ร้อนกว่าเมื่อวาน)',
+                 'He runs **faster** than his brother. (เขาวิ่งเร็วกว่าพี่ชาย)'
+               ] 
+             },
+             { 
+               name: 'Superlative', 
+               usage: 'ขั้นสุด (เปรียบเทียบ 3 สิ่งขึ้นไป)', 
+               examples: [
+                 'She is the **smartest** student in class. (เธอเป็นนักเรียนที่ฉลาดที่สุดในห้อง)',
+                 'This is the **biggest** house in the village. (นี่คือบ้านหลังใหญ่ที่สุดในหมู่บ้าน)',
+                 'He is the **most handsome** man here. (เขาเป็นผู้ชายที่หล่อที่สุดที่นี่)',
+                 'It was the **best** day of my life. (มันเป็นวันที่ดีที่สุดในชีวิตของฉัน)',
+                 'Mt. Everest is the **highest** mountain. (ยอดเขาเอเวอร์เรสต์สูงที่สุด)'
+               ] 
+             },
+             { 
+               name: 'Order of Adjectives', 
+               usage: 'ลำดับการวาง (จำนวน-ความเห็น-ขนาด-อายุ-รูปทรง-สี-ถิ่น-วัสดุ)', 
+               examples: [
+                 'A **beautiful small old wooden** house. (บ้านไม้เก่าหลังเล็กที่สวยงาม)',
+                 'Two **lovely huge black** dogs. (สุนัขสีดำตัวใหญ่ที่น่ารักสองตัว)',
+                 'A **delicious hot Italian** pizza. (พิซซ่าอิตาเลียนร้อนๆ แสนอร่อย)',
+                 'My **new red silk** dress. (ชุดเดรสผ้าไหมสีแดงชุดใหม่ของฉัน)',
+                 'The **round plastic** table. (โต๊ะพลาสติกทรงกลม)'
+               ] 
+             }
           ]
         },
         {
-          name: 'Adverb (วิเศษณ์)',
+          name: '1.5 Adverb (วิเศษณ์)',
           usage: 'ขยายกริยา คุณศัพท์ หรือวิเศษณ์ด้วยกันเอง',
-          structure: 'Manner, Time, Frequency, Place, Degree',
-          examples: [
-            '**Manner:** He speaks **clearly**.',
-            '**Frequency:** I **often** go there.',
-            '**Degree:** It is **very** hot.',
-            '**Time:** Do it **now**.',
-            '**Place:** Come **here**.'
+          types: [
+             { 
+               name: 'Manner', 
+               usage: 'บอกอาการ (ทำอย่างไร)', 
+               examples: [
+                 'He speaks **clearly**. (เขาพูดอย่างชัดเจน)',
+                 'Please drive **carefully**. (โปรดขับรถอย่างระมัดระวัง)',
+                 'She sings **beautifully**. (เธอร้องเพลงอย่างไพเราะ)',
+                 'They ran **quickly**. (พวกเขาวิ่งอย่างรวดเร็ว)',
+                 'He works **hard**. (เขาทำงานหนัก)'
+               ] 
+             },
+             { 
+               name: 'Time', 
+               usage: 'บอกเวลา (เมื่อไหร่)', 
+               examples: [
+                 'Do it **now**. (ทำมันเดี๋ยวนี้)',
+                 'See you **tomorrow**. (เจอกันพรุ่งนี้)',
+                 'I met him **yesterday**. (ฉันเจอเขาเมื่อวาน)',
+                 'She arrived **late**. (เธอมาถึงสาย)',
+                 'We will go **soon**. (พวกเราจะไปเร็วๆ นี้)'
+               ] 
+             },
+             { 
+               name: 'Frequency', 
+               usage: 'บอกความถี่ (บ่อยแค่ไหน)', 
+               examples: [
+                 'I **often** go to the park. (ฉันไปสวนสาธารณะบ่อยๆ)',
+                 'She **never** tells a lie. (เธอไม่เคยโกหก)',
+                 'We **always** eat breakfast. (พวกเรากินมื้อเช้าเสมอ)',
+                 'He **sometimes** walks to work. (บางครั้งเขาก็เดินไปทำงาน)',
+                 'They **rarely** watch TV. (พวกเขาแทบจะไม่ดูทีวี)'
+               ] 
+             },
+             { 
+               name: 'Place', 
+               usage: 'บอกสถานที่ (ที่ไหน)', 
+               examples: [
+                 'Come **here**. (มาที่นี่)',
+                 'The dog is playing **outside**. (สุนัขกำลังเล่นอยู่ข้างนอก)',
+                 'Please sit **down**. (กรุณานั่งลง)',
+                 'Look **up** at the sky. (มองขึ้นไปบนท้องฟ้า)',
+                 'I looked **everywhere**. (ฉันมองหาทุกที่แล้ว)'
+               ] 
+             },
+             { 
+               name: 'Degree', 
+               usage: 'บอกระดับ (แค่ไหน)', 
+               examples: [
+                 'It is **very** hot today. (วันนี้อากาศร้อนมาก)',
+                 'She is **so** beautiful. (เธอสวยเหลือเกิน)',
+                 'I am **quite** tired. (ฉันค่อนข้างเหนื่อย)',
+                 'The movie was **too** long. (หนังยาวเกินไป)',
+                 'He is **extremely** smart. (เขาฉลาดสุดๆ)'
+               ] 
+             }
           ]
         },
         {
-          name: 'Preposition (บุพบท)',
+          name: '1.6 Preposition (บุพบท)',
           usage: 'เชื่อมคำเพื่อบอกตำแหน่ง เวลา หรือความสัมพันธ์',
-          structure: 'Place, Time, Movement, Cause',
-          examples: [
-            '**Place:** The keys are **under** the table.',
-            '**Time:** See you **at** 5 PM.',
-            '**Movement:** Walk **into** the room.',
-            '**Cause:** I stayed home **because of** the rain.'
+          types: [
+             { 
+               name: 'Place', 
+               usage: 'บอกตำแหน่ง สถานที่', 
+               examples: [
+                 'The keys are **under** the table. (กุญแจอยู่ใต้โต๊ะ)',
+                 'I live **in** Bangkok. (ฉันอาศัยอยู่ในกรุงเทพ)',
+                 'The book is **on** the shelf. (หนังสืออยู่บนชั้นวาง)',
+                 'He stands **at** the door. (เขายืนอยู่ที่ประตู)',
+                 'The cat is **behind** the sofa. (แมวอยู่หลังโซฟา)'
+               ] 
+             },
+             { 
+               name: 'Time', 
+               usage: 'บอกเวลา', 
+               examples: [
+                 'See you **at** 5 PM. (เจอกันตอน 5 โมงเย็น)',
+                 'We have a meeting **on** Monday. (เรามีประชุมในวันจันทร์)',
+                 'I was born **in** 1995. (ฉันเกิดในปี 1995)',
+                 'Please arrive **before** noon. (กรุณามาถึงก่อนเที่ยง)',
+                 'We walked **after** dinner. (พวกเราเดินเล่นหลังอาหารเย็น)'
+               ] 
+             },
+             { 
+               name: 'Movement', 
+               usage: 'บอกทิศทาง การเคลื่อนที่', 
+               examples: [
+                 'Walk **into** the room. (เดินเข้าไปในห้อง)',
+                 'He went **to** school. (เขาไปโรงเรียน)',
+                 'The bird flew **over** the house. (นกบินข้ามบ้านไป)',
+                 'She ran **towards** me. (เธอวิ่งตรงมาหาฉัน)',
+                 'Get **out of** the car. (ออกจากรถซะ)'
+               ] 
+             },
+             { 
+               name: 'Cause/Reason', 
+               usage: 'บอกสาเหตุ', 
+               examples: [
+                 'I stayed home **because of** the rain. (ฉันอยู่บ้านเพราะฝนตก)',
+                 'She cried **for** fear. (เธอร้องไห้ด้วยความกลัว)',
+                 'Thanks **for** your help. (ขอบคุณสำหรับความช่วยเหลือ)',
+                 'He died **from** cancer. (เขาเสียชีวิตจากโรคมะเร็ง)',
+                 'We are here **for** a meeting. (พวกเรามาที่นี่เพื่อประชุม)'
+               ] 
+             }
           ]
         },
         {
-          name: 'Conjunction (สันธาน)',
+          name: '1.7 Conjunction (สันธาน)',
           usage: 'เชื่อมคำ วลี หรือประโยค',
-          structure: 'Coordinating (FANBOYS), Subordinating, Correlative',
-          examples: [
-            '**Coordinating:** I like coffee **and** tea.',
-            '**Subordinating:** I stayed home **because** it rained.',
-            '**Correlative:** **Both** Tom **and** Jerry are here.'
+          types: [
+             { 
+               name: 'Coordinating', 
+               usage: 'เชื่อมสิ่งที่เท่ากัน (FANBOYS: For, And, Nor, But, Or, Yet, So)', 
+               examples: [
+                 'I like coffee **and** tea. (ฉันชอบกาแฟและชา)',
+                 'She is poor **but** happy. (เธอยากจนแต่มีความสุข)',
+                 'Do you want pizza **or** pasta? (คุณอยากกินพิซซ่าหรือพาสต้า?)',
+                 'It was raining, **so** I stayed home. (ฝนตก ฉันเลยอยู่บ้าน)',
+                 'He studied hard, **yet** he failed. (เขาเรียนหนัก แต่เขาก็ยังสอบตก)'
+               ] 
+             },
+             { 
+               name: 'Subordinating', 
+               usage: 'เชื่อมประโยคหลักกับประโยคย่อย (บอกเหตุผล, เงื่อนไข)', 
+               examples: [
+                 'I stayed home **because** it rained. (ฉันอยู่บ้านเพราะฝนตก)',
+                 '**Although** he is rich, he is sad. (ถึงแม้ว่าเขาจะรวย แต่เขาก็เศร้า)',
+                 'Call me **if** you need help. (โทรหาฉันนะถ้าคุณต้องการความช่วยเหลือ)',
+                 '**When** I arrived, he left. (เมื่อฉันมาถึง เขาก็ออกไปแล้ว)',
+                 'She eats **before** she works. (เธอกินข้าวก่อนทำงาน)'
+               ] 
+             },
+             { 
+               name: 'Correlative', 
+               usage: 'คำเชื่อมที่มาเป็นคู่', 
+               examples: [
+                 '**Both** Tom **and** Jerry are here. (ทั้งทอมและเจอร์รี่อยู่ที่นี่)',
+                 '**Neither** this **nor** that. (ไม่ทั้งอันนี้และอันนั้น)',
+                 '**Either** you **or** I must go. (ไม่คุณก็ฉันต้องไป)',
+                 'She is **not only** smart **but also** kind. (เธอไม่เพียงแค่ฉลาดแต่ยังใจดีด้วย)',
+                 '**Whether** you like it **or** not. (ไม่ว่าคุณจะชอบมันหรือไม่ก็ตาม)'
+               ] 
+             }
           ]
         },
         {
-          name: 'Determiner (คำนำหน้านาม)',
+          name: '1.8 Determiner (คำนำหน้านาม)',
           usage: 'วางหน้าคำนามเพื่อระบุความชี้เฉพาะ',
-          structure: 'Articles, Demonstratives, Quantifiers, Possessives',
-          examples: [
-            '**Article:** I have **an** apple.',
-            '**Quantifier:** I need **some** help.',
-            '**Demonstrative:** **This** book is mine.',
-            '**Possessive:** **My** cat is cute.'
+          types: [
+             { 
+               name: 'Articles', 
+               usage: 'A, An, The', 
+               examples: [
+                 'I have **an** apple. (ฉันมีแอปเปิ้ลหนึ่งผล)',
+                 'I saw **a** cat. (ฉันเห็นแมวตัวหนึ่ง)',
+                 '**The** sun is hot. (พระอาทิตย์ร้อน)',
+                 'She wants to be **a** doctor. (เธออยากเป็นหมอ)',
+                 '**The** moon is bright. (พระจันทร์สว่างไสว)'
+               ] 
+             },
+             { 
+               name: 'Demonstratives', 
+               usage: 'This, That, These, Those', 
+               examples: [
+                 '**This** house is mine. (บ้านหลังนี้เป็นของฉัน)',
+                 '**That** star is far away. (ดาวดวงนั้นอยู่ไกลมาก)',
+                 '**These** shoes are tight. (รองเท้าคู่นี้คับ)',
+                 '**Those** days are gone. (วันเหล่านั้นผ่านไปแล้ว)',
+                 'Look at **that** picture. (ดูรูปภาพนั้นสิ)'
+               ] 
+             },
+             { 
+               name: 'Quantifiers', 
+               usage: 'บอกปริมาณ (Some, Many, Much)', 
+               examples: [
+                 'I need **some** help. (ฉันต้องการความช่วยเหลือบ้าง)',
+                 'She has **many** friends. (เธอมีเพื่อนเยอะ)',
+                 'How **much** money do you have? (คุณมีเงินเท่าไหร่?)',
+                 'There are **a few** cookies left. (มีคุกกี้เหลืออยู่นิดหน่อย)',
+                 '**All** students passed the exam. (นักเรียนทุกคนสอบผ่าน)'
+               ] 
+             },
+             { 
+               name: 'Possessives', 
+               usage: 'แสดงความเป็นเจ้าของ (My, Your, His)', 
+               examples: [
+                 '**My** cat is very cute. (แมวของฉันน่ารักมาก)',
+                 'Is this **your** bag? (นี่คือกระเป๋าของคุณใช่ไหม?)',
+                 '**His** car is broken. (รถของเขาเสีย)',
+                 '**Her** smile is sweet. (รอยยิ้มของเธอหวาน)',
+                 '**Their** house is new. (บ้านของพวกเขาใหม่)'
+               ] 
+             }
           ]
         },
         {
-          name: 'Interjection (คำอุทาน)',
+          name: '1.9 Interjection (คำอุทาน)',
           usage: 'แสดงอารมณ์ความรู้สึก',
-          structure: 'Exclamation marks (!)',
-          examples: [
-            '**Wow!** Amazing!',
-            '**Oh!** I forgot my keys.',
-            '**Hey!** Come here.'
+          types: [
+             { 
+               name: 'Exclamation', 
+               usage: 'คำอุทานแสดงอารมณ์ต่างๆ', 
+               examples: [
+                 '**Wow!** That is amazing! (ว้าว! นั่นมันมหัศจรรย์มาก)',
+                 '**Oh!** I forgot my keys. (โอ้! ฉันลืมกุญแจ)',
+                 '**Hey!** Come over here. (เฮ้! มาตรงนี้หน่อย)',
+                 '**Ouch!** That hurts. (โอ๊ย! เจ็บนะ)',
+                 '**Eww!** It looks disgusting. (อี๋! มันดูน่าขยะแขยงจัง)'
+               ] 
+             }
           ]
         }
       ]
@@ -125,20 +615,150 @@ export const grammarTopics: GrammarTopic[] = [
       title: 'เจาะลึก 12 Tenses',
       description: 'คู่มือ 12 Tenses ฉบับละเอียด พร้อมโครงสร้าง ตัวอย่าง 5 ประโยค และแบบทดสอบ',
       subtopics: [
-        { name: 'Present Simple', structure: 'S + V1 (s/es)', usage: 'ความจริง, กิจวัตร', examples: ['She **eats** rice.', 'The sun **rises** in the east.', 'He **does not** like spicy food.', 'Water **boils** at 100°C.', 'I **usually** wake up at 6 AM.'] },
-        { name: 'Present Continuous', structure: 'S + is/am/are + V-ing', usage: 'กำลังทำอยู่', examples: ['I **am studying** now.', 'It **is raining**.', 'She **is reading** a book.', 'They **are playing** football.', 'We **are having** dinner.'] },
-        { name: 'Present Perfect', structure: 'S + has/have + V3', usage: 'เพิ่งจบ, ประสบการณ์', examples: ['I **have finished** my work.', 'She **has gone** to Japan.', 'We **have lived** here for 10 years.', 'He **has lost** his keys.', '**Have** you **seen** this movie?'] },
-        { name: 'Present Perfect Continuous', structure: 'S + has/have + been + V-ing', usage: 'ทำต่อเนื่องตั้งแต่อดีตถึงปัจจุบัน', examples: ['I **have been waiting** for 2 hours.', 'It **has been raining** all day.', 'She **has been working** here since 2010.', 'They **have been playing** games.', 'He **has been sleeping** lately.'] },
-        // Past
-        { name: 'Past Simple', structure: 'S + V2', usage: 'จบแล้วในอดีต', examples: ['I **went** to school yesterday.', 'She **bought** a new car.', 'We **watched** a movie last night.', 'He **did not** come.', '**Did** you **see** him?'] },
-        { name: 'Past Continuous', structure: 'S + was/were + V-ing', usage: 'กำลังทำในอดีต', examples: ['I **was sleeping** at 9 PM.', 'They **were playing** when it rained.', 'She **was cooking** dinner.', 'We **were watching** TV.', 'He **was reading** a book.'] },
-        { name: 'Past Perfect', structure: 'S + had + V3', usage: 'เกิดก่อนอีกเหตุการณ์ในอดีต', examples: ['When I arrived, the train **had left**.', 'She **had finished** work before she went out.', 'I realized I **had lost** my wallet.', 'He **had never been** there before.', 'They **had eaten** already.'] },
-        { name: 'Past Perfect Continuous', structure: 'S + had + been + V-ing', usage: 'ทำต่อเนื่องในอดีตก่อนเกิดอีกเหตุการณ์', examples: ['He **had been driving** for 5 hours.', 'It **had been raining** before we arrived.', 'They **had been waiting** long.', 'She **had been crying**.', 'I **had been working** hard.'] },
-        // Future
-        { name: 'Future Simple', structure: 'S + will + V1', usage: 'อนาคตทั่วไป, ตัดสินใจทันที', examples: ['I **will help** you.', 'It **will rain** tomorrow.', 'She **will call** you later.', 'We **will visit** Japan.', 'I **promise** I **will** go.'] },
-        { name: 'Future Continuous', structure: 'S + will + be + V-ing', usage: 'กำลังจะทำในอนาคต', examples: ['At 8 PM, I **will be watching** TV.', 'She **will be working** tomorrow.', 'We **will be flying** to London.', 'They **will be sleeping**.', '**Will** you **be using** the car?'] },
-        { name: 'Future Perfect', structure: 'S + will + have + V3', usage: 'จะเสร็จสมบูรณ์ในอนาคต', examples: ['I **will have finished** by tomorrow.', 'She **will have left** by then.', 'We **will have arrived** by 6 PM.', 'He **will have done** it.', 'They **will have eaten**.'] },
-        { name: 'Future Perfect Continuous', structure: 'S + will + have + been + V-ing', usage: 'จะทำต่อเนื่องถึงจุดหนึ่งในอนาคต', examples: ['By next year, I **will have been working** here for 10 years.', 'She **will have been sleeping** for 8 hours.', 'We **will have been driving** all day.', 'They **will have been waiting**.', 'He **will have been studying**.'] }
+        { 
+          name: 'Present Simple', 
+          structure: 'S + V1 (s/es)', 
+          usage: 'ความจริง, กิจวัตร', 
+          examples: [
+            'She **eats** rice every day. (เธอกินข้าวทุกวัน)',
+            'The sun **rises** in the east. (พระอาทิตย์ขึ้นทางทิศตะวันออก)',
+            'He **does not** like spicy food. (เขาไม่ชอบอาหารเผ็ด)',
+            'Water **boils** at 100°C. (น้ำเดือดที่ 100 องศาเซลเซียส)',
+            'I **usually** wake up at 6 AM. (ฉันมักจะตื่นนอนตอน 6 โมงเช้า)'
+          ] 
+        },
+        { 
+          name: 'Present Continuous', 
+          structure: 'S + is/am/are + V-ing', 
+          usage: 'กำลังทำอยู่ ณ ขณะนี้', 
+          examples: [
+            'I **am studying** English now. (ฉันกำลังเรียนภาษาอังกฤษอยู่ตอนนี้)',
+            'It **is raining** outside. (ฝนกำลังตกอยู่ข้างนอก)',
+            'She **is reading** a book. (เธอกำลังอ่านหนังสือ)',
+            'They **are playing** football. (พวกเขากำลังเล่นฟุตบอล)',
+            'We **are having** dinner. (พวกเรากำลังทานมื้อเย็น)'
+          ] 
+        },
+        { 
+          name: 'Present Perfect', 
+          structure: 'S + has/have + V3', 
+          usage: 'เพิ่งจบลง หรือ เป็นประสบการณ์', 
+          examples: [
+            'I **have finished** my homework. (ฉันทำการบ้านเสร็จแล้ว)',
+            'She **has gone** to Japan. (เธอไปญี่ปุ่นแล้ว)',
+            'We **have lived** here for 10 years. (พวกเราอาศัยอยู่ที่นี่มา 10 ปีแล้ว)',
+            'He **has lost** his keys. (เขาทำกุญแจหาย)',
+            '**Have** you ever **seen** a ghost? (คุณเคยเห็นผีไหม?)'
+          ] 
+        },
+        { 
+          name: 'Present Perfect Continuous', 
+          structure: 'S + has/have + been + V-ing', 
+          usage: 'ทำต่อเนื่องตั้งแต่อดีตถึงปัจจุบัน', 
+          examples: [
+            'I **have been waiting** for 2 hours. (ฉันรอมา 2 ชั่วโมงแล้ว)',
+            'It **has been raining** all day. (ฝนตกตลอดทั้งวันเลย)',
+            'She **has been working** here since 2010. (เธอทำงานที่นี่มาตั้งแต่ปี 2010)',
+            'They **have been playing** games. (พวกเขาเล่นเกมกันมาต่อเนื่อง)',
+            'He **has been sleeping** lately. (ช่วงนี้เขาเอาแต่นอน)'
+          ] 
+        },
+        { 
+          name: 'Past Simple', 
+          structure: 'S + V2', 
+          usage: 'จบแล้วในอดีต ระบุเวลาชัดเจน', 
+          examples: [
+            'I **went** to school yesterday. (ฉันไปโรงเรียนเมื่อวานนี้)',
+            'She **bought** a new car last week. (เธอซื้อรถใหม่เมื่อสัปดาห์ที่แล้ว)',
+            'We **watched** a movie last night. (พวกเราดูหนังเมื่อคืนนี้)',
+            'He **did not** come to the party. (เขาไม่ได้มางานปาร์ตี้)',
+            '**Did** you **see** him? (คุณเห็นเขาไหม?)'
+          ] 
+        },
+        { 
+          name: 'Past Continuous', 
+          structure: 'S + was/were + V-ing', 
+          usage: 'กำลังทำอยู่ในอดีต ณ เวลาหนึ่ง', 
+          examples: [
+            'I **was sleeping** at 9 PM last night. (ฉันกำลังนอนหลับตอน 3 ทุ่มเมื่อคืนนี้)',
+            'They **were playing** when it rained. (พวกเขากำลังเล่นตอนที่ฝนตก)',
+            'She **was cooking** dinner when I arrived. (เธอกำลังทำมื้อเย็นตอนที่ฉันมาถึง)',
+            'We **were watching** TV all evening. (พวกเราดูทีวีกันตลอดทั้งเย็น)',
+            'He **was reading** while she was writing. (เขากำลังอ่านในขณะที่เธอกำลังเขียน)'
+          ] 
+        },
+        { 
+          name: 'Past Perfect', 
+          structure: 'S + had + V3', 
+          usage: 'เกิดก่อนและจบลง ก่อนอีกเหตุการณ์ในอดีต', 
+          examples: [
+            'When I arrived, the train **had left**. (เมื่อฉันมาถึง รถไฟก็ออกไปแล้ว)',
+            'She **had finished** work before she went out. (เธอทำงานเสร็จก่อนที่เธอจะออกไปข้างนอก)',
+            'I realized I **had lost** my wallet. (ฉันตระหนักได้ว่าฉันทำกระเป๋าตังค์หายไปแล้ว)',
+            'He **had never been** to London before. (เขาไม่เคยไปลอนดอนมาก่อนเลย)',
+            'They **had eaten** dinner by the time we came. (พวกเขาทานมื้อเย็นเสร็จแล้วตอนที่เรามาถึง)'
+          ] 
+        },
+        { 
+          name: 'Past Perfect Continuous', 
+          structure: 'S + had + been + V-ing', 
+          usage: 'ทำต่อเนื่องในอดีต ก่อนเกิดอีกเหตุการณ์', 
+          examples: [
+            'He **had been driving** for 5 hours when the car broke down. (เขาขับรถมา 5 ชั่วโมงแล้วตอนที่รถเสีย)',
+            'It **had been raining** before we arrived. (ฝนตกมาตลอดก่อนที่เราจะมาถึง)',
+            'They **had been waiting** for long. (พวกเขารอกันมานานมากแล้ว)',
+            'She **had been crying** all night. (เธอร้องไห้มาตลอดทั้งคืน)',
+            'I **had been working** hard before I got sick. (ฉันทำงานหนักมาตลอดก่อนที่ฉันจะป่วย)'
+          ] 
+        },
+        { 
+          name: 'Future Simple', 
+          structure: 'S + will + V1', 
+          usage: 'อนาคตทั่วไป, ตัดสินใจทันที, การคาดเดา', 
+          examples: [
+            'I **will help** you. (ฉันจะช่วยคุณเอง)',
+            'It **will rain** tomorrow. (ฝนน่าจะตกพรุ่งนี้)',
+            'She **will call** you later. (เธอจะโทรหาคุณทีหลัง)',
+            'We **will visit** Japan next year. (เราจะไปเที่ยวญี่ปุ่นปีหน้า)',
+            'I **promise** I **will** go. (ฉันสัญญาว่าฉันจะไป)'
+          ] 
+        },
+        { 
+          name: 'Future Continuous', 
+          structure: 'S + will + be + V-ing', 
+          usage: 'กำลังจะทำในอนาคต ณ เวลาที่ระบุ', 
+          examples: [
+            'At 8 PM, I **will be watching** TV. (ตอน 2 ทุ่ม ฉันคงกำลังดูทีวีอยู่)',
+            'She **will be working** tomorrow morning. (พรุ่งนี้เช้าเธอคงกำลังทำงานอยู่)',
+            'We **will be flying** to London this time next week. (เวลานี้สัปดาห์หน้าเราคงกำลังบินไปลอนดอน)',
+            'They **will be sleeping** when you arrive. (พวกเขาคงกำลังหลับอยู่ตอนที่คุณไปถึง)',
+            '**Will** you **be using** the car? (คุณจะใช้รถไหม?)'
+          ] 
+        },
+        { 
+          name: 'Future Perfect', 
+          structure: 'S + will + have + V3', 
+          usage: 'จะเสร็จสมบูรณ์ในอนาคต', 
+          examples: [
+            'I **will have finished** by tomorrow. (ฉันจะทำเสร็จภายในพรุ่งนี้)',
+            'She **will have left** by then. (เธอคงจะออกไปแล้วตอนนั้น)',
+            'We **will have arrived** by 6 PM. (เราจะไปถึงภายใน 6 โมงเย็น)',
+            'He **will have done** it before you ask. (เขาคงจะทำเสร็จก่อนที่คุณจะถาม)',
+            'They **will have eaten** dinner already. (พวกเขาคงกินมื้อเย็นเรียบร้อยแล้ว)'
+          ] 
+        },
+        { 
+          name: 'Future Perfect Continuous', 
+          structure: 'S + will + have + been + V-ing', 
+          usage: 'จะทำต่อเนื่องไปจนถึงจุดหนึ่งในอนาคต', 
+          examples: [
+            'By next year, I **will have been working** here for 10 years. (เมื่อถึงปีหน้า ฉันจะทำงานที่นี่ครบ 10 ปีพอดี)',
+            'She **will have been sleeping** for 8 hours by 6 AM. (เธอคงจะนอนครบ 8 ชั่วโมงตอน 6 โมงเช้า)',
+            'We **will have been driving** all day. (เราคงจะขับรถมาตลอดทั้งวัน)',
+            'They **will have been waiting** for hours. (พวกเขาคงจะรอมาหลายชั่วโมงแล้ว)',
+            'He **will have been studying** English for 5 years. (เขาคงจะเรียนภาษาอังกฤษมาครบ 5 ปีแล้ว)'
+          ] 
+        }
       ]
     }
   },
@@ -151,8 +771,30 @@ export const grammarTopics: GrammarTopic[] = [
       title: 'Active & Passive Voice',
       description: 'เรียนรู้รูปประโยคประธานกระทำและประธานถูกกระทำ',
       subtopics: [
-        { name: 'Active Voice', usage: 'ประธานทำเอง', structure: 'S + V + O', examples: ['I **eat** rice.', 'She **writes** a letter.'] },
-        { name: 'Passive Voice', usage: 'ประธานถูกกระทำ', structure: 'Be + V3', examples: ['Rice **is eaten** by me.', 'A letter **was written** by her.'] }
+        { 
+          name: 'Active Voice', 
+          usage: 'ประธานเป็นผู้กระทำกริยา', 
+          structure: 'S + V + O', 
+          examples: [
+            'I **eat** rice. (ฉันกินข้าว)',
+            'She **writes** a letter. (เธอเขียนจดหมาย)',
+            'He **kicked** the ball. (เขาเตะลูกบอล)',
+            'They **are building** a house. (พวกเขากำลังสร้างบ้าน)',
+            'We **will clean** the room. (พวกเราจะทำความสะอาดห้อง)'
+          ] 
+        },
+        { 
+          name: 'Passive Voice', 
+          usage: 'ประธานเป็นผู้ถูกกระทำ', 
+          structure: 'Be + V3 (+ by agent)', 
+          examples: [
+            'Rice **is eaten** by me. (ข้าวถูกกินโดยฉัน)',
+            'A letter **was written** by her. (จดหมายถูกเขียนโดยเธอ)',
+            'The ball **was kicked** by him. (ลูกบอลถูกเตะโดยเขา)',
+            'A house **is being built**. (บ้านกำลังถูกสร้าง)',
+            'The room **will be cleaned**. (ห้องจะถูกทำความสะอาด)'
+          ] 
+        }
       ]
     }
   }

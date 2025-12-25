@@ -15,13 +15,22 @@ export interface CourseCard {
   color: 'orange' | 'pink' | 'purple' | 'blue';
 }
 
-// --- Grammar Types ---
+// --- Grammar Types (Updated for Deep Dive + Vocab) ---
+export interface GrammarTypeDetail {
+  name: string;
+  usage: string;
+  structure?: string;
+  vocabulary?: string[]; // เพิ่ม field นี้ (เก็บคำศัพท์ตัวอย่าง 5 คำ)
+  examples: string[];
+}
+
 export interface GrammarSubtopic {
   name: string;
-  explanation?: string;
   usage?: string;
   structure?: string;
-  examples: string[];
+  vocabulary?: string[]; // เพิ่มเผื่อไว้สำหรับ level นี้ด้วย
+  examples?: string[];
+  types?: GrammarTypeDetail[];
 }
 
 export interface GrammarDetail {
