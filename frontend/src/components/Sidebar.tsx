@@ -1,6 +1,6 @@
 // frontend/src/components/Sidebar.tsx
 import { NavLink } from 'react-router-dom';
-import { X } from 'lucide-react'; // [Update] เหลือแค่ X ที่ใช้จริง
+import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { menuItems } from '../data/menuData';
 
@@ -14,23 +14,23 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
+          {/* Backdrop: ลบ lg:hidden ออก */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm"
+            className="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm" // [แก้ไข] ลบ lg:hidden
             aria-hidden="true"
           />
 
-          {/* Sidebar */}
+          {/* Sidebar: ลบ lg:hidden ออก */}
           <motion.div
             initial={{ x: -280 }}
             animate={{ x: 0 }}
             exit={{ x: -280 }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed top-0 left-0 bottom-0 w-[280px] bg-white z-50 shadow-2xl lg:hidden flex flex-col"
+            className="fixed top-0 left-0 bottom-0 w-[280px] bg-white z-50 shadow-2xl flex flex-col" // [แก้ไข] ลบ lg:hidden
             role="dialog"
             aria-modal="true"
             aria-label="Mobile Navigation"
