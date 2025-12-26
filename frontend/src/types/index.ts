@@ -1,3 +1,4 @@
+// frontend/src/types/index.ts
 import { LucideIcon } from 'lucide-react';
 
 // --- Shared Types ---
@@ -20,15 +21,16 @@ export interface GrammarTypeDetail {
   name: string;
   usage: string;
   structure?: string;
-  vocabulary?: string[]; // เพิ่ม field นี้ (เก็บคำศัพท์ตัวอย่าง 5 คำ)
+  vocabulary?: string[];
   examples: string[];
 }
 
 export interface GrammarSubtopic {
+  id: string; // [New] เพิ่ม ID ตรงนี้
   name: string;
   usage?: string;
   structure?: string;
-  vocabulary?: string[]; // เพิ่มเผื่อไว้สำหรับ level นี้ด้วย
+  vocabulary?: string[];
   examples?: string[];
   types?: GrammarTypeDetail[];
 }

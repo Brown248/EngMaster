@@ -1,3 +1,4 @@
+// frontend/src/data/grammarData.ts
 import { GrammarTopic } from '../types';
 
 export const grammarTopics: GrammarTopic[] = [
@@ -11,9 +12,11 @@ export const grammarTopics: GrammarTopic[] = [
       description: 'พื้นฐานสำคัญของภาษาอังกฤษ เจาะลึกครบทั้ง 9 ชนิด แยกย่อยทุกประเด็น',
       subtopics: [
         {
+          id: 'noun', // [New] Added ID
           name: '1.1 Noun (คำนาม)',
           usage: 'คำที่ใช้เรียกคน สัตว์ สิ่งของ สถานที่ (มี 8 ประเภท)',
           types: [
+            // ... (ข้อมูลเดิม types ยังคงเหมือนเดิม) ...
             {
               name: 'Common Noun (นามทั่วไป)',
               usage: 'ใช้เรียกสิ่งทั่วไป ไม่เจาะจงชื่อ',
@@ -113,10 +116,12 @@ export const grammarTopics: GrammarTopic[] = [
           ]
         },
         {
+          id: 'pronoun', // [New]
           name: '1.2 Pronoun (สรรพนาม)',
           usage: 'คำที่ใช้แทนคำนาม เพื่อไม่ให้พูดซ้ำ (มี 9 ประเภท)',
           types: [
-            { 
+            // ... (types content) ...
+             { 
               name: 'Subject Pronoun', 
               usage: 'ทำหน้าที่เป็นประธานของประโยค', 
               vocabulary: ['I', 'You', 'We', 'They', 'He', 'She', 'It'],
@@ -227,9 +232,11 @@ export const grammarTopics: GrammarTopic[] = [
           ]
         },
         {
+          id: 'verb', // [New]
           name: '1.3 Verb (กริยา)',
           usage: 'แสดงการกระทำหรือสภาวะ',
           types: [
+            // ... (types content) ...
             { 
               name: 'Action Verb', 
               usage: 'แสดงการกระทำทางกายภาพหรือจิตใจ', 
@@ -317,9 +324,11 @@ export const grammarTopics: GrammarTopic[] = [
           ]
         },
         {
+          id: 'adjective', // [New]
           name: '1.4 Adjective (คุณศัพท์)',
           usage: 'ขยายคำนาม บอกลักษณะ หรือเปรียบเทียบ',
           types: [
+            // ... (types content) ...
              { 
                name: 'Descriptive', 
                usage: 'บอกลักษณะ คุณภาพ', 
@@ -419,9 +428,11 @@ export const grammarTopics: GrammarTopic[] = [
           ]
         },
         {
+          id: 'adverb', // [New]
           name: '1.5 Adverb (วิเศษณ์)',
           usage: 'ขยายกริยา คุณศัพท์ หรือวิเศษณ์ด้วยกันเอง',
           types: [
+            // ... (types content) ...
              { 
                name: 'Manner', 
                usage: 'บอกอาการ (ทำอย่างไร)', 
@@ -485,9 +496,11 @@ export const grammarTopics: GrammarTopic[] = [
           ]
         },
         {
+          id: 'preposition', // [New]
           name: '1.6 Preposition (บุพบท)',
           usage: 'เชื่อมคำเพื่อบอกตำแหน่ง เวลา หรือความสัมพันธ์',
           types: [
+            // ... (types content) ...
              { 
                name: 'Place', 
                usage: 'บอกตำแหน่ง สถานที่', 
@@ -539,9 +552,11 @@ export const grammarTopics: GrammarTopic[] = [
           ]
         },
         {
+          id: 'conjunction', // [New]
           name: '1.7 Conjunction (สันธาน)',
           usage: 'เชื่อมคำ วลี หรือประโยค',
           types: [
+            // ... (types content) ...
              { 
                name: 'Coordinating', 
                usage: 'เชื่อมสิ่งที่เท่ากัน (FANBOYS)', 
@@ -581,9 +596,11 @@ export const grammarTopics: GrammarTopic[] = [
           ]
         },
         {
+          id: 'determiner', // [New]
           name: '1.8 Determiner (คำนำหน้านาม)',
           usage: 'วางหน้าคำนามเพื่อระบุความชี้เฉพาะ',
           types: [
+            // ... (types content) ...
              { 
                name: 'Articles', 
                usage: 'A, An, The', 
@@ -635,9 +652,11 @@ export const grammarTopics: GrammarTopic[] = [
           ]
         },
         {
+          id: 'interjection', // [New]
           name: '1.9 Interjection (คำอุทาน)',
           usage: 'แสดงอารมณ์ความรู้สึก',
           types: [
+            // ... (types content) ...
              { 
                name: 'Exclamation', 
                usage: 'คำอุทานแสดงอารมณ์ต่างๆ', 
@@ -665,6 +684,7 @@ export const grammarTopics: GrammarTopic[] = [
       description: 'คู่มือ 12 Tenses ฉบับละเอียด พร้อมโครงสร้าง ตัวอย่าง 5 ประโยค และแบบทดสอบ',
       subtopics: [
         { 
+          id: 'present-simple',
           name: 'Present Simple', 
           structure: 'S + V1 (s/es)', 
           usage: 'ความจริง, กิจวัตร', 
@@ -677,6 +697,7 @@ export const grammarTopics: GrammarTopic[] = [
           ] 
         },
         { 
+          id: 'present-continuous',
           name: 'Present Continuous', 
           structure: 'S + is/am/are + V-ing', 
           usage: 'กำลังทำอยู่ ณ ขณะนี้', 
@@ -689,6 +710,7 @@ export const grammarTopics: GrammarTopic[] = [
           ] 
         },
         { 
+          id: 'present-perfect',
           name: 'Present Perfect', 
           structure: 'S + has/have + V3', 
           usage: 'เพิ่งจบลง หรือ เป็นประสบการณ์', 
@@ -701,6 +723,7 @@ export const grammarTopics: GrammarTopic[] = [
           ] 
         },
         { 
+          id: 'present-perfect-continuous',
           name: 'Present Perfect Continuous', 
           structure: 'S + has/have + been + V-ing', 
           usage: 'ทำต่อเนื่องตั้งแต่อดีตถึงปัจจุบัน', 
@@ -713,6 +736,7 @@ export const grammarTopics: GrammarTopic[] = [
           ] 
         },
         { 
+          id: 'past-simple',
           name: 'Past Simple', 
           structure: 'S + V2', 
           usage: 'จบแล้วในอดีต ระบุเวลาชัดเจน', 
@@ -725,6 +749,7 @@ export const grammarTopics: GrammarTopic[] = [
           ] 
         },
         { 
+          id: 'past-continuous',
           name: 'Past Continuous', 
           structure: 'S + was/were + V-ing', 
           usage: 'กำลังทำอยู่ในอดีต ณ เวลาหนึ่ง', 
@@ -737,6 +762,7 @@ export const grammarTopics: GrammarTopic[] = [
           ] 
         },
         { 
+          id: 'past-perfect',
           name: 'Past Perfect', 
           structure: 'S + had + V3', 
           usage: 'เกิดก่อนและจบลง ก่อนอีกเหตุการณ์ในอดีต', 
@@ -749,6 +775,7 @@ export const grammarTopics: GrammarTopic[] = [
           ] 
         },
         { 
+          id: 'past-perfect-continuous',
           name: 'Past Perfect Continuous', 
           structure: 'S + had + been + V-ing', 
           usage: 'ทำต่อเนื่องในอดีต ก่อนเกิดอีกเหตุการณ์', 
@@ -761,6 +788,7 @@ export const grammarTopics: GrammarTopic[] = [
           ] 
         },
         { 
+          id: 'future-simple',
           name: 'Future Simple', 
           structure: 'S + will + V1', 
           usage: 'อนาคตทั่วไป, ตัดสินใจทันที, การคาดเดา', 
@@ -773,6 +801,7 @@ export const grammarTopics: GrammarTopic[] = [
           ] 
         },
         { 
+          id: 'future-continuous',
           name: 'Future Continuous', 
           structure: 'S + will + be + V-ing', 
           usage: 'กำลังจะทำในอนาคต ณ เวลาที่ระบุ', 
@@ -785,6 +814,7 @@ export const grammarTopics: GrammarTopic[] = [
           ] 
         },
         { 
+          id: 'future-perfect',
           name: 'Future Perfect', 
           structure: 'S + will + have + V3', 
           usage: 'จะเสร็จสมบูรณ์ในอนาคต', 
@@ -797,6 +827,7 @@ export const grammarTopics: GrammarTopic[] = [
           ] 
         },
         { 
+          id: 'future-perfect-continuous',
           name: 'Future Perfect Continuous', 
           structure: 'S + will + have + been + V-ing', 
           usage: 'จะทำต่อเนื่องไปจนถึงจุดหนึ่งในอนาคต', 
@@ -821,6 +852,7 @@ export const grammarTopics: GrammarTopic[] = [
       description: 'เรียนรู้รูปประโยคประธานกระทำและประธานถูกกระทำ',
       subtopics: [
         { 
+          id: 'active-voice',
           name: 'Active Voice', 
           usage: 'ประธานเป็นผู้กระทำกริยา', 
           structure: 'S + V + O', 
@@ -833,6 +865,7 @@ export const grammarTopics: GrammarTopic[] = [
           ] 
         },
         { 
+          id: 'passive-voice',
           name: 'Passive Voice', 
           usage: 'ประธานเป็นผู้ถูกกระทำ', 
           structure: 'Be + V3 (+ by agent)', 

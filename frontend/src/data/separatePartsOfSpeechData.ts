@@ -1,8 +1,11 @@
+// frontend/src/data/separatePartsOfSpeechData.ts
 import { QuizQuestion } from '../types';
 import { adjectiveQuizData } from './adjectiveQuizData';
 
 export interface PartOfSpeechTopic {
   id: string;
+  name: string; // [New] เพิ่ม field นี้
+  description?: string; // [New] เพิ่ม field นี้
   questions: QuizQuestion[];
 }
 
@@ -10,26 +13,25 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 1. Noun ---
   {
     id: 'noun',
+    name: 'Noun (คำนาม)', // [New]
+    description: 'แบบทดสอบคำนามทั่วไป, นามเฉพาะ, นามนับได้/ไม่ได้', // [New]
     questions: [
-      // Choice (5)
+      // ... (ข้อมูลคำถามเดิมไม่ต้องแก้) ...
       { id: 1, type: 'choice', question: "Which word is a **Common Noun**?", options: ["London", "Dog", "Monday", "Toyota"], correctAnswer: 1, explanation: "Dog เป็นคำนามทั่วไป ไม่ได้เจาะจงชื่อ" },
       { id: 2, type: 'choice', question: "Find the **Abstract Noun**.", options: ["Table", "Water", "Freedom", "Teacher"], correctAnswer: 2, explanation: "Freedom (เสรีภาพ) เป็นนามธรรม จับต้องไม่ได้" },
       { id: 3, type: 'choice', question: "Which is a **Collective Noun**?", options: ["Team", "Player", "Ball", "Stadium"], correctAnswer: 0, explanation: "Team หมายถึงกลุ่มคน (คณะ)" },
       { id: 4, type: 'choice', question: "Which noun is **Uncountable**?", options: ["Book", "Car", "Water", "Pen"], correctAnswer: 2, explanation: "Water (น้ำ) นับเป็นชิ้นไม่ได้ เป็น Uncountable" },
       { id: 5, type: 'choice', question: "'Toothpaste' is an example of...", options: ["Proper Noun", "Compound Noun", "Abstract Noun", "Collective Noun"], correctAnswer: 1, explanation: "Tooth + Paste = Compound Noun" },
-      // TF (5)
       { id: 6, type: 'true-false', question: "Correct/Incorrect: 'Bangkok is a Common Noun.'", options: ["Correct", "Incorrect"], correctAnswer: 1, explanation: "Incorrect: Bangkok เป็น Proper Noun (ชื่อเฉพาะ)" },
       { id: 7, type: 'true-false', question: "Correct/Incorrect: 'Rice is an Uncountable Noun.'", options: ["Correct", "Incorrect"], correctAnswer: 0, explanation: "Correct: ข้าวสารนับเม็ดไม่ได้ (ปกติ)" },
       { id: 8, type: 'true-false', question: "Correct/Incorrect: 'I have two moneys.'", options: ["Correct", "Incorrect"], correctAnswer: 1, explanation: "Incorrect: Money เป็น Uncountable เติม s ไม่ได้" },
       { id: 9, type: 'true-false', question: "Correct/Incorrect: 'The jury is making a decision.'", options: ["Correct", "Incorrect"], correctAnswer: 0, explanation: "Correct: Jury เป็น Collective Noun ใช้กับกริยาเอกพจน์ได้" },
       { id: 10, type: 'true-false', question: "Correct/Incorrect: 'Love is a Concrete Noun.'", options: ["Correct", "Incorrect"], correctAnswer: 1, explanation: "Incorrect: Love เป็น Abstract Noun" },
-      // Reorder (5)
       { id: 11, type: 'reorder', question: "Rearrange:", options: ["won", "team", "the", "match"], correctAnswer: ["the", "team", "won", "the", "match"], explanation: "Collective Noun Subject" },
       { id: 12, type: 'reorder', question: "Rearrange:", options: ["Bangkok", "live", "I", "in"], correctAnswer: ["I", "live", "in", "Bangkok"], explanation: "Proper Noun" },
       { id: 13, type: 'reorder', question: "Rearrange:", options: ["need", "some", "I", "water"], correctAnswer: ["I", "need", "some", "water"], explanation: "Uncountable Noun" },
       { id: 14, type: 'reorder', question: "Rearrange:", options: ["intelligence", "showed", "he", "great"], correctAnswer: ["he", "showed", "great", "intelligence"], explanation: "Abstract Noun" },
       { id: 15, type: 'reorder', question: "Rearrange:", options: ["brush", "toothpaste", "use", "to", "teeth", "your"], correctAnswer: ["use", "toothpaste", "to", "brush", "your", "teeth"], explanation: "Compound Noun" },
-      // Fill (5)
       { id: 16, type: 'fill-blank', question: "A ______ (flock/herd) of birds flew over.", correctAnswer: "flock", explanation: "ฝูงนกใช้ Flock" },
       { id: 17, type: 'fill-blank', question: "Please give me a glass of ______ (water).", correctAnswer: "water", explanation: "Noun" },
       { id: 18, type: 'fill-blank', question: "______ (Honesty) is the best policy.", correctAnswer: "honesty", explanation: "Abstract Noun" },
@@ -40,6 +42,8 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 2. Pronoun ---
   {
     id: 'pronoun',
+    name: 'Pronoun (สรรพนาม)', // [New]
+    description: 'ทดสอบการใช้ Subject, Object, Possessive Pronoun ฯลฯ', // [New]
     questions: [
       { id: 1, type: 'choice', question: "'**She** eats.' 'She' is a...", options: ["Object Pronoun", "Subject Pronoun", "Possessive Pronoun", "Reflexive Pronoun"], correctAnswer: 1, explanation: "ทำหน้าที่เป็นประธาน" },
       { id: 2, type: 'choice', question: "I did it **myself**.", options: ["Reflexive", "Reciprocal", "Relative", "Indefinite"], correctAnswer: 0, explanation: "Reflexive สะท้อนเข้าตัว" },
@@ -66,6 +70,8 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 3. Verb ---
   {
     id: 'verb',
+    name: 'Verb (กริยา)', // [New]
+    description: 'ทดสอบ Action verb, Linking verb, Modal verb', // [New]
     questions: [
       { id: 1, type: 'choice', question: "I **run** every day.", options: ["Action Verb", "Linking Verb", "Modal Verb", "Auxiliary Verb"], correctAnswer: 0, explanation: "Run คือการกระทำ" },
       { id: 2, type: 'choice', question: "She **is** a doctor.", options: ["Action", "Linking", "Transitive", "Modal"], correctAnswer: 1, explanation: "Verb to be บอกสถานะ (Linking)" },
@@ -92,11 +98,15 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 4. Adjective (Imported) ---
   {
     id: 'adjective',
+    name: 'Adjective (คำคุณศัพท์)', // [New]
+    description: 'คำขยายคำนาม, บอกลักษณะ, บอกสี', // [New]
     questions: adjectiveQuizData 
   },
   // --- 5. Adverb ---
   {
     id: 'adverb',
+    name: 'Adverb (คำวิเศษณ์)', // [New]
+    description: 'ขยายกริยา, ขยายคุณศัพท์, บอกความถี่', // [New]
     questions: [
       { id: 1, type: 'choice', question: "He runs **quickly**.", options: ["Manner", "Time", "Place", "Frequency"], correctAnswer: 0, explanation: "บอกอาการ (อย่างไร)" },
       { id: 2, type: 'choice', question: "I **always** eat breakfast.", options: ["Manner", "Frequency", "Degree", "Place"], correctAnswer: 1, explanation: "บอกความถี่" },
@@ -123,6 +133,8 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 6. Preposition ---
   {
     id: 'preposition',
+    name: 'Preposition (คำบุพบท)', // [New]
+    description: 'บอกตำแหน่ง (in/on/at), เวลา, ทิศทาง', // [New]
     questions: [
         { id: 1, type: 'choice', question: "The book is **on** the table.", options: ["Time", "Place", "Movement", "Cause"], correctAnswer: 1, explanation: "บอกตำแหน่ง" },
         { id: 2, type: 'choice', question: "We met **at** 9 AM.", options: ["Place", "Time", "Movement", "Agent"], correctAnswer: 1, explanation: "บอกเวลา" },
@@ -149,6 +161,8 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 7. Conjunction ---
   {
     id: 'conjunction',
+    name: 'Conjunction (คำสันธาน)', // [New]
+    description: 'คำเชื่อมประโยค (and, but, or, because)', // [New]
     questions: [
         { id: 1, type: 'choice', question: "I like tea **and** coffee.", options: ["Coordinating", "Subordinating", "Correlative", "Adverb"], correctAnswer: 0, explanation: "เชื่อมคำประเภทเดียวกัน" },
         { id: 2, type: 'choice', question: "I stayed home **because** it rained.", options: ["Coordinating", "Subordinating", "Correlative", "Preposition"], correctAnswer: 1, explanation: "เชื่อมประโยคเหตุผล (Subordinating)" },
@@ -175,6 +189,8 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 8. Determiner ---
   {
     id: 'determiner',
+    name: 'Determiner (คำนำหน้านาม)', // [New]
+    description: 'Articles (a/an/the), Demonstrative (this/that)', // [New]
     questions: [
         { id: 1, type: 'choice', question: "I have **an** apple.", options: ["Article", "Demonstrative", "Quantifier", "Possessive"], correctAnswer: 0, explanation: "a, an, the คือ Article" },
         { id: 2, type: 'choice', question: "**This** book is mine.", options: ["Article", "Demonstrative", "Quantifier", "Possessive"], correctAnswer: 1, explanation: "ชี้เฉพาะ (This/That)" },
@@ -201,6 +217,8 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 9. Interjection ---
   {
     id: 'interjection',
+    name: 'Interjection (คำอุทาน)', // [New]
+    description: 'Wow!, Ouch!, Hey! (บอกอารมณ์)', // [New]
     questions: [
         { id: 1, type: 'choice', question: "**Wow!** It's beautiful.", options: ["Interjection", "Noun", "Verb", "Adjective"], correctAnswer: 0, explanation: "คำอุทาน" },
         { id: 2, type: 'choice', question: "**Ouch!** That hurts.", options: ["Happiness", "Pain", "Surprise", "Greeting"], correctAnswer: 1, explanation: "เจ็บปวด" },
