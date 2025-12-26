@@ -6,7 +6,6 @@ import { partsOfSpeechQuizData } from '../data/partsOfSpeechQuizData';
 
 export default function PartsOfSpeechQuiz() {
   const location = useLocation();
-  // รับค่า subTopicId ที่ส่งมาจากหน้า Grammar (ถ้ามี)
   const initialTopicId = location.state?.subTopicId;
 
   return (
@@ -14,7 +13,7 @@ export default function PartsOfSpeechQuiz() {
       title="Parts of Speech Quiz"
       description="ทดสอบความเข้าใจเรื่องชนิดของคำ (Noun, Verb, etc.)"
       backPath="/grammar"
-      themeColor="purple" // [แก้ไข] เปลี่ยนสีตรงนี้ (เลือกได้: indigo, blue, purple, orange)
+      themeColor="purple"
       topics={separatePartsOfSpeechData}
       mixedQuestions={partsOfSpeechQuizData}
       initialTopicId={initialTopicId}

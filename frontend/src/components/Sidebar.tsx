@@ -14,23 +14,23 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop: ลบ lg:hidden ออก */}
+          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm" // [แก้ไข] ลบ lg:hidden
+            className="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
             aria-hidden="true"
           />
 
-          {/* Sidebar: ลบ lg:hidden ออก */}
+          {/* Sidebar */}
           <motion.div
             initial={{ x: -280 }}
             animate={{ x: 0 }}
             exit={{ x: -280 }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed top-0 left-0 bottom-0 w-[280px] bg-white z-50 shadow-2xl flex flex-col" // [แก้ไข] ลบ lg:hidden
+            className="fixed top-0 left-0 bottom-0 w-[280px] bg-white z-50 shadow-2xl flex flex-col"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile Navigation"

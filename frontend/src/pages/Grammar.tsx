@@ -149,9 +149,8 @@ export default function Grammar() {
                         ))}
                     </div>
                     
-                    {/* [Fixed] เปลี่ยนสีปุ่มเริ่มทำแบบทดสอบเป็น Gradient สีส้มทอง (Amber-Orange) */}
                     <div className="mt-8 text-center">
-                        <button onClick={() => startQuiz(activeTopic!.id)} className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-2xl font-bold text-xl hover:shadow-xl hover:scale-105 transition-all shadow-lg shadow-orange-200">
+                        <button onClick={() => startQuiz(activeTopic!.id)} className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-bold text-xl hover:shadow-xl hover:scale-105 transition-all">
                             <PlayCircle size={24} /> เริ่มทำแบบทดสอบ
                         </button>
                     </div>
@@ -180,7 +179,6 @@ export default function Grammar() {
                          ))}
                     </div>
 
-                    {/* [Fixed] เปลี่ยนสีปุ่มเริ่มทำแบบทดสอบย่อยเป็นสีเทาเข้ม (Slate) เหมือนเดิม หรือจะเปลี่ยนเป็นส้มก็ได้ แต่เทาดูสุภาพสำหรับข้อย่อย */}
                     <div className="mt-10 pt-8 border-t border-slate-100 text-center">
                         <button 
                             onClick={() => startQuiz(activeTopic!.id, currentSubtopicData.id)}

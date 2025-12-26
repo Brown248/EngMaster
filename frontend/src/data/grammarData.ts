@@ -686,7 +686,7 @@ export const grammarTopics: GrammarTopic[] = [
         { 
           id: 'present-simple',
           name: 'Present Simple', 
-          structure: 'S + V1 (s/es)', 
+          structure: 'Subjective + V1 (s/es)', 
           usage: 'ความจริง, กิจวัตร', 
           examples: [
             'She **eats** rice every day. (เธอกินข้าวทุกวัน)',
@@ -699,7 +699,7 @@ export const grammarTopics: GrammarTopic[] = [
         { 
           id: 'present-continuous',
           name: 'Present Continuous', 
-          structure: 'S + is/am/are + V-ing', 
+          structure: 'Subjective + is/am/are + V-ing', 
           usage: 'กำลังทำอยู่ ณ ขณะนี้', 
           examples: [
             'I **am studying** English now. (ฉันกำลังเรียนภาษาอังกฤษอยู่ตอนนี้)',
@@ -712,7 +712,7 @@ export const grammarTopics: GrammarTopic[] = [
         { 
           id: 'present-perfect',
           name: 'Present Perfect', 
-          structure: 'S + has/have + V3', 
+          structure: 'Subjective + has/have + V3', 
           usage: 'เพิ่งจบลง หรือ เป็นประสบการณ์', 
           examples: [
             'I **have finished** my homework. (ฉันทำการบ้านเสร็จแล้ว)',
@@ -725,7 +725,7 @@ export const grammarTopics: GrammarTopic[] = [
         { 
           id: 'present-perfect-continuous',
           name: 'Present Perfect Continuous', 
-          structure: 'S + has/have + been + V-ing', 
+          structure: 'Subjective + has/have + been + V-ing', 
           usage: 'ทำต่อเนื่องตั้งแต่อดีตถึงปัจจุบัน', 
           examples: [
             'I **have been waiting** for 2 hours. (ฉันรอมา 2 ชั่วโมงแล้ว)',
@@ -738,7 +738,7 @@ export const grammarTopics: GrammarTopic[] = [
         { 
           id: 'past-simple',
           name: 'Past Simple', 
-          structure: 'S + V2', 
+          structure: 'Subjective + V2', 
           usage: 'จบแล้วในอดีต ระบุเวลาชัดเจน', 
           examples: [
             'I **went** to school yesterday. (ฉันไปโรงเรียนเมื่อวานนี้)',
@@ -751,7 +751,7 @@ export const grammarTopics: GrammarTopic[] = [
         { 
           id: 'past-continuous',
           name: 'Past Continuous', 
-          structure: 'S + was/were + V-ing', 
+          structure: 'Subjective + was/were + V-ing', 
           usage: 'กำลังทำอยู่ในอดีต ณ เวลาหนึ่ง', 
           examples: [
             'I **was sleeping** at 9 PM last night. (ฉันกำลังนอนหลับตอน 3 ทุ่มเมื่อคืนนี้)',
@@ -764,7 +764,7 @@ export const grammarTopics: GrammarTopic[] = [
         { 
           id: 'past-perfect',
           name: 'Past Perfect', 
-          structure: 'S + had + V3', 
+          structure: 'Subjective + had + V3', 
           usage: 'เกิดก่อนและจบลง ก่อนอีกเหตุการณ์ในอดีต', 
           examples: [
             'When I arrived, the train **had left**. (เมื่อฉันมาถึง รถไฟก็ออกไปแล้ว)',
@@ -777,7 +777,7 @@ export const grammarTopics: GrammarTopic[] = [
         { 
           id: 'past-perfect-continuous',
           name: 'Past Perfect Continuous', 
-          structure: 'S + had + been + V-ing', 
+          structure: 'Subjective + had + been + V-ing', 
           usage: 'ทำต่อเนื่องในอดีต ก่อนเกิดอีกเหตุการณ์', 
           examples: [
             'He **had been driving** for 5 hours when the car broke down. (เขาขับรถมา 5 ชั่วโมงแล้วตอนที่รถเสีย)',
@@ -790,7 +790,7 @@ export const grammarTopics: GrammarTopic[] = [
         { 
           id: 'future-simple',
           name: 'Future Simple', 
-          structure: 'S + will + V1', 
+          structure: 'Subjective + will + V1', 
           usage: 'อนาคตทั่วไป, ตัดสินใจทันที, การคาดเดา', 
           examples: [
             'I **will help** you. (ฉันจะช่วยคุณเอง)',
@@ -803,7 +803,7 @@ export const grammarTopics: GrammarTopic[] = [
         { 
           id: 'future-continuous',
           name: 'Future Continuous', 
-          structure: 'S + will + be + V-ing', 
+          structure: 'Subjective + will + be + V-ing', 
           usage: 'กำลังจะทำในอนาคต ณ เวลาที่ระบุ', 
           examples: [
             'At 8 PM, I **will be watching** TV. (ตอน 2 ทุ่ม ฉันคงกำลังดูทีวีอยู่)',
@@ -816,7 +816,7 @@ export const grammarTopics: GrammarTopic[] = [
         { 
           id: 'future-perfect',
           name: 'Future Perfect', 
-          structure: 'S + will + have + V3', 
+          structure: 'subjective + will + have + V3', 
           usage: 'จะเสร็จสมบูรณ์ในอนาคต', 
           examples: [
             'I **will have finished** by tomorrow. (ฉันจะทำเสร็จภายในพรุ่งนี้)',
@@ -829,7 +829,7 @@ export const grammarTopics: GrammarTopic[] = [
         { 
           id: 'future-perfect-continuous',
           name: 'Future Perfect Continuous', 
-          structure: 'S + will + have + been + V-ing', 
+          structure: 'Subjective + will + have + been + V-ing', 
           usage: 'จะทำต่อเนื่องไปจนถึงจุดหนึ่งในอนาคต', 
           examples: [
             'By next year, I **will have been working** here for 10 years. (เมื่อถึงปีหน้า ฉันจะทำงานที่นี่ครบ 10 ปีพอดี)',
@@ -855,7 +855,7 @@ export const grammarTopics: GrammarTopic[] = [
           id: 'active-voice',
           name: 'Active Voice', 
           usage: 'ประธานเป็นผู้กระทำกริยา', 
-          structure: 'S + V + O', 
+          structure: 'Subjective + Verb + Objective', 
           examples: [
             'I **eat** rice. (ฉันกินข้าว)',
             'She **writes** a letter. (เธอเขียนจดหมาย)',

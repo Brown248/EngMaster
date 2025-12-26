@@ -32,7 +32,7 @@ interface QuizEngineProps {
   title: string;
   description?: string;
   backPath: string;
-  themeColor?: 'indigo' | 'blue' | 'purple' | 'orange';
+  themeColor?: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink';
   topics?: QuizTopic[];
   mixedQuestions?: QuizQuestion[];
   directQuestions?: QuizQuestion[];
@@ -57,6 +57,8 @@ export default function QuizEngine({
     blue: { bg: 'bg-blue-600', text: 'text-blue-600', light: 'bg-blue-50', border: 'border-blue-500', hover: 'hover:bg-blue-700', ring: 'focus:ring-blue-200' },
     purple: { bg: 'bg-purple-600', text: 'text-purple-600', light: 'bg-purple-50', border: 'border-purple-500', hover: 'hover:bg-purple-700', ring: 'focus:ring-purple-200' },
     orange: { bg: 'bg-orange-600', text: 'text-orange-600', light: 'bg-orange-50', border: 'border-orange-500', hover: 'hover:bg-orange-700', ring: 'focus:ring-orange-200' },
+    green: { bg: 'bg-emerald-600', text: 'text-emerald-600', light: 'bg-emerald-50', border: 'border-emerald-500', hover: 'hover:bg-emerald-700', ring: 'focus:ring-emerald-200' },
+    pink: { bg: 'bg-rose-600', text: 'text-rose-600', light: 'bg-rose-50', border: 'border-rose-500', hover: 'hover:bg-rose-700', ring: 'focus:ring-rose-200' },
   }[themeColor];
 
   // --- State ---
@@ -385,6 +387,10 @@ export default function QuizEngine({
 
   // --- Render: Playing Mode ---
   const q = questions[currentQIndex];
+  
+  // [Fix] Add Loading State
+  if (!q) return <div className="min-h-screen flex items-center justify-center text-slate-400 font-bold text-lg">Loading...</div>;
+
   const progress = ((currentQIndex + 1) / questions.length) * 100;
   const userAnswer = userAnswers[currentQIndex];
   const isAnswered = userAnswer !== null && userAnswer !== '' && (!Array.isArray(userAnswer) || userAnswer.length > 0);
