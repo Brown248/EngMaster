@@ -32,7 +32,8 @@ interface QuizEngineProps {
   title: string;
   description?: string;
   backPath: string;
-  themeColor?: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink';
+  // [Update] เพิ่ม 'teal'
+  themeColor?: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink' | 'cyan' | 'teal'; 
   topics?: QuizTopic[];
   mixedQuestions?: QuizQuestion[];
   directQuestions?: QuizQuestion[];
@@ -59,6 +60,9 @@ export default function QuizEngine({
     orange: { bg: 'bg-orange-600', text: 'text-orange-600', light: 'bg-orange-50', border: 'border-orange-500', hover: 'hover:bg-orange-700', ring: 'focus:ring-orange-200' },
     green: { bg: 'bg-emerald-600', text: 'text-emerald-600', light: 'bg-emerald-50', border: 'border-emerald-500', hover: 'hover:bg-emerald-700', ring: 'focus:ring-emerald-200' },
     pink: { bg: 'bg-rose-600', text: 'text-rose-600', light: 'bg-rose-50', border: 'border-rose-500', hover: 'hover:bg-rose-700', ring: 'focus:ring-rose-200' },
+    cyan: { bg: 'bg-cyan-600', text: 'text-cyan-600', light: 'bg-cyan-50', border: 'border-cyan-500', hover: 'hover:bg-cyan-700', ring: 'focus:ring-cyan-200' },
+    // [Update] เพิ่มธีมสี Teal
+    teal: { bg: 'bg-teal-600', text: 'text-teal-600', light: 'bg-teal-50', border: 'border-teal-500', hover: 'hover:bg-teal-700', ring: 'focus:ring-teal-200' },
   }[themeColor];
 
   // --- State ---
@@ -247,10 +251,6 @@ export default function QuizEngine({
           cancelLabel="เริ่มใหม่"
           variant="info"
         />
-
-        {resumeModal.isOpen === false && resumeModal.topicId && !activeTopicId && (
-            null 
-        )}
         
         <ConfirmationModal 
            isOpen={resumeModal.isOpen}
@@ -388,7 +388,6 @@ export default function QuizEngine({
   // --- Render: Playing Mode ---
   const q = questions[currentQIndex];
   
-  // [Fix] Add Loading State
   if (!q) return <div className="min-h-screen flex items-center justify-center text-slate-400 font-bold text-lg">Loading...</div>;
 
   const progress = ((currentQIndex + 1) / questions.length) * 100;

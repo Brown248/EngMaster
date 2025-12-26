@@ -36,8 +36,12 @@ export default function Grammar() {
         navigate('/grammar/parts-of-speech-quiz', { state: { subTopicId: subTopicId } });
     } else if (mainTopicId === 'voice') {
         navigate('/grammar/voice-quiz');
-    } else if (mainTopicId === 'mood') { // [New] เพิ่มเงื่อนไขสำหรับ Mood Quiz
+    } else if (mainTopicId === 'mood') {
         navigate('/grammar/mood-quiz', { state: { subTopicId: subTopicId } });
+    } else if (mainTopicId === 'sentence-structure') {
+        navigate('/grammar/sentence-structure-quiz', { state: { subTopicId: subTopicId } });
+    } else if (mainTopicId === 'clauses') { // [New] เพิ่มเงื่อนไขนี้
+        navigate('/grammar/clauses-quiz', { state: { subTopicId: subTopicId } });
     }
   };
 

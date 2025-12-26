@@ -9,9 +9,11 @@ const Home = lazy(() => import('./pages/Home'));
 const Grammar = lazy(() => import('./pages/Grammar'));
 const Vocabulary = lazy(() => import('./pages/Vocabulary'));
 const TensesQuiz = lazy(() => import('./pages/TensesQuiz'));
-const PartsOfSpeechQuiz = lazy(() => import('./pages/PartsOfSpeechQui')); // Note: Check typo in filename
+const PartsOfSpeechQuiz = lazy(() => import('./pages/PartsOfSpeechQui'));
 const VoiceQuiz = lazy(() => import('./pages/VoiceQuiz'));
-const MoodQuiz = lazy(() => import('./pages/MoodQuiz')); // [New] Import MoodQuiz
+const MoodQuiz = lazy(() => import('./pages/MoodQuiz'));
+const SentenceStructureQuiz = lazy(() => import('./pages/SentenceStructureQuiz'));
+const ClausesQuiz = lazy(() => import('./pages/ClausesQuiz')); // [New] Import
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
@@ -35,7 +37,9 @@ function App() {
             <Route path="/grammar/quiz" element={<TensesQuiz />} />
             <Route path="/grammar/parts-of-speech-quiz" element={<PartsOfSpeechQuiz />} />
             <Route path="/grammar/voice-quiz" element={<VoiceQuiz />} />
-            <Route path="/grammar/mood-quiz" element={<MoodQuiz />} /> {/* [New] เพิ่ม Route นี้ */}
+            <Route path="/grammar/mood-quiz" element={<MoodQuiz />} />
+            <Route path="/grammar/sentence-structure-quiz" element={<SentenceStructureQuiz />} />
+            <Route path="/grammar/clauses-quiz" element={<ClausesQuiz />} /> {/* [New] Route */}
 
             {/* Vocabulary Section */}
             <Route path="/vocabulary" element={<Vocabulary />} />
