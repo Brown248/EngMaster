@@ -233,7 +233,7 @@ export default function Grammar() {
 
                                 {detail.vocabulary && detail.vocabulary.length > 0 && (
                                     <div>
-                                        <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">🔤 คำศัพท์น่ารู้</h3>
+                                        <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">🔤 ตัวอย่างคำศัพท์</h3>
                                         <div className="flex flex-wrap gap-2">
                                             {detail.vocabulary.map((word, i) => (
                                                 <span key={i} className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-bold border border-slate-200 text-sm">

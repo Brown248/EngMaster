@@ -17,6 +17,7 @@ export const grammarTopics: GrammarTopic[] = [
             {
               name: 'Common Noun (นามทั่วไป)',
               usage: 'ใช้เรียกสิ่งทั่วไป ไม่เจาะจงชื่อ',
+              vocabulary: ['dog', 'city', 'car', 'teacher', 'book', 'student'],
               examples: [
                 'I saw a **dog** in the park. (ฉันเห็นสุนัขตัวหนึ่งในสวน)',
                 'She wants to buy a new **car**. (เธออยากซื้อรถคันใหม่)',
@@ -28,6 +29,7 @@ export const grammarTopics: GrammarTopic[] = [
             {
               name: 'Proper Noun (นามเฉพาะ)',
               usage: 'ชื่อเฉพาะของคน สถานที่ (ขึ้นต้นด้วยตัวใหญ่เสมอ)',
+              vocabulary: ['Bangkok', 'Lisa', 'Japan', 'Monday', 'Toyota', 'London'],
               examples: [
                 'I live in **Bangkok**. (ฉันอาศัยอยู่ในกรุงเทพฯ)',
                 '**Lisa** is singing a song. (ลิซ่ากำลังร้องเพลง)',
@@ -39,6 +41,7 @@ export const grammarTopics: GrammarTopic[] = [
             {
               name: 'Concrete Noun (รูปธรรม)',
               usage: 'สิ่งที่จับต้องได้ มองเห็นได้ สัมผัสได้',
+              vocabulary: ['table', 'water', 'flower', 'computer', 'door', 'noise'],
               examples: [
                 'The **table** is made of wood. (โต๊ะตัวนี้ทำจากไม้)',
                 'Please close the **door**. (กรุณาปิดประตูด้วย)',
@@ -50,6 +53,7 @@ export const grammarTopics: GrammarTopic[] = [
             {
               name: 'Abstract Noun (นามธรรม)',
               usage: 'ความรู้สึก สภาวะ ความคิด ที่จับต้องไม่ได้',
+              vocabulary: ['love', 'happiness', 'freedom', 'honesty', 'knowledge', 'anger'],
               examples: [
                 '**Love** makes the world go round. (ความรักทำให้โลกหมุนไป)',
                 'She showed great **kindness**. (เธอแสดงความเมตตาอย่างมาก)',
@@ -61,6 +65,7 @@ export const grammarTopics: GrammarTopic[] = [
             {
               name: 'Countable Noun (นามนับได้)',
               usage: 'นับเป็นชิ้น/อันได้ มีรูปเอกพจน์และพหูพจน์',
+              vocabulary: ['book', 'apple', 'cat', 'student', 'house', 'pen'],
               examples: [
                 'I have two **books**. (ฉันมีหนังสือสองเล่ม)',
                 'There is an **apple** on the desk. (มีแอปเปิ้ลหนึ่งผลบนโต๊ะ)',
@@ -72,6 +77,7 @@ export const grammarTopics: GrammarTopic[] = [
             {
               name: 'Uncountable Noun (นามนับไม่ได้)',
               usage: 'นับไม่ได้ ต้องใช้ภาชนะตวง หรือมองเป็นมวลรวม',
+              vocabulary: ['water', 'rice', 'sugar', 'money', 'information', 'milk'],
               examples: [
                 'Please give me some **water**. (ขอน้ำให้ฉันหน่อย)',
                 'I like to eat **rice**. (ฉันชอบกินข้าว)',
@@ -83,6 +89,7 @@ export const grammarTopics: GrammarTopic[] = [
             {
               name: 'Collective Noun (สมุหนาม)',
               usage: 'คำนามที่อยู่เป็นกลุ่ม เป็นคณะ',
+              vocabulary: ['team', 'family', 'group', 'class', 'flock', 'jury'],
               examples: [
                 'The **team** won the match. (ทีมชนะการแข่งขัน)',
                 'A **flock** of birds flew away. (ฝูงนกบินหนีไป)',
@@ -94,6 +101,7 @@ export const grammarTopics: GrammarTopic[] = [
             {
               name: 'Compound Noun (นามประสม)',
               usage: 'คำนาม 2 คำมารวมกันเกิดความหมายใหม่',
+              vocabulary: ['toothpaste', 'bedroom', 'bus stop', 'football', 'sunflower', 'mother-in-law'],
               examples: [
                 'I need to buy **toothpaste**. (ฉันต้องซื้อยาสีฟัน)',
                 'Let\'s go to the **bedroom**. (ไปที่ห้องนอนกันเถอะ)',
@@ -111,6 +119,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Subject Pronoun', 
               usage: 'ทำหน้าที่เป็นประธานของประโยค', 
+              vocabulary: ['I', 'You', 'We', 'They', 'He', 'She', 'It'],
               examples: [
                 '**I** go to school every day. (ฉันไปโรงเรียนทุกวัน)',
                 '**She** likes to eat ice cream. (เธอชอบกินไอศกรีม)',
@@ -122,6 +131,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Object Pronoun', 
               usage: 'ทำหน้าที่เป็นกรรมของประโยค', 
+              vocabulary: ['me', 'you', 'us', 'them', 'him', 'her', 'it'],
               examples: [
                 'She loves **me**. (เธอรักฉัน)',
                 'I saw **him** at the market. (ฉันเห็นเขาที่ตลาด)',
@@ -133,6 +143,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Possessive Pronoun', 
               usage: 'แสดงความเป็นเจ้าของ (ไม่ต้องมีนามตามหลัง)', 
+              vocabulary: ['mine', 'yours', 'ours', 'theirs', 'his', 'hers'],
               examples: [
                 'This book is **mine**. (หนังสือเล่มนี้เป็นของฉัน)',
                 'Is this pen **yours**? (ปากกาด้ามนี้เป็นของคุณหรือเปล่า?)',
@@ -144,6 +155,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Reflexive Pronoun', 
               usage: 'สรรพนามสะท้อน (กระทำต่อตัวเอง)', 
+              vocabulary: ['myself', 'yourself', 'himself', 'herself', 'itself', 'ourselves'],
               examples: [
                 'She taught **herself** English. (เธอสอนภาษาอังกฤษด้วยตัวเอง)',
                 'I cut **myself** while cooking. (ฉันทำมีดบาดตัวเองตอนทำอาหาร)',
@@ -155,6 +167,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Demonstrative Pronoun', 
               usage: 'สรรพนามชี้เฉพาะ (นี่, นั่น)', 
+              vocabulary: ['this', 'that', 'these', 'those'],
               examples: [
                 '**This** is my favorite book. (นี่คือหนังสือเล่มโปรดของฉัน)',
                 '**That** looks delicious. (นั่นดูน่าอร่อยจัง)',
@@ -166,6 +179,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Relative Pronoun', 
               usage: 'เชื่อมประโยคขยายคำนาม (ผู้ซึ่ง, ที่ซึ่ง)', 
+              vocabulary: ['who', 'which', 'that', 'whose', 'where', 'whom'],
               examples: [
                 'The man **who** called is here. (ผู้ชายคนที่โทรมาอยู่ที่นี่แล้ว)',
                 'This is the car **which** I bought. (นี่คือรถคันที่ฉันซื้อมา)',
@@ -177,6 +191,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Interrogative Pronoun', 
               usage: 'ใช้สำหรับถามคำถาม', 
+              vocabulary: ['who', 'what', 'where', 'when', 'why', 'whose'],
               examples: [
                 '**Who** are you? (คุณคือใคร?)',
                 '**What** is this? (นี่คืออะไร?)',
@@ -188,6 +203,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Indefinite Pronoun', 
               usage: 'สรรพนามไม่เจาะจง (ใครบางคน, ทุกคน)', 
+              vocabulary: ['someone', 'anyone', 'everything', 'nothing', 'everybody', 'all'],
               examples: [
                 '**Someone** is knocking at the door. (มีใครบางคนกำลังเคาะประตู)',
                 '**Anyone** can do this task. (ใครๆ ก็ทำงานนี้ได้)',
@@ -199,6 +215,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Reciprocal Pronoun', 
               usage: 'สรรพนามแสดงความสัมพันธ์ซึ่งกันและกัน', 
+              vocabulary: ['each other', 'one another'],
               examples: [
                 'They help **each other**. (พวกเขาช่วยเหลือซึ่งกันและกัน)',
                 'We love **one another**. (พวกเรารักซึ่งกันและกัน)',
@@ -216,6 +233,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Action Verb', 
               usage: 'แสดงการกระทำทางกายภาพหรือจิตใจ', 
+              vocabulary: ['run', 'eat', 'sleep', 'walk', 'write', 'play'],
               examples: [
                 'She **runs** very fast. (เธอวิ่งเร็วมาก)',
                 'We **eat** pizza for dinner. (พวกเรากินพิซซ่าเป็นมื้อเย็น)',
@@ -227,6 +245,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Stative Verb', 
               usage: 'แสดงสภาวะ ความรู้สึก (มักไม่เติม ing)', 
+              vocabulary: ['know', 'love', 'believe', 'hate', 'understand', 'remember'],
               examples: [
                 'I **know** the answer. (ฉันรู้คำตอบ)',
                 'She **loves** cats very much. (เธอรักแมวมาก)',
@@ -238,6 +257,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Linking Verb', 
               usage: 'เชื่อมประธานกับคุณสมบัติ (ไม่ใช่การกระทำ)', 
+              vocabulary: ['is', 'am', 'are', 'seem', 'look', 'feel', 'become'],
               examples: [
                 'He **is** a smart student. (เขาเป็นนักเรียนที่ฉลาด)',
                 'You **look** tired today. (วันนี้คุณดูเหนื่อยนะ)',
@@ -249,6 +269,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Transitive Verb', 
               usage: 'กริยาที่ต้องการกรรมมารองรับ', 
+              vocabulary: ['buy', 'kick', 'give', 'make', 'love', 'hit'],
               examples: [
                 'I **eat** an apple. (ฉันกินแอปเปิ้ล - ต้องมีแอปเปิ้ลเป็นกรรม)',
                 'She **kicked** the ball. (เธอเตะลูกบอล)',
@@ -260,6 +281,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Intransitive Verb', 
               usage: 'กริยาที่ไม่ต้องการกรรม สมบูรณ์ในตัวเอง', 
+              vocabulary: ['smile', 'cry', 'arrive', 'sleep', 'fall', 'die'],
               examples: [
                 'The baby **sleeps**. (ทารกนอนหลับ)',
                 'Birds **fly** in the sky. (นกบินบนท้องฟ้า)',
@@ -271,6 +293,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Auxiliary Verb', 
               usage: 'กริยาช่วย (Do, Have, Be) ช่วยสร้างประโยค', 
+              vocabulary: ['do', 'have', 'be', 'will', 'can', 'should'],
               examples: [
                 'I **do** not know him. (ฉันไม่รู้จักเขา)',
                 'She **has** finished her work. (เธอทำงานของเธอเสร็จแล้ว)',
@@ -282,6 +305,7 @@ export const grammarTopics: GrammarTopic[] = [
             { 
               name: 'Modal Verb', 
               usage: 'กริยาช่วยบอกความสามารถ ความเป็นไปได้', 
+              vocabulary: ['can', 'must', 'should', 'may', 'might', 'could'],
               examples: [
                 'I **can** swim. (ฉันว่ายน้ำได้)',
                 'You **must** go now. (คุณต้องไปเดี๋ยวนี้)',
@@ -299,6 +323,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Descriptive', 
                usage: 'บอกลักษณะ คุณภาพ', 
+               vocabulary: ['beautiful', 'big', 'red', 'happy', 'tall', 'good'],
                examples: [
                  'A **big** house stands on the hill. (บ้านหลังใหญ่อยู่บนเนินเขา)',
                  'She drives a **red** car. (เธอขับรถสีแดง)',
@@ -310,6 +335,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Quantitative', 
                usage: 'บอกปริมาณ จำนวน', 
+               vocabulary: ['many', 'some', 'few', 'little', 'all', 'three'],
                examples: [
                  'I have **many** friends here. (ฉันมีเพื่อนหลายคนที่นี่)',
                  'There is **some** water left. (มีน้ำเหลืออยู่บ้าง)',
@@ -321,6 +347,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Demonstrative', 
                usage: 'ชี้เฉพาะเจาะจง (วางหน้าคำนาม)', 
+               vocabulary: ['this', 'that', 'these', 'those'],
                examples: [
                  '**This** book is interesting. (หนังสือเล่มนี้น่าสนใจ)',
                  '**That** car is fast. (รถคันนั้นเร็ว)',
@@ -332,6 +359,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Possessive', 
                usage: 'แสดงความเป็นเจ้าของ (วางหน้าคำนาม)', 
+               vocabulary: ['my', 'your', 'our', 'their', 'his', 'her'],
                examples: [
                  '**My** pen is blue. (ปากกาของฉันสีน้ำเงิน)',
                  '**Your** name is beautiful. (ชื่อของคุณไพเราะ)',
@@ -343,6 +371,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Interrogative', 
                usage: 'ใช้ขยายคำนามในประโยคคำถาม', 
+               vocabulary: ['which', 'what', 'whose'],
                examples: [
                  '**Which** color do you like? (คุณชอบสีไหน?)',
                  '**What** time is it? (มันคือกี่โมง?)',
@@ -354,6 +383,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Comparative', 
                usage: 'ขั้นกว่า (เปรียบเทียบ 2 สิ่ง)', 
+               vocabulary: ['bigger', 'faster', 'better', 'taller', 'more beautiful'],
                examples: [
                  'This car is **bigger** than that one. (รถคันนี้ใหญ่กว่าคันนั้น)',
                  'She is **taller** than me. (เธอสูงกว่าฉัน)',
@@ -365,6 +395,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Superlative', 
                usage: 'ขั้นสุด (เปรียบเทียบ 3 สิ่งขึ้นไป)', 
+               vocabulary: ['biggest', 'fastest', 'best', 'tallest', 'most beautiful'],
                examples: [
                  'She is the **smartest** student in class. (เธอเป็นนักเรียนที่ฉลาดที่สุดในห้อง)',
                  'This is the **biggest** house in the village. (นี่คือบ้านหลังใหญ่ที่สุดในหมู่บ้าน)',
@@ -376,6 +407,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Order of Adjectives', 
                usage: 'ลำดับการวาง (จำนวน-ความเห็น-ขนาด-อายุ-รูปทรง-สี-ถิ่น-วัสดุ)', 
+               vocabulary: ['beautiful small old', 'big red', 'new wooden', 'lovely black'],
                examples: [
                  'A **beautiful small old wooden** house. (บ้านไม้เก่าหลังเล็กที่สวยงาม)',
                  'Two **lovely huge black** dogs. (สุนัขสีดำตัวใหญ่ที่น่ารักสองตัว)',
@@ -393,6 +425,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Manner', 
                usage: 'บอกอาการ (ทำอย่างไร)', 
+               vocabulary: ['quickly', 'slowly', 'happily', 'carefully', 'well'],
                examples: [
                  'He speaks **clearly**. (เขาพูดอย่างชัดเจน)',
                  'Please drive **carefully**. (โปรดขับรถอย่างระมัดระวัง)',
@@ -404,6 +437,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Time', 
                usage: 'บอกเวลา (เมื่อไหร่)', 
+               vocabulary: ['now', 'yesterday', 'tomorrow', 'soon', 'later', 'today'],
                examples: [
                  'Do it **now**. (ทำมันเดี๋ยวนี้)',
                  'See you **tomorrow**. (เจอกันพรุ่งนี้)',
@@ -415,6 +449,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Frequency', 
                usage: 'บอกความถี่ (บ่อยแค่ไหน)', 
+               vocabulary: ['always', 'often', 'sometimes', 'never', 'rarely'],
                examples: [
                  'I **often** go to the park. (ฉันไปสวนสาธารณะบ่อยๆ)',
                  'She **never** tells a lie. (เธอไม่เคยโกหก)',
@@ -426,6 +461,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Place', 
                usage: 'บอกสถานที่ (ที่ไหน)', 
+               vocabulary: ['here', 'there', 'everywhere', 'inside', 'outside', 'up'],
                examples: [
                  'Come **here**. (มาที่นี่)',
                  'The dog is playing **outside**. (สุนัขกำลังเล่นอยู่ข้างนอก)',
@@ -437,6 +473,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Degree', 
                usage: 'บอกระดับ (แค่ไหน)', 
+               vocabulary: ['very', 'too', 'quite', 'so', 'extremely'],
                examples: [
                  'It is **very** hot today. (วันนี้อากาศร้อนมาก)',
                  'She is **so** beautiful. (เธอสวยเหลือเกิน)',
@@ -454,6 +491,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Place', 
                usage: 'บอกตำแหน่ง สถานที่', 
+               vocabulary: ['in', 'on', 'at', 'under', 'behind', 'between'],
                examples: [
                  'The keys are **under** the table. (กุญแจอยู่ใต้โต๊ะ)',
                  'I live **in** Bangkok. (ฉันอาศัยอยู่ในกรุงเทพ)',
@@ -465,6 +503,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Time', 
                usage: 'บอกเวลา', 
+               vocabulary: ['at', 'in', 'on', 'before', 'after', 'during'],
                examples: [
                  'See you **at** 5 PM. (เจอกันตอน 5 โมงเย็น)',
                  'We have a meeting **on** Monday. (เรามีประชุมในวันจันทร์)',
@@ -476,6 +515,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Movement', 
                usage: 'บอกทิศทาง การเคลื่อนที่', 
+               vocabulary: ['to', 'into', 'towards', 'across', 'through', 'out of'],
                examples: [
                  'Walk **into** the room. (เดินเข้าไปในห้อง)',
                  'He went **to** school. (เขาไปโรงเรียน)',
@@ -487,6 +527,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Cause/Reason', 
                usage: 'บอกสาเหตุ', 
+               vocabulary: ['because of', 'due to', 'for', 'from', 'thanks to'],
                examples: [
                  'I stayed home **because of** the rain. (ฉันอยู่บ้านเพราะฝนตก)',
                  'She cried **for** fear. (เธอร้องไห้ด้วยความกลัว)',
@@ -503,7 +544,8 @@ export const grammarTopics: GrammarTopic[] = [
           types: [
              { 
                name: 'Coordinating', 
-               usage: 'เชื่อมสิ่งที่เท่ากัน (FANBOYS: For, And, Nor, But, Or, Yet, So)', 
+               usage: 'เชื่อมสิ่งที่เท่ากัน (FANBOYS)', 
+               vocabulary: ['and', 'but', 'or', 'so', 'for', 'nor'],
                examples: [
                  'I like coffee **and** tea. (ฉันชอบกาแฟและชา)',
                  'She is poor **but** happy. (เธอยากจนแต่มีความสุข)',
@@ -514,7 +556,8 @@ export const grammarTopics: GrammarTopic[] = [
              },
              { 
                name: 'Subordinating', 
-               usage: 'เชื่อมประโยคหลักกับประโยคย่อย (บอกเหตุผล, เงื่อนไข)', 
+               usage: 'เชื่อมประโยคหลักกับประโยคย่อย', 
+               vocabulary: ['because', 'although', 'if', 'when', 'while', 'since'],
                examples: [
                  'I stayed home **because** it rained. (ฉันอยู่บ้านเพราะฝนตก)',
                  '**Although** he is rich, he is sad. (ถึงแม้ว่าเขาจะรวย แต่เขาก็เศร้า)',
@@ -526,6 +569,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Correlative', 
                usage: 'คำเชื่อมที่มาเป็นคู่', 
+               vocabulary: ['both...and', 'either...or', 'neither...nor', 'not only...but also'],
                examples: [
                  '**Both** Tom **and** Jerry are here. (ทั้งทอมและเจอร์รี่อยู่ที่นี่)',
                  '**Neither** this **nor** that. (ไม่ทั้งอันนี้และอันนั้น)',
@@ -543,6 +587,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Articles', 
                usage: 'A, An, The', 
+               vocabulary: ['a', 'an', 'the'],
                examples: [
                  'I have **an** apple. (ฉันมีแอปเปิ้ลหนึ่งผล)',
                  'I saw **a** cat. (ฉันเห็นแมวตัวหนึ่ง)',
@@ -554,6 +599,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Demonstratives', 
                usage: 'This, That, These, Those', 
+               vocabulary: ['this', 'that', 'these', 'those'],
                examples: [
                  '**This** house is mine. (บ้านหลังนี้เป็นของฉัน)',
                  '**That** star is far away. (ดาวดวงนั้นอยู่ไกลมาก)',
@@ -565,6 +611,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Quantifiers', 
                usage: 'บอกปริมาณ (Some, Many, Much)', 
+               vocabulary: ['some', 'many', 'much', 'a lot of', 'any'],
                examples: [
                  'I need **some** help. (ฉันต้องการความช่วยเหลือบ้าง)',
                  'She has **many** friends. (เธอมีเพื่อนเยอะ)',
@@ -576,6 +623,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Possessives', 
                usage: 'แสดงความเป็นเจ้าของ (My, Your, His)', 
+               vocabulary: ['my', 'your', 'his', 'her', 'their', 'our'],
                examples: [
                  '**My** cat is very cute. (แมวของฉันน่ารักมาก)',
                  'Is this **your** bag? (นี่คือกระเป๋าของคุณใช่ไหม?)',
@@ -593,6 +641,7 @@ export const grammarTopics: GrammarTopic[] = [
              { 
                name: 'Exclamation', 
                usage: 'คำอุทานแสดงอารมณ์ต่างๆ', 
+               vocabulary: ['Wow!', 'Oh!', 'Ouch!', 'Hey!', 'Eww!', 'Oops!'],
                examples: [
                  '**Wow!** That is amazing! (ว้าว! นั่นมันมหัศจรรย์มาก)',
                  '**Oh!** I forgot my keys. (โอ้! ฉันลืมกุญแจ)',
