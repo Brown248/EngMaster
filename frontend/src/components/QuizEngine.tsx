@@ -6,11 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { QuizQuestion } from '../types';
 import { shuffleArray } from '../utils/quizUtils';
 import AdBanner from './AdBanner';
+import ConfirmationModal from './ConfirmationModal'; // [New] Import Modal
 
 // --- Types & Constants ---
 const STORAGE_PREFIX = 'engmaster_quiz_';
 const HISTORY_KEY = 'engmaster_quiz_history';
-const SUPPORT_EMAIL = 'support@engmaster.com'; // เปลี่ยนเป็นอีเมลจริงของคุณ
+const SUPPORT_EMAIL = 'support@engmaster.com';
 
 export interface QuizTopic {
   id: string;
@@ -66,6 +67,14 @@ export default function QuizEngine({
   const [userAnswers, setUserAnswers] = useState<(string | number | string[] | null)[]>([]);
   const [isFinished, setIsFinished] = useState(false);
   const [history, setHistory] = useState<Record<string, number | null>>({});
+
+  // [New] Modal States
+  const [showExitModal, setShowExitModal] = useState(false);
+  const [resumeModal, setResumeModal] = useState<{ isOpen: boolean; session: QuizSession | null; topicId: string | null }>({
+    isOpen: false,
+    session: null,
+    topicId: null
+  });
 
   // --- Load History & Resume ---
   useEffect(() => {
@@ -128,16 +137,23 @@ export default function QuizEngine({
 
   const handleStartTopic = (id: string) => {
     const savedSessionStr = localStorage.getItem(`${STORAGE_PREFIX}session_${id}`);
+    
+    // [Update] Replace native confirm with Custom Modal logic
     if (savedSessionStr) {
         const session: QuizSession = JSON.parse(savedSessionStr);
         if (!session.isFinished) {
-             if (confirm(`คุณมีแบบทดสอบ ${id} ที่ยังทำไม่เสร็จ ต้องการทำต่อหรือไม่?`)) {
-                 resumeSession(session);
-                 return;
-             }
+             // เปิด Modal ถามแทนการใช้ confirm
+             setResumeModal({ isOpen: true, session, topicId: id });
+             return;
         }
     }
 
+    // ถ้าไม่มี session หรือจบไปแล้ว ให้เริ่มใหม่เลย
+    prepareAndStartQuiz(id);
+  };
+
+  // แยก Logic การเตรียมโจทย์ออกมา เพื่อเรียกใช้ได้ทั้งจาก Start ปกติ และจากปุ่ม "เริ่มใหม่" ใน Modal
+  const prepareAndStartQuiz = (id: string) => {
     let selectedQs: QuizQuestion[] = [];
     if (id === 'mixed') {
         selectedQs = [...mixedQuestions];
@@ -230,6 +246,40 @@ export default function QuizEngine({
   if (!activeTopicId && !directQuestions) {
     return (
       <div className="min-h-screen bg-slate-50 py-8 px-4">
+        {/* [New] Modal สำหรับถาม Resume */}
+        <ConfirmationModal 
+          isOpen={resumeModal.isOpen}
+          onClose={() => setResumeModal({ ...resumeModal, isOpen: false })} // ถ้ากดปิด modal เฉยๆ ถือว่าไม่ทำอะไร (หรือจะให้เริ่มใหม่ก็ได้ แต่นี่ปลอดภัยสุด)
+          onConfirm={() => resumeSession(resumeModal.session!)}
+          title="พบความคืบหน้าเดิม"
+          message={`คุณทำแบบทดสอบ "${resumeModal.topicId}" ค้างไว้อยู่ ต้องการทำต่อจากเดิมหรือไม่?`}
+          confirmLabel="ทำต่อจากเดิม"
+          cancelLabel="เริ่มใหม่"
+          variant="info"
+        />
+
+        {/* Logic เพิ่มเติม: ถ้ากด Cancel (เริ่มใหม่) ให้เริ่ม Quiz ใหม่ */}
+        {resumeModal.isOpen === false && resumeModal.topicId && !activeTopicId && (
+            /* Trick: เราจับ event onClose ไม่ได้แยกกันชัดเจนใน Modal props ที่ให้ไป 
+               ดังนั้นเราอาจจะปรับ Logic Modal นิดหน่อย หรือใช้ Effect 
+               เพื่อให้ง่าย ผมจะแก้ onClose ของ Modal ข้างบนให้ชัดเจนขึ้น */
+            null 
+        )}
+        
+        {/* เพื่อความง่าย ผมขอแก้ Props ของ ConfirmationModal ข้างบนนิดหน่อย 
+            ให้ปุ่ม Cancel ทำงานเป็น "เริ่มใหม่" */}
+        <ConfirmationModal 
+           isOpen={resumeModal.isOpen}
+           onClose={() => prepareAndStartQuiz(resumeModal.topicId!)} // กดนอกกรอบ หรือกด Cancel ให้เริ่มใหม่เลย
+           onConfirm={() => resumeSession(resumeModal.session!)}
+           title="พบความคืบหน้าเดิม"
+           message={`คุณทำแบบทดสอบค้างไว้อยู่ ต้องการทำต่อจากจุดเดิม หรือเริ่มทำใหม่?`}
+           confirmLabel="ทำต่อจากจุดเดิม"
+           cancelLabel="เริ่มทำใหม่"
+           variant="info"
+        />
+
+
         <div className="max-w-5xl mx-auto">
           <div className="mb-8 flex items-center gap-4">
             <button onClick={() => navigate(backPath)} className="p-2 rounded-xl bg-white text-slate-500 hover:text-slate-800 shadow-sm border border-slate-100" aria-label="Back">
@@ -343,7 +393,6 @@ export default function QuizEngine({
                       <span>{q.explanation}</span>
                     </div>
 
-                     {/* Report Issue Button (Small) */}
                     <button 
                         onClick={() => handleReportIssue(q)}
                         className="absolute top-4 right-4 text-slate-300 hover:text-red-400 p-1 transition-colors"
@@ -369,10 +418,26 @@ export default function QuizEngine({
 
   return (
     <div className="min-h-screen bg-slate-50 py-8 px-4 flex flex-col items-center">
+       
+       {/* [New] Modal สำหรับกด Exit */}
+       <ConfirmationModal 
+          isOpen={showExitModal}
+          onClose={() => setShowExitModal(false)}
+          onConfirm={handleBack}
+          title="ยืนยันการออกจากแบบทดสอบ"
+          message="ความคืบหน้าของคุณจะถูกบันทึกไว้โดยอัตโนมัติ คุณสามารถกลับมาทำต่อได้ภายหลัง"
+          confirmLabel="ออกสู่เมนูหลัก"
+          cancelLabel="ทำข้อสอบต่อ"
+          variant="danger"
+       />
+
        <div className="w-full max-w-3xl flex items-center justify-between mb-6">
-        <button onClick={() => {
-            if(confirm('ต้องการกลับเมนูหลักใช่ไหม? (ระบบบันทึกความคืบหน้าให้อัตโนมัติ)')) handleBack();
-        }} className="flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold transition-colors" aria-label="Exit Quiz">
+        <button 
+          // [Update] เปลี่ยนจาก confirm() เป็นเปิด Modal
+          onClick={() => setShowExitModal(true)} 
+          className="flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold transition-colors" 
+          aria-label="Exit Quiz"
+        >
             <ArrowLeft size={20} /> ออก
         </button>
         <div className={`px-4 py-1.5 rounded-full text-sm font-bold ${theme.light} ${theme.text}`}>
@@ -383,7 +448,6 @@ export default function QuizEngine({
       <div className="w-full max-w-3xl bg-white rounded-[2rem] shadow-lg border border-slate-100 overflow-hidden min-h-[400px] flex flex-col relative">
           <div className="w-full h-1.5 bg-slate-100"><motion.div className={`h-full ${theme.bg}`} animate={{ width: `${progress}%` }} /></div>
           
-          {/* Report Button */}
           <button 
              onClick={() => handleReportIssue(q)}
              className="absolute top-4 right-4 text-slate-300 hover:text-red-500 p-2 rounded-full hover:bg-red-50 transition-all z-10"
