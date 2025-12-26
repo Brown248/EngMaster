@@ -14,7 +14,7 @@ export default function PartsOfSpeechQuiz() {
       title="Parts of Speech Quiz"
       description="ทดสอบความเข้าใจเรื่องชนิดของคำ (Noun, Verb, etc.)"
       backPath="/grammar"
-      themeColor="blue"
+      themeColor="purple" // [แก้ไข] เปลี่ยนสีตรงนี้ (เลือกได้: indigo, blue, purple, orange)
       topics={separatePartsOfSpeechData}
       mixedQuestions={partsOfSpeechQuizData}
       initialTopicId={initialTopicId}

@@ -12,13 +12,11 @@ export default function Grammar() {
   
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // รับค่าจาก URL Query Params
   const selectedSubtopicId = searchParams.get('subtopicId');
   const selectedTypeName = searchParams.get('type'); 
 
   const activeTopic = grammarTopics.find(t => t.id === topicId);
   
-  // ค้นหา Subtopic จาก ID
   const currentSubtopicData = activeTopic?.details?.subtopics?.find(
     s => s.id === selectedSubtopicId
   );
@@ -31,12 +29,10 @@ export default function Grammar() {
     window.scrollTo(0, 0);
   }, [topicId, selectedSubtopicId, selectedTypeName]);
 
-  // ฟังก์ชันเริ่มทำแบบทดสอบ
   const startQuiz = (mainTopicId: string, subTopicId?: string) => {
     if (mainTopicId === 'tenses') {
         navigate('/grammar/quiz');
     } else if (mainTopicId === 'parts-of-speech') {
-        // ไปยังหน้า Quiz ของ Parts of Speech พร้อมส่ง ID (ถ้ามี)
         navigate('/grammar/parts-of-speech-quiz', { state: { subTopicId: subTopicId } });
     } else if (mainTopicId === 'voice') {
         navigate('/grammar/voice-quiz');
@@ -66,7 +62,6 @@ export default function Grammar() {
       <AnimatePresence mode="wait">
         
         {!topicId ? (
-          // --- หน้าเลือกหัวข้อหลัก (Main Topics List) ---
           <motion.div 
             key="list"
             initial={{ opacity: 0, x: -20 }}
@@ -103,7 +98,6 @@ export default function Grammar() {
           </motion.div>
         ) : (
           
-          // --- หน้ารายละเอียดหัวข้อ (Topic Detail) ---
           <motion.div 
             key="detail"
             initial={{ opacity: 0, x: 20 }}
@@ -111,7 +105,6 @@ export default function Grammar() {
             exit={{ opacity: 0, x: 20 }}
             className="bg-white rounded-[2.5rem] p-6 md:p-8 shadow-xl border border-slate-100 min-h-[60vh]"
           >
-            {/* Header */}
             <div className="mb-8">
                 <button 
                   onClick={handleBack}
@@ -134,9 +127,7 @@ export default function Grammar() {
                 </div>
             </div>
 
-            {/* Content Logic */}
             {!selectedSubtopicId ? (
-                 // --- LEVEL 1: Subtopic List (หน้ารวมหัวข้อย่อย) ---
                  <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {activeTopic?.details.subtopics.map((sub, idx) => (
@@ -158,9 +149,9 @@ export default function Grammar() {
                         ))}
                     </div>
                     
-                    {/* [Fixed] แสดงปุ่มทำแบบทดสอบสำหรับทุกหัวข้อ (รวมถึง Parts of Speech) */}
+                    {/* [Fixed] เปลี่ยนสีปุ่มเริ่มทำแบบทดสอบเป็น Gradient สีส้มทอง (Amber-Orange) */}
                     <div className="mt-8 text-center">
-                        <button onClick={() => startQuiz(activeTopic!.id)} className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-bold text-xl hover:shadow-xl hover:scale-105 transition-all">
+                        <button onClick={() => startQuiz(activeTopic!.id)} className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-2xl font-bold text-xl hover:shadow-xl hover:scale-105 transition-all shadow-lg shadow-orange-200">
                             <PlayCircle size={24} /> เริ่มทำแบบทดสอบ
                         </button>
                     </div>
@@ -168,7 +159,6 @@ export default function Grammar() {
 
             ) : !selectedTypeDetail && currentSubtopicData?.types ? (
                 
-                // --- LEVEL 2: Type List (หน้าเลือกประเภทย่อย) ---
                 <div className="space-y-6 animate-fade-in">
                     <div className="p-4 bg-blue-50 text-blue-800 rounded-xl border border-blue-100 mb-6 flex items-start gap-3">
                          <span className="text-2xl">💡</span>
@@ -190,6 +180,7 @@ export default function Grammar() {
                          ))}
                     </div>
 
+                    {/* [Fixed] เปลี่ยนสีปุ่มเริ่มทำแบบทดสอบย่อยเป็นสีเทาเข้ม (Slate) เหมือนเดิม หรือจะเปลี่ยนเป็นส้มก็ได้ แต่เทาดูสุภาพสำหรับข้อย่อย */}
                     <div className="mt-10 pt-8 border-t border-slate-100 text-center">
                         <button 
                             onClick={() => startQuiz(activeTopic!.id, currentSubtopicData.id)}
@@ -203,7 +194,6 @@ export default function Grammar() {
 
             ) : (
                 
-                // --- LEVEL 3: Detail View (เนื้อหาบทเรียน) ---
                 <div className="animate-fade-in space-y-8">
                      {(() => {
                          const detail = selectedTypeDetail || currentSubtopicData;
