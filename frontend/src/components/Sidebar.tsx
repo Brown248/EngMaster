@@ -1,6 +1,6 @@
 // frontend/src/components/Sidebar.tsx
 import { NavLink } from 'react-router-dom';
-import { X } from 'lucide-react';
+import { X, MessageSquarePlus } from 'lucide-react'; // [1] เพิ่ม import ไอคอน
 import { motion, AnimatePresence } from 'framer-motion';
 import { menuItems } from '../data/menuData';
 
@@ -24,18 +24,19 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             aria-hidden="true"
           />
 
-          {/* Sidebar */}
+          {/* Sidebar Container */}
           <motion.div
             initial={{ x: -280 }}
             animate={{ x: 0 }}
             exit={{ x: -280 }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed top-0 left-0 bottom-0 w-[280px] bg-white z-50 shadow-2xl flex flex-col"
+            className="fixed top-0 left-0 bottom-0 w-[280px] bg-white z-50 shadow-2xl flex flex-col" // flex-col สำคัญมาก เพื่อดัน footer ลงล่าง
             role="dialog"
             aria-modal="true"
             aria-label="Mobile Navigation"
           >
-            <div className="p-6 flex items-center justify-between border-b border-slate-100">
+            {/* 1. Header Portion */}
+            <div className="p-6 flex items-center justify-between border-b border-slate-100 bg-white">
               <span className="text-2xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 EngMaster
               </span>
@@ -48,6 +49,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               </button>
             </div>
 
+            {/* 2. Scrollable Menu Items */}
+            {/* flex-1 จะทำให้ส่วนนี้ยืดกินพื้นที่ว่างทั้งหมด ดันส่วนที่อยู่ข้างล่างลงไปติดขอบล่าง */}
             <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
               {menuItems.map((item) => (
                 <NavLink
@@ -68,9 +71,30 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               ))}
             </nav>
             
-            <div className="p-6 border-t border-slate-100 text-center">
-                 <p className="text-xs text-slate-400 font-medium">© 2024 EngMaster App</p>
+            {/* 3. Footer Section (Feedback + Copyright) */}
+            <div className="p-4 border-t border-slate-100 bg-slate-50/50">
+              {/* ปุ่ม Feedback Link */}
+              <a 
+                href="https://docs.google.com/forms/d/e/1FAIpQLSeJqpXVQ-kir08pEsSKhX0xsfs_nEAfhMRY0bVd_9TTGQcJFg/viewform?usp=dialog" // [2] อย่าลืมเปลี่ยนลิงก์ตรงนี้
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-3 py-3 mb-4 bg-white border border-slate-200 text-slate-600 rounded-xl transition-all shadow-sm hover:border-blue-300 hover:shadow-md hover:text-blue-700 group"
+              >
+                <div className="p-2 bg-blue-50 text-blue-600 rounded-lg group-hover:scale-110 transition-transform">
+                   <MessageSquarePlus size={20} strokeWidth={2.5} />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-sm font-bold">แจ้งปัญหา / แนะนำ</span>
+                  <span className="text-[10px] text-slate-400 font-medium">ช่วยให้เราพัฒนาขึ้น</span>
+                </div>
+              </a>
+
+              {/* Copyright */}
+              <div className="text-center">
+                 <p className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">© 2024 EngMaster App</p>
+              </div>
             </div>
+
           </motion.div>
         </>
       )}
