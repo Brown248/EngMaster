@@ -12,13 +12,13 @@ export default function Grammar() {
   
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // [Update] เปลี่ยนการรับค่าจาก URL เป็น ID
+  // รับค่าจาก URL Query Params
   const selectedSubtopicId = searchParams.get('subtopicId');
-  const selectedTypeName = searchParams.get('type'); // type ยังใช้ name ได้ถ้าไม่มี ID แต่ถ้าจะให้ดีควรมี ID ด้วย
+  const selectedTypeName = searchParams.get('type'); 
 
   const activeTopic = grammarTopics.find(t => t.id === topicId);
   
-  // [Update] ค้นหา Subtopic จาก ID
+  // ค้นหา Subtopic จาก ID
   const currentSubtopicData = activeTopic?.details?.subtopics?.find(
     s => s.id === selectedSubtopicId
   );
@@ -31,12 +31,12 @@ export default function Grammar() {
     window.scrollTo(0, 0);
   }, [topicId, selectedSubtopicId, selectedTypeName]);
 
-  // [Update] startQuiz รับ ID แทน Name
+  // ฟังก์ชันเริ่มทำแบบทดสอบ
   const startQuiz = (mainTopicId: string, subTopicId?: string) => {
     if (mainTopicId === 'tenses') {
         navigate('/grammar/quiz');
     } else if (mainTopicId === 'parts-of-speech') {
-        // [Update] ส่ง subTopicId ไปใน state
+        // ไปยังหน้า Quiz ของ Parts of Speech พร้อมส่ง ID (ถ้ามี)
         navigate('/grammar/parts-of-speech-quiz', { state: { subTopicId: subTopicId } });
     } else if (mainTopicId === 'voice') {
         navigate('/grammar/voice-quiz');
@@ -53,7 +53,6 @@ export default function Grammar() {
       }
   };
 
-  // [Update] Helper เปลี่ยนหน้าใช้ ID
   const goToSubtopic = (id: string) => {
       setSearchParams({ subtopicId: id });
   };
@@ -67,6 +66,7 @@ export default function Grammar() {
       <AnimatePresence mode="wait">
         
         {!topicId ? (
+          // --- หน้าเลือกหัวข้อหลัก (Main Topics List) ---
           <motion.div 
             key="list"
             initial={{ opacity: 0, x: -20 }}
@@ -103,6 +103,7 @@ export default function Grammar() {
           </motion.div>
         ) : (
           
+          // --- หน้ารายละเอียดหัวข้อ (Topic Detail) ---
           <motion.div 
             key="detail"
             initial={{ opacity: 0, x: 20 }}
@@ -135,13 +136,13 @@ export default function Grammar() {
 
             {/* Content Logic */}
             {!selectedSubtopicId ? (
-                 // --- LEVEL 1: Subtopic List ---
+                 // --- LEVEL 1: Subtopic List (หน้ารวมหัวข้อย่อย) ---
                  <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {activeTopic?.details.subtopics.map((sub, idx) => (
                             <motion.div 
                                 key={idx}
-                                onClick={() => goToSubtopic(sub.id)} // [Update] Pass ID
+                                onClick={() => goToSubtopic(sub.id)}
                                 whileHover={{ scale: 1.01 }}
                                 className="bg-slate-50 p-6 rounded-2xl border border-slate-200 cursor-pointer hover:bg-indigo-50 hover:border-indigo-200 transition-colors group relative"
                             >
@@ -157,18 +158,17 @@ export default function Grammar() {
                         ))}
                     </div>
                     
-                    {activeTopic?.id !== 'parts-of-speech' && (
-                        <div className="mt-8 text-center">
-                            <button onClick={() => startQuiz(activeTopic!.id)} className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-bold text-xl hover:shadow-xl hover:scale-105 transition-all">
-                                <PlayCircle size={24} /> เริ่มทำแบบทดสอบรวม
-                            </button>
-                        </div>
-                     )}
+                    {/* [Fixed] แสดงปุ่มทำแบบทดสอบสำหรับทุกหัวข้อ (รวมถึง Parts of Speech) */}
+                    <div className="mt-8 text-center">
+                        <button onClick={() => startQuiz(activeTopic!.id)} className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-bold text-xl hover:shadow-xl hover:scale-105 transition-all">
+                            <PlayCircle size={24} /> เริ่มทำแบบทดสอบ
+                        </button>
+                    </div>
                  </div>
 
             ) : !selectedTypeDetail && currentSubtopicData?.types ? (
                 
-                // --- LEVEL 2: Type List ---
+                // --- LEVEL 2: Type List (หน้าเลือกประเภทย่อย) ---
                 <div className="space-y-6 animate-fade-in">
                     <div className="p-4 bg-blue-50 text-blue-800 rounded-xl border border-blue-100 mb-6 flex items-start gap-3">
                          <span className="text-2xl">💡</span>
@@ -192,7 +192,6 @@ export default function Grammar() {
 
                     <div className="mt-10 pt-8 border-t border-slate-100 text-center">
                         <button 
-                            // [Update] Pass ID directly
                             onClick={() => startQuiz(activeTopic!.id, currentSubtopicData.id)}
                             className="inline-flex items-center gap-2 px-8 py-3 bg-slate-800 text-white rounded-xl font-bold text-lg hover:bg-slate-900 hover:shadow-lg transition-all"
                         >
@@ -204,7 +203,7 @@ export default function Grammar() {
 
             ) : (
                 
-                // --- LEVEL 3: Detail View ---
+                // --- LEVEL 3: Detail View (เนื้อหาบทเรียน) ---
                 <div className="animate-fade-in space-y-8">
                      {(() => {
                          const detail = selectedTypeDetail || currentSubtopicData;
