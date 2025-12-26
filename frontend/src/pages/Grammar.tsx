@@ -36,6 +36,8 @@ export default function Grammar() {
         navigate('/grammar/parts-of-speech-quiz', { state: { subTopicId: subTopicId } });
     } else if (mainTopicId === 'voice') {
         navigate('/grammar/voice-quiz');
+    } else if (mainTopicId === 'mood') { // [New] เพิ่มเงื่อนไขสำหรับ Mood Quiz
+        navigate('/grammar/mood-quiz', { state: { subTopicId: subTopicId } });
     }
   };
 

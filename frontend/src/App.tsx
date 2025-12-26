@@ -1,62 +1,52 @@
-import { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+// frontend/src/App.tsx
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
-import usePageTitle from './hooks/usePageTitle';
 
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'));
-const Vocabulary = lazy(() => import('./pages/Vocabulary'));
 const Grammar = lazy(() => import('./pages/Grammar'));
+const Vocabulary = lazy(() => import('./pages/Vocabulary'));
 const TensesQuiz = lazy(() => import('./pages/TensesQuiz'));
-// ✅ แก้ไข: อัปเดต Path ให้ตรงกับชื่อไฟล์ใหม่ (PartsOfSpeechQuiz.tsx)
-const PartsOfSpeechQuiz = lazy(() => import('./pages/PartsOfSpeechQui')); 
+const PartsOfSpeechQuiz = lazy(() => import('./pages/PartsOfSpeechQui')); // Note: Check typo in filename
 const VoiceQuiz = lazy(() => import('./pages/VoiceQuiz'));
+const MoodQuiz = lazy(() => import('./pages/MoodQuiz')); // [New] Import MoodQuiz
 const NotFound = lazy(() => import('./pages/NotFound'));
-
-// Loading component
-const PageLoader = () => (
-  <div className="min-h-[60vh] flex items-center justify-center">
-    <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-200 border-t-blue-600"></div>
-  </div>
-);
-
-function AnimatedRoutes() {
-  const location = useLocation();
-  
-  usePageTitle(); 
-
-  return (
-    <AnimatePresence mode="wait">
-      <Suspense fallback={<PageLoader />}>
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="vocabulary" element={<Vocabulary />} />
-            
-            {/* --- Grammar Routes --- */}
-            <Route path="grammar" element={<Grammar />} />
-            {/* ✅ เพิ่ม Route นี้เพื่อให้รองรับการเลือกหัวข้อผ่าน URL (แก้ปัญหาปุ่ม Back) */}
-            <Route path="grammar/:topicId" element={<Grammar />} />
-            
-            <Route path="grammar/quiz" element={<TensesQuiz />} />
-            <Route path="grammar/parts-of-speech-quiz" element={<PartsOfSpeechQuiz />} />
-            <Route path="grammar/voice-quiz" element={<VoiceQuiz />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
-    </AnimatePresence>
-  );
-}
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <ScrollToTop />
-      <AnimatedRoutes />
-    </Router>
+      <Layout>
+        <Suspense fallback={
+          <div className="min-h-screen flex items-center justify-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+          </div>
+        }>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            
+            {/* Grammar Section */}
+            <Route path="/grammar" element={<Grammar />} />
+            <Route path="/grammar/:topicId" element={<Grammar />} />
+            
+            {/* Quizzes */}
+            <Route path="/grammar/quiz" element={<TensesQuiz />} />
+            <Route path="/grammar/parts-of-speech-quiz" element={<PartsOfSpeechQuiz />} />
+            <Route path="/grammar/voice-quiz" element={<VoiceQuiz />} />
+            <Route path="/grammar/mood-quiz" element={<MoodQuiz />} /> {/* [New] เพิ่ม Route นี้ */}
+
+            {/* Vocabulary Section */}
+            <Route path="/vocabulary" element={<Vocabulary />} />
+            
+            {/* 404 */}
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<Navigate to="/404" replace />} />
+          </Routes>
+        </Suspense>
+      </Layout>
+    </BrowserRouter>
   );
 }
 

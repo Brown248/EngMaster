@@ -1,9 +1,15 @@
+// frontend/src/components/Layout.tsx
 import { Outlet, Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import { Menu } from 'lucide-react';
-import { useState } from 'react';
+import { useState, ReactNode } from 'react'; // [Update] Import ReactNode
 
-export default function Layout() {
+// [Update] เพิ่ม Interface สำหรับ Props
+interface LayoutProps {
+  children?: ReactNode;
+}
+
+export default function Layout({ children }: LayoutProps) { // [Update] รับ prop children
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -37,7 +43,8 @@ export default function Layout() {
 
       {/* Main Content: ลด padding ด้านบน (pt-4 -> pt-2) เพื่อดึงเนื้อหาขึ้นมาชิด Header */}
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 pb-6 pt-2 md:px-6">
-        <Outlet />
+        {/* [Update] แสดง children ถ้ามี ถ้าไม่มีให้ใช้ Outlet (รองรับทั้งสองแบบ) */}
+        {children || <Outlet />}
       </main>
     </div>
   );
