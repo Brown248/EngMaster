@@ -1,21 +1,132 @@
+// frontend/src/data/vocabularyData.ts
+import { Book, Layers, MessageCircle, Star, Zap } from 'lucide-react';
+
+// 1. อัปเดต Interface เพื่อรองรับหมวดหมู่ใหม่
 export interface VocabWord {
   word: string;
   meaning: string;
-  partOfSpeech: string; // n., v., adj., adv.
+  partOfSpeech: string;
   example: string;
-  category: 'General' | 'Academic' | 'Business';
+  category?: 'General' | 'Academic' | 'Business'; 
+  topic?: string;       
+  usage?: string;       
+  level?: string;       
+  special?: string;     
 }
 
+// 2. สร้างโครงสร้างข้อมูลสำหรับ UI หมวดหมู่
+export interface SubCategory {
+  id: string;
+  label: string;
+}
+
+export interface MainCategory {
+  id: string;
+  label: string;
+  icon: any;
+  subCategories: SubCategory[];
+}
+
+export const VOCAB_CATEGORIES: MainCategory[] = [
+  {
+    id: 'Topic',
+    label: 'หมวดตามหัวข้อ (Topics)',
+    icon: Layers,
+    subCategories: [
+      { id: 'Food & Drink', label: 'อาหารและเครื่องดื่ม' },
+      { id: 'Animals', label: 'สัตว์' },
+      { id: 'Body & Health', label: 'ร่างกายและสุขภาพ' },
+      { id: 'Clothes & Fashion', label: 'เสื้อผ้าและแฟชั่น' },
+      { id: 'House & Furniture', label: 'บ้านและของใช้' },
+      { id: 'Transportation', label: 'การเดินทาง' },
+      { id: 'Places', label: 'สถานที่' },
+      { id: 'Jobs', label: 'อาชีพ' },
+      { id: 'Nature', label: 'ธรรมชาติและอากาศ' },
+      { id: 'Technology', label: 'เทคโนโลยี' },
+      { id: 'Business', label: 'ธุรกิจและการเงิน' },
+    ]
+  },
+  {
+    id: 'POS',
+    label: 'หน้าที่คำ (Grammar)',
+    icon: Book,
+    subCategories: [
+      { id: 'n.', label: 'Noun (คำนาม)' },
+      { id: 'v.', label: 'Verb (คำกริยา)' },
+      { id: 'adj.', label: 'Adjective (คำคุณศัพท์)' },
+      { id: 'adv.', label: 'Adverb (คำวิเศษณ์)' },
+      { id: 'prep.', label: 'Preposition (คำบุพบท)' },
+      { id: 'conj.', label: 'Conjunction (คำเชื่อม)' },
+      { id: 'pron.', label: 'Pronoun (คำสรรพนาม)' },
+    ]
+  },
+  {
+    id: 'Usage',
+    label: 'การใช้งานจริง (Usage)',
+    icon: MessageCircle,
+    subCategories: [
+      { id: 'Daily Life', label: 'ชีวิตประจำวัน' },
+      { id: 'Conversation', label: 'บทสนทนา' },
+      { id: 'Travel', label: 'การท่องเที่ยว' },
+      { id: 'Work', label: 'การทำงาน' },
+      { id: 'Feelings', label: 'ความรู้สึก' },
+      { id: 'Shopping', label: 'การซื้อของ' },
+    ]
+  },
+  {
+    id: 'Level',
+    label: 'ระดับความยาก (Level)',
+    icon: Zap,
+    subCategories: [
+      { id: 'Beginner', label: 'ระดับต้น (Beginner)' },
+      { id: 'Intermediate', label: 'ระดับกลาง (Intermediate)' },
+      { id: 'Advanced', label: 'ระดับสูง (Advanced)' },
+    ]
+  },
+  {
+    id: 'Special',
+    label: 'คำพิเศษ (Special)',
+    icon: Star,
+    subCategories: [
+      { id: 'Idioms', label: 'สำนวน (Idioms)' },
+      { id: 'Phrasal Verbs', label: 'กริยาวลี' },
+      { id: 'Slang', label: 'คำสแลง' },
+      { id: 'Academic', label: 'คำศัพท์วิชาการ' },
+      { id: 'TOEIC', label: 'คำศัพท์ TOEIC' },
+    ]
+  }
+];
+
+// ตัวอย่างข้อมูล (ต้องไปไล่อัปเดตข้อมูลจริงให้ครบตาม Fields ใหม่)
 export const vocabularyData: VocabWord[] = [
-  // =================================================================
+  { 
+    word: "Ability", 
+    meaning: "ความสามารถ", 
+    partOfSpeech: "n.", 
+    example: "She has the ability to learn quickly.", 
+    category: "General",
+    topic: "Body & Health", // ตัวอย่างการใส่ Topic
+    level: "Beginner",
+    usage: "Daily Life"
+  },
+  { 
+    word: "Account", 
+    meaning: "บัญชี", 
+    partOfSpeech: "n.", 
+    example: "I opened a new bank account.", 
+    category: "Business",
+    topic: "Business",
+    usage: "Work"
+  },
+  // ... (ข้อมูลอื่นๆ)
+  // หมายเหตุ: สำหรับข้อมูลเดิมที่ยังไม่ได้ใส่ topic/level/usage ระบบจะยังแสดงผลได้แต่อาจจะไม่ถูกกรองในหมวดใหม่
+    // =================================================================
   // A
   // =================================================================
-  { word: "Ability", meaning: "ความสามารถ", partOfSpeech: "n.", example: "She has the ability to learn quickly.", category: "General" },
   { word: "Above", meaning: "เหนือ, ข้างบน", partOfSpeech: "prep.", example: "The plane flew above the clouds.", category: "General" },
   { word: "Abroad", meaning: "ต่างประเทศ", partOfSpeech: "adv.", example: "He lived abroad for ten years.", category: "General" },
   { word: "Absorb", meaning: "ดูดซึม", partOfSpeech: "v.", example: "Plants absorb sunlight.", category: "General" },
   { word: "Accept", meaning: "ยอมรับ", partOfSpeech: "v.", example: "I accept your apology.", category: "General" },
-  { word: "Account", meaning: "บัญชี", partOfSpeech: "n.", example: "I opened a new bank account.", category: "Business" },
   { word: "Acquisition", meaning: "การเข้าซื้อกิจการ", partOfSpeech: "n.", example: "The acquisition was finalized yesterday.", category: "Business" },
   { word: "Agenda", meaning: "วาระการประชุม", partOfSpeech: "n.", example: "What's on the agenda today?", category: "Business" },
   { word: "Asset", meaning: "ทรัพย์สิน", partOfSpeech: "n.", example: "Data is a valuable asset.", category: "Business" },

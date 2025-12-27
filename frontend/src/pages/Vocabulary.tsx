@@ -1,42 +1,51 @@
+// frontend/src/pages/Vocabulary.tsx
 import { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { Search, XCircle, Briefcase, School, Coffee, Globe } from 'lucide-react'; // ลบ Volume2 ออก
-import { vocabularyData } from '../data/vocabularyData';
-// ✅ Import AdBanner
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, XCircle, Layers } from 'lucide-react'; // ลบ ChevronDown
+import { vocabularyData, VOCAB_CATEGORIES } from '../data/vocabularyData'; // ลบ Type ที่ไม่ได้ใช้ออก
 import AdBanner from '../components/AdBanner';
-
-type CategoryType = 'All' | 'General' | 'Academic' | 'Business';
 
 export default function Vocabulary() {
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterCategory, setFilterCategory] = useState<CategoryType>('All');
+  
+  // State ใหม่สำหรับการเลือก Category แบบ 2 ขั้น
+  const [activeGroup, setActiveGroup] = useState<string>('All'); 
+  const [activeSubCategory, setActiveSubCategory] = useState<string | null>(null);
 
   const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
 
-  const categories: { id: CategoryType; label: string; icon: any; color: string }[] = [
-    { id: 'All', label: 'ทั้งหมด', icon: Globe, color: 'bg-slate-100 text-slate-600 border-slate-200' },
-    { id: 'General', label: 'ทั่วไป', icon: Coffee, color: 'bg-emerald-50 text-emerald-600 border-emerald-200' },
-    { id: 'Business', label: 'ธุรกิจ', icon: Briefcase, color: 'bg-blue-50 text-blue-600 border-blue-200' },
-    { id: 'Academic', label: 'วิชาการ', icon: School, color: 'bg-purple-50 text-purple-600 border-purple-200' },
-  ];
-
+  // ฟังก์ชันกรองข้อมูล
   const filteredVocab = useMemo(() => {
     return vocabularyData.filter((item) => {
-      const matchesCategory = filterCategory === 'All' ? true : item.category === filterCategory;
+      // 1. กรองตามหมวดหมู่
+      let matchesCategory = true;
+      if (activeGroup !== 'All' && activeSubCategory) {
+        if (activeGroup === 'Topic') matchesCategory = item.topic === activeSubCategory;
+        else if (activeGroup === 'POS') matchesCategory = item.partOfSpeech === activeSubCategory;
+        else if (activeGroup === 'Usage') matchesCategory = item.usage === activeSubCategory;
+        else if (activeGroup === 'Level') matchesCategory = item.level === activeSubCategory;
+        else if (activeGroup === 'Special') matchesCategory = item.special === activeSubCategory;
+      }
+
+      // 2. กรองตามตัวอักษร
       const matchesLetter = selectedLetter ? item.word.charAt(0).toUpperCase() === selectedLetter : true;
+      
+      // 3. กรองตามคำค้นหา
       const matchesSearch = searchTerm
         ? item.word.toLowerCase().includes(searchTerm.toLowerCase()) || 
           item.meaning.toLowerCase().includes(searchTerm.toLowerCase())
         : true;
+
       return matchesCategory && matchesLetter && matchesSearch;
     });
-  }, [selectedLetter, searchTerm, filterCategory]);
+  }, [selectedLetter, searchTerm, activeGroup, activeSubCategory]);
 
   const clearFilters = () => {
     setSelectedLetter(null);
     setSearchTerm('');
-    setFilterCategory('All');
+    setActiveGroup('All');
+    setActiveSubCategory(null);
   };
 
   const container = {
@@ -80,21 +89,30 @@ export default function Vocabulary() {
 
         {/* --- Controls Section --- */}
         <div className="space-y-6 mb-8">
-            <div className="flex flex-wrap gap-2 md:gap-3 p-1.5 bg-slate-50 rounded-2xl border border-slate-100 w-fit">
-                {categories.map((cat) => {
-                    const isActive = filterCategory === cat.id;
+            
+            {/* 1. Main Category Tabs */}
+            <div className="flex flex-wrap gap-2">
+                <button
+                    onClick={() => { setActiveGroup('All'); setActiveSubCategory(null); setSelectedLetter(null); }}
+                    className={`px-5 py-2.5 rounded-xl font-bold transition-all border
+                        ${activeGroup === 'All' 
+                            ? 'bg-orange-500 text-white border-orange-600 shadow-orange-200 shadow-md' 
+                            : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50'}`}
+                >
+                    <Layers size={18} className="inline mr-2 -mt-1" />
+                    รวมทั้งหมด
+                </button>
+                {VOCAB_CATEGORIES.map((cat) => {
+                    const isActive = activeGroup === cat.id;
                     const Icon = cat.icon;
                     return (
                         <button
                             key={cat.id}
-                            onClick={() => {
-                                setFilterCategory(cat.id);
-                                setSelectedLetter(null);
-                            }}
-                            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold transition-all text-sm md:text-base
+                            onClick={() => { setActiveGroup(cat.id); setActiveSubCategory(null); setSelectedLetter(null); }}
+                            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold transition-all border
                                 ${isActive 
-                                    ? 'bg-white text-orange-600 shadow-md ring-2 ring-orange-100' 
-                                    : 'text-slate-500 hover:bg-slate-100 hover:text-slate-700'
+                                    ? 'bg-white text-orange-600 border-orange-200 ring-2 ring-orange-100' 
+                                    : 'bg-slate-50 text-slate-500 border-slate-100 hover:bg-white hover:border-slate-300'
                                 }`}
                         >
                             <Icon size={18} />
@@ -104,6 +122,36 @@ export default function Vocabulary() {
                 })}
             </div>
 
+            {/* 2. Sub Category Pills (แสดงเมื่อเลือก Main Category) */}
+            <AnimatePresence>
+                {activeGroup !== 'All' && (
+                    <motion.div 
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="overflow-hidden"
+                    >
+                        <div className="flex flex-wrap gap-2 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                            <span className="text-sm font-bold text-slate-400 uppercase tracking-wider mr-2 py-1.5">เลือกหัวข้อย่อย:</span>
+                            {VOCAB_CATEGORIES.find(c => c.id === activeGroup)?.subCategories.map((sub) => (
+                                <button
+                                    key={sub.id}
+                                    onClick={() => setActiveSubCategory(sub.id === activeSubCategory ? null : sub.id)}
+                                    className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-all border
+                                        ${activeSubCategory === sub.id
+                                            ? 'bg-orange-500 text-white border-orange-600 shadow-sm'
+                                            : 'bg-white text-slate-600 border-slate-200 hover:border-orange-300'
+                                        }`}
+                                >
+                                    {sub.label}
+                                </button>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* 3. Search Bar */}
             <div className="flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1 group">
                     <input 
@@ -111,7 +159,9 @@ export default function Vocabulary() {
                         value={searchTerm}
                         onChange={(e) => {
                             setSearchTerm(e.target.value);
-                            if(e.target.value) setSelectedLetter(null);
+                            if(e.target.value) {
+                                setSelectedLetter(null);
+                            }
                         }}
                         placeholder="🔍 ค้นหาคำศัพท์ (เช่น abundant, ผลลัพธ์)..." 
                         className="w-full pl-14 pr-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:outline-none focus:border-orange-400 focus:bg-white focus:shadow-lg transition-all text-lg font-medium text-slate-700 placeholder:text-slate-400"
@@ -126,7 +176,7 @@ export default function Vocabulary() {
                     )}
                 </div>
                 
-                {(selectedLetter || searchTerm || filterCategory !== 'All') && (
+                {(selectedLetter || searchTerm || activeGroup !== 'All') && (
                     <button 
                         onClick={clearFilters}
                         className="px-6 py-3 rounded-2xl font-bold text-slate-500 hover:bg-slate-100 transition-colors border-2 border-transparent hover:border-slate-200"
@@ -137,7 +187,7 @@ export default function Vocabulary() {
             </div>
         </div>
 
-        {/* ✅ แทรก AdBanner ก่อนตารางตัวอักษร */}
+        {/* ✅ แทรก AdBanner */}
         <AdBanner className="mb-8" />
 
         {/* --- Keyboard Grid --- */}
@@ -150,10 +200,18 @@ export default function Vocabulary() {
             >
             {letters.map((letter) => {
                 const isSelected = selectedLetter === letter;
-                const hasWords = vocabularyData.some(item => 
-                    item.word.charAt(0).toUpperCase() === letter && 
-                    (filterCategory === 'All' || item.category === filterCategory)
-                );
+                // เช็คว่ามีคำศัพท์ในหมวดที่เลือกไหม
+                const hasWords = vocabularyData.some(item => {
+                    let matchesCategory = true;
+                    if (activeGroup !== 'All' && activeSubCategory) {
+                        if (activeGroup === 'Topic') matchesCategory = item.topic === activeSubCategory;
+                        else if (activeGroup === 'POS') matchesCategory = item.partOfSpeech === activeSubCategory;
+                        else if (activeGroup === 'Usage') matchesCategory = item.usage === activeSubCategory;
+                        else if (activeGroup === 'Level') matchesCategory = item.level === activeSubCategory;
+                        else if (activeGroup === 'Special') matchesCategory = item.special === activeSubCategory;
+                    }
+                    return matchesCategory && item.word.charAt(0).toUpperCase() === letter;
+                });
 
                 return (
                     <motion.button 
@@ -181,16 +239,13 @@ export default function Vocabulary() {
         {/* --- Result List --- */}
         <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-700 flex items-center gap-2 mb-4">
-                {selectedLetter ? `หมวดอักษร "${selectedLetter}"` : searchTerm ? 'ผลการค้นหา' : 'รายการคำศัพท์ทั้งหมด'}
+                {selectedLetter ? `หมวดอักษร "${selectedLetter}"` : searchTerm ? 'ผลการค้นหา' : activeSubCategory ? `รายการ: ${activeSubCategory}` : 'รายการคำศัพท์ทั้งหมด'}
                 <span className="bg-slate-100 text-slate-500 px-2 py-0.5 rounded-md text-sm">{filteredVocab.length} คำ</span>
             </h3>
 
             {filteredVocab.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {filteredVocab.map((item, idx) => {
-                        const catStyle = categories.find(c => c.id === item.category);
-                        const CatIcon = catStyle?.icon || Globe;
-
                         return (
                             <motion.div 
                                 key={`${item.word}-${idx}`}
@@ -207,7 +262,6 @@ export default function Vocabulary() {
                                         <h4 className="text-2xl font-black text-slate-800">{item.word}</h4>
                                         <span className="text-sm font-bold text-orange-500 italic">{item.partOfSpeech}</span>
                                     </div>
-                                    {/* ลบปุ่มเสียงออกแล้วตรงนี้ */}
                                 </div>
                                 
                                 <div className="relative z-10">
@@ -216,10 +270,12 @@ export default function Vocabulary() {
                                         <p className="text-slate-500 text-sm italic">"{item.example}"</p>
                                     </div>
                                     
-                                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider border ${catStyle?.color}`}>
-                                        <CatIcon size={12} />
-                                        {item.category}
-                                    </span>
+                                    <div className="flex flex-wrap gap-2">
+                                        {/* แสดง Tags ที่มี */}
+                                        {item.topic && <span className="text-[10px] uppercase font-bold px-2 py-1 bg-blue-50 text-blue-600 rounded-md border border-blue-100">{item.topic}</span>}
+                                        {item.level && <span className="text-[10px] uppercase font-bold px-2 py-1 bg-purple-50 text-purple-600 rounded-md border border-purple-100">{item.level}</span>}
+                                        {item.usage && <span className="text-[10px] uppercase font-bold px-2 py-1 bg-green-50 text-green-600 rounded-md border border-green-100">{item.usage}</span>}
+                                    </div>
                                 </div>
                             </motion.div>
                         );
@@ -228,11 +284,7 @@ export default function Vocabulary() {
             ) : (
                 <div className="text-center py-12 text-slate-400 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200">
                     <p className="text-lg font-medium">
-                        {searchTerm 
-                            ? `ไม่พบคำว่า "${searchTerm}" ในหมวดนี้` 
-                            : selectedLetter 
-                                ? `ไม่มีคำศัพท์ที่ขึ้นต้นด้วย "${selectedLetter}" ในหมวดนี้`
-                                : "ยังไม่มีคำศัพท์ในหมวดนี้"}
+                        ไม่พบคำศัพท์ในเงื่อนไขที่เลือก
                     </p>
                     <button onClick={clearFilters} className="text-orange-500 font-bold hover:underline mt-2">ล้างตัวกรองทั้งหมด</button>
                 </div>
