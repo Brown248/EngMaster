@@ -1,8 +1,8 @@
 // frontend/src/pages/PartsOfSpeechQui.tsx
 import { useLocation } from 'react-router-dom';
-import QuizEngine from '../components/QuizEngine';
-import { separatePartsOfSpeechData } from '../data/exercises/separatePartsOfSpeechData';
-import { partsOfSpeechQuizData } from '../data/quizzes/partsOfSpeechQuizData';
+import QuizEngine from '../../components/QuizEngine';
+import { separatePartsOfSpeechData } from '../../data/exercises/separatePartsOfSpeechData';
+import { partsOfSpeechQuizData } from '../../data/quizzes/partsOfSpeechQuizData';
 
 export default function PartsOfSpeechQuiz() {
   const location = useLocation();

@@ -1,8 +1,8 @@
 // frontend/src/pages/GerundInfinitiveQuiz.tsx
 import { useLocation } from 'react-router-dom';
-import QuizEngine from '../components/QuizEngine';
-import { separateGerundInfinitiveData } from '../data/exercises/separateGerundInfinitiveData';
-import { gerundInfinitiveQuizData } from '../data/quizzes/gerundInfinitiveQuizData';
+import QuizEngine from '../../components/QuizEngine';
+import { separateGerundInfinitiveData } from '../../data/exercises/separateGerundInfinitiveData';
+import { gerundInfinitiveQuizData } from '../../data/quizzes/gerundInfinitiveQuizData';
 
 export default function GerundInfinitiveQuiz() {
   const location = useLocation();

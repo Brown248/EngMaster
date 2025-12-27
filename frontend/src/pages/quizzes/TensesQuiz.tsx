@@ -1,8 +1,8 @@
 // frontend/src/pages/TensesQuiz.tsx
-import QuizEngine from '../components/QuizEngine';
+import QuizEngine from '../../components/QuizEngine';
 // ✅ แก้ไข Path ตรงนี้
-import { separateTensesData } from '../data/exercises/separateTensesData';
-import { mixedTensesQuizData } from '../data/quizzes/mixedTensesQuizData';
+import { separateTensesData } from '../../data/exercises/separateTensesData';
+import { mixedTensesQuizData } from '../../data/quizzes/mixedTensesQuizData';
 
 export default function TensesQuiz() {
   return (

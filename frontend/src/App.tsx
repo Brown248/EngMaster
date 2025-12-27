@@ -8,15 +8,15 @@ import ScrollToTop from './components/ScrollToTop';
 const Home = lazy(() => import('./pages/Home'));
 const Grammar = lazy(() => import('./pages/Grammar'));
 const Vocabulary = lazy(() => import('./pages/Vocabulary'));
-const TensesQuiz = lazy(() => import('./pages/TensesQuiz'));
-const PartsOfSpeechQuiz = lazy(() => import('./pages/PartsOfSpeechQui'));
-const VoiceQuiz = lazy(() => import('./pages/VoiceQuiz'));
-const MoodQuiz = lazy(() => import('./pages/MoodQuiz'));
-const SentenceStructureQuiz = lazy(() => import('./pages/SentenceStructureQuiz'));
-const ClausesQuiz = lazy(() => import('./pages/ClausesQuiz'));
-const ConditionalsQuiz = lazy(() => import('./pages/ConditionalsQuiz'));
-const ModalVerbsQuiz = lazy(() => import('./pages/ModalVerbsQuiz'));
-const GerundInfinitiveQuiz = lazy(() => import('./pages/GerundInfinitiveQuiz')); // [New] Import
+const TensesQuiz = lazy(() => import('./pages/quizzes/TensesQuiz'));
+const PartsOfSpeechQuiz = lazy(() => import('./pages/quizzes/PartsOfSpeechQui'));
+const VoiceQuiz = lazy(() => import('./pages/quizzes/VoiceQuiz'));
+const MoodQuiz = lazy(() => import('./pages/quizzes/MoodQuiz'));
+const SentenceStructureQuiz = lazy(() => import('./pages/quizzes/SentenceStructureQuiz'));
+const ClausesQuiz = lazy(() => import('./pages/quizzes/ClausesQuiz'));
+const ConditionalsQuiz = lazy(() => import('./pages/quizzes/ConditionalsQuiz'));
+const ModalVerbsQuiz = lazy(() => import('./pages/quizzes/ModalVerbsQuiz'));
+const GerundInfinitiveQuiz = lazy(() => import('./pages/quizzes/GerundInfinitiveQuiz')); // [New] Import
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {

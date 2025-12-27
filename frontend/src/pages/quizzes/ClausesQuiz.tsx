@@ -1,8 +1,8 @@
 // frontend/src/pages/ClausesQuiz.tsx
 import { useLocation } from 'react-router-dom';
-import QuizEngine from '../components/QuizEngine';
-import { separateClausesData } from '../data/exercises/separateClausesData';
-import { clausesQuizData } from '../data/quizzes/clausesQuizData';
+import QuizEngine from '../../components/QuizEngine';
+import { separateClausesData } from '../../data/exercises/separateClausesData';
+import { clausesQuizData } from '../../data/quizzes/clausesQuizData';
 
 export default function ClausesQuiz() {
   const location = useLocation();

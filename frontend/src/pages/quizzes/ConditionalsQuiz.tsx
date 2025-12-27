@@ -1,8 +1,8 @@
 // frontend/src/pages/ConditionalsQuiz.tsx
 import { useLocation } from 'react-router-dom';
-import QuizEngine from '../components/QuizEngine';
-import { separateConditionalsData } from '../data/exercises/separateConditionalsData';
-import { conditionalsQuizData } from '../data/quizzes/conditionalsQuizData';
+import QuizEngine from '../../components/QuizEngine';
+import { separateConditionalsData } from '../../data/exercises/separateConditionalsData';
+import { conditionalsQuizData } from '../../data/quizzes/conditionalsQuizData';
 
 export default function ConditionalsQuiz() {
   const location = useLocation();

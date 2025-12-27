@@ -1,9 +1,9 @@
 // frontend/src/pages/Vocabulary.tsx
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, XCircle, Layers } from 'lucide-react'; 
-// ✅ แก้ไข Path ตรงนี้
-import { vocabularyData, VOCAB_CATEGORIES } from '../data/vocabulary/vocabularyData';
+import { Search, XCircle, Layers } from 'lucide-react';
+// ✅ แก้ไข Path ให้ตรงกับโฟลเดอร์จริง (vocab_parts)
+import { vocabularyData, VOCAB_CATEGORIES } from '../data/vocab_parts/vocabularyData';
 import AdBanner from '../components/AdBanner';
 
 export default function Vocabulary() {
@@ -62,7 +62,6 @@ export default function Vocabulary() {
       transition={{ duration: 0.4 }}
       className="space-y-8 pb-12"
     >
-      {/* --- Header --- */}
       <div className="flex items-center gap-5">
         <motion.div 
           initial={{ scale: 0 }}
@@ -83,9 +82,7 @@ export default function Vocabulary() {
       <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-lg shadow-orange-100/50 border border-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-orange-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 -z-10" />
 
-        {/* --- Controls Section --- */}
         <div className="space-y-6 mb-8">
-            
             <div className="flex flex-wrap gap-2">
                 <button
                     onClick={() => { setActiveGroup('All'); setActiveSubCategory(null); setSelectedLetter(null); }}
@@ -260,7 +257,6 @@ export default function Vocabulary() {
                                     </div>
                                     
                                     <div className="flex flex-wrap gap-2">
-                                        {/* แสดง Tags ที่มี */}
                                         {item.topic && <span className="text-[10px] uppercase font-bold px-2 py-1 bg-blue-50 text-blue-600 rounded-md border border-blue-100">{item.topic}</span>}
                                         {item.level && <span className="text-[10px] uppercase font-bold px-2 py-1 bg-purple-50 text-purple-600 rounded-md border border-purple-100">{item.level}</span>}
                                         {item.usage && <span className="text-[10px] uppercase font-bold px-2 py-1 bg-green-50 text-green-600 rounded-md border border-green-100">{item.usage}</span>}
