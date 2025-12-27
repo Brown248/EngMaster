@@ -1,11 +1,10 @@
 // frontend/src/data/separatePartsOfSpeechData.ts
 import { QuizQuestion } from '../types';
-import { adjectiveQuizData } from './adjectiveQuizData';
 
 export interface PartOfSpeechTopic {
   id: string;
-  name: string; // [New] เพิ่ม field นี้
-  description?: string; // [New] เพิ่ม field นี้
+  name: string;
+  description?: string;
   questions: QuizQuestion[];
 }
 
@@ -13,10 +12,9 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 1. Noun ---
   {
     id: 'noun',
-    name: 'Noun (คำนาม)', // [New]
-    description: 'แบบทดสอบคำนามทั่วไป, นามเฉพาะ, นามนับได้/ไม่ได้', // [New]
+    name: 'Noun (คำนาม)',
+    description: 'แบบทดสอบคำนามทั่วไป, นามเฉพาะ, นามนับได้/ไม่ได้',
     questions: [
-      // ... (ข้อมูลคำถามเดิมไม่ต้องแก้) ...
       { id: 1, type: 'choice', question: "Which word is a **Common Noun**?", options: ["London", "Dog", "Monday", "Toyota"], correctAnswer: 1, explanation: "Dog เป็นคำนามทั่วไป ไม่ได้เจาะจงชื่อ" },
       { id: 2, type: 'choice', question: "Find the **Abstract Noun**.", options: ["Table", "Water", "Freedom", "Teacher"], correctAnswer: 2, explanation: "Freedom (เสรีภาพ) เป็นนามธรรม จับต้องไม่ได้" },
       { id: 3, type: 'choice', question: "Which is a **Collective Noun**?", options: ["Team", "Player", "Ball", "Stadium"], correctAnswer: 0, explanation: "Team หมายถึงกลุ่มคน (คณะ)" },
@@ -42,8 +40,8 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 2. Pronoun ---
   {
     id: 'pronoun',
-    name: 'Pronoun (สรรพนาม)', // [New]
-    description: 'ทดสอบการใช้ Subject, Object, Possessive Pronoun ฯลฯ', // [New]
+    name: 'Pronoun (สรรพนาม)',
+    description: 'ทดสอบการใช้ Subject, Object, Possessive Pronoun ฯลฯ',
     questions: [
       { id: 1, type: 'choice', question: "'**She** eats.' 'She' is a...", options: ["Object Pronoun", "Subject Pronoun", "Possessive Pronoun", "Reflexive Pronoun"], correctAnswer: 1, explanation: "ทำหน้าที่เป็นประธาน" },
       { id: 2, type: 'choice', question: "I did it **myself**.", options: ["Reflexive", "Reciprocal", "Relative", "Indefinite"], correctAnswer: 0, explanation: "Reflexive สะท้อนเข้าตัว" },
@@ -70,8 +68,8 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 3. Verb ---
   {
     id: 'verb',
-    name: 'Verb (กริยา)', // [New]
-    description: 'ทดสอบ Action verb, Linking verb, Modal verb', // [New]
+    name: 'Verb (กริยา)',
+    description: 'ทดสอบ Action verb, Linking verb, Modal verb',
     questions: [
       { id: 1, type: 'choice', question: "I **run** every day.", options: ["Action Verb", "Linking Verb", "Modal Verb", "Auxiliary Verb"], correctAnswer: 0, explanation: "Run คือการกระทำ" },
       { id: 2, type: 'choice', question: "She **is** a doctor.", options: ["Action", "Linking", "Transitive", "Modal"], correctAnswer: 1, explanation: "Verb to be บอกสถานะ (Linking)" },
@@ -95,18 +93,177 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
       { id: 20, type: 'fill-blank', question: "They ______ (eat/sleep) pizza.", correctAnswer: "eat", explanation: "Transitive Verb" }
     ]
   },
-  // --- 4. Adjective (Imported) ---
+  // --- 4. Adjective (Data moved here) ---
   {
     id: 'adjective',
-    name: 'Adjective (คำคุณศัพท์)', // [New]
-    description: 'คำขยายคำนาม, บอกลักษณะ, บอกสี', // [New]
-    questions: adjectiveQuizData 
+    name: 'Adjective (คำคุณศัพท์)',
+    description: 'คำขยายคำนาม, บอกลักษณะ, บอกสี',
+    questions: [
+      {
+        id: 1,
+        type: 'choice',
+        question: "This car is ______ than that one.",
+        options: ["fast", "faster", "fastest", "more fast"],
+        correctAnswer: 1,
+        explanation: "Comparative: มีคำว่า 'than' แสดงว่าเป็นขั้นกว่า คำว่า fast พยางค์เดียวเติม -er ได้เลย"
+      },
+      {
+        id: 2,
+        type: 'choice',
+        question: "She is the ______ student in the class.",
+        options: ["smart", "smarter", "smartest", "most smart"],
+        correctAnswer: 2,
+        explanation: "Superlative: มีคำว่า 'the' และบริบท 'in the class' แสดงว่าเป็นขั้นสุด smart เติม -est"
+      },
+      {
+        id: 3,
+        type: 'choice',
+        question: "This puzzle is ______ than the last one.",
+        options: ["difficult", "difficulter", "more difficult", "most difficult"],
+        correctAnswer: 2,
+        explanation: "Difficult มี 3 พยางค์ ขั้นกว่าต้องใช้ 'more' นำหน้า"
+      },
+      {
+        id: 4,
+        type: 'choice',
+        question: "Who is the ______ football player in the world?",
+        options: ["good", "better", "best", "goodest"],
+        correctAnswer: 2,
+        explanation: "Irregular: Good เป็นคำยกเว้น ขั้นสุดคือ 'best'"
+      },
+      {
+        id: 5,
+        type: 'choice',
+        question: "My house is ______ than yours.",
+        options: ["big", "biger", "bigger", "more big"],
+        correctAnswer: 2,
+        explanation: "Big เป็นสระเสียงสั้นตัวเดียว (Short Vowel) ต้องเบิ้ลตัวสะกด (g) ก่อนเติม er เป็น bigger"
+      },
+      // --- Part 2: True / False ---
+      {
+        id: 6,
+        type: 'true-false',
+        question: "Correct or Incorrect: 'He is more tall than me.'",
+        options: ["Correct", "Incorrect"],
+        correctAnswer: 1, // Incorrect
+        explanation: "ผิด: Tall เป็นคำพยางค์เดียว ต้องใช้ taller ไม่ใช่ more tall"
+      },
+      {
+        id: 7,
+        type: 'true-false',
+        question: "Correct or Incorrect: 'This is the most expensive bag.'",
+        options: ["Correct", "Incorrect"],
+        correctAnswer: 0, // Correct
+        explanation: "ถูก: Expensive มี 3 พยางค์ ใช้ the most ถูกต้องแล้ว"
+      },
+      {
+        id: 8,
+        type: 'true-false',
+        question: "Correct or Incorrect: 'Today is badder than yesterday.'",
+        options: ["Correct", "Incorrect"],
+        correctAnswer: 1, // Incorrect
+        explanation: "ผิด: Bad เป็นคำยกเว้น (Irregular) ขั้นกว่าคือ 'worse' ไม่ใช่ badder"
+      },
+      {
+        id: 9,
+        type: 'true-false',
+        question: "Correct or Incorrect: 'She is the happiest girl.'",
+        options: ["Correct", "Incorrect"],
+        correctAnswer: 0, // Correct
+        explanation: "ถูก: Happy ลงท้าย y เปลี่ยนเป็น i แล้วเติม est"
+      },
+      {
+        id: 10,
+        type: 'true-false',
+        question: "Correct or Incorrect: 'Jupiter is the bigest planet.'",
+        options: ["Correct", "Incorrect"],
+        correctAnswer: 1, // Incorrect
+        explanation: "ผิด: Bigest สะกดผิด ต้องเบิ้ล g เป็น 'biggest'"
+      },
+      // --- Part 3: Reordering ---
+      {
+        id: 11,
+        type: 'reorder',
+        question: "Rearrange the sentence:",
+        options: ["is", "cheetah", "faster", "a", "turtle", "than", "a"],
+        correctAnswer: ["a", "cheetah", "is", "faster", "than", "a", "turtle"],
+        explanation: "Structure: Noun 1 + is + adj-er + than + Noun 2"
+      },
+      {
+        id: 12,
+        type: 'reorder',
+        question: "Rearrange the sentence:",
+        options: ["beautiful", "most", "she", "the", "is", "girl"],
+        correctAnswer: ["she", "is", "the", "most", "beautiful", "girl"],
+        explanation: "Structure: Subject + is + the most + adj + Noun"
+      },
+      {
+        id: 13,
+        type: 'reorder',
+        question: "Rearrange the sentence:",
+        options: ["weather", "today", "worse", "yesterday", "is", "than"],
+        correctAnswer: ["today", "weather", "is", "worse", "than", "yesterday"],
+        explanation: "Comparison: worse than (แย่กว่า)"
+      },
+      {
+        id: 14,
+        type: 'reorder',
+        question: "Rearrange the sentence:",
+        options: ["English", "math", "is", "easier", "than"],
+        correctAnswer: ["English", "is", "easier", "than", "math"],
+        explanation: "Comparison: easier than (ง่ายกว่า)"
+      },
+      {
+        id: 15,
+        type: 'reorder',
+        question: "Rearrange the sentence:",
+        options: ["building", "tallest", "this", "the", "is", "city", "in", "the"],
+        correctAnswer: ["this", "is", "the", "tallest", "building", "in", "the", "city"],
+        explanation: "Superlative: The tallest building"
+      },
+      // --- Part 4: Fill in the blank ---
+      {
+        id: 16,
+        type: 'fill-blank',
+        question: "Elephants are ______ (heavy) than lions.",
+        correctAnswer: "heavier",
+        explanation: "Heavy ลงท้าย y เปลี่ยนเป็น i แล้วเติม er"
+      },
+      {
+        id: 17,
+        type: 'fill-blank',
+        question: "This is the ______ (bad) movie I have ever seen.",
+        correctAnswer: "worst",
+        explanation: "ขั้นสุดของ bad คือ worst"
+      },
+      {
+        id: 18,
+        type: 'fill-blank',
+        question: "My brother is ______ (old) than me.",
+        correctAnswer: "older",
+        explanation: "ขั้นกว่าของ old คือ older"
+      },
+      {
+        id: 19,
+        type: 'fill-blank',
+        question: "Summer is the ______ (hot) season.",
+        correctAnswer: "hottest",
+        explanation: "Hot สระเสียงสั้น ต้องเบิ้ล t เป็น hottest"
+      },
+      {
+        id: 20,
+        type: 'fill-blank',
+        question: "This phone is ______ (expensive) than that one.",
+        correctAnswer: "more expensive",
+        explanation: "Expensive มีหลายพยางค์ ใช้ more นำหน้า"
+      }
+    ]
   },
   // --- 5. Adverb ---
   {
     id: 'adverb',
-    name: 'Adverb (คำวิเศษณ์)', // [New]
-    description: 'ขยายกริยา, ขยายคุณศัพท์, บอกความถี่', // [New]
+    name: 'Adverb (คำวิเศษณ์)',
+    description: 'ขยายกริยา, ขยายคุณศัพท์, บอกความถี่',
     questions: [
       { id: 1, type: 'choice', question: "He runs **quickly**.", options: ["Manner", "Time", "Place", "Frequency"], correctAnswer: 0, explanation: "บอกอาการ (อย่างไร)" },
       { id: 2, type: 'choice', question: "I **always** eat breakfast.", options: ["Manner", "Frequency", "Degree", "Place"], correctAnswer: 1, explanation: "บอกความถี่" },
@@ -133,8 +290,8 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 6. Preposition ---
   {
     id: 'preposition',
-    name: 'Preposition (คำบุพบท)', // [New]
-    description: 'บอกตำแหน่ง (in/on/at), เวลา, ทิศทาง', // [New]
+    name: 'Preposition (คำบุพบท)',
+    description: 'บอกตำแหน่ง (in/on/at), เวลา, ทิศทาง',
     questions: [
         { id: 1, type: 'choice', question: "The book is **on** the table.", options: ["Time", "Place", "Movement", "Cause"], correctAnswer: 1, explanation: "บอกตำแหน่ง" },
         { id: 2, type: 'choice', question: "We met **at** 9 AM.", options: ["Place", "Time", "Movement", "Agent"], correctAnswer: 1, explanation: "บอกเวลา" },
@@ -161,8 +318,8 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 7. Conjunction ---
   {
     id: 'conjunction',
-    name: 'Conjunction (คำสันธาน)', // [New]
-    description: 'คำเชื่อมประโยค (and, but, or, because)', // [New]
+    name: 'Conjunction (คำสันธาน)',
+    description: 'คำเชื่อมประโยค (and, but, or, because)',
     questions: [
         { id: 1, type: 'choice', question: "I like tea **and** coffee.", options: ["Coordinating", "Subordinating", "Correlative", "Adverb"], correctAnswer: 0, explanation: "เชื่อมคำประเภทเดียวกัน" },
         { id: 2, type: 'choice', question: "I stayed home **because** it rained.", options: ["Coordinating", "Subordinating", "Correlative", "Preposition"], correctAnswer: 1, explanation: "เชื่อมประโยคเหตุผล (Subordinating)" },
@@ -189,8 +346,8 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 8. Determiner ---
   {
     id: 'determiner',
-    name: 'Determiner (คำนำหน้านาม)', // [New]
-    description: 'Articles (a/an/the), Demonstrative (this/that)', // [New]
+    name: 'Determiner (คำนำหน้านาม)',
+    description: 'Articles (a/an/the), Demonstrative (this/that)',
     questions: [
         { id: 1, type: 'choice', question: "I have **an** apple.", options: ["Article", "Demonstrative", "Quantifier", "Possessive"], correctAnswer: 0, explanation: "a, an, the คือ Article" },
         { id: 2, type: 'choice', question: "**This** book is mine.", options: ["Article", "Demonstrative", "Quantifier", "Possessive"], correctAnswer: 1, explanation: "ชี้เฉพาะ (This/That)" },
@@ -217,8 +374,8 @@ export const separatePartsOfSpeechData: PartOfSpeechTopic[] = [
   // --- 9. Interjection ---
   {
     id: 'interjection',
-    name: 'Interjection (คำอุทาน)', // [New]
-    description: 'Wow!, Ouch!, Hey! (บอกอารมณ์)', // [New]
+    name: 'Interjection (คำอุทาน)',
+    description: 'Wow!, Ouch!, Hey! (บอกอารมณ์)',
     questions: [
         { id: 1, type: 'choice', question: "**Wow!** It's beautiful.", options: ["Interjection", "Noun", "Verb", "Adjective"], correctAnswer: 0, explanation: "คำอุทาน" },
         { id: 2, type: 'choice', question: "**Ouch!** That hurts.", options: ["Happiness", "Pain", "Surprise", "Greeting"], correctAnswer: 1, explanation: "เจ็บปวด" },

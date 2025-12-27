@@ -32,8 +32,8 @@ interface QuizEngineProps {
   title: string;
   description?: string;
   backPath: string;
-  // [Update] เพิ่ม 'teal'
-  themeColor?: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink' | 'cyan' | 'teal'; 
+  // [Update] เพิ่ม 'amber'
+  themeColor?: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink' | 'cyan' | 'teal' | 'red' | 'amber'; 
   topics?: QuizTopic[];
   mixedQuestions?: QuizQuestion[];
   directQuestions?: QuizQuestion[];
@@ -61,8 +61,10 @@ export default function QuizEngine({
     green: { bg: 'bg-emerald-600', text: 'text-emerald-600', light: 'bg-emerald-50', border: 'border-emerald-500', hover: 'hover:bg-emerald-700', ring: 'focus:ring-emerald-200' },
     pink: { bg: 'bg-rose-600', text: 'text-rose-600', light: 'bg-rose-50', border: 'border-rose-500', hover: 'hover:bg-rose-700', ring: 'focus:ring-rose-200' },
     cyan: { bg: 'bg-cyan-600', text: 'text-cyan-600', light: 'bg-cyan-50', border: 'border-cyan-500', hover: 'hover:bg-cyan-700', ring: 'focus:ring-cyan-200' },
-    // [Update] เพิ่มธีมสี Teal
     teal: { bg: 'bg-teal-600', text: 'text-teal-600', light: 'bg-teal-50', border: 'border-teal-500', hover: 'hover:bg-teal-700', ring: 'focus:ring-teal-200' },
+    red: { bg: 'bg-red-600', text: 'text-red-600', light: 'bg-red-50', border: 'border-red-500', hover: 'hover:bg-red-700', ring: 'focus:ring-red-200' },
+    // [Update] เพิ่มธีมสี Amber
+    amber: { bg: 'bg-amber-500', text: 'text-amber-700', light: 'bg-amber-50', border: 'border-amber-500', hover: 'hover:bg-amber-600', ring: 'focus:ring-amber-200' },
   }[themeColor];
 
   // --- State ---

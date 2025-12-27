@@ -40,8 +40,12 @@ export default function Grammar() {
         navigate('/grammar/mood-quiz', { state: { subTopicId: subTopicId } });
     } else if (mainTopicId === 'sentence-structure') {
         navigate('/grammar/sentence-structure-quiz', { state: { subTopicId: subTopicId } });
-    } else if (mainTopicId === 'clauses') { // [New] เพิ่มเงื่อนไขนี้
+    } else if (mainTopicId === 'clauses') {
         navigate('/grammar/clauses-quiz', { state: { subTopicId: subTopicId } });
+    } else if (mainTopicId === 'conditionals') {
+        navigate('/grammar/conditionals-quiz', { state: { subTopicId: subTopicId } });
+    } else if (mainTopicId === 'modal-verbs') { // [New] เพิ่มเงื่อนไขนี้
+        navigate('/grammar/modal-verbs-quiz', { state: { subTopicId: subTopicId } });
     }
   };
 
