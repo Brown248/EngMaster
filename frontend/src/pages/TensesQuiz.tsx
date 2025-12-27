@@ -9,7 +9,7 @@ export default function TensesQuiz() {
       title="Tenses Master Quiz"
       description="เลือก Tense ที่ต้องการฝึกฝน หรือทำแบบทดสอบรวม"
       backPath="/grammar"
-      themeColor="indigo"
+      themeColor="purple"
       topics={separateTensesData}
       mixedQuestions={mixedTensesQuizData}
     />

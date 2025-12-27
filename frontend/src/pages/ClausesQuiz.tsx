@@ -13,7 +13,7 @@ export default function ClausesQuiz() {
       title="Clauses Quiz"
       description="ทดสอบความเข้าใจเรื่องอนุประโยค (Independent & Dependent Clauses)"
       backPath="/grammar"
-      themeColor="blue" // ใช้สี Teal
+      themeColor="purple" // ใช้สี Teal
       topics={separateClausesData}
       mixedQuestions={clausesQuizData}
       initialTopicId={initialTopicId}

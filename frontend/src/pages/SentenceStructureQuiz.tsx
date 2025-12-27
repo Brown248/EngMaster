@@ -13,7 +13,7 @@ export default function SentenceStructureQuiz() {
       title="Sentence Structure Quiz"
       description="ทดสอบความเข้าใจเรื่องประเภทประโยค (Types) และหน้าที่ของประโยค (Purpose)"
       backPath="/grammar"
-      themeColor="pink" // ใช้สีใหม่
+      themeColor="purple" // ใช้สีใหม่
       topics={separateSentenceStructureData}
       mixedQuestions={sentenceStructureQuizData}
       initialTopicId={initialTopicId}

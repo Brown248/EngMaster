@@ -13,7 +13,7 @@ export default function MoodQuiz() {
       title="Mood Quiz (Moods of Verbs)"
       description="ทดสอบความเข้าใจเรื่อง Indicative (บอกเล่า), Imperative (คำสั่ง) และ Subjunctive (สมมติ)"
       backPath="/grammar"
-      themeColor="pink" // ใช้สีชมพูตามที่กำหนดใน grammarData
+      themeColor="purple" // ใช้สีชมพูตามที่กำหนดใน grammarData
       topics={separateMoodData}
       mixedQuestions={moodQuizData}
       initialTopicId={initialTopicId}
