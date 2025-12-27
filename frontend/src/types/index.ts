@@ -45,8 +45,8 @@ export interface GrammarTopic {
   id: string;
   title: string;
   icon: string;
-  // [Update] เพิ่ม 'red' และ 'fuchsia' ให้ครบตามที่ใช้ใน data
-  color: 'emerald' | 'amber' | 'indigo' | 'blue' | 'rose' | 'purple' | 'orange' | 'teal' | 'cyan' | 'slate' | 'fuchsia' | 'lime' | 'red';
+  // [Fix] เปลี่ยน emerald -> green และ rose -> pink เพื่อให้ตรงกับ QuizEngine และ grammarData
+  color: 'green' | 'amber' | 'indigo' | 'blue' | 'pink' | 'purple' | 'orange' | 'teal' | 'cyan' | 'slate' | 'fuchsia' | 'lime' | 'red';
   details: GrammarDetail;
 }
 
