@@ -15,7 +15,8 @@ const MoodQuiz = lazy(() => import('./pages/MoodQuiz'));
 const SentenceStructureQuiz = lazy(() => import('./pages/SentenceStructureQuiz'));
 const ClausesQuiz = lazy(() => import('./pages/ClausesQuiz'));
 const ConditionalsQuiz = lazy(() => import('./pages/ConditionalsQuiz'));
-const ModalVerbsQuiz = lazy(() => import('./pages/ModalVerbsQuiz')); // [New] Import
+const ModalVerbsQuiz = lazy(() => import('./pages/ModalVerbsQuiz'));
+const GerundInfinitiveQuiz = lazy(() => import('./pages/GerundInfinitiveQuiz')); // [New] Import
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
@@ -43,7 +44,8 @@ function App() {
             <Route path="/grammar/sentence-structure-quiz" element={<SentenceStructureQuiz />} />
             <Route path="/grammar/clauses-quiz" element={<ClausesQuiz />} />
             <Route path="/grammar/conditionals-quiz" element={<ConditionalsQuiz />} />
-            <Route path="/grammar/modal-verbs-quiz" element={<ModalVerbsQuiz />} /> {/* [New] Route */}
+            <Route path="/grammar/modal-verbs-quiz" element={<ModalVerbsQuiz />} />
+            <Route path="/grammar/gerund-infinitive-quiz" element={<GerundInfinitiveQuiz />} /> {/* [New] Route */}
 
             {/* Vocabulary Section */}
             <Route path="/vocabulary" element={<Vocabulary />} />

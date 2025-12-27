@@ -32,8 +32,8 @@ interface QuizEngineProps {
   title: string;
   description?: string;
   backPath: string;
-  // [Update] เพิ่ม 'amber'
-  themeColor?: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink' | 'cyan' | 'teal' | 'red' | 'amber'; 
+  // [Update] รองรับสีทั้งหมด (indigo, blue, purple, orange, green, pink, cyan, teal, red, amber, fuchsia)
+  themeColor?: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink' | 'cyan' | 'teal' | 'red' | 'amber' | 'fuchsia'; 
   topics?: QuizTopic[];
   mixedQuestions?: QuizQuestion[];
   directQuestions?: QuizQuestion[];
@@ -63,8 +63,9 @@ export default function QuizEngine({
     cyan: { bg: 'bg-cyan-600', text: 'text-cyan-600', light: 'bg-cyan-50', border: 'border-cyan-500', hover: 'hover:bg-cyan-700', ring: 'focus:ring-cyan-200' },
     teal: { bg: 'bg-teal-600', text: 'text-teal-600', light: 'bg-teal-50', border: 'border-teal-500', hover: 'hover:bg-teal-700', ring: 'focus:ring-teal-200' },
     red: { bg: 'bg-red-600', text: 'text-red-600', light: 'bg-red-50', border: 'border-red-500', hover: 'hover:bg-red-700', ring: 'focus:ring-red-200' },
-    // [Update] เพิ่มธีมสี Amber
     amber: { bg: 'bg-amber-500', text: 'text-amber-700', light: 'bg-amber-50', border: 'border-amber-500', hover: 'hover:bg-amber-600', ring: 'focus:ring-amber-200' },
+    // [New] สีบานเย็นสำหรับ Gerund & Infinitive
+    fuchsia: { bg: 'bg-fuchsia-600', text: 'text-fuchsia-600', light: 'bg-fuchsia-50', border: 'border-fuchsia-500', hover: 'hover:bg-fuchsia-700', ring: 'focus:ring-fuchsia-200' },
   }[themeColor];
 
   // --- State ---
