@@ -1,5 +1,5 @@
 // frontend/src/data/sentenceStructureQuizData.ts
-import { QuizQuestion } from '../types';
+import { QuizQuestion } from '../../types';
 
 export const sentenceStructureQuizData: QuizQuestion[] = [
   {

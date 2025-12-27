@@ -1,5 +1,5 @@
 // frontend/src/data/mixedTensesQuizData.ts
-import { QuizQuestion } from '../types';
+import { QuizQuestion } from '../../types';
 
 export const mixedTensesQuizData: QuizQuestion[] = [
   // --- PART 1: Multiple Choice (10 ข้อ) ---

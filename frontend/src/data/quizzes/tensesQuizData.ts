@@ -1,5 +1,5 @@
 // frontend/src/data/tensesQuizData.ts
-import { QuizQuestion } from '../types';
+import { QuizQuestion } from '../../types';
 
 export const tensesQuizData: QuizQuestion[] = [
   // --- Part 1: Multiple Choice (5) ---

@@ -1,7 +1,7 @@
 // frontend/src/pages/VoiceQuiz.tsx
 import QuizEngine from '../components/QuizEngine';
-import { separateVoiceData } from '../data/separateVoiceData'; // [New] Import ข้อมูลแบบแยกหัวข้อ
-import { voiceQuizData } from '../data/voiceQuizData'; // ใช้ข้อมูลเดิมเป็น Mixed Challenge
+import { separateVoiceData } from '../data/exercises/separateVoiceData'; // [New] Import ข้อมูลแบบแยกหัวข้อ
+import { voiceQuizData } from '../data/quizzes/voiceQuizData'; // ใช้ข้อมูลเดิมเป็น Mixed Challenge
 
 export default function VoiceQuiz() {
   return (

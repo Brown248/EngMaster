@@ -1,5 +1,5 @@
 // frontend/src/data/grammarData.ts
-import { GrammarTopic } from '../types';
+import { GrammarTopic } from '../../types';
 
 export const grammarTopics: GrammarTopic[] = [
   {

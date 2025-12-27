@@ -1,11 +1,13 @@
+// frontend/src/data/vocabulary/vocabularyData.ts
 import { Book, Layers, MessageCircle, Star, Zap } from 'lucide-react';
-import { MainCategory, VocabWord } from '../types';
+// ✅ แก้ไข Path ตรงนี้ (ถอย 2 ชั้นไปหา types)
+import { MainCategory, VocabWord } from '../../types';
 
-// Import ข้อมูลจากไฟล์ย่อย
-import { topicWords } from './vocab_parts/vocab_topics';
-import { grammarWords } from './vocab_parts/vocab_grammar';
-import { usageWords } from './vocab_parts/vocab_usage';
-import { specialWords } from './vocab_parts/vocab_special';
+// ✅ แก้ไข Path ตรงนี้ (ชี้ไปที่ folder parts ที่อยู่ในระดับเดียวกัน)
+import { topicWords } from './parts/vocab_topics';
+import { grammarWords } from './parts/vocab_grammar';
+import { usageWords } from './parts/vocab_usage';
+import { specialWords } from './parts/vocab_special';
 
 // ข้อมูล Categories สำหรับหน้า UI
 export const VOCAB_CATEGORIES: MainCategory[] = [

@@ -1,4 +1,4 @@
-import { VocabWord } from '../../types';
+import { VocabWord } from '../../../types';
 
 export const usageWords: VocabWord[] = [
   // --- Feelings ---

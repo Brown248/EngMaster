@@ -1,5 +1,5 @@
 // frontend/src/data/separateClausesData.ts
-import { QuizQuestion } from '../types';
+import { QuizQuestion } from '../../types';
 
 export interface ClausesTopic {
   id: string;

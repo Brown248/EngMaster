@@ -1,5 +1,5 @@
 // frontend/src/data/modalVerbsQuizData.ts
-import { QuizQuestion } from '../types';
+import { QuizQuestion } from '../../types';
 
 export const modalVerbsQuizData: QuizQuestion[] = [
   {

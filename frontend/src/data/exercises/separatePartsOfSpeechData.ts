@@ -1,5 +1,5 @@
 // frontend/src/data/separatePartsOfSpeechData.ts
-import { QuizQuestion } from '../types';
+import { QuizQuestion } from '../../types';
 
 export interface PartOfSpeechTopic {
   id: string;

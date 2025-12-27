@@ -1,8 +1,8 @@
 // frontend/src/pages/ModalVerbsQuiz.tsx
 import { useLocation } from 'react-router-dom';
 import QuizEngine from '../components/QuizEngine';
-import { separateModalVerbsData } from '../data/separateModalVerbsData';
-import { modalVerbsQuizData } from '../data/modalVerbsQuizData';
+import { separateModalVerbsData } from '../data/exercises/separateModalVerbsData';
+import { modalVerbsQuizData } from '../data/quizzes/modalVerbsQuizData';
 
 export default function ModalVerbsQuiz() {
   const location = useLocation();

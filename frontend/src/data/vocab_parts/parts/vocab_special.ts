@@ -1,4 +1,4 @@
-import { VocabWord } from '../../types';
+import { VocabWord } from '../../../types';
 
 export const specialWords: VocabWord[] = [
   // --- Phrasal Verbs ---

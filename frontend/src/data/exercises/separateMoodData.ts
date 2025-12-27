@@ -1,5 +1,5 @@
 // frontend/src/data/separateMoodData.ts
-import { QuizQuestion } from '../types';
+import { QuizQuestion } from '../../types';
 
 export interface MoodTopic {
   id: string;

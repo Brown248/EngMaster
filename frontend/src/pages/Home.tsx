@@ -1,9 +1,10 @@
+// frontend/src/pages/Home.tsx
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-// ลบ BookOpen ออกเนื่องจากไม่ได้ถูกใช้งาน
 import { ChevronRight, Sparkles, Zap, Star, ArrowUpRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { coursesData } from '../data/homeData';
+// ✅ แก้ไข Path ตรงนี้
+import { coursesData } from '../data/core/homeData';
 import AdBanner from '../components/AdBanner';
 
 export default function Home() {
@@ -11,7 +12,6 @@ export default function Home() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   
-  // ลดระยะการขยับของ Background ให้ดูนิ่งขึ้น ไม่เวียนหัว
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -30]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, 50]);
 
@@ -19,15 +19,11 @@ export default function Home() {
     navigate(`/${id}`);
   };
 
-  // Animation Variants
   const containerVars = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
     }
   };
 
@@ -40,16 +36,11 @@ export default function Home() {
     }
   };
 
-  // อนิเมชั่นลอยตัวสำหรับนกฮูก
   const floatingVars = {
     animate: {
       y: [0, -15, 0],
       rotate: [0, 2, -2, 0],
-      transition: {
-        duration: 5,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
+      transition: { duration: 5, repeat: Infinity, ease: "easeInOut" }
     }
   };
 
@@ -65,14 +56,12 @@ export default function Home() {
             exit={{ opacity: 0 }}
             className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 relative"
           >
-            {/* Background Decor (Subtle) */}
             <motion.div style={{ y: y1 }} className="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-br from-indigo-100/40 to-purple-100/40 rounded-full blur-3xl -z-10 opacity-60" />
             <motion.div style={{ y: y2 }} className="absolute bottom-20 left-10 w-32 h-32 bg-yellow-100/60 rounded-full blur-2xl -z-10" />
 
             {/* --- HERO SECTION --- */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 py-8 md:py-10 relative z-10">
               
-              {/* Text Content */}
               <div className="flex-1 text-center md:text-left order-2 md:order-1">
                 <motion.div 
                   variants={itemVars}
@@ -121,13 +110,11 @@ export default function Home() {
                 </motion.div>
               </div>
 
-              {/* Hero Image (Owl Mascot) */}
               <motion.div 
                 variants={itemVars}
                 className="flex-1 relative w-full max-w-xs md:max-w-sm flex justify-center items-center order-1 md:order-2"
               >
                 <div className="relative z-10">
-                    {/* Owl Emoji with Floating Animation */}
                     <motion.div
                         variants={floatingVars}
                         animate="animate"
@@ -137,7 +124,6 @@ export default function Home() {
                         🦉
                     </motion.div>
 
-                    {/* Floating Badge 1 */}
                     <motion.div 
                         animate={{ y: [0, -10, 0] }}
                         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.5 }}
@@ -152,7 +138,6 @@ export default function Home() {
                         <span>Let's Go!</span>
                     </motion.div>
 
-                    {/* Floating Badge 2 */}
                     <motion.div 
                         animate={{ y: [0, 10, 0] }}
                         transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
@@ -163,7 +148,6 @@ export default function Home() {
                     </motion.div>
                 </div>
                 
-                {/* Glow Effect behind Owl */}
                 <motion.div 
                     animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.7, 0.5] }}
                     transition={{ duration: 3, repeat: Infinity }}
@@ -230,7 +214,6 @@ export default function Home() {
   );
 }
 
-// Helpers
 function getColorClass(color: string) {
     const map: Record<string, string> = {
         orange: 'bg-orange-50 text-orange-500',

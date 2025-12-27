@@ -1,24 +1,22 @@
 // frontend/src/pages/Vocabulary.tsx
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, XCircle, Layers } from 'lucide-react'; // ลบ ChevronDown
-import { vocabularyData, VOCAB_CATEGORIES } from '../data/vocabularyData'; // ลบ Type ที่ไม่ได้ใช้ออก
+import { Search, XCircle, Layers } from 'lucide-react'; 
+// ✅ แก้ไข Path ตรงนี้
+import { vocabularyData, VOCAB_CATEGORIES } from '../data/vocabulary/vocabularyData';
 import AdBanner from '../components/AdBanner';
 
 export default function Vocabulary() {
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   
-  // State ใหม่สำหรับการเลือก Category แบบ 2 ขั้น
   const [activeGroup, setActiveGroup] = useState<string>('All'); 
   const [activeSubCategory, setActiveSubCategory] = useState<string | null>(null);
 
   const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
 
-  // ฟังก์ชันกรองข้อมูล
   const filteredVocab = useMemo(() => {
     return vocabularyData.filter((item) => {
-      // 1. กรองตามหมวดหมู่
       let matchesCategory = true;
       if (activeGroup !== 'All' && activeSubCategory) {
         if (activeGroup === 'Topic') matchesCategory = item.topic === activeSubCategory;
@@ -28,10 +26,8 @@ export default function Vocabulary() {
         else if (activeGroup === 'Special') matchesCategory = item.special === activeSubCategory;
       }
 
-      // 2. กรองตามตัวอักษร
       const matchesLetter = selectedLetter ? item.word.charAt(0).toUpperCase() === selectedLetter : true;
       
-      // 3. กรองตามคำค้นหา
       const matchesSearch = searchTerm
         ? item.word.toLowerCase().includes(searchTerm.toLowerCase()) || 
           item.meaning.toLowerCase().includes(searchTerm.toLowerCase())
@@ -90,7 +86,6 @@ export default function Vocabulary() {
         {/* --- Controls Section --- */}
         <div className="space-y-6 mb-8">
             
-            {/* 1. Main Category Tabs */}
             <div className="flex flex-wrap gap-2">
                 <button
                     onClick={() => { setActiveGroup('All'); setActiveSubCategory(null); setSelectedLetter(null); }}
@@ -122,7 +117,6 @@ export default function Vocabulary() {
                 })}
             </div>
 
-            {/* 2. Sub Category Pills (แสดงเมื่อเลือก Main Category) */}
             <AnimatePresence>
                 {activeGroup !== 'All' && (
                     <motion.div 
@@ -151,7 +145,6 @@ export default function Vocabulary() {
                 )}
             </AnimatePresence>
 
-            {/* 3. Search Bar */}
             <div className="flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1 group">
                     <input 
@@ -187,10 +180,8 @@ export default function Vocabulary() {
             </div>
         </div>
 
-        {/* ✅ แทรก AdBanner */}
         <AdBanner className="mb-8" />
 
-        {/* --- Keyboard Grid --- */}
         {!searchTerm && (
             <motion.div 
                 variants={container}
@@ -200,7 +191,6 @@ export default function Vocabulary() {
             >
             {letters.map((letter) => {
                 const isSelected = selectedLetter === letter;
-                // เช็คว่ามีคำศัพท์ในหมวดที่เลือกไหม
                 const hasWords = vocabularyData.some(item => {
                     let matchesCategory = true;
                     if (activeGroup !== 'All' && activeSubCategory) {
@@ -236,7 +226,6 @@ export default function Vocabulary() {
             </motion.div>
         )}
 
-        {/* --- Result List --- */}
         <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-700 flex items-center gap-2 mb-4">
                 {selectedLetter ? `หมวดอักษร "${selectedLetter}"` : searchTerm ? 'ผลการค้นหา' : activeSubCategory ? `รายการ: ${activeSubCategory}` : 'รายการคำศัพท์ทั้งหมด'}

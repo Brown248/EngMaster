@@ -1,5 +1,5 @@
 import { Home, Book, Layers } from 'lucide-react';
-import { MenuItem } from '../types';
+import { MenuItem } from '../../types';
 
 export const menuItems: MenuItem[] = [
   { path: '/', label: 'หน้าแรก', icon: Home },

@@ -1,8 +1,8 @@
 // frontend/src/pages/MoodQuiz.tsx
 import { useLocation } from 'react-router-dom';
 import QuizEngine from '../components/QuizEngine';
-import { separateMoodData } from '../data/separateMoodData';
-import { moodQuizData } from '../data/moodQuizData';
+import { separateMoodData } from '../data/exercises/separateMoodData';
+import { moodQuizData } from '../data/quizzes/moodQuizData';
 
 export default function MoodQuiz() {
   const location = useLocation();

@@ -1,4 +1,4 @@
-import { TenseTopicData } from '../types';
+import { TenseTopicData } from '../../types';
 
 export const separateTensesData: TenseTopicData[] = [
   // ==========================================

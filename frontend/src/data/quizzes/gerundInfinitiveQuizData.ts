@@ -1,5 +1,5 @@
 // frontend/src/data/gerundInfinitiveQuizData.ts
-import { QuizQuestion } from '../types';
+import { QuizQuestion } from '../../types';
 
 export const gerundInfinitiveQuizData: QuizQuestion[] = [
   {

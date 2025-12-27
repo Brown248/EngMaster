@@ -1,4 +1,4 @@
-import { QuizQuestion } from '../types';
+import { QuizQuestion } from '../../types';
 
 export const partsOfSpeechQuizData: QuizQuestion[] = [
   // --- Noun (1-4) ---

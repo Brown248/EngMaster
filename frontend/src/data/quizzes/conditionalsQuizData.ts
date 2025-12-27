@@ -1,5 +1,5 @@
 // frontend/src/data/conditionalsQuizData.ts
-import { QuizQuestion } from '../types';
+import { QuizQuestion } from '../../types';
 
 export const conditionalsQuizData: QuizQuestion[] = [
   {

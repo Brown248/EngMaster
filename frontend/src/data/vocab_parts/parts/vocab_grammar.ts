@@ -1,4 +1,4 @@
-import { VocabWord } from '../../types';
+import { VocabWord } from '../../../types';
 
 export const grammarWords: VocabWord[] = [
   { word: "Although", meaning: "ถึงแม้ว่า", partOfSpeech: "conj.", example: "Although it rained, we went out.", category: "Academic", level: "Intermediate", usage: "Conversation" },

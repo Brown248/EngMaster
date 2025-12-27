@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ArrowLeft, PlayCircle, BookOpen } from 'lucide-react';
 import { useNavigate, useParams, Link, useSearchParams } from 'react-router-dom';
-import { grammarTopics } from '../data/grammarData';
+// ✅ แก้ไข Path ตรงนี้
+import { grammarTopics } from '../data/core/grammarData';
 import AdBanner from '../components/AdBanner';
 
 export default function Grammar() {
@@ -46,7 +47,7 @@ export default function Grammar() {
         navigate('/grammar/conditionals-quiz', { state: { subTopicId: subTopicId } });
     } else if (mainTopicId === 'modal-verbs') {
         navigate('/grammar/modal-verbs-quiz', { state: { subTopicId: subTopicId } });
-    } else if (mainTopicId === 'gerund-infinitive') { // [New] เพิ่มเงื่อนไขสำหรับหัวข้อที่ 9
+    } else if (mainTopicId === 'gerund-infinitive') {
         navigate('/grammar/gerund-infinitive-quiz', { state: { subTopicId: subTopicId } });
     }
   };

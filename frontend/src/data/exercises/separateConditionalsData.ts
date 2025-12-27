@@ -1,5 +1,5 @@
 // frontend/src/data/separateConditionalsData.ts
-import { QuizQuestion } from '../types';
+import { QuizQuestion } from '../../types';
 
 export interface ConditionalsTopic {
   id: string;

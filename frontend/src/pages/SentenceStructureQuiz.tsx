@@ -1,8 +1,8 @@
 // frontend/src/pages/SentenceStructureQuiz.tsx
 import { useLocation } from 'react-router-dom';
 import QuizEngine from '../components/QuizEngine';
-import { separateSentenceStructureData } from '../data/separateSentenceStructureData';
-import { sentenceStructureQuizData } from '../data/sentenceStructureQuizData';
+import { separateSentenceStructureData } from '../data/exercises/separateSentenceStructureData';
+import { sentenceStructureQuizData } from '../data/quizzes/sentenceStructureQuizData';
 
 export default function SentenceStructureQuiz() {
   const location = useLocation();
