@@ -46,7 +46,7 @@ export default function Grammar() {
         navigate('/grammar/conditionals-quiz', { state: { subTopicId: subTopicId } });
     } else if (mainTopicId === 'modal-verbs') {
         navigate('/grammar/modal-verbs-quiz', { state: { subTopicId: subTopicId } });
-    } else if (mainTopicId === 'gerund-infinitive') { // [New] เพิ่มเงื่อนไขนี้
+    } else if (mainTopicId === 'gerund-infinitive') { // [New] เพิ่มเงื่อนไขสำหรับหัวข้อที่ 9
         navigate('/grammar/gerund-infinitive-quiz', { state: { subTopicId: subTopicId } });
     }
   };

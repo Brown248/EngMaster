@@ -26,7 +26,7 @@ export interface GrammarTypeDetail {
 }
 
 export interface GrammarSubtopic {
-  id: string; // [New] เพิ่ม ID ตรงนี้
+  id: string;
   name: string;
   usage?: string;
   structure?: string;
@@ -45,7 +45,8 @@ export interface GrammarTopic {
   id: string;
   title: string;
   icon: string;
-  color: 'emerald' | 'amber' | 'indigo' | 'blue' | 'rose' | 'purple' | 'orange' | 'teal' | 'cyan' | 'slate' | 'fuchsia' | 'lime';
+  // [Update] เพิ่ม 'red' และ 'fuchsia' ให้ครบตามที่ใช้ใน data
+  color: 'emerald' | 'amber' | 'indigo' | 'blue' | 'rose' | 'purple' | 'orange' | 'teal' | 'cyan' | 'slate' | 'fuchsia' | 'lime' | 'red';
   details: GrammarDetail;
 }
 
