@@ -418,10 +418,10 @@ export default function QuizEngine({
           className="flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold transition-colors" 
           aria-label="Exit Quiz"
         >
-            <ArrowLeft size={20} /> ออก
+           <ArrowLeft size={20} /> ออก
         </button>
         <div className={`px-4 py-1.5 rounded-full text-sm font-bold ${theme.light} ${theme.text}`}>
-            ข้อที่ {currentQIndex + 1} / {questions.length}
+           ข้อที่ {currentQIndex + 1} / {questions.length}
         </div>
       </div>
 

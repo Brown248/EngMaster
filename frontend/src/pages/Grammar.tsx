@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ArrowLeft, PlayCircle, BookOpen } from 'lucide-react';
 import { useNavigate, useParams, Link, useSearchParams } from 'react-router-dom';
-// ✅ แก้ไข Path ตรงนี้
 import { grammarTopics } from '../data/core/grammarData';
+// ✅ Import AdBanner
 import AdBanner from '../components/AdBanner';
 
 export default function Grammar() {
@@ -162,7 +162,12 @@ export default function Grammar() {
                         ))}
                     </div>
                     
-                    <div className="mt-8 text-center">
+                    {/* ✅ พื้นที่โฆษณา (AdBanner) ก่อนปุ่มเริ่มสอบในหน้าหลักของหัวข้อ */}
+                    <div className="mt-8 mb-4">
+                        <AdBanner />
+                    </div>
+
+                    <div className="text-center">
                         <button onClick={() => startQuiz(activeTopic!.id)} className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-bold text-xl hover:shadow-xl hover:scale-105 transition-all">
                             <PlayCircle size={24} /> เริ่มทำแบบทดสอบ
                         </button>
@@ -193,6 +198,12 @@ export default function Grammar() {
                     </div>
 
                     <div className="mt-10 pt-8 border-t border-slate-100 text-center">
+                        
+                        {/* ✅ พื้นที่โฆษณา (AdBanner) ก่อนปุ่มเริ่มสอบในหน้า Subtopic */}
+                        <div className="mb-8">
+                            <AdBanner />
+                        </div>
+
                         <button 
                             onClick={() => startQuiz(activeTopic!.id, currentSubtopicData.id)}
                             className="inline-flex items-center gap-2 px-8 py-3 bg-slate-800 text-white rounded-xl font-bold text-lg hover:bg-slate-900 hover:shadow-lg transition-all"

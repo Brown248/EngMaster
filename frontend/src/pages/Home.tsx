@@ -3,7 +3,6 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Sparkles, Zap, Star, ArrowUpRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-// ✅ แก้ไข Path ตรงนี้
 import { coursesData } from '../data/core/homeData';
 import AdBanner from '../components/AdBanner';
 
@@ -19,28 +18,48 @@ export default function Home() {
     navigate(`/${id}`);
   };
 
+  // ✅ 1. ปรับ Animation Container ให้ Smooth ขึ้น
   const containerVars = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+      transition: { 
+        staggerChildren: 0.15, // เพิ่มระยะห่างระหว่าง items เล็กน้อย
+        delayChildren: 0.1 
+      }
     }
   };
 
+  // ✅ 2. ปรับ Spring ให้เด้งนุ่มนวล (Soft Spring) และเพิ่ม Exit Animation
   const itemVars = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     show: { 
       opacity: 1, 
       y: 0, 
-      transition: { type: 'spring', stiffness: 50, damping: 20 } 
+      transition: { 
+        type: 'spring', 
+        stiffness: 70, // ลดความแข็ง (เดิม ~100+)
+        damping: 15,   // เพิ่มแรงต้านให้หยุดนิ่งแบบนุ่มๆ
+        mass: 1
+      } 
+    },
+    exit: { 
+      opacity: 0, 
+      y: -20, 
+      transition: { duration: 0.2, ease: "easeIn" } 
     }
   };
 
+  // ✅ 3. ปรับ Floating Animation ให้ลอยช้าๆ สบายตา
   const floatingVars = {
     animate: {
-      y: [0, -15, 0],
-      rotate: [0, 2, -2, 0],
-      transition: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+      y: [0, -12, 0],
+      rotate: [0, 1.5, -1.5, 0],
+      transition: { 
+        duration: 6, // เพิ่มเวลาให้ช้าลง
+        repeat: Infinity, 
+        ease: "easeInOut" 
+      }
     }
   };
 
@@ -52,8 +71,8 @@ export default function Home() {
             ref={containerRef}
             initial="hidden"
             animate="show"
+            exit="exit" // ✅ เพิ่ม exit prop ตรงนี้
             variants={containerVars}
-            exit={{ opacity: 0 }}
             className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 relative"
           >
             <motion.div style={{ y: y1 }} className="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-br from-indigo-100/40 to-purple-100/40 rounded-full blur-3xl -z-10 opacity-60" />

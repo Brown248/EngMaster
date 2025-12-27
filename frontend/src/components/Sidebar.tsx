@@ -2,8 +2,9 @@
 import { NavLink } from 'react-router-dom';
 import { X, MessageSquarePlus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-// ✅ แก้ไข Path ตรงนี้
 import { menuItems } from '../data/core/menuData'; 
+// ✅ Import AdBanner
+import AdBanner from './AdBanner';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -73,6 +74,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             
             {/* Footer */}
             <div className="p-4 border-t border-slate-100 bg-slate-50/50">
+              
+              {/* ✅ พื้นที่โฆษณา (AdBanner) ใน Sidebar */}
+              <div className="mb-4 rounded-xl overflow-hidden shadow-sm">
+                 <AdBanner />
+              </div>
+
               <a 
                 href="https://docs.google.com/forms/d/e/1FAIpQLSeJqpXVQ-kir08pEsSKhX0xsfs_nEAfhMRY0bVd_9TTGQcJFg/viewform?usp=dialog"
                 target="_blank"

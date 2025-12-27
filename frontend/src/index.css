@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth; /* ✅ เพิ่มบรรทัดนี้ */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
   body {
-    /* เปลี่ยนจาก overflow-hidden เป็น overflow-y-auto หรือลบออก */
-    @apply font-sans text-slate-700 bg-[#f0f4f8] overflow-y-auto overflow-x-hidden;
+    @apply bg-[#F8FAFC]; /* กำหนดสีพื้นหลังหลักให้สบายตา */
   }
 }
 
