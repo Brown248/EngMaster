@@ -1,7 +1,6 @@
-// frontend/src/pages/Grammar.tsx
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ArrowLeft, PlayCircle, BookOpen } from 'lucide-react';
+import { ChevronRight, ArrowLeft, PlayCircle, BookOpen, Trophy } from 'lucide-react';
 import { useNavigate, useParams, Link, useSearchParams } from 'react-router-dom';
 import { grammarTopics } from '../data/core/grammarData';
 import AdBanner from '../components/AdBanner';
@@ -49,7 +48,7 @@ export default function Grammar() {
     } else if (mainTopicId === 'gerund-infinitive') {
         navigate('/grammar/gerund-infinitive-quiz', { state: { subTopicId: subTopicId } });
     } 
-    // ✅ New Quiz Navigation Logic
+    // ✅ Logic สำหรับหัวข้อใหม่
     else if (mainTopicId === 'reported-speech') {
         navigate('/grammar/reported-speech-quiz', { state: { subTopicId: subTopicId } });
     } else if (mainTopicId === 'question-forms') {
@@ -113,6 +112,32 @@ export default function Grammar() {
                 </Link>
               ))}
             </div>
+
+            {/* ✅ ปุ่ม Ultimate Challenge (Mixed Quiz) */}
+            <div className="mt-12 mb-8">
+              <Link to="/grammar/mixed-quiz">
+                <motion.div 
+                   whileHover={{ scale: 1.02 }}
+                   className="bg-gradient-to-r from-amber-500 to-orange-600 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden group cursor-pointer"
+                >
+                    <div className="relative z-10 flex items-center justify-between">
+                        <div>
+                            <h3 className="text-3xl font-black mb-2 flex items-center gap-3">
+                                <Trophy size={32} className="text-yellow-200" />
+                                Ultimate Challenge
+                            </h3>
+                            <p className="text-white/90 text-lg font-medium">ทดสอบวัดระดับรวมทุกหัวข้อ 30 ข้อ (Tenses, Matching, etc.)</p>
+                        </div>
+                        <div className="bg-white/20 p-4 rounded-full backdrop-blur-sm group-hover:bg-white/30 transition-colors">
+                            <PlayCircle size={40} />
+                        </div>
+                    </div>
+                    {/* Decorative circles */}
+                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all"/>
+                </motion.div>
+              </Link>
+            </div>
+
           </motion.div>
         ) : (
           

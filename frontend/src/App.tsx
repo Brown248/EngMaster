@@ -1,4 +1,3 @@
-// frontend/src/App.tsx
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
@@ -25,6 +24,7 @@ const GerundInfinitiveQuiz = lazy(() => import('./pages/quizzes/GerundInfinitive
 // ✅ New Quizzes Imports
 const ReportedSpeechQuiz = lazy(() => import('./pages/quizzes/ReportedSpeechQuiz'));
 const QuestionFormsQuiz = lazy(() => import('./pages/quizzes/QuestionFormsQuiz'));
+const MixedGrammarQuiz = lazy(() => import('./pages/quizzes/MixedGrammarQuiz'));
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -49,9 +49,10 @@ function AnimatedRoutes() {
         <Route path="/grammar/modal-verbs-quiz" element={<ModalVerbsQuiz />} />
         <Route path="/grammar/gerund-infinitive-quiz" element={<GerundInfinitiveQuiz />} />
         
-        {/* ✅ New Quizzes Routes */}
+        {/* ✅ New Quiz Routes */}
         <Route path="/grammar/reported-speech-quiz" element={<ReportedSpeechQuiz />} />
         <Route path="/grammar/question-forms-quiz" element={<QuestionFormsQuiz />} />
+        <Route path="/grammar/mixed-quiz" element={<MixedGrammarQuiz />} />
 
         {/* Vocabulary Section */}
         <Route path="/vocabulary" element={<Vocabulary />} />
