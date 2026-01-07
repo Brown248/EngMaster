@@ -32,7 +32,8 @@ interface QuizEngineProps {
   title: string;
   description?: string;
   backPath: string;
-  themeColor?: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink' | 'cyan' | 'teal' | 'red' | 'amber' | 'fuchsia'; 
+  // [Fix] เพิ่มสี lime และ violet ใน Props
+  themeColor?: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink' | 'cyan' | 'teal' | 'red' | 'amber' | 'fuchsia' | 'lime' | 'violet'; 
   topics?: QuizTopic[];
   mixedQuestions?: QuizQuestion[];
   directQuestions?: QuizQuestion[];
@@ -64,6 +65,9 @@ export default function QuizEngine({
     red: { bg: 'bg-red-600', text: 'text-red-600', light: 'bg-red-50', border: 'border-red-500', hover: 'hover:bg-red-700', ring: 'focus:ring-red-200' },
     amber: { bg: 'bg-amber-500', text: 'text-amber-700', light: 'bg-amber-50', border: 'border-amber-500', hover: 'hover:bg-amber-600', ring: 'focus:ring-amber-200' },
     fuchsia: { bg: 'bg-fuchsia-600', text: 'text-fuchsia-600', light: 'bg-fuchsia-50', border: 'border-fuchsia-500', hover: 'hover:bg-fuchsia-700', ring: 'focus:ring-fuchsia-200' },
+    // [Fix] เพิ่มชุดสี lime และ violet
+    lime: { bg: 'bg-lime-600', text: 'text-lime-700', light: 'bg-lime-50', border: 'border-lime-500', hover: 'hover:bg-lime-600', ring: 'focus:ring-lime-200' },
+    violet: { bg: 'bg-violet-600', text: 'text-violet-600', light: 'bg-violet-50', border: 'border-violet-500', hover: 'hover:bg-violet-700', ring: 'focus:ring-violet-200' },
   }[themeColor];
 
   // --- State ---
@@ -287,7 +291,6 @@ export default function QuizEngine({
                     <button className={`px-8 py-3 bg-white ${theme.text} rounded-xl font-bold flex items-center gap-2 shadow-sm mb-2`}>
                         เริ่มทดสอบรวม <Play size={20} fill="currentColor" />
                     </button>
-                    {/* [Fix] เช็ค typeof history['mixed'] === 'number' เพื่อไม่ให้โชว์ถ้ายังไม่มีคะแนน */}
                     {typeof history['mixed'] === 'number' && (
                         <span className="text-white text-sm font-medium bg-black/20 px-3 py-1 rounded-full">
                             คะแนนล่าสุด: {history['mixed']} / {mixedQuestions.length}
@@ -311,9 +314,7 @@ export default function QuizEngine({
               <button key={topic.id} onClick={() => handleStartTopic(topic.id)} className={`bg-white p-6 rounded-2xl border-2 border-slate-100 hover:${theme.border} hover:shadow-md text-left transition-all group relative overflow-hidden flex flex-col h-full`}>
                  <div className="flex justify-between items-start mb-3 w-full">
                    <h3 className={`font-bold text-lg text-slate-800 group-hover:${theme.text} transition-colors capitalize`}>{topic.name}</h3>
-                   {/* [Fix] ซ่อน "ทำค้างไว้" ถ้ามีคะแนนแล้ว (จบแล้ว) */}
                    {hasSession && typeof lastScore !== 'number' && <span className="text-[10px] font-bold px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full flex items-center gap-1"><Save size={10}/> ทำค้างไว้</span>}
-                   {/* [Fix] เช็ค typeof lastScore === 'number' เพื่อไม่ให้โชว์ถ้ายังไม่มีคะแนน */}
                    {typeof lastScore === 'number' && <span className="text-[10px] font-bold px-2 py-1 bg-green-100 text-green-700 rounded-full">Score: {lastScore}</span>}
                  </div>
                  <p className="text-sm text-slate-500 mb-4 line-clamp-2 flex-grow">{topic.description || `แบบทดสอบเรื่อง ${topic.name}`}</p>
@@ -418,10 +419,10 @@ export default function QuizEngine({
           className="flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold transition-colors" 
           aria-label="Exit Quiz"
         >
-           <ArrowLeft size={20} /> ออก
+            <ArrowLeft size={20} /> ออก
         </button>
         <div className={`px-4 py-1.5 rounded-full text-sm font-bold ${theme.light} ${theme.text}`}>
-           ข้อที่ {currentQIndex + 1} / {questions.length}
+            ข้อที่ {currentQIndex + 1} / {questions.length}
         </div>
       </div>
 

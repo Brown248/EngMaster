@@ -1,3 +1,4 @@
+// frontend/src/types/index.ts
 import { LucideIcon } from 'lucide-react';
 
 // --- Shared Types ---
@@ -15,7 +16,7 @@ export interface CourseCard {
   color: 'orange' | 'pink' | 'purple' | 'blue';
 }
 
-// --- Grammar Types ---
+// --- Grammar Types (Updated for Deep Dive + Vocab) ---
 export interface GrammarTypeDetail {
   name: string;
   usage: string;
@@ -44,7 +45,8 @@ export interface GrammarTopic {
   id: string;
   title: string;
   icon: string;
-  color: 'green' | 'amber' | 'indigo' | 'blue' | 'pink' | 'purple' | 'orange' | 'teal' | 'cyan' | 'slate' | 'fuchsia' | 'lime' | 'red';
+  // [Fix] เพิ่มสี lime และ violet เข้าไปในรายการ
+  color: 'green' | 'amber' | 'indigo' | 'blue' | 'pink' | 'purple' | 'orange' | 'teal' | 'cyan' | 'slate' | 'fuchsia' | 'lime' | 'red' | 'violet';
   details: GrammarDetail;
 }
 
@@ -66,29 +68,4 @@ export interface TenseTopicData {
   name: string;
   description: string;
   questions: QuizQuestion[];
-}
-
-// --- ✅ Vocabulary Types (เพิ่มใหม่) ---
-export interface VocabWord {
-  word: string;
-  meaning: string;
-  partOfSpeech: string;
-  example: string;
-  category?: 'General' | 'Academic' | 'Business'; 
-  topic?: string;       
-  usage?: string;       
-  level?: string;       
-  special?: string;     
-}
-
-export interface SubCategory {
-  id: string;
-  label: string;
-}
-
-export interface MainCategory {
-  id: string;
-  label: string;
-  icon: any;
-  subCategories: SubCategory[];
 }

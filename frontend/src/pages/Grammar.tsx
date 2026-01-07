@@ -3,8 +3,11 @@ import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ArrowLeft, PlayCircle, BookOpen } from 'lucide-react';
 import { useNavigate, useParams, Link, useSearchParams } from 'react-router-dom';
-import { grammarTopics } from '../data/grammarData';
+// [Fix] แก้ Path ให้ถูกต้อง
+import { grammarTopics } from '../data/core/grammarData'; 
 import AdBanner from '../components/AdBanner';
+// [Fix] Import Types
+import { GrammarTopic, GrammarSubtopic, GrammarTypeDetail } from '../types';
 
 export default function Grammar() {
   const navigate = useNavigate();
@@ -15,14 +18,17 @@ export default function Grammar() {
   const selectedSubtopicId = searchParams.get('subtopicId');
   const selectedTypeName = searchParams.get('type'); 
 
-  const activeTopic = grammarTopics.find(t => t.id === topicId);
+  // [Fix] กำหนด Type ให้ t
+  const activeTopic = grammarTopics.find((t: GrammarTopic) => t.id === topicId);
   
+  // [Fix] กำหนด Type ให้ s
   const currentSubtopicData = activeTopic?.details?.subtopics?.find(
-    s => s.id === selectedSubtopicId
+    (s: GrammarSubtopic) => s.id === selectedSubtopicId
   );
 
+  // [Fix] กำหนด Type ให้ t
   const selectedTypeDetail = currentSubtopicData?.types?.find(
-    t => t.name === selectedTypeName
+    (t: GrammarTypeDetail) => t.name === selectedTypeName
   );
 
   useEffect(() => {
@@ -30,7 +36,6 @@ export default function Grammar() {
   }, [topicId, selectedSubtopicId, selectedTypeName]);
 
   const startQuiz = (mainTopicId: string, subTopicId?: string) => {
-    // Logic การนำทางไปยัง Quiz ของแต่ละหัวข้อ
     if (mainTopicId === 'tenses') {
         navigate('/grammar/quiz');
     } else if (mainTopicId === 'parts-of-speech') {
@@ -49,9 +54,9 @@ export default function Grammar() {
         navigate('/grammar/modal-verbs-quiz', { state: { subTopicId: subTopicId } });
     } else if (mainTopicId === 'gerund-infinitive') {
         navigate('/grammar/gerund-infinitive-quiz', { state: { subTopicId: subTopicId } });
-    } else if (mainTopicId === 'reported-speech') { // [New] หัวข้อที่ 10
+    } else if (mainTopicId === 'reported-speech') {
         navigate('/grammar/reported-speech-quiz', { state: { subTopicId: subTopicId } });
-    } else if (mainTopicId === 'question-forms') { // [New] หัวข้อที่ 11
+    } else if (mainTopicId === 'question-forms') {
         navigate('/grammar/question-forms-quiz', { state: { subTopicId: subTopicId } });
     }
   };
@@ -97,7 +102,8 @@ export default function Grammar() {
             <AdBanner className="mb-8" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {grammarTopics.map((topic) => (
+              {/* [Fix] กำหนด Type ให้ topic */}
+              {grammarTopics.map((topic: GrammarTopic) => (
                 <Link to={`/grammar/${topic.id}`} key={topic.id}>
                   <motion.div
                     whileHover={{ scale: 1.02, y: -5 }}
@@ -147,7 +153,8 @@ export default function Grammar() {
             {!selectedSubtopicId ? (
                  <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {activeTopic?.details.subtopics.map((sub, idx) => (
+                        {/* [Fix] กำหนด Type ให้ sub และ idx */}
+                        {activeTopic?.details.subtopics.map((sub: GrammarSubtopic, idx: number) => (
                             <motion.div 
                                 key={idx}
                                 onClick={() => goToSubtopic(sub.id)}
@@ -183,7 +190,8 @@ export default function Grammar() {
 
                     <h3 className="text-xl font-bold text-slate-700 mb-4">เลือกหัวข้อเพื่อเจาะลึก:</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                         {currentSubtopicData.types.map((type, idx) => (
+                         {/* [Fix] กำหนด Type ให้ type และ idx */}
+                         {currentSubtopicData.types.map((type: GrammarTypeDetail, idx: number) => (
                              <motion.button
                                 key={idx}
                                 onClick={() => goToTypeDetail(type.name)}
@@ -234,7 +242,8 @@ export default function Grammar() {
                                     <div>
                                         <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">🔤 ตัวอย่างคำศัพท์</h3>
                                         <div className="flex flex-wrap gap-2">
-                                            {detail.vocabulary.map((word, i) => (
+                                            {/* [Fix] กำหนด Type ให้ word และ i */}
+                                            {detail.vocabulary.map((word: string, i: number) => (
                                                 <span key={i} className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-bold border border-slate-200 text-sm">
                                                     {word}
                                                 </span>
@@ -248,7 +257,8 @@ export default function Grammar() {
                                         📝 ตัวอย่างประโยค
                                     </h3>
                                     <div className="grid gap-3">
-                                        {detail.examples?.map((ex, i) => (
+                                        {/* [Fix] กำหนด Type ให้ ex และ i */}
+                                        {detail.examples?.map((ex: string, i: number) => (
                                             <div key={i} className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex gap-3 items-start">
                                                 <div className="bg-slate-100 text-slate-500 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">{i + 1}</div>
                                                 <p className="text-slate-700" dangerouslySetInnerHTML={{ __html: ex.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-indigo-600 bg-indigo-50 px-1 rounded">$1</span>') }} />
