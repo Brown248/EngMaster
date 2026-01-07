@@ -45,9 +45,38 @@ export interface GrammarTopic {
   id: string;
   title: string;
   icon: string;
-  // [Fix] เพิ่มสี lime และ violet เข้าไปในรายการ
   color: 'green' | 'amber' | 'indigo' | 'blue' | 'pink' | 'purple' | 'orange' | 'teal' | 'cyan' | 'slate' | 'fuchsia' | 'lime' | 'red' | 'violet';
   details: GrammarDetail;
+}
+
+// --- Vocabulary Types (Updated) ---
+export interface VocabWord {
+  id: number | string;
+  word: string;
+  meaning: string;
+  partOfSpeech?: string;
+  example?: string;
+  synonyms?: string[];
+  // [Fix] เพิ่ม property เหล่านี้ให้เป็น optional เพื่อรองรับข้อมูลจากไฟล์ย่อย
+  category?: string;
+  topic?: string;
+  level?: string;
+  usage?: string;
+}
+
+export interface SubCategory {
+  id: string;
+  title: string; // ใช้ title ให้ตรงกับ Data
+  words: VocabWord[];
+}
+
+export interface MainCategory {
+  id: string;
+  title: string;
+  // [Fix] เปลี่ยนเป็น any เพื่อรองรับ LucideIcon object โดยไม่ต้อง strict มากเกินไป
+  icon: any; 
+  color: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink' | 'cyan' | 'teal' | 'red' | 'amber' | 'fuchsia' | 'lime' | 'violet';
+  subCategories: SubCategory[];
 }
 
 // --- Quiz Types ---

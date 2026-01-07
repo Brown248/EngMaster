@@ -1,59 +1,27 @@
 import { VocabWord } from '../../../types';
 
-export const grammarWords: VocabWord[] = [
-  // --- Conjunctions (คำเชื่อม) ---
-  { word: "Although", meaning: "ถึงแม้ว่า", partOfSpeech: "conj.", example: "Although it rained, we went out.", category: "Academic", level: "Intermediate", usage: "Conversation" },
-  { word: "Because", meaning: "เพราะว่า", partOfSpeech: "conj.", example: "I stayed home because I was sick.", category: "General", level: "Beginner", usage: "Conversation" },
-  { word: "Consequently", meaning: "ดังนั้น/ส่งผลให้", partOfSpeech: "adv.", example: "He missed the bus; consequently, he was late.", category: "Academic", level: "Advanced", usage: "Work" },
-  { word: "Despite", meaning: "ทั้งๆ ที่", partOfSpeech: "prep.", example: "Despite the rain, we played.", category: "Academic", level: "Advanced", usage: "Conversation" },
-  { word: "Furthermore", meaning: "ยิ่งไปกว่านั้น", partOfSpeech: "adv.", example: "Furthermore, it is cheap.", category: "Academic", level: "Advanced", usage: "Work" },
-  { word: "However", meaning: "อย่างไรก็ตาม", partOfSpeech: "adv.", example: "I like him; however, I don't trust him.", category: "Academic", level: "Intermediate", usage: "Conversation" },
-  { word: "Instead", meaning: "แทนที่", partOfSpeech: "adv.", example: "Drink water instead of soda.", category: "General", level: "Intermediate", usage: "Daily Life" },
-  { word: "Meanwhile", meaning: "ในขณะเดียวกัน", partOfSpeech: "adv.", example: "Cook the rice; meanwhile, chop the veggies.", category: "General", level: "Intermediate", usage: "Daily Life" },
-  { word: "Moreover", meaning: "ยิ่งไปกว่านั้น", partOfSpeech: "adv.", example: "The house is big; moreover, it's new.", category: "Academic", level: "Advanced", usage: "Work" },
-  { word: "Nevertheless", meaning: "อย่างไรก็ตาม", partOfSpeech: "adv.", example: "It was hard; nevertheless, we finished.", category: "Academic", level: "Advanced", usage: "Work" },
-  { word: "Otherwise", meaning: "มิฉะนั้น", partOfSpeech: "adv.", example: "Hurry up, otherwise you'll be late.", category: "General", level: "Intermediate", usage: "Conversation" },
-  { word: "Since", meaning: "เนื่องจาก/ตั้งแต่", partOfSpeech: "conj.", example: "Since you are here, help me.", category: "General", level: "Intermediate", usage: "Conversation" },
-  { word: "Therefore", meaning: "ดังนั้น", partOfSpeech: "adv.", example: "He is sick; therefore, he is absent.", category: "Academic", level: "Intermediate", usage: "Work" },
-  { word: "Unless", meaning: "เว้นแต่", partOfSpeech: "conj.", example: "Don't go unless I call.", category: "General", level: "Intermediate", usage: "Conversation" },
-  { word: "Whereas", meaning: "ในทางตรงกันข้าม", partOfSpeech: "conj.", example: "He is rich, whereas she is poor.", category: "Academic", level: "Advanced", usage: "Conversation" },
-  { word: "While", meaning: "ในขณะที่", partOfSpeech: "conj.", example: "While I was sleeping, the phone rang.", category: "General", level: "Beginner", usage: "Conversation" },
-  { word: "Yet", meaning: "แต่/ยัง", partOfSpeech: "conj.", example: "It is small, yet comfortable.", category: "General", level: "Intermediate", usage: "Conversation" },
-
-  // --- Prepositions (คำบุพบท) ---
-  { word: "About", meaning: "เกี่ยวกับ", partOfSpeech: "prep.", example: "Talk about work.", category: "General", level: "Beginner", usage: "Conversation" },
-  { word: "Above", meaning: "เหนือ", partOfSpeech: "prep.", example: "Above the clouds.", category: "General", level: "Beginner", usage: "Daily Life" },
-  { word: "Against", meaning: "ต่อต้าน/พิง", partOfSpeech: "prep.", example: "Lean against the wall.", category: "General", level: "Intermediate", usage: "Daily Life" },
-  { word: "Among", meaning: "ท่ามกลาง", partOfSpeech: "prep.", example: "Among friends.", category: "General", level: "Intermediate", usage: "Daily Life" },
-  { word: "Around", meaning: "รอบๆ", partOfSpeech: "prep.", example: "Walk around the park.", category: "General", level: "Beginner", usage: "Daily Life" },
-  { word: "Before", meaning: "ก่อน", partOfSpeech: "prep.", example: "Before noon.", category: "General", level: "Beginner", usage: "Daily Life" },
-  { word: "Behind", meaning: "ข้างหลัง", partOfSpeech: "prep.", example: "Behind the door.", category: "General", level: "Beginner", usage: "Daily Life" },
-  { word: "Below", meaning: "ข้างล่าง", partOfSpeech: "prep.", example: "Below sea level.", category: "General", level: "Intermediate", usage: "Daily Life" },
-  { word: "Beneath", meaning: "ภายใต้", partOfSpeech: "prep.", example: "Beneath the surface.", category: "Academic", level: "Advanced", usage: "Daily Life" },
-  { word: "Beside", meaning: "ข้างๆ", partOfSpeech: "prep.", example: "Sit beside me.", category: "General", level: "Intermediate", usage: "Daily Life" },
-  { word: "Between", meaning: "ระหว่าง (สองสิ่ง)", partOfSpeech: "prep.", example: "Between you and me.", category: "General", level: "Beginner", usage: "Daily Life" },
-  { word: "Beyond", meaning: "เหนือกว่า/ไกลออกไป", partOfSpeech: "prep.", example: "Beyond the horizon.", category: "Academic", level: "Advanced", usage: "Daily Life" },
-  { word: "During", meaning: "ระหว่าง (เวลา)", partOfSpeech: "prep.", example: "During the meeting.", category: "General", level: "Beginner", usage: "Work" },
-  { word: "Except", meaning: "ยกเว้น", partOfSpeech: "prep.", example: "Everyone except John.", category: "General", level: "Intermediate", usage: "Daily Life" },
-  { word: "Inside", meaning: "ข้างใน", partOfSpeech: "prep.", example: "Inside the box.", category: "General", level: "Beginner", usage: "Daily Life" },
-  { word: "Instead of", meaning: "แทนที่", partOfSpeech: "prep.", example: "Tea instead of coffee.", category: "General", level: "Intermediate", usage: "Shopping" },
-  { word: "Through", meaning: "ผ่าน", partOfSpeech: "prep.", example: "Walk through the door.", category: "General", level: "Intermediate", usage: "Daily Life" },
-  { word: "Throughout", meaning: "ตลอด/ทั่ว", partOfSpeech: "prep.", example: "Throughout the year.", category: "General", level: "Intermediate", usage: "Daily Life" },
-  { word: "Towards", meaning: "ไปยัง", partOfSpeech: "prep.", example: "Walk towards the light.", category: "General", level: "Intermediate", usage: "Daily Life" },
-  { word: "Under", meaning: "ข้างใต้", partOfSpeech: "prep.", example: "Under the table.", category: "General", level: "Beginner", usage: "Daily Life" },
-  { word: "Underneath", meaning: "ภายใต้", partOfSpeech: "prep.", example: "Underneath the bed.", category: "General", level: "Intermediate", usage: "Daily Life" },
-  { word: "Within", meaning: "ภายใน", partOfSpeech: "prep.", example: "Within 24 hours.", category: "General", level: "Intermediate", usage: "Work" },
-  { word: "Without", meaning: "ปราศจาก", partOfSpeech: "prep.", example: "Coffee without sugar.", category: "General", level: "Beginner", usage: "Daily Life" },
-
-  // --- Pronouns (สรรพนาม) ---
-  { word: "Anybody", meaning: "ใครก็ได้", partOfSpeech: "pron.", example: "Is anybody home?", category: "General", level: "Beginner", usage: "Conversation" },
-  { word: "Everything", meaning: "ทุกสิ่ง", partOfSpeech: "pron.", example: "Everything is ready.", category: "General", level: "Beginner", usage: "Conversation" },
-  { word: "Myself", meaning: "ตัวฉันเอง", partOfSpeech: "pron.", example: "I did it myself.", category: "General", level: "Beginner", usage: "Conversation" },
-  { word: "Neither", meaning: "ไม่ทั้งสอง", partOfSpeech: "pron.", example: "Neither of them came.", category: "General", level: "Intermediate", usage: "Conversation" },
-  { word: "Nobody", meaning: "ไม่มีใคร", partOfSpeech: "pron.", example: "Nobody knows.", category: "General", level: "Beginner", usage: "Conversation" },
-  { word: "None", meaning: "ไม่มีเลย", partOfSpeech: "pron.", example: "None of the above.", category: "General", level: "Intermediate", usage: "Conversation" },
-  { word: "Ourselves", meaning: "ตัวพวกเราเอง", partOfSpeech: "pron.", example: "We introduced ourselves.", category: "General", level: "Intermediate", usage: "Conversation" },
-  { word: "Someone", meaning: "บางคน", partOfSpeech: "pron.", example: "Someone called you.", category: "General", level: "Beginner", usage: "Conversation" },
-  { word: "Themselves", meaning: "ตัวพวกเขาเอง", partOfSpeech: "pron.", example: "They enjoyed themselves.", category: "General", level: "Intermediate", usage: "Conversation" },
-  { word: "Whose", meaning: "ของใคร", partOfSpeech: "pron.", example: "Whose bag is this?", category: "General", level: "Beginner", usage: "Conversation" }
+export const vocab_grammar: VocabWord[] = [
+  // Nouns
+  { id: 'g1', word: "Beauty", meaning: "ความงาม", partOfSpeech: "n.", example: "Natural beauty.", category: "Grammar" },
+  { id: 'g2', word: "Decision", meaning: "การตัดสินใจ", partOfSpeech: "n.", example: "Make a decision.", category: "Grammar" },
+  
+  // Verbs
+  { id: 'g3', word: "Analyze", meaning: "วิเคราะห์", partOfSpeech: "v.", example: "Analyze the data.", category: "Grammar" },
+  { id: 'g4', word: "Develop", meaning: "พัฒนา", partOfSpeech: "v.", example: "Develop a plan.", category: "Grammar" },
+  
+  // Adjectives
+  { id: 'g5', word: "Creative", meaning: "สร้างสรรค์", partOfSpeech: "adj.", example: "Creative idea.", category: "Grammar" },
+  { id: 'g6', word: "Efficient", meaning: "มีประสิทธิภาพ", partOfSpeech: "adj.", example: "Efficient method.", category: "Grammar" },
+  
+  // Adverbs
+  { id: 'g7', word: "Carefully", meaning: "อย่างระมัดระวัง", partOfSpeech: "adv.", example: "Drive carefully.", category: "Grammar" },
+  { id: 'g8', word: "Frequently", meaning: "บ่อยๆ", partOfSpeech: "adv.", example: "Visit frequently.", category: "Grammar" },
+  
+  // Prepositions
+  { id: 'g9', word: "Against", meaning: "ต่อต้าน/พิง", partOfSpeech: "prep.", example: "Lean against the wall.", category: "Grammar" },
+  { id: 'g10', word: "Beyond", meaning: "เหนือกว่า/ถัดไป", partOfSpeech: "prep.", example: "Beyond the horizon.", category: "Grammar" },
+  
+  // Conjunctions
+  { id: 'g11', word: "Although", meaning: "ถึงแม้ว่า", partOfSpeech: "conj.", example: "Although it rained...", category: "Grammar" },
+  { id: 'g12', word: "Unless", meaning: "เว้นแต่", partOfSpeech: "conj.", example: "Unless you study...", category: "Grammar" }
 ];

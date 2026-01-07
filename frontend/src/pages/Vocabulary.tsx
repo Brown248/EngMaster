@@ -1,281 +1,263 @@
 // frontend/src/pages/Vocabulary.tsx
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, XCircle, Layers } from 'lucide-react';
-// ✅ แก้ไข Path ให้ตรงกับโฟลเดอร์จริง (vocab_parts)
-import { vocabularyData, VOCAB_CATEGORIES } from '../data/vocab_parts/vocabularyData';
-import AdBanner from '../components/AdBanner';
+import { Search, Volume2, Bookmark, BookmarkCheck, ChevronRight, X } from 'lucide-react';
+// [Fix] Import Types ที่เพิ่มเข้ามา
+import { VOCAB_CATEGORIES } from '../data/vocab_parts/vocabularyData';
+import { MainCategory, SubCategory, VocabWord } from '../types'; 
 
 export default function Vocabulary() {
-  const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  const [activeGroup, setActiveGroup] = useState<string>('All'); 
-  const [activeSubCategory, setActiveSubCategory] = useState<string | null>(null);
+  const [activeGroup, setActiveGroup] = useState<string>(VOCAB_CATEGORIES[0].id);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [savedWords, setSavedWords] = useState<number[]>([]);
+  const [selectedWord, setSelectedWord] = useState<VocabWord | null>(null);
 
-  const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
+  // Load saved words
+  useEffect(() => {
+    const saved = localStorage.getItem('engmaster_saved_vocab');
+    if (saved) {
+      setSavedWords(JSON.parse(saved));
+    }
+  }, []);
 
-  const filteredVocab = useMemo(() => {
-    return vocabularyData.filter((item) => {
-      let matchesCategory = true;
-      if (activeGroup !== 'All' && activeSubCategory) {
-        if (activeGroup === 'Topic') matchesCategory = item.topic === activeSubCategory;
-        else if (activeGroup === 'POS') matchesCategory = item.partOfSpeech === activeSubCategory;
-        else if (activeGroup === 'Usage') matchesCategory = item.usage === activeSubCategory;
-        else if (activeGroup === 'Level') matchesCategory = item.level === activeSubCategory;
-        else if (activeGroup === 'Special') matchesCategory = item.special === activeSubCategory;
-      }
+  const toggleSave = (id: number | string) => {
+    // Convert id to number if possible for consistent storage
+    const numId = Number(id);
+    let newSaved;
+    if (savedWords.includes(numId)) {
+      newSaved = savedWords.filter(wId => wId !== numId);
+    } else {
+      newSaved = [...savedWords, numId];
+    }
+    setSavedWords(newSaved);
+    localStorage.setItem('engmaster_saved_vocab', JSON.stringify(newSaved));
+  };
 
-      const matchesLetter = selectedLetter ? item.word.charAt(0).toUpperCase() === selectedLetter : true;
-      
-      const matchesSearch = searchTerm
-        ? item.word.toLowerCase().includes(searchTerm.toLowerCase()) || 
-          item.meaning.toLowerCase().includes(searchTerm.toLowerCase())
-        : true;
+  const speak = (text: string) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    window.speechSynthesis.speak(utterance);
+  };
 
-      return matchesCategory && matchesLetter && matchesSearch;
+  // Helper to flatten words for searching
+  const getAllWords = () => {
+    let all: VocabWord[] = [];
+    VOCAB_CATEGORIES.forEach(cat => {
+      cat.subCategories.forEach(sub => {
+        all = [...all, ...sub.words];
+      });
     });
-  }, [selectedLetter, searchTerm, activeGroup, activeSubCategory]);
-
-  const clearFilters = () => {
-    setSelectedLetter(null);
-    setSearchTerm('');
-    setActiveGroup('All');
-    setActiveSubCategory(null);
+    return all;
   };
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.03 } }
-  };
-
-  const itemAnim = {
-    hidden: { opacity: 0, y: 20, scale: 0.8 },
-    show: { opacity: 1, y: 0, scale: 1 }
-  };
+  const filteredWords = searchQuery 
+    ? getAllWords().filter(w => w.word.toLowerCase().includes(searchQuery.toLowerCase()) || w.meaning.includes(searchQuery))
+    : [];
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.4 }}
-      className="space-y-8 pb-12"
-    >
-      <div className="flex items-center gap-5">
-        <motion.div 
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 200, damping: 15 }}
-          className="w-16 h-16 bg-orange-100 text-orange-500 rounded-3xl flex items-center justify-center text-4xl shadow-md rotate-3"
-        >
-          📚
-        </motion.div>
-        <div>
-          <h2 className="text-4xl font-black text-slate-800 tracking-tight">Vocabulary Bank</h2>
-          <p className="text-slate-500 text-lg font-medium">
-            คลังคำศัพท์แบ่งตามหมวดหมู่ เรียนรู้ง่าย จำแม่น
+    <div className="space-y-8 pb-20">
+      {/* Header Section */}
+      <div className="bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-[2.5rem] p-8 md:p-12 text-white shadow-xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+        <div className="relative z-10">
+          <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">Vocabulary Bank</h1>
+          <p className="text-violet-100 text-lg md:text-xl font-medium max-w-2xl">
+            คลังคำศัพท์ที่จัดหมวดหมู่ไว้อย่างดี ช่วยให้คุณจำศัพท์ได้ง่ายและนำไปใช้ได้จริง
           </p>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-lg shadow-orange-100/50 border border-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 -z-10" />
-
-        <div className="space-y-6 mb-8">
-            <div className="flex flex-wrap gap-2">
-                <button
-                    onClick={() => { setActiveGroup('All'); setActiveSubCategory(null); setSelectedLetter(null); }}
-                    className={`px-5 py-2.5 rounded-xl font-bold transition-all border
-                        ${activeGroup === 'All' 
-                            ? 'bg-orange-500 text-white border-orange-600 shadow-orange-200 shadow-md' 
-                            : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50'}`}
-                >
-                    <Layers size={18} className="inline mr-2 -mt-1" />
-                    รวมทั้งหมด
-                </button>
-                {VOCAB_CATEGORIES.map((cat) => {
-                    const isActive = activeGroup === cat.id;
-                    const Icon = cat.icon;
-                    return (
-                        <button
-                            key={cat.id}
-                            onClick={() => { setActiveGroup(cat.id); setActiveSubCategory(null); setSelectedLetter(null); }}
-                            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold transition-all border
-                                ${isActive 
-                                    ? 'bg-white text-orange-600 border-orange-200 ring-2 ring-orange-100' 
-                                    : 'bg-slate-50 text-slate-500 border-slate-100 hover:bg-white hover:border-slate-300'
-                                }`}
-                        >
-                            <Icon size={18} />
-                            {cat.label}
-                        </button>
-                    );
-                })}
-            </div>
-
-            <AnimatePresence>
-                {activeGroup !== 'All' && (
-                    <motion.div 
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="overflow-hidden"
-                    >
-                        <div className="flex flex-wrap gap-2 p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                            <span className="text-sm font-bold text-slate-400 uppercase tracking-wider mr-2 py-1.5">เลือกหัวข้อย่อย:</span>
-                            {VOCAB_CATEGORIES.find(c => c.id === activeGroup)?.subCategories.map((sub) => (
-                                <button
-                                    key={sub.id}
-                                    onClick={() => setActiveSubCategory(sub.id === activeSubCategory ? null : sub.id)}
-                                    className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-all border
-                                        ${activeSubCategory === sub.id
-                                            ? 'bg-orange-500 text-white border-orange-600 shadow-sm'
-                                            : 'bg-white text-slate-600 border-slate-200 hover:border-orange-300'
-                                        }`}
-                                >
-                                    {sub.label}
-                                </button>
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
-            <div className="flex flex-col md:flex-row gap-4">
-                <div className="relative flex-1 group">
-                    <input 
-                        type="text" 
-                        value={searchTerm}
-                        onChange={(e) => {
-                            setSearchTerm(e.target.value);
-                            if(e.target.value) {
-                                setSelectedLetter(null);
-                            }
-                        }}
-                        placeholder="🔍 ค้นหาคำศัพท์ (เช่น abundant, ผลลัพธ์)..." 
-                        className="w-full pl-14 pr-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:outline-none focus:border-orange-400 focus:bg-white focus:shadow-lg transition-all text-lg font-medium text-slate-700 placeholder:text-slate-400"
-                    />
-                    <div className="absolute left-5 top-1/2 -translate-y-1/2 p-1.5 bg-white rounded-lg shadow-sm border border-slate-100">
-                        <Search size={20} className="text-orange-400" />
-                    </div>
-                    {searchTerm && (
-                        <button onClick={() => setSearchTerm('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
-                            <XCircle size={20} />
-                        </button>
-                    )}
-                </div>
-                
-                {(selectedLetter || searchTerm || activeGroup !== 'All') && (
-                    <button 
-                        onClick={clearFilters}
-                        className="px-6 py-3 rounded-2xl font-bold text-slate-500 hover:bg-slate-100 transition-colors border-2 border-transparent hover:border-slate-200"
-                    >
-                        ล้างค่าทั้งหมด
-                    </button>
-                )}
-            </div>
-        </div>
-
-        <AdBanner className="mb-8" />
-
-        {!searchTerm && (
-            <motion.div 
-                variants={container}
-                initial="hidden"
-                animate="show"
-                className="grid grid-cols-4 md:grid-cols-7 lg:grid-cols-9 gap-2 md:gap-3 mb-10"
-            >
-            {letters.map((letter) => {
-                const isSelected = selectedLetter === letter;
-                const hasWords = vocabularyData.some(item => {
-                    let matchesCategory = true;
-                    if (activeGroup !== 'All' && activeSubCategory) {
-                        if (activeGroup === 'Topic') matchesCategory = item.topic === activeSubCategory;
-                        else if (activeGroup === 'POS') matchesCategory = item.partOfSpeech === activeSubCategory;
-                        else if (activeGroup === 'Usage') matchesCategory = item.usage === activeSubCategory;
-                        else if (activeGroup === 'Level') matchesCategory = item.level === activeSubCategory;
-                        else if (activeGroup === 'Special') matchesCategory = item.special === activeSubCategory;
-                    }
-                    return matchesCategory && item.word.charAt(0).toUpperCase() === letter;
-                });
-
-                return (
-                    <motion.button 
-                        key={letter}
-                        variants={itemAnim}
-                        disabled={!hasWords}
-                        onClick={() => setSelectedLetter(isSelected ? null : letter)}
-                        whileHover={hasWords ? { y: -3 } : {}}
-                        whileTap={hasWords ? { scale: 0.9 } : {}}
-                        className={`aspect-square rounded-xl border-b-[4px] active:border-b-0 active:translate-y-[4px] transition-all flex items-center justify-center text-xl font-black shadow-sm
-                            ${isSelected 
-                                ? 'bg-orange-500 text-white border-orange-700 shadow-orange-200' 
-                                : hasWords
-                                    ? 'bg-white text-slate-600 border-slate-200 hover:border-orange-200 hover:text-orange-500'
-                                    : 'bg-slate-50 text-slate-300 border-slate-100 cursor-not-allowed'
-                            }`}
-                    >
-                        {letter}
-                    </motion.button>
-                );
-            })}
-            </motion.div>
-        )}
-
-        <div className="space-y-4">
-            <h3 className="text-xl font-bold text-slate-700 flex items-center gap-2 mb-4">
-                {selectedLetter ? `หมวดอักษร "${selectedLetter}"` : searchTerm ? 'ผลการค้นหา' : activeSubCategory ? `รายการ: ${activeSubCategory}` : 'รายการคำศัพท์ทั้งหมด'}
-                <span className="bg-slate-100 text-slate-500 px-2 py-0.5 rounded-md text-sm">{filteredVocab.length} คำ</span>
-            </h3>
-
-            {filteredVocab.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {filteredVocab.map((item, idx) => {
-                        return (
-                            <motion.div 
-                                key={`${item.word}-${idx}`}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: idx * 0.05 }}
-                                whileHover={{ scale: 1.01 }}
-                                className="bg-slate-50 border border-slate-100 p-5 rounded-2xl hover:bg-white hover:shadow-md hover:border-orange-100 transition-all group relative overflow-hidden"
-                            >
-                                <div className="absolute top-0 right-0 w-20 h-20 bg-orange-100 rounded-full blur-2xl opacity-0 group-hover:opacity-50 transition-opacity" />
-                                
-                                <div className="flex justify-between items-start mb-2 relative z-10">
-                                    <div className="flex items-baseline gap-2">
-                                        <h4 className="text-2xl font-black text-slate-800">{item.word}</h4>
-                                        <span className="text-sm font-bold text-orange-500 italic">{item.partOfSpeech}</span>
-                                    </div>
-                                </div>
-                                
-                                <div className="relative z-10">
-                                    <p className="text-lg font-bold text-slate-600 mb-2">{item.meaning}</p>
-                                    <div className="bg-white/60 p-3 rounded-xl border border-slate-200/50 mb-3">
-                                        <p className="text-slate-500 text-sm italic">"{item.example}"</p>
-                                    </div>
-                                    
-                                    <div className="flex flex-wrap gap-2">
-                                        {item.topic && <span className="text-[10px] uppercase font-bold px-2 py-1 bg-blue-50 text-blue-600 rounded-md border border-blue-100">{item.topic}</span>}
-                                        {item.level && <span className="text-[10px] uppercase font-bold px-2 py-1 bg-purple-50 text-purple-600 rounded-md border border-purple-100">{item.level}</span>}
-                                        {item.usage && <span className="text-[10px] uppercase font-bold px-2 py-1 bg-green-50 text-green-600 rounded-md border border-green-100">{item.usage}</span>}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-                </div>
-            ) : (
-                <div className="text-center py-12 text-slate-400 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200">
-                    <p className="text-lg font-medium">
-                        ไม่พบคำศัพท์ในเงื่อนไขที่เลือก
-                    </p>
-                    <button onClick={clearFilters} className="text-orange-500 font-bold hover:underline mt-2">ล้างตัวกรองทั้งหมด</button>
-                </div>
+          
+          <div className="mt-8 relative max-w-xl">
+            <input 
+              type="text" 
+              placeholder="ค้นหาคำศัพท์ (เช่น business, เดินทาง...)" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-6 py-4 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-white/70 focus:outline-none focus:bg-white focus:text-violet-900 focus:placeholder-violet-400 transition-all text-lg shadow-lg"
+            />
+            <Search className={`absolute left-4 top-1/2 -translate-y-1/2 ${searchQuery ? 'text-violet-500' : 'text-white/70'}`} size={24} />
+            {searchQuery && (
+               <button onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-violet-400 hover:text-violet-600">
+                 <X size={20}/>
+               </button>
             )}
+          </div>
         </div>
       </div>
+
+      {/* Main Content */}
+      <div className="min-h-[600px]">
+        {searchQuery ? (
+          <div className="space-y-6">
+             <h3 className="text-xl font-bold text-slate-700 flex items-center gap-2">
+               <Search size={20}/> ผลการค้นหา: {filteredWords.length} คำ
+             </h3>
+             {filteredWords.length > 0 ? (
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                 {filteredWords.map((word) => (
+                   <WordCard key={word.id} word={word} isSaved={savedWords.includes(Number(word.id))} onSave={() => toggleSave(word.id)} onSpeak={() => speak(word.word)} onClick={() => setSelectedWord(word)} />
+                 ))}
+               </div>
+             ) : (
+               <div className="text-center py-20 text-slate-400">
+                 <p className="text-xl">ไม่พบคำศัพท์ที่คุณค้นหา</p>
+               </div>
+             )}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            {/* Sidebar Categories */}
+            <div className="lg:col-span-1 space-y-3">
+              <h3 className="text-lg font-bold text-slate-400 uppercase tracking-wider mb-4 px-2">Categories</h3>
+              {VOCAB_CATEGORIES.map((cat: MainCategory) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveGroup(cat.id)}
+                  className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all font-bold text-left group border-2
+                    ${activeGroup === cat.id 
+                      ? `bg-${cat.color}-50 border-${cat.color}-200 text-${cat.color}-700 shadow-sm` 
+                      : 'bg-white border-transparent hover:bg-slate-50 text-slate-600'
+                    }`}
+                >
+                  <span className={`text-2xl group-hover:scale-110 transition-transform`}>{cat.icon}</span>
+                  <span className="flex-1">{cat.title}</span>
+                  {activeGroup === cat.id && <ChevronRight size={18} className={`text-${cat.color}-500`} />}
+                </button>
+              ))}
+            </div>
+
+            {/* Content Area */}
+            <div className="lg:col-span-3 space-y-8">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeGroup}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.2 }}
+                >
+                   {/* [Fix] ใส่ Type ให้ sub: SubCategory */}
+                   {VOCAB_CATEGORIES.find((c: MainCategory) => c.id === activeGroup)?.subCategories.map((sub: SubCategory) => (
+                     <div key={sub.id} className="mb-10">
+                        <div className="flex items-center gap-3 mb-6">
+                          <div className="h-8 w-1.5 bg-slate-800 rounded-full"></div>
+                          <h2 className="text-2xl font-black text-slate-800">{sub.title}</h2>
+                          <span className="text-sm font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-md">{sub.words.length} words</span>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {sub.words.map((word) => (
+                            <WordCard 
+                              key={word.id} 
+                              word={word} 
+                              isSaved={savedWords.includes(Number(word.id))} 
+                              onSave={() => toggleSave(word.id)} 
+                              onSpeak={() => speak(word.word)}
+                              onClick={() => setSelectedWord(word)}
+                            />
+                          ))}
+                        </div>
+                     </div>
+                   ))}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Word Detail Modal */}
+      <AnimatePresence>
+        {selectedWord && (
+          <motion.div 
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedWord(null)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
+              className="bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl relative"
+              onClick={e => e.stopPropagation()}
+            >
+              <button onClick={() => setSelectedWord(null)} className="absolute top-6 right-6 text-slate-400 hover:text-slate-600">
+                <X size={24} />
+              </button>
+
+              <div className="text-center mb-8">
+                <h2 className="text-4xl font-black text-slate-800 mb-2">{selectedWord.word}</h2>
+                <div className="flex items-center justify-center gap-2 text-slate-500 font-medium">
+                  {selectedWord.partOfSpeech && <span className="italic">{selectedWord.partOfSpeech}</span>}
+                  <span>•</span>
+                  <span className="text-lg">{selectedWord.meaning}</span>
+                </div>
+              </div>
+
+              <div className="bg-slate-50 rounded-2xl p-6 mb-8 border border-slate-100">
+                <div className="flex gap-4">
+                   <span className="text-4xl">💡</span>
+                   <div>
+                     <p className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">Example</p>
+                     <p className="text-slate-700 text-lg leading-relaxed italic">"{selectedWord.example}"</p>
+                   </div>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <button 
+                  onClick={() => speak(selectedWord.word)}
+                  className="flex-1 py-3 bg-violet-600 text-white rounded-xl font-bold hover:bg-violet-700 transition-colors flex items-center justify-center gap-2"
+                >
+                  <Volume2 size={20} /> ฟังเสียง
+                </button>
+                <button 
+                  onClick={() => toggleSave(selectedWord.id)}
+                  className={`flex-1 py-3 border-2 rounded-xl font-bold transition-colors flex items-center justify-center gap-2
+                    ${savedWords.includes(Number(selectedWord.id)) 
+                      ? 'border-green-500 text-green-600 bg-green-50' 
+                      : 'border-slate-200 text-slate-600 hover:border-slate-300'}`}
+                >
+                  {savedWords.includes(Number(selectedWord.id)) ? <><BookmarkCheck size={20}/> Saved</> : <><Bookmark size={20}/> Save</>}
+                </button>
+              </div>
+
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// Sub-component for clean code
+function WordCard({ word, isSaved, onSave, onSpeak, onClick }: { word: VocabWord; isSaved: boolean; onSave: (e: any) => void; onSpeak: (e: any) => void; onClick: () => void }) {
+  return (
+    <motion.div 
+      whileHover={{ y: -4 }}
+      onClick={onClick}
+      className="bg-white p-5 rounded-2xl border border-slate-100 hover:border-violet-200 shadow-sm hover:shadow-lg transition-all cursor-pointer group relative"
+    >
+      <div className="flex justify-between items-start mb-2">
+        <h4 className="text-xl font-bold text-slate-800 group-hover:text-violet-700 transition-colors">{word.word}</h4>
+        <div className="flex gap-1">
+          <button 
+            onClick={(e) => { e.stopPropagation(); onSpeak(e); }} 
+            className="p-2 text-slate-300 hover:text-violet-500 hover:bg-violet-50 rounded-full transition-all"
+          >
+            <Volume2 size={18} />
+          </button>
+          <button 
+            onClick={(e) => { e.stopPropagation(); onSave(e); }} 
+            className={`p-2 rounded-full transition-all ${isSaved ? 'text-green-500 bg-green-50' : 'text-slate-300 hover:text-slate-500 hover:bg-slate-50'}`}
+          >
+            {isSaved ? <BookmarkCheck size={18} /> : <Bookmark size={18} />}
+          </button>
+        </div>
+      </div>
+      <p className="text-slate-500 font-medium mb-1">{word.meaning}</p>
+      {word.example && (
+        <p className="text-xs text-slate-400 line-clamp-1 italic mt-2 border-t border-slate-50 pt-2">
+          "{word.example}"
+        </p>
+      )}
     </motion.div>
   );
 }
