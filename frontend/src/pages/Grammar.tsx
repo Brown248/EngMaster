@@ -1,8 +1,9 @@
+// frontend/src/pages/Grammar.tsx
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ArrowLeft, PlayCircle, BookOpen, Trophy } from 'lucide-react';
+import { ChevronRight, ArrowLeft, PlayCircle, BookOpen } from 'lucide-react';
 import { useNavigate, useParams, Link, useSearchParams } from 'react-router-dom';
-import { grammarTopics } from '../data/core/grammarData';
+import { grammarTopics } from '../data/grammarData';
 import AdBanner from '../components/AdBanner';
 
 export default function Grammar() {
@@ -29,6 +30,7 @@ export default function Grammar() {
   }, [topicId, selectedSubtopicId, selectedTypeName]);
 
   const startQuiz = (mainTopicId: string, subTopicId?: string) => {
+    // Logic การนำทางไปยัง Quiz ของแต่ละหัวข้อ
     if (mainTopicId === 'tenses') {
         navigate('/grammar/quiz');
     } else if (mainTopicId === 'parts-of-speech') {
@@ -47,11 +49,9 @@ export default function Grammar() {
         navigate('/grammar/modal-verbs-quiz', { state: { subTopicId: subTopicId } });
     } else if (mainTopicId === 'gerund-infinitive') {
         navigate('/grammar/gerund-infinitive-quiz', { state: { subTopicId: subTopicId } });
-    } 
-    // ✅ Logic สำหรับหัวข้อใหม่
-    else if (mainTopicId === 'reported-speech') {
+    } else if (mainTopicId === 'reported-speech') { // [New] หัวข้อที่ 10
         navigate('/grammar/reported-speech-quiz', { state: { subTopicId: subTopicId } });
-    } else if (mainTopicId === 'question-forms') {
+    } else if (mainTopicId === 'question-forms') { // [New] หัวข้อที่ 11
         navigate('/grammar/question-forms-quiz', { state: { subTopicId: subTopicId } });
     }
   };
@@ -112,32 +112,6 @@ export default function Grammar() {
                 </Link>
               ))}
             </div>
-
-            {/* ✅ ปุ่ม Ultimate Challenge (Mixed Quiz) */}
-            <div className="mt-12 mb-8">
-              <Link to="/grammar/mixed-quiz">
-                <motion.div 
-                   whileHover={{ scale: 1.02 }}
-                   className="bg-gradient-to-r from-amber-500 to-orange-600 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden group cursor-pointer"
-                >
-                    <div className="relative z-10 flex items-center justify-between">
-                        <div>
-                            <h3 className="text-3xl font-black mb-2 flex items-center gap-3">
-                                <Trophy size={32} className="text-yellow-200" />
-                                Ultimate Challenge
-                            </h3>
-                            <p className="text-white/90 text-lg font-medium">ทดสอบวัดระดับรวมทุกหัวข้อ 30 ข้อ (Tenses, Matching, etc.)</p>
-                        </div>
-                        <div className="bg-white/20 p-4 rounded-full backdrop-blur-sm group-hover:bg-white/30 transition-colors">
-                            <PlayCircle size={40} />
-                        </div>
-                    </div>
-                    {/* Decorative circles */}
-                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all"/>
-                </motion.div>
-              </Link>
-            </div>
-
           </motion.div>
         ) : (
           
@@ -192,11 +166,7 @@ export default function Grammar() {
                         ))}
                     </div>
                     
-                    <div className="mt-8 mb-4">
-                        <AdBanner />
-                    </div>
-
-                    <div className="text-center">
+                    <div className="mt-8 text-center">
                         <button onClick={() => startQuiz(activeTopic!.id)} className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-bold text-xl hover:shadow-xl hover:scale-105 transition-all">
                             <PlayCircle size={24} /> เริ่มทำแบบทดสอบ
                         </button>
@@ -227,9 +197,6 @@ export default function Grammar() {
                     </div>
 
                     <div className="mt-10 pt-8 border-t border-slate-100 text-center">
-                        <div className="mb-8">
-                            <AdBanner />
-                        </div>
                         <button 
                             onClick={() => startQuiz(activeTopic!.id, currentSubtopicData.id)}
                             className="inline-flex items-center gap-2 px-8 py-3 bg-slate-800 text-white rounded-xl font-bold text-lg hover:bg-slate-900 hover:shadow-lg transition-all"
