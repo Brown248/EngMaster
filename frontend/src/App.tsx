@@ -38,19 +38,6 @@ function App() {
             <Route path="/grammar" element={<Grammar />} />
             <Route path="/grammar/:topicId" element={<Grammar />} />
             
-            {/* Quizzes */}
-            <Route path="/grammar/quiz" element={<TensesQuiz />} />
-            <Route path="/grammar/parts-of-speech-quiz" element={<PartsOfSpeechQuiz />} />
-            <Route path="/grammar/voice-quiz" element={<VoiceQuiz />} />
-            <Route path="/grammar/mood-quiz" element={<MoodQuiz />} />
-            <Route path="/grammar/sentence-structure-quiz" element={<SentenceStructureQuiz />} />
-            <Route path="/grammar/clauses-quiz" element={<ClausesQuiz />} />
-            <Route path="/grammar/conditionals-quiz" element={<ConditionalsQuiz />} />
-            <Route path="/grammar/modal-verbs-quiz" element={<ModalVerbsQuiz />} />
-            <Route path="/grammar/gerund-infinitive-quiz" element={<GerundInfinitiveQuiz />} />
-            <Route path="/grammar/reported-speech-quiz" element={<ReportedSpeechQuiz />} /> {/* [New] Route */}
-            <Route path="/grammar/question-forms-quiz" element={<QuestionFormsQuiz />} /> {/* [New] Route */}
-
             {/* Vocabulary Section */}
             <Route path="/vocabulary" element={<Vocabulary />} />
             
