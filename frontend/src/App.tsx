@@ -8,17 +8,6 @@ import ScrollToTop from './components/ScrollToTop';
 const Home = lazy(() => import('./pages/Home'));
 const Grammar = lazy(() => import('./pages/Grammar'));
 const Vocabulary = lazy(() => import('./pages/Vocabulary'));
-const TensesQuiz = lazy(() => import('./pages/quizzes/TensesQuiz'));
-const PartsOfSpeechQuiz = lazy(() => import('./pages/quizzes/PartsOfSpeechQui'));
-const VoiceQuiz = lazy(() => import('./pages/quizzes/VoiceQuiz'));
-const MoodQuiz = lazy(() => import('./pages/quizzes/MoodQuiz'));
-const SentenceStructureQuiz = lazy(() => import('./pages/quizzes/SentenceStructureQuiz'));
-const ClausesQuiz = lazy(() => import('./pages/quizzes/ClausesQuiz'));
-const ConditionalsQuiz = lazy(() => import('./pages/quizzes/ConditionalsQuiz'));
-const ModalVerbsQuiz = lazy(() => import('./pages/quizzes/ModalVerbsQuiz'));
-const GerundInfinitiveQuiz = lazy(() => import('./pages/quizzes/GerundInfinitiveQuiz'));
-const ReportedSpeechQuiz = lazy(() => import('./pages/quizzes/ReportedSpeechQuiz')); // [New]
-const QuestionFormsQuiz = lazy(() => import('./pages/quizzes/QuestionFormsQuiz')); // [New]
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {

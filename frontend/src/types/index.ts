@@ -57,7 +57,6 @@ export interface VocabWord {
   partOfSpeech?: string;
   example?: string;
   synonyms?: string[];
-  // [Fix] เพิ่ม property เหล่านี้ให้เป็น optional เพื่อรองรับข้อมูลจากไฟล์ย่อย
   category?: string;
   topic?: string;
   level?: string;
@@ -73,28 +72,13 @@ export interface SubCategory {
 export interface MainCategory {
   id: string;
   title: string;
-  // [Fix] เปลี่ยนเป็น any เพื่อรองรับ LucideIcon object โดยไม่ต้อง strict มากเกินไป
   icon: any; 
   color: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink' | 'cyan' | 'teal' | 'red' | 'amber' | 'fuchsia' | 'lime' | 'violet';
   subCategories: SubCategory[];
-}
-
-// --- Quiz Types ---
-export type QuestionType = 'choice' | 'true-false' | 'matching' | 'reorder' | 'fill-blank';
-
-export interface QuizQuestion {
-  id: number;
-  type: QuestionType; 
-  question: string;
-  options?: string[];
-  correctAnswer: string | number | string[];
-  explanation: string;
-  tenseTopic?: string;
 }
 
 export interface TenseTopicData {
   id: string;
   name: string;
   description: string;
-  questions: QuizQuestion[];
 }
