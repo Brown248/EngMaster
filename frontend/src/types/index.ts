@@ -16,23 +16,40 @@ export interface CourseCard {
   color: 'orange' | 'pink' | 'purple' | 'blue';
 }
 
-// --- Grammar Types (Updated for Deep Dive + Vocab) ---
+// --- Grammar Types (Enhanced for Self-Learning) ---
+
+export interface CommonMistake {
+  wrong: string;
+  right: string;
+  explanation?: string;
+}
+
+export interface GrammarStructure {
+  positive: string;
+  negative?: string;
+  question?: string;
+}
+
 export interface GrammarTypeDetail {
   name: string;
   usage: string;
-  structure?: string;
+  structure?: string | GrammarStructure; // รองรับทั้งแบบข้อความเดียวและแบบแยกประเภท
   vocabulary?: string[];
   examples: string[];
+  commonMistakes?: CommonMistake[]; // [New] จุดที่มักผิด
+  tips?: string; // [New] เกร็ดความรู้
 }
 
 export interface GrammarSubtopic {
   id: string;
   name: string;
   usage?: string;
-  structure?: string;
+  structure?: string | GrammarStructure; // รองรับทั้งแบบข้อความเดียวและแบบแยกประเภท
   vocabulary?: string[];
   examples?: string[];
   types?: GrammarTypeDetail[];
+  commonMistakes?: CommonMistake[]; // [New]
+  tips?: string; // [New]
 }
 
 export interface GrammarDetail {
@@ -49,7 +66,7 @@ export interface GrammarTopic {
   details: GrammarDetail;
 }
 
-// --- Vocabulary Types (Updated) ---
+// --- Vocabulary Types ---
 export interface VocabWord {
   id: number | string;
   word: string;
@@ -65,7 +82,7 @@ export interface VocabWord {
 
 export interface SubCategory {
   id: string;
-  title: string; // ใช้ title ให้ตรงกับ Data
+  title: string;
   words: VocabWord[];
 }
 
@@ -75,10 +92,4 @@ export interface MainCategory {
   icon: any; 
   color: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink' | 'cyan' | 'teal' | 'red' | 'amber' | 'fuchsia' | 'lime' | 'violet';
   subCategories: SubCategory[];
-}
-
-export interface TenseTopicData {
-  id: string;
-  name: string;
-  description: string;
 }

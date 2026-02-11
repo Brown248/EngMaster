@@ -189,7 +189,31 @@ export default function Grammar() {
                                     </p>
                                     {detail.structure && (
                                         <div className="mt-4 p-3 bg-white rounded-lg border border-indigo-100 font-mono text-indigo-600 text-sm">
-                                            Structure: {detail.structure}
+                                            {typeof detail.structure === 'string' ? (
+                                                <span>Structure: {detail.structure}</span>
+                                            ) : (
+                                                <div className="flex flex-col gap-2">
+                                                    <div className="font-bold text-slate-500 text-xs uppercase border-b border-indigo-50 pb-1">
+                                                        Structure Forms
+                                                    </div>
+                                                    <div className="flex gap-2 items-start">
+                                                        <span className="font-bold text-teal-600 min-w-[24px] select-none">(+)</span>
+                                                        <span>{detail.structure.positive}</span>
+                                                    </div>
+                                                    {detail.structure.negative && (
+                                                        <div className="flex gap-2 items-start">
+                                                            <span className="font-bold text-rose-500 min-w-[24px] select-none">(-)</span>
+                                                            <span>{detail.structure.negative}</span>
+                                                        </div>
+                                                    )}
+                                                    {detail.structure.question && (
+                                                        <div className="flex gap-2 items-start">
+                                                            <span className="font-bold text-amber-600 min-w-[24px] select-none">(?)</span>
+                                                            <span>{detail.structure.question}</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
                                         </div>
                                     )}
                                 </div>
