@@ -2,12 +2,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Volume2, Bookmark, BookmarkCheck, ChevronRight, X } from 'lucide-react';
-// [Fix] Import Types ที่เพิ่มเข้ามา
-import { VOCAB_CATEGORIES } from '../data/vocab_parts/vocabularyData';
+// [Fix] เปลี่ยนชื่อ import ให้ตรงกับไฟล์ Data ใหม่
+import { vocabularyCategories } from '../data/vocab_parts/vocabularyData';
 import { MainCategory, SubCategory, VocabWord } from '../types'; 
 
 export default function Vocabulary() {
-  const [activeGroup, setActiveGroup] = useState<string>(VOCAB_CATEGORIES[0].id);
+  // [Fix] ใช้ vocabularyCategories แทน VOCAB_CATEGORIES
+  const [activeGroup, setActiveGroup] = useState<string>(vocabularyCategories[0].id);
   const [searchQuery, setSearchQuery] = useState('');
   const [savedWords, setSavedWords] = useState<number[]>([]);
   const [selectedWord, setSelectedWord] = useState<VocabWord | null>(null);
@@ -21,7 +22,6 @@ export default function Vocabulary() {
   }, []);
 
   const toggleSave = (id: number | string) => {
-    // Convert id to number if possible for consistent storage
     const numId = Number(id);
     let newSaved;
     if (savedWords.includes(numId)) {
@@ -42,8 +42,10 @@ export default function Vocabulary() {
   // Helper to flatten words for searching
   const getAllWords = () => {
     let all: VocabWord[] = [];
-    VOCAB_CATEGORIES.forEach(cat => {
-      cat.subCategories.forEach(sub => {
+    // [Fix] ระบุ Type (cat: MainCategory) เพื่อแก้ Error TS7006
+    vocabularyCategories.forEach((cat: MainCategory) => {
+      // [Fix] ระบุ Type (sub: SubCategory)
+      cat.subCategories.forEach((sub: SubCategory) => {
         all = [...all, ...sub.words];
       });
     });
@@ -62,13 +64,13 @@ export default function Vocabulary() {
         <div className="relative z-10">
           <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">Vocabulary Bank</h1>
           <p className="text-violet-100 text-lg md:text-xl font-medium max-w-2xl">
-            คลังคำศัพท์ที่จัดหมวดหมู่ไว้อย่างดี ช่วยให้คุณจำศัพท์ได้ง่ายและนำไปใช้ได้จริง
+            คลังคำศัพท์พื้นฐานแบ่งตามประเภทของคำ (Parts of Speech) ช่วยให้เข้าใจโครงสร้างภาษาได้ดียิ่งขึ้น
           </p>
           
           <div className="mt-8 relative max-w-xl">
             <input 
               type="text" 
-              placeholder="ค้นหาคำศัพท์ (เช่น business, เดินทาง...)" 
+              placeholder="ค้นหาคำศัพท์ (เช่น run, กิน, happy...)" 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-12 pr-6 py-4 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-white/70 focus:outline-none focus:bg-white focus:text-violet-900 focus:placeholder-violet-400 transition-all text-lg shadow-lg"
@@ -107,8 +109,9 @@ export default function Vocabulary() {
             
             {/* Sidebar Categories */}
             <div className="lg:col-span-1 space-y-3">
-              <h3 className="text-lg font-bold text-slate-400 uppercase tracking-wider mb-4 px-2">Categories</h3>
-              {VOCAB_CATEGORIES.map((cat: MainCategory) => (
+              <h3 className="text-lg font-bold text-slate-400 uppercase tracking-wider mb-4 px-2">Parts of Speech</h3>
+              {/* [Fix] ใช้ vocabularyCategories และระบุ Type */}
+              {vocabularyCategories.map((cat: MainCategory) => (
                 <button
                   key={cat.id}
                   onClick={() => setActiveGroup(cat.id)}
@@ -135,8 +138,8 @@ export default function Vocabulary() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.2 }}
                 >
-                   {/* [Fix] ใส่ Type ให้ sub: SubCategory */}
-                   {VOCAB_CATEGORIES.find((c: MainCategory) => c.id === activeGroup)?.subCategories.map((sub: SubCategory) => (
+                   {/* [Fix] ใช้ vocabularyCategories และระบุ Type */}
+                   {vocabularyCategories.find((c: MainCategory) => c.id === activeGroup)?.subCategories.map((sub: SubCategory) => (
                      <div key={sub.id} className="mb-10">
                         <div className="flex items-center gap-3 mb-6">
                           <div className="h-8 w-1.5 bg-slate-800 rounded-full"></div>

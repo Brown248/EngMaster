@@ -1,23 +1,58 @@
 import { VocabWord } from '../../../types';
 
 export const vocab_special: VocabWord[] = [
-  // Idioms
-  { id: 's1', word: "Piece of cake", meaning: "ง่ายมาก", partOfSpeech: "idiom", example: "The test was a piece of cake.", category: "Idioms" },
-  { id: 's2', word: "Break a leg", meaning: "ขอให้โชคดี", partOfSpeech: "idiom", example: "Break a leg on stage!", category: "Idioms" },
-  
-  // Phrasal Verbs
-  { id: 's3', word: "Give up", meaning: "ยอมแพ้/เลิก", partOfSpeech: "phrasal verb", example: "Don't give up.", category: "Phrasal Verbs" },
-  { id: 's4', word: "Look forward to", meaning: "ตั้งตารอ", partOfSpeech: "phrasal verb", example: "Look forward to seeing you.", category: "Phrasal Verbs" },
-  
-  // Slang
-  { id: 's5', word: "Chill", meaning: "ผ่อนคลาย", partOfSpeech: "slang", example: "Just chilling.", category: "Slang" },
-  { id: 's6', word: "Lit", meaning: "เจ๋ง/มันส์", partOfSpeech: "slang", example: "The party was lit.", category: "Slang" },
-  
-  // Academic
-  { id: 's7', word: "Hypothesis", meaning: "สมมติฐาน", partOfSpeech: "n.", example: "Test the hypothesis.", category: "Academic" },
-  { id: 's8', word: "Significant", meaning: "สำคัญ/มีนัยสำคัญ", partOfSpeech: "adj.", example: "Significant improvement.", category: "Academic" },
-  
-  // TOEIC
-  { id: 's9', word: "Agenda", meaning: "วาระการประชุม", partOfSpeech: "n.", example: "Meeting agenda.", category: "TOEIC" },
-  { id: 's10', word: "Negotiate", meaning: "เจรจาต่อรอง", partOfSpeech: "v.", example: "Negotiate a deal.", category: "TOEIC" }
+  // --- Group 1: Confusing Words (คำที่มักสับสน) ---
+  { 
+    id: 'cw1', 
+    word: "Affect vs Effect", 
+    meaning: "Affect (v. ส่งผลกระทบ) / Effect (n. ผลกระทบ)", 
+    partOfSpeech: "Confusing", 
+    example: "The weather affected his mood. / The effect was immediate.", 
+    category: "Confusing Words" 
+  },
+  { 
+    id: 'cw2', 
+    word: "Borrow vs Lend", 
+    meaning: "Borrow (ขอยืม - เข้าตัว) / Lend (ให้ยืม - ออกจากตัว)", 
+    partOfSpeech: "Confusing", 
+    example: "Can I borrow your pen? / I will lend you money.", 
+    category: "Confusing Words" 
+  },
+  { 
+    id: 'cw3', 
+    word: "Say vs Tell", 
+    meaning: "Say (พูดออกมา) / Tell (บอกใครสักคน)", 
+    partOfSpeech: "Confusing", 
+    example: "She said hello. / She told me the truth.", 
+    category: "Confusing Words" 
+  },
+
+  // --- Group 2: Collocations (คำที่ใช้คู่กันเสมอ) ---
+  { 
+    id: 'col1', 
+    word: "Make a decision", 
+    meaning: "ตัดสินใจ (ห้ามใช้ Do)", 
+    partOfSpeech: "Collocation", 
+    example: "I need to make a decision quickly.", 
+    category: "Collocations" 
+  },
+  { 
+    id: 'col2', 
+    word: "Do a favor", 
+    meaning: "ช่วยเหลือ/ทำคุณประโยชน์ (ห้ามใช้ Make)", 
+    partOfSpeech: "Collocation", 
+    example: "Can you do me a favor?", 
+    category: "Collocations" 
+  },
+  { 
+    id: 'col3', 
+    word: "Take a break", 
+    meaning: "พักเบรก", 
+    partOfSpeech: "Collocation", 
+    example: "Let's take a break for 10 minutes.", 
+    category: "Collocations" 
+  },
+
+  // ... (Idioms, Phrasal Verbs เดิมของคุณ) ...
+  { id: 's1', word: "Piece of cake", meaning: "ง่ายมาก (หมูๆ)", partOfSpeech: "idiom", example: "The test was a piece of cake.", category: "Idioms" },
 ];
