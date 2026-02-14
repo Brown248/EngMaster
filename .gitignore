@@ -11,12 +11,12 @@ lerna-debug.log*
 node_modules
 .pnpm-store
 
-# Dist / Build
+# Dist / Build (ผลลัพธ์จากการ Build)
 dist
 dist-ssr
 *.local
 
-# Editor directories and files
+# Editor directories and files (ไฟล์ตั้งค่าของโปรแกรมเขียนโค้ด)
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -27,7 +27,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment Variables (สำคัญมาก ห้ามหลุดขึ้น Git)
+# Environment Variables (สำคัญมาก ห้ามหลุดขึ้น Git เพื่อความปลอดภัย)
 .env
 .env.*
 !.env.example
@@ -37,3 +37,20 @@ coverage
 
 # Temporary files
 *.tmp
+
+# --- ส่วนที่แนะนำให้เพิ่ม ---
+
+# Vite specific (ไฟล์ขยะที่เกิดจาก Vite)
+vite.config.ts.timestamp-*
+vite.config.js.timestamp-*
+
+# TypeScript (Cache ของ TypeScript)
+*.tsbuildinfo
+
+# ESLint (Cache ของตัวตรวจโค้ด)
+.eslintcache
+
+# System Files (ไฟล์ขยะของระบบปฏิบัติการ)
+Thumbs.db
+ehthumbs.db
+Desktop.ini
