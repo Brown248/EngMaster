@@ -22,19 +22,11 @@ function App() {
           </div>
         }>
           <Routes>
-            <Route path="/" element={<Home />} />
-            
-            {/* Grammar Section */}
+            <Route path="/" element={<Home />} />            
             <Route path="/grammar" element={<Grammar />} />
-            <Route path="/grammar/:topicId" element={<Grammar />} />
-            
-            {/* Vocabulary Section */}
+            <Route path="/grammar/:topicId" element={<Grammar />} />       
             <Route path="/vocabulary" element={<Vocabulary />} />
-            
-            {/* Privacy Policy */}
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            
-            {/* 404 */}
+            <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
