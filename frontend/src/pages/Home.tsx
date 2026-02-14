@@ -18,19 +18,17 @@ export default function Home() {
     navigate(`/${id}`);
   };
 
-  // ✅ 1. ปรับ Animation Container ให้ Smooth ขึ้น
   const containerVars = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: { 
-        staggerChildren: 0.15, // เพิ่มระยะห่างระหว่าง items เล็กน้อย
+        staggerChildren: 0.15,
         delayChildren: 0.1 
       }
     }
   };
 
-  // ✅ 2. ปรับ Spring ให้เด้งนุ่มนวล (Soft Spring) และเพิ่ม Exit Animation
   const itemVars = {
     hidden: { opacity: 0, y: 30 },
     show: { 
@@ -38,8 +36,8 @@ export default function Home() {
       y: 0, 
       transition: { 
         type: 'spring', 
-        stiffness: 70, // ลดความแข็ง (เดิม ~100+)
-        damping: 15,   // เพิ่มแรงต้านให้หยุดนิ่งแบบนุ่มๆ
+        stiffness: 70, 
+        damping: 15,   
         mass: 1
       } 
     },
@@ -50,13 +48,12 @@ export default function Home() {
     }
   };
 
-  // ✅ 3. ปรับ Floating Animation ให้ลอยช้าๆ สบายตา
   const floatingVars = {
     animate: {
       y: [0, -12, 0],
       rotate: [0, 1.5, -1.5, 0],
       transition: { 
-        duration: 6, // เพิ่มเวลาให้ช้าลง
+        duration: 6, 
         repeat: Infinity, 
         ease: "easeInOut" 
       }
@@ -71,7 +68,7 @@ export default function Home() {
             ref={containerRef}
             initial="hidden"
             animate="show"
-            exit="exit" // ✅ เพิ่ม exit prop ตรงนี้
+            exit="exit"
             variants={containerVars}
             className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 relative"
           >
@@ -80,7 +77,6 @@ export default function Home() {
 
             {/* --- HERO SECTION --- */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 py-8 md:py-10 relative z-10">
-              
               <div className="flex-1 text-center md:text-left order-2 md:order-1">
                 <motion.div 
                   variants={itemVars}
@@ -142,7 +138,6 @@ export default function Home() {
                     >
                         🦉
                     </motion.div>
-
                     <motion.div 
                         animate={{ y: [0, -10, 0] }}
                         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.5 }}
@@ -156,7 +151,6 @@ export default function Home() {
                         </motion.div>
                         <span>Let's Go!</span>
                     </motion.div>
-
                     <motion.div 
                         animate={{ y: [0, 10, 0] }}
                         transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
@@ -166,7 +160,6 @@ export default function Home() {
                         <span>Keep Learning</span>
                     </motion.div>
                 </div>
-                
                 <motion.div 
                     animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.7, 0.5] }}
                     transition={{ duration: 3, repeat: Infinity }}
@@ -174,10 +167,6 @@ export default function Home() {
                 />
               </motion.div>
             </div>
-
-            <motion.div variants={itemVars} className="relative z-10">
-                <AdBanner className="mb-10 shadow-sm border border-slate-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300" />
-            </motion.div>
 
             {/* --- COURSES GRID --- */}
             <motion.div 
@@ -193,7 +182,6 @@ export default function Home() {
                   className="group bg-white p-6 rounded-[1.5rem] shadow-sm hover:shadow-xl hover:shadow-indigo-100/40 border border-slate-100 transition-all cursor-pointer relative overflow-hidden"
                 >
                   <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${getGradient(course.color)} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-bl-full -mr-6 -mt-6`} />
-                  
                   <div className="relative z-10 flex flex-col h-full justify-between">
                     <div>
                         <div className="flex justify-between items-start mb-6">
@@ -207,7 +195,6 @@ export default function Home() {
                                 <ArrowUpRight size={20} />
                             </div>
                         </div>
-                        
                         <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-indigo-600 transition-colors">
                             {course.title}
                         </h3>
@@ -215,7 +202,6 @@ export default function Home() {
                             {course.sub}
                         </p>
                     </div>
-                    
                     <div className="flex items-center justify-between border-t border-slate-50 pt-3 mt-auto">
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider group-hover:text-indigo-500 transition-colors">Start Course</span>
                         <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
@@ -225,6 +211,11 @@ export default function Home() {
                   </div>
                 </motion.div>
               ))}
+            </motion.div>
+
+            {/* ✅ เพิ่มช่องใส่โฆษณาด้านล่างสุดของหน้า Home */}
+            <motion.div variants={itemVars} className="mt-12 relative z-10">
+                <AdBanner className="shadow-sm border border-slate-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300" />
             </motion.div>
 
         </motion.div>
