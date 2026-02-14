@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'));
@@ -29,6 +30,9 @@ function App() {
             
             {/* Vocabulary Section */}
             <Route path="/vocabulary" element={<Vocabulary />} />
+            
+            {/* Privacy Policy */}
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             
             {/* 404 */}
             <Route path="/404" element={<NotFound />} />
