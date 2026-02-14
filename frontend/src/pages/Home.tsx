@@ -109,7 +109,7 @@ export default function Home() {
                   variants={itemVars}
                   className="text-base md:text-lg text-slate-500 mb-6 max-w-lg mx-auto md:mx-0 font-medium leading-relaxed"
                 >
-                  เรียนภาษาอังกฤษด้วยวิธีที่สนุกและเข้าใจง่าย ครอบคลุมทั้งไวยากรณ์ คำศัพท์ และแบบทดสอบเพื่อวัดผลจริง
+                  เรียนภาษาอังกฤษด้วยวิธีที่สนุกและเข้าใจง่าย ครอบคลุมทั้งไวยากรณ์ และคำศัพท์
                 </motion.p>
 
                 <motion.div 
