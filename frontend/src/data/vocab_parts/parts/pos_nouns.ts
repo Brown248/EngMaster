@@ -1,6 +1,7 @@
 import { MainCategory } from '../../../types';
 
-export const nounsCategory: MainCategory = {
+// เปลี่ยนจาก export const เป็น export default
+const nounsCategory: MainCategory = {
   id: 'pos-noun',
   title: '1. Noun (คำนาม)',
   icon: '📦',
@@ -255,4 +256,5 @@ export const nounsCategory: MainCategory = {
       ]
     }
   ]
-};
+}; 
+export default nounsCategory;
