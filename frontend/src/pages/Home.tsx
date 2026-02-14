@@ -92,7 +92,7 @@ export default function Home() {
                   >
                     <Sparkles size={14} className="text-yellow-400 fill-yellow-400" />
                   </motion.div>
-                  <span>New Interactive Learning</span>
+                  <span>Learning</span>
                 </motion.div>
                 
                 <motion.h1 
