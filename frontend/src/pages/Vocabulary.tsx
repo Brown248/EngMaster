@@ -6,6 +6,7 @@ import { vocabularyCategories } from '../data/vocab_parts/vocabularyData';
 import { MainCategory, SubCategory, VocabWord } from '../types'; 
 import AdBanner from '../components/AdBanner';
 
+
 export default function Vocabulary() {
   const [activeGroup, setActiveGroup] = useState<string>(vocabularyCategories[0].id);
   const [searchQuery, setSearchQuery] = useState('');

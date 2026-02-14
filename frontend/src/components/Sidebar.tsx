@@ -1,17 +1,31 @@
 // frontend/src/components/Sidebar.tsx
-import { NavLink } from 'react-router-dom';
-import { X, MessageSquarePlus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { menuItems } from '../data/core/menuData'; 
-// ✅ Import AdBanner
-import AdBanner from './AdBanner';
+import { 
+  X, 
+  BookOpen, 
+  Library, 
+  Home, 
+  MessageSquare, 
+  GraduationCap,
+  ChevronRight,
+  ShieldCheck
+} from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+const menuItems = [
+  { id: 'home', title: 'หน้าแรก', path: '/', icon: Home, color: 'text-blue-500' },
+  { id: 'grammar', title: 'ไวยากรณ์', path: '/grammar', icon: BookOpen, color: 'text-purple-500' },
+  { id: 'vocabulary', title: 'คำศัพท์', path: '/vocabulary', icon: Library, color: 'text-orange-500' },
+];
+
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+  const location = useLocation();
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -22,84 +36,92 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
-            aria-hidden="true"
+            className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 lg:hidden"
           />
 
-          {/* Sidebar Container */}
+          {/* Sidebar Panel */}
           <motion.div
-            initial={{ x: -280 }}
+            initial={{ x: '-100%' }}
             animate={{ x: 0 }}
-            exit={{ x: -280 }}
-            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed top-0 left-0 bottom-0 w-[280px] bg-white z-50 shadow-2xl flex flex-col"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile Navigation"
+            exit={{ x: '-100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-y-0 left-0 w-[280px] bg-white shadow-2xl z-50 flex flex-col border-r border-slate-100"
           >
             {/* Header */}
-            <div className="p-6 flex items-center justify-between border-b border-slate-100 bg-white">
-              <span className="text-2xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                EngMaster
-              </span>
+            <div className="p-6 border-b border-slate-50 flex items-center justify-between bg-slate-50/50">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
+                  <GraduationCap size={24} />
+                </div>
+                <span className="font-black text-xl text-slate-800 tracking-tight">EngMaster</span>
+              </div>
               <button 
-                onClick={onClose} 
-                className="p-2 text-slate-400 hover:text-slate-800 hover:bg-slate-100 rounded-full transition-colors"
-                aria-label="Close menu"
+                onClick={onClose}
+                className="p-2 hover:bg-white rounded-lg transition-colors text-slate-400 hover:text-slate-600 shadow-sm border border-transparent hover:border-slate-100"
               >
-                <X size={24} />
+                <X size={20} />
               </button>
             </div>
 
-            {/* Menu Items */}
-            <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-              {menuItems.map((item) => (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
+            {/* Navigation Links */}
+            <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+              <p className="px-4 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-4">Main Menu</p>
+              {menuItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.id}
+                    to={item.path}
+                    onClick={onClose}
+                    className={`
+                      flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all font-bold group
+                      ${isActive 
+                        ? 'bg-indigo-50 text-indigo-600 shadow-sm shadow-indigo-100' 
+                        : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                      }
+                    `}
+                  >
+                    <item.icon size={22} className={isActive ? 'text-indigo-600' : 'text-slate-400 group-hover:text-slate-600'} />
+                    <span className="flex-1">{item.title}</span>
+                    {isActive && <motion.div layoutId="active" className="w-1.5 h-1.5 rounded-full bg-indigo-600" />}
+                  </Link>
+                );
+              })}
+
+              {/* ✅ ส่วนล่างสุด: ลิงก์นโยบายความเป็นส่วนตัว */}
+              <div className="pt-4 mt-4 border-t border-slate-100">
+                <Link
+                  to="/privacy-policy"
                   onClick={onClose}
-                  className={({ isActive }) =>
-                    `flex items-center gap-4 px-4 py-3.5 rounded-xl font-bold transition-all ${
-                      isActive
-                        ? 'bg-blue-50 text-blue-600 shadow-sm'
-                        : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
-                    }`
-                  }
+                  className={`
+                    flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all font-bold group
+                    ${location.pathname === '/privacy-policy'
+                      ? 'bg-indigo-50 text-indigo-600'
+                      : 'text-slate-400 hover:bg-slate-50 hover:text-indigo-600'
+                    }
+                  `}
                 >
-                  <item.icon size={22} strokeWidth={2.5} />
-                  {item.label}
-                </NavLink>
-              ))}
-            </nav>
-            
-            {/* Footer */}
-            <div className="p-4 border-t border-slate-100 bg-slate-50/50">
-              
-              {/* ✅ พื้นที่โฆษณา (AdBanner) ใน Sidebar */}
-              <div className="mb-4 rounded-xl overflow-hidden shadow-sm">
-                 <AdBanner />
+                  <ShieldCheck size={22} />
+                  <span className="flex-1">Privacy Policy</span>
+                  <ChevronRight size={16} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
               </div>
+            </nav>
 
-              <a 
-                href="https://docs.google.com/forms/d/e/1FAIpQLSeJqpXVQ-kir08pEsSKhX0xsfs_nEAfhMRY0bVd_9TTGQcJFg/viewform?usp=dialog"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 px-3 py-3 mb-4 bg-white border border-slate-200 text-slate-600 rounded-xl transition-all shadow-sm hover:border-blue-300 hover:shadow-md hover:text-blue-700 group"
-              >
-                <div className="p-2 bg-blue-50 text-blue-600 rounded-lg group-hover:scale-110 transition-transform">
-                   <MessageSquarePlus size={20} strokeWidth={2.5} />
+            {/* Footer Information */}
+            <div className="p-6 bg-slate-50/50 border-t border-slate-100">
+              <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 bg-green-100 text-green-600 rounded-lg flex items-center justify-center">
+                    <MessageSquare size={16} />
+                  </div>
+                  <span className="text-xs font-bold text-slate-700">Community</span>
                 </div>
-                <div className="flex flex-col text-left">
-                  <span className="text-sm font-bold">แจ้งปัญหา / แนะนำ</span>
-                  <span className="text-[10px] text-slate-400 font-medium">ช่วยให้เราพัฒนาขึ้น</span>
-                </div>
-              </a>
-
-              <div className="text-center">
-                 <p className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">© 2024 EngMaster App</p>
+                <p className="text-[10px] text-slate-400 font-medium leading-relaxed">
+                  เข้าร่วมกลุ่มผู้เรียนเพื่อแลกเปลี่ยนเทคนิคการเรียนภาษาอังกฤษ
+                </p>
               </div>
             </div>
-
           </motion.div>
         </>
       )}
