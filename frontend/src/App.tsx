@@ -3,8 +3,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-
+import PrivacyPolicy from './pages/PrivacyPolicy'; // ต้องมีบรรทัดนี้
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'));
 const Grammar = lazy(() => import('./pages/Grammar'));
