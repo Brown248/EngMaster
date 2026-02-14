@@ -1,7 +1,7 @@
 // frontend/src/data/vocab_parts/vocabularyData.ts
 import { MainCategory } from '../../types';
 
-// Import ข้อมูลจากไฟล์ย่อย
+// Import ข้อมูลจากไฟล์ย่อยที่เราแยกไว้
 import { nounsCategory } from './parts/pos_nouns';
 import { verbsCategory } from './parts/pos_verbs';
 import { adjectivesCategory } from './parts/pos_adjectives';
@@ -14,5 +14,5 @@ export const vocabularyCategories: MainCategory[] = [
   verbsCategory,
   adjectivesCategory,
   adverbsCategory,
-  ...othersCategories // แตก Array ของ others ออกมาต่อท้าย
+  ...othersCategories // others เป็น Array อยู่แล้ว เลยต้องใช้ ... เพื่อกระจายออกมา
 ];
