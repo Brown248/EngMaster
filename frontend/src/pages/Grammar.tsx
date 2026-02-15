@@ -167,7 +167,10 @@ export default function Grammar() {
 
             {/* ✅ เพิ่มช่องใส่โฆษณาด้านล่างสุดของหน้า Grammar ที่ย่อยๆ ทั้งหมด */}
             <div className="mt-12 pt-8 border-t border-slate-50">
-                <AdBanner />
+                <AdBanner 
+                    dataAdSlot="2990261154" // ใส่เลข ID จริงจาก AdSense
+                    className="shadow-sm border border-slate-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300" 
+                />
             </div>
 
           </motion.div>

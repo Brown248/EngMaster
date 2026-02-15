@@ -88,7 +88,9 @@ export default function Vocabulary() {
         </div>
       </div>
 
-      <AdBanner className="mb-2" />
+      <AdBanner 
+        dataAdSlot="2990261154" // 👈 ใส่รหัสจาก Google AdSense ที่คุณสร้างไว้
+        className="shadow-sm border border-slate-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300" />
 
       {/* Content */}
       <div className="min-h-[400px]">

@@ -15,7 +15,9 @@ export default function NotFound() {
       
       {/* ✅ พื้นที่โฆษณา (AdBanner) */}
       <div className="w-full max-w-md mb-8">
-        <AdBanner />
+        <AdBanner 
+            dataAdSlot="2990261154" // 👈 ใส่รหัสจาก Google AdSense ที่คุณสร้างไว้
+            className="shadow-sm border border-slate-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300" />
       </div>
 
       <Link 

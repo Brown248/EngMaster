@@ -215,7 +215,9 @@ export default function Home() {
 
             {/* ✅ เพิ่มช่องใส่โฆษณาด้านล่างสุดของหน้า Home */}
             <motion.div variants={itemVars} className="mt-12 relative z-10">
-                <AdBanner className="shadow-sm border border-slate-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300" />
+                <AdBanner 
+                    dataAdSlot="2990261154" // 👈 ใส่รหัสจาก Google AdSense ที่คุณสร้างไว้
+                    className="shadow-sm border border-slate-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300" />
             </motion.div>
 
         </motion.div>
