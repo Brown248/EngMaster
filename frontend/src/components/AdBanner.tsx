@@ -11,9 +11,9 @@ export default function AdBanner({
   className = "",
   dataAdSlot = "2990261154", // ⚠️ ใส่ Slot ID กลางๆ ไว้กันเหนียว หรือปล่อยว่าง
   dataAdFormat = "auto",
-  dataFullWidthResponsive = true,
-}: AdBannerProps) {
-  const adRef = useRef<HTMLModElement>(null);
+  dataFullWidthResponsive = true,}:
+  AdBannerProps) 
+  {const adRef = useRef<HTMLModElement>(null);
 
   useEffect(() => {
     try {
