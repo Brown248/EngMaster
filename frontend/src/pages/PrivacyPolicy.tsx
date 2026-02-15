@@ -1,6 +1,6 @@
 // frontend/src/pages/PrivacyPolicy.tsx
 import { motion } from 'framer-motion';
-import { ShieldCheck, Lock, Eye, Cookie, ArrowLeft } from 'lucide-react';
+import { ShieldCheck, Lock, Eye, Cookie, ArrowLeft, UserCheck } from 'lucide-react'; // ✅ เพิ่ม UserCheck
 import { useNavigate } from 'react-router-dom';
 
 export default function PrivacyPolicy() {
@@ -21,6 +21,12 @@ export default function PrivacyPolicy() {
       icon: <Lock className="text-emerald-500" />,
       title: "การรักษาความปลอดภัย",
       content: "เราให้ความสำคัญกับความปลอดภัยของข้อมูลส่วนบุคคลของท่าน และใช้มาตรการทางเทคนิคที่เหมาะสมเพื่อป้องกันการเข้าถึงข้อมูลโดยไม่ได้รับอนุญาต"
+    },
+    // ✅ เพิ่มส่วนนี้: สิทธิของผู้ใช้งาน
+    {
+      icon: <UserCheck className="text-purple-500" />,
+      title: "สิทธิของท่าน (User Rights)",
+      content: "ท่านมีสิทธิในการขอเข้าถึง ขอรับสำเนา ขอแก้ไข หรือขอให้ลบข้อมูลส่วนบุคคลของท่าน รวมถึงสิทธิในการคัดค้านการประมวลผลข้อมูล หากท่านต้องการใช้สิทธิเหล่านี้ สามารถติดต่อเราได้ผ่านช่องทางที่ระบุไว้ในเว็บไซต์"
     }
   ];
 

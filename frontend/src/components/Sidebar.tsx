@@ -1,11 +1,9 @@
 // frontend/src/components/Sidebar.tsx
-import { NavLink } from 'react-router-dom';
-import { X, MessageSquarePlus } from 'lucide-react';
+import { NavLink } from 'react-router-dom'; // ✅ ลบ Link ออกแล้ว ใช้แค่ NavLink
+import { X, MessageSquarePlus, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { menuItems } from '../data/core/menuData'; 
-// ✅ Import AdBanner
 import AdBanner from './AdBanner';
-
 
 interface SidebarProps {
   isOpen: boolean;
@@ -71,12 +69,27 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   {item.label}
                 </NavLink>
               ))}
+
+              {/* ✅ ลิงก์ Privacy Policy */}
+              <NavLink
+                  to="/privacy-policy"
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    `flex items-center gap-4 px-4 py-3.5 rounded-xl font-bold transition-all mt-4 border-t border-slate-100 ${
+                      isActive
+                        ? 'bg-blue-50 text-blue-600 shadow-sm'
+                        : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+                    }`
+                  }
+                >
+                  <ShieldCheck size={22} strokeWidth={2.5} />
+                  Privacy Policy
+              </NavLink>
             </nav>
             
             {/* Footer */}
             <div className="p-4 border-t border-slate-100 bg-slate-50/50">
               
-              {/* ✅ พื้นที่โฆษณา (AdBanner) ใน Sidebar */}
               <div className="mb-4 rounded-xl overflow-hidden shadow-sm">
                  <AdBanner />
               </div>

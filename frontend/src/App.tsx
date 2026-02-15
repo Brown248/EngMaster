@@ -3,7 +3,10 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
-import PrivacyPolicy from './pages/PrivacyPolicy'; // ต้องมีบรรทัดนี้
+import PrivacyPolicy from './pages/PrivacyPolicy';
+// ✅ Import CookieConsent
+import CookieConsent from './components/CookieConsent';
+
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'));
 const Grammar = lazy(() => import('./pages/Grammar'));
@@ -30,6 +33,10 @@ function App() {
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
         </Suspense>
+        
+        {/* ✅ วาง CookieConsent ไว้ตรงนี้ (นอก Routes แต่ใน Layout) */}
+        <CookieConsent />
+        
       </Layout>
     </BrowserRouter>
   );
