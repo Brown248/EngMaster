@@ -7,6 +7,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookieConsent from './components/CookieConsent';
 
 
+
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'));
 const Grammar = lazy(() => import('./pages/Grammar'));
@@ -30,7 +31,7 @@ function App() {
             <Route path="/grammar/:topicId" element={<Grammar />} />       
             <Route path="/vocabulary" element={<Vocabulary />} />
             <Route path="/game" element={<Game />} />
-            <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
