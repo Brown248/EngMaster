@@ -3,8 +3,9 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Sparkles, Zap, Star, ArrowUpRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async'; // ✅ เพิ่ม import Helmet
 import { coursesData } from '../data/core/homeData';
-import AdBanner from '../components/AdBanner';
+// import AdBanner from '../components/AdBanner'; // ❌ ปิดโฆษณาหน้าแรกชั่วคราวเพื่อลดความเสี่ยง Low Value Content
 
 export default function Home() {
   const navigate = useNavigate();
@@ -62,6 +63,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900 overflow-x-hidden">
+      {/* ✅ เพิ่ม SEO Meta Tags สำหรับหน้า Home */}
+      <Helmet>
+        <title>EngMaster - เรียนภาษาอังกฤษออนไลน์ด้วยตัวเอง ฟรี! ไวยากรณ์และคำศัพท์</title>
+        <meta name="description" content="เว็บไซต์เรียนภาษาอังกฤษออนไลน์สำหรับคนไทย รวบรวมสรุปไวยากรณ์ (Grammar) 12 Tenses และคำศัพท์ (Vocabulary) พร้อมตัวอย่างการใช้งานจริง เรียนฟรี เข้าใจง่าย" />
+      </Helmet>
+
       <AnimatePresence mode="wait">
         <motion.div 
             key="home"
@@ -213,12 +220,30 @@ export default function Home() {
               ))}
             </motion.div>
 
-            {/* ✅ เพิ่มช่องใส่โฆษณาด้านล่างสุดของหน้า Home */}
-            <motion.div variants={itemVars} className="mt-12 relative z-10">
-                <AdBanner 
-                    dataAdSlot="2990261154" // 👈 ใส่รหัสจาก Google AdSense ที่คุณสร้างไว้
-                    className="shadow-sm border border-slate-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300" />
+            {/* ✅ SEO Content Section: เพิ่มส่วนนี้เพื่อให้ Google Bot เห็นเนื้อหา */}
+            <motion.div variants={itemVars} className="mt-16 bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
+                <h2 className="text-2xl font-bold text-slate-800 mb-4">เรียนภาษาอังกฤษออนไลน์ด้วยตัวเอง ฟรี!</h2>
+                <div className="space-y-4 text-slate-600 leading-relaxed">
+                    <p>
+                        ยินดีต้อนรับสู่ <strong>EngMaster</strong> แพลตฟอร์มเรียนภาษาอังกฤษที่ออกแบบมาเพื่อคนไทยโดยเฉพาะ 
+                        เราเชื่อว่าการเรียนภาษาไม่ควรเป็นเรื่องยากหรือน่าเบื่อ ที่นี่คุณจะได้เรียนรู้ทั้ง
+                        <strong className="text-indigo-600"> ไวยากรณ์ (Grammar)</strong> ที่ครอบคลุมทั้ง 12 Tenses, Parts of Speech 
+                        และ <strong className="text-indigo-600"> คำศัพท์ (Vocabulary)</strong> ที่จำเป็นในชีวิตประจำวัน
+                    </p>
+                    <p>
+                        เว็บไซต์ของเราเน้นการเรียนรู้แบบ Interactive ที่มีการจัดหมวดหมู่ชัดเจน 
+                        ช่วยให้คุณสามารถเลือกเรียนได้ตามความสนใจ ไม่ว่าจะเป็นการเตรียมสอบ หรือเพื่อใช้ในการทำงาน 
+                        เริ่มต้นเก่งภาษาอังกฤษได้ตั้งแต่วันนี้ เพียงเลือกหัวข้อที่คุณสนใจด้านบน
+                    </p>
+                </div>
             </motion.div>
+
+            {/* ❌ ปิดโฆษณาหน้า Home ชั่วคราว */}
+            {/* <motion.div variants={itemVars} className="mt-12 relative z-10">
+                <AdBanner 
+                    dataAdSlot="2990261154" 
+                    className="shadow-sm border border-slate-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300" />
+            </motion.div> */}
 
         </motion.div>
       </AnimatePresence>

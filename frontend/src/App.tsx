@@ -4,14 +4,15 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
 import PrivacyPolicy from './pages/PrivacyPolicy';
-// ✅ Import CookieConsent
 import CookieConsent from './components/CookieConsent';
+
 
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'));
 const Grammar = lazy(() => import('./pages/Grammar'));
 const Vocabulary = lazy(() => import('./pages/Vocabulary'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const Game = lazy(() => import('./pages/Game'));
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/grammar" element={<Grammar />} />
             <Route path="/grammar/:topicId" element={<Grammar />} />       
             <Route path="/vocabulary" element={<Vocabulary />} />
+            <Route path="/game" element={<Game />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" replace />} />

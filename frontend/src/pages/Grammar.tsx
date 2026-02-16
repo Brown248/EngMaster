@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ArrowLeft, BookOpen } from 'lucide-react'; 
 import { useNavigate, useParams, Link, useSearchParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async'; // ✅ เพิ่ม import Helmet
 import { grammarTopics } from '../data/core/grammarData'; 
 import AdBanner from '../components/AdBanner';
 import { GrammarTopic, GrammarSubtopic, GrammarTypeDetail } from '../types';
@@ -41,8 +42,29 @@ export default function Grammar() {
       setSearchParams({ subtopicId: selectedSubtopicId!, type: name });
   };
 
+  // ✅ คำนวณ Title และ Description สำหรับ SEO แบบ Dynamic
+  let pageTitle = "Grammar Summary - สรุปไวยากรณ์ภาษาอังกฤษครบจบในที่เดียว | EngMaster";
+  let pageDesc = "รวมสรุปหลักไวยากรณ์ภาษาอังกฤษ (English Grammar) ทั้ง 12 Tenses, Parts of Speech, และ Sentence Structure อธิบายเข้าใจง่ายพร้อมตัวอย่าง";
+
+  if (selectedTypeDetail) {
+      pageTitle = `${selectedTypeDetail.name} - ${activeTopic?.title} | EngMaster`;
+      pageDesc = `เรียนรู้เรื่อง ${selectedTypeDetail.name} ในหัวข้อ ${activeTopic?.title} พร้อมตัวอย่างประโยคและวิธีการใช้ที่ถูกต้อง`;
+  } else if (currentSubtopicData) {
+      pageTitle = `${currentSubtopicData.name} - Grammar | EngMaster`;
+      pageDesc = `สรุปเรื่อง ${currentSubtopicData.name} : ${currentSubtopicData.usage}`;
+  } else if (activeTopic) {
+      pageTitle = `${activeTopic.title} - แบบฝึกหัดและสรุป | EngMaster`;
+      pageDesc = activeTopic.details.description || "";
+  }
+
   return (
     <div className="space-y-8 pb-12">
+      {/* ✅ ใส่ Helmet ตรงนี้เพื่อให้เปลี่ยน Title ไปตามเนื้อหา */}
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDesc} />
+      </Helmet>
+
       <AnimatePresence mode="wait">
         {!topicId ? (
           <motion.div key="list" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
@@ -54,7 +76,20 @@ export default function Grammar() {
                </div>
             </div>
             
-            <AdBanner className="mb-8" />
+            {/* ✅ เพิ่ม Text Content เพื่อแก้ปัญหา Low Value Content */}
+            <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-slate-600 leading-relaxed">
+                <p>
+                    ไวยากรณ์ภาษาอังกฤษ (English Grammar) คือโครงสร้างพื้นฐานที่สำคัญในการสื่อสาร 
+                    ไม่ว่าจะเป็นการพูด อ่าน หรือเขียน ในหน้านี้เราได้รวบรวมสรุปหลักไวยากรณ์ที่สำคัญไว้ครบถ้วน 
+                    ตั้งแต่เรื่องพื้นฐานอย่าง <strong>Parts of Speech</strong> ไปจนถึงเรื่องซับซ้อนอย่าง <strong>12 Tenses</strong> และ <strong>Conditional Sentences</strong>
+                </p>
+                <p className="mt-2">
+                    คุณสามารถเลือกหัวข้อด้านล่างเพื่อเริ่มเรียนรู้ได้ทันที โดยแต่ละบทเรียนจะประกอบไปด้วยคำอธิบาย โครงสร้างประโยค และตัวอย่างการใช้งานจริง
+                </p>
+            </div>
+
+            {/* ❌ ปิดโฆษณาในหน้า List View ไปก่อน */}
+            {/* <AdBanner className="mb-8" /> */}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {grammarTopics.map((topic: GrammarTopic) => (
@@ -165,10 +200,10 @@ export default function Grammar() {
                 )}
             </div>
 
-            {/* ✅ เพิ่มช่องใส่โฆษณาด้านล่างสุดของหน้า Grammar ที่ย่อยๆ ทั้งหมด */}
+            {/* ✅ AdBanner ด้านล่างสุดของหน้า Detail ถือว่า OK เพราะมีเนื้อหาบทเรียนเยอะแล้ว */}
             <div className="mt-12 pt-8 border-t border-slate-50">
                 <AdBanner 
-                    dataAdSlot="2990261154" // ใส่เลข ID จริงจาก AdSense
+                    dataAdSlot="2990261154" 
                     className="shadow-sm border border-slate-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300" 
                 />
             </div>

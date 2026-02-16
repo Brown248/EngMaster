@@ -93,3 +93,9 @@ export interface MainCategory {
   color: 'indigo' | 'blue' | 'purple' | 'orange' | 'green' | 'pink' | 'cyan' | 'teal' | 'red' | 'amber' | 'fuchsia' | 'lime' | 'violet';
   subCategories: SubCategory[];
 }
+
+export interface MenuItem {
+  path: string;
+  label: string;  // 👈 ใช้ชื่อ property ว่า "label"
+  icon: LucideIcon;
+}

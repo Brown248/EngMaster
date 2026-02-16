@@ -1,7 +1,8 @@
 // frontend/src/pages/PrivacyPolicy.tsx
 import { motion } from 'framer-motion';
-import { ShieldCheck, Lock, Eye, Cookie, ArrowLeft, UserCheck } from 'lucide-react'; // ✅ เพิ่ม UserCheck
+import { ShieldCheck, Lock, Eye, Cookie, ArrowLeft, UserCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async'; // ✅ เพิ่ม Helmet
 
 export default function PrivacyPolicy() {
   const navigate = useNavigate();
@@ -22,7 +23,6 @@ export default function PrivacyPolicy() {
       title: "การรักษาความปลอดภัย",
       content: "เราให้ความสำคัญกับความปลอดภัยของข้อมูลส่วนบุคคลของท่าน และใช้มาตรการทางเทคนิคที่เหมาะสมเพื่อป้องกันการเข้าถึงข้อมูลโดยไม่ได้รับอนุญาต"
     },
-    // ✅ เพิ่มส่วนนี้: สิทธิของผู้ใช้งาน
     {
       icon: <UserCheck className="text-purple-500" />,
       title: "สิทธิของท่าน (User Rights)",
@@ -32,6 +32,13 @@ export default function PrivacyPolicy() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] pb-20">
+      {/* ✅ เพิ่ม Meta Tags สำหรับหน้า Policy */}
+      <Helmet>
+        <title>นโยบายความเป็นส่วนตัว (Privacy Policy) - EngMaster</title>
+        <meta name="description" content="นโยบายความเป็นส่วนตัวของ EngMaster การเก็บรวบรวมข้อมูล การใช้งานคุกกี้ และสิทธิของผู้ใช้งาน" />
+        <meta name="robots" content="noindex" />
+      </Helmet>
+
       <div className="max-w-4xl mx-auto px-4 pt-10">
         
         {/* ปุ่มย้อนกลับ */}

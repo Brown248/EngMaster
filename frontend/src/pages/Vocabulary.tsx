@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Volume2, ChevronRight, X } from 'lucide-react';
+import { Helmet } from 'react-helmet-async'; // ✅ เพิ่ม Helmet
 import { vocabularyCategories } from '../data/vocab_parts/vocabularyData';
 import { MainCategory, SubCategory, VocabWord } from '../types'; 
 import AdBanner from '../components/AdBanner';
@@ -62,6 +63,12 @@ export default function Vocabulary() {
 
   return (
     <div className="space-y-6 md:space-y-8 pb-20">
+      {/* ✅ เพิ่ม Meta Tags สำหรับ SEO */}
+      <Helmet>
+        <title>Vocabulary Bank - คลังคำศัพท์ภาษาอังกฤษแยกหมวดหมู่ | EngMaster</title>
+        <meta name="description" content="รวมคำศัพท์ภาษาอังกฤษที่ใช้บ่อยในชีวิตประจำวัน แยกตามหมวดหมู่ (Verbs, Nouns, Adjectives) พร้อมคำแปล ตัวอย่างประโยค และเสียงอ่าน เพื่อการเรียนรู้ที่มีประสิทธิภาพ" />
+      </Helmet>
+
       {/* Header */}
       <div className="bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-12 text-white shadow-xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
@@ -88,8 +95,22 @@ export default function Vocabulary() {
         </div>
       </div>
 
+      {/* ✅ เพิ่ม Content Section เพื่อให้ Google เห็นเนื้อหาบทความ */}
+      <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-slate-600 leading-relaxed">
+        <h2 className="text-xl font-bold text-slate-800 mb-2">เรียนรู้คำศัพท์ภาษาอังกฤษ (English Vocabulary)</h2>
+        <p className="mb-2">
+            การมีคลังคำศัพท์ (Vocabulary) ที่มากพอเป็นกุญแจสำคัญในการเก่งภาษาอังกฤษ ไม่ว่าจะเป็นการฟัง พูด อ่าน หรือเขียน 
+            ที่ EngMaster เราได้รวบรวมคำศัพท์ที่จำเป็นและแบ่งออกเป็นหมวดหมู่ที่ชัดเจน เช่น <strong>คำกริยา (Verbs)</strong>, 
+            <strong>คำนาม (Nouns)</strong> และ <strong>คำคุณศัพท์ (Adjectives)</strong> เพื่อให้ง่ายต่อการจดจำ
+        </p>
+        <p>
+            แต่ละคำศัพท์มาพร้อมกับความหมาย คำอ่าน และตัวอย่างประโยคที่แสดงให้เห็นถึงบริบทการใช้งานจริง (Context) 
+            รวมถึงมีการระบุ Tense ในตัวอย่างประโยคเพื่อช่วยทบทวนไวยากรณ์ไปในตัว
+        </p>
+      </div>
+
       <AdBanner 
-        dataAdSlot="2990261154" // 👈 ใส่รหัสจาก Google AdSense ที่คุณสร้างไว้
+        dataAdSlot="2990261154" 
         className="shadow-sm border border-slate-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300" />
 
       {/* Content */}

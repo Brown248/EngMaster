@@ -1,14 +1,13 @@
-// frontend/src/main.tsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import ErrorBoundary from './components/ErrorBoundary.tsx' // Import เข้ามา
+import { HelmetProvider } from 'react-helmet-async'; // 1. import
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ErrorBoundary> 
+    <HelmetProvider> {/* 2. ครอบตรงนี้ */}
       <App />
-    </ErrorBoundary>
+    </HelmetProvider>
   </React.StrictMode>,
 )

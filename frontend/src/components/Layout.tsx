@@ -1,6 +1,6 @@
 // frontend/src/components/Layout.tsx
 import { Outlet, Link } from 'react-router-dom';
-import Sidebar from './Sidebar'; // แก้ import ให้ถูกต้องตามโครงสร้างไฟล์เดิม
+import Sidebar from './Sidebar';
 import { Menu } from 'lucide-react';
 import { useState, ReactNode } from 'react';
 
@@ -27,9 +27,8 @@ export default function Layout({ children }: LayoutProps) {
             <Menu size={20} strokeWidth={2.5} />
           </button>
 
-          {/* โลโก้ (แก้ไขตรงนี้) */}
+          {/* โลโก้ */}
           <Link to="/" className="flex items-center gap-2 group cursor-pointer select-none">
-            {/* ลบ div ตัว E เดิมออก แล้วใส่ img แทน */}
             <img 
               src="/logo.png" 
               alt="EngMaster Logo" 
@@ -47,6 +46,20 @@ export default function Layout({ children }: LayoutProps) {
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 pb-6 pt-2 md:px-6">
         {children || <Outlet />}
       </main>
+
+      {/* ✅ เพิ่ม Footer เพื่อวางลิงก์ Privacy Policy ให้เข้าถึงได้จากทุกหน้า */}
+      <footer className="bg-white border-t border-slate-200 py-6 mt-auto">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+          <div>
+            © 2024 EngMaster. All rights reserved.
+          </div>
+          <div className="flex gap-6 font-medium">
+            <Link to="/privacy-policy" className="hover:text-indigo-600 transition-colors">
+              Privacy Policy
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

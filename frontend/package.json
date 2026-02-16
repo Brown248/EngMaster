@@ -11,15 +11,18 @@
   },
   "dependencies": {
     "axios": "^1.13.2",
+    "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.294.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.20.1",
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^25.2.3",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",

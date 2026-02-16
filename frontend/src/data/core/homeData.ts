@@ -1,7 +1,27 @@
-import { Book, Brain } from 'lucide-react';
+import { Book, Layers, Gamepad2 } from 'lucide-react'; // 👈 เพิ่ม Gamepad2
 import { CourseCard } from '../../types';
 
 export const coursesData: CourseCard[] = [
-  { id: 'vocabulary', title: 'Vocabulary', sub: 'คลังศัพท์ A-Z', icon: Book, color: 'orange' },
-  { id: 'grammar', title: 'Grammar', sub: '12 Tenses', icon: Brain, color: 'purple' },
+  {
+    id: 'grammar',
+    title: 'Grammar',
+    sub: 'เจาะลึกไวยากรณ์ครบทุกเรื่อง จากพื้นฐานสู่ระดับสูง',
+    icon: Layers,
+    color: 'purple',
+  },
+  {
+    id: 'vocabulary',
+    title: 'Vocabulary',
+    sub: 'คลังคำศัพท์พร้อมเสียงอ่านและตัวอย่างประโยค',
+    icon: Book,
+    color: 'blue',
+  },
+  // 👇 เพิ่ม Card สำหรับเข้าเกมตรงนี้
+  {
+    id: 'game',
+    title: 'Game Challenge',
+    sub: 'ฝึกสมองประลองคำศัพท์ เรียงตัวอักษรให้ถูกต้อง',
+    icon: Gamepad2,
+    color: 'orange', // เลือกสีได้ตามใจ (orange, pink, purple, blue)
+  },
 ];
