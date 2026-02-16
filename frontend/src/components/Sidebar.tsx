@@ -1,5 +1,5 @@
 // frontend/src/components/Sidebar.tsx
-import { NavLink } from 'react-router-dom'; // ✅ ลบ Link ออกแล้ว ใช้แค่ NavLink
+import { NavLink } from 'react-router-dom';
 import { X, MessageSquarePlus, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { menuItems } from '../data/core/menuData'; 
@@ -70,7 +70,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 </NavLink>
               ))}
 
-              {/* ✅ ลิงก์ Privacy Policy */}
+              {/* Privacy Policy Link */}
               <NavLink
                   to="/privacy-policy"
                   onClick={onClose}
@@ -90,8 +90,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             {/* Footer */}
             <div className="p-4 border-t border-slate-100 bg-slate-50/50">
               
-              <div className="mb-4 rounded-xl overflow-hidden shadow-sm">
-                 <AdBanner />
+              {/* ✅ โซนโฆษณา: จำกัดความสูงไว้ที่ 250px เพื่อไม่ให้ดันเมนูจนหาย */}
+              <div className="mb-4 rounded-xl overflow-hidden shadow-sm bg-white min-h-[250px] max-h-[250px] flex items-center justify-center">
+                 {/* ส่งค่า rectangle เพื่อบอก AdSense ว่าขอโฆษณาสี่เหลี่ยมจัตุรัส */}
+                 <AdBanner dataAdFormat="rectangle" />
               </div>
 
               <a 
