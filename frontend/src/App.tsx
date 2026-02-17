@@ -1,4 +1,4 @@
-// frontend/src/App.tsx
+// src/App.tsx
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
@@ -6,14 +6,15 @@ import ScrollToTop from './components/ScrollToTop';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookieConsent from './components/CookieConsent';
 
-
-
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'));
 const Grammar = lazy(() => import('./pages/Grammar'));
 const Vocabulary = lazy(() => import('./pages/Vocabulary'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Game = lazy(() => import('./pages/Game'));
+// ✅ เพิ่ม 2 บรรทัดนี้
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
 
 function App() {
   return (
@@ -31,13 +32,17 @@ function App() {
             <Route path="/grammar/:topicId" element={<Grammar />} />       
             <Route path="/vocabulary" element={<Vocabulary />} />
             <Route path="/game" element={<Game />} />
+            
+            {/* ✅ เพิ่ม Route ใหม่ตรงนี้ */}
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
         </Suspense>
         
-        {/* ✅ วาง CookieConsent ไว้ตรงนี้ (นอก Routes แต่ใน Layout) */}
         <CookieConsent />
         
       </Layout>

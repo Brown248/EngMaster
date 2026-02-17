@@ -1,6 +1,7 @@
-// frontend/src/components/Sidebar.tsx
+// src/components/Sidebar.tsx
 import { NavLink } from 'react-router-dom';
-import { X, MessageSquarePlus, ShieldCheck } from 'lucide-react';
+// ✅ เพิ่ม Info และ Mail ในการ import
+import { X, MessageSquarePlus, ShieldCheck, Info, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { menuItems } from '../data/core/menuData'; 
 import AdBanner from './AdBanner';
@@ -15,7 +16,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
+          {/* ... (ส่วน Backdrop และ Header เหมือนเดิม ไม่ต้องแก้) ... */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -25,7 +26,6 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             aria-hidden="true"
           />
 
-          {/* Sidebar Container */}
           <motion.div
             initial={{ x: -280 }}
             animate={{ x: 0 }}
@@ -70,33 +70,61 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 </NavLink>
               ))}
 
-              {/* Privacy Policy Link */}
-              <NavLink
-                  to="/privacy-policy"
+              {/* ✅ เพิ่มส่วนนี้: เมนู About และ Contact */}
+              <div className="pt-4 mt-4 border-t border-slate-100">
+                <p className="px-4 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                  ข้อมูลทั่วไป
+                </p>
+                <NavLink
+                  to="/about"
                   onClick={onClose}
                   className={({ isActive }) =>
-                    `flex items-center gap-4 px-4 py-3.5 rounded-xl font-bold transition-all mt-4 border-t border-slate-100 ${
-                      isActive
-                        ? 'bg-blue-50 text-blue-600 shadow-sm'
-                        : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+                    `flex items-center gap-4 px-4 py-3 rounded-xl font-medium transition-all ${
+                      isActive ? 'bg-blue-50 text-blue-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
                     }`
                   }
                 >
-                  <ShieldCheck size={22} strokeWidth={2.5} />
-                  Privacy Policy
-              </NavLink>
+                  <Info size={20} />
+                  เกี่ยวกับเรา
+                </NavLink>
+                <NavLink
+                  to="/contact"
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    `flex items-center gap-4 px-4 py-3 rounded-xl font-medium transition-all ${
+                      isActive ? 'bg-blue-50 text-blue-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+                    }`
+                  }
+                >
+                  <Mail size={20} />
+                  ติดต่อเรา
+                </NavLink>
+                <NavLink
+                  to="/privacy-policy"
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    `flex items-center gap-4 px-4 py-3 rounded-xl font-medium transition-all ${
+                      isActive ? 'bg-blue-50 text-blue-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+                    }`
+                  }
+                >
+                  <ShieldCheck size={20} />
+                  นโยบายความเป็นส่วนตัว
+                </NavLink>
+              </div>
             </nav>
             
             {/* Footer */}
             <div className="p-4 border-t border-slate-100 bg-slate-50/50">
-              
-              {/* ✅ โซนโฆษณา: จำกัดความสูงไว้ที่ 250px เพื่อไม่ให้ดันเมนูจนหาย */}
-              <div className="mb-4 rounded-xl overflow-hidden shadow-sm bg-white min-h-[250px] max-h-[250px] flex items-center justify-center">
-                 {/* ส่งค่า rectangle เพื่อบอก AdSense ว่าขอโฆษณาสี่เหลี่ยมจัตุรัส */}
+               {/* ... (ส่วน Footer เดิม ไม่ต้องแก้) ... */}
+               {/* หมายเหตุ: คุณอาจจะเอาปุ่ม "แจ้งปัญหา / แนะนำ" ด้านล่างนี้ออกก็ได้ 
+                   เพราะเรามีหน้า Contact แล้ว แต่ถ้าเก็บไว้ก็ไม่เสียหายครับ */}
+               <div className="mb-4 rounded-xl overflow-hidden shadow-sm bg-white min-h-[250px] max-h-[250px] flex items-center justify-center">
                  <AdBanner dataAdFormat="rectangle" />
               </div>
 
-              <a 
+               {/* ... (Code เดิม) ... */}
+               <a 
                 href="https://docs.google.com/forms/d/e/1FAIpQLSeJqpXVQ-kir08pEsSKhX0xsfs_nEAfhMRY0bVd_9TTGQcJFg/viewform?usp=dialog"
                 target="_blank"
                 rel="noopener noreferrer"
