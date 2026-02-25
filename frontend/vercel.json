@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/ads.txt",
+      "destination": "/frontend/public/ads.txt" 
+    },
+    {
       "source": "/(.*)",
       "destination": "/frontend/index.html" 
     }
